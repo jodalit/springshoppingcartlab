@@ -775,10 +775,10 @@
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
-                <span id="saccueil"><a id="aaccueil" href="#">Home</a></span>
+                <span id="saccueil"><a id="aaccueil" href='<spring:url value="/"></spring:url>'>Home</a></span>
 
                 <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <span id="sconnexion" class="bouton"><a id="aconnexion" href="#">Connexion</a></span>
+                <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
             </div>
             
 			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>
