@@ -786,16 +786,6 @@
             </div>
             
 			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>
-		
-            <!-- div id="divSearch">
-                <form action="#" method="post">
-                    <fieldset>
-                        <label for="itemNameToFind">Item's name</label>
-                        <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
-                        <button type="submit" id="searchItem" name="searchItem" class="bouton">Search</button>
-                    </fieldset>
-                </form>
-            </div -->
 		</header>
 
         <nav>
@@ -811,7 +801,7 @@
             </div>
             
             <div id="divmotbienvenue" class="divmain">
-            	<span id="snewClientBtn" class="bouton"><a id="anewClientBtn" href="<spring:url value="/newuser"></spring:url>">New Client</a></span>
+            	<span id="snewClientBtn" class="bouton"><a id="anewClientBtn" href="<spring:url value="/client"></spring:url>">New Client</a></span>
             	<br/>
             	<span id="snewAdminBtn" class="bouton"><a id="anewAdminBtn" href="<spring:url value="#"></spring:url>" style="width: 241px; ">New Administrator</a></span>
             </div>
