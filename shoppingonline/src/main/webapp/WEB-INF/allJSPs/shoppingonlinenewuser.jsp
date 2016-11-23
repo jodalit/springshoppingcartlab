@@ -665,7 +665,7 @@
 			float:left;
 			font-size:13.5pt;
 			font-weight: bold;
-			width:25%;
+			width:22%;
 		    padding:1.5em;
 		    box-sizing:border-box;
 		}
@@ -704,25 +704,49 @@
 			font-size:14pt;
 		    margin:1px;
 		    padding:1px;
-			width:37%;
+			width:45%;
 		    box-sizing:border-box;
 		}
 		
-		#main #divmotbienvenue #newClientBtn{
-			background-color:hsl(205, 100%, 50%);
-			widh:98%;
+		#main #divmotbienvenue span#snewClientBtn{
+			background-color:royalblue;
+			width:10em;
+			border-radius:10px;
+			z-index: 11500;
 		}
 		
-		#main #divmotbienvenue #newAdminBtn{
+		#main #divmotbienvenue span#snewClientBtn a#anewClientBtn{
 			background-color:hsl(205, 100%, 50%);
-			widh:98%;
+			text-align:center;
+			text-decoration:none;
+		    color:white;
+			padding:0.15em;
+			width: 100%;
+			z-index: 11500;
 		}
 		
+		#main #divmotbienvenue span#snewAdminBtn{
+			background-color:royalblue;
+			width:10em;
+			border-radius :10px;
+			z-index: 11500;
+		}
 		
-		#main #divmotbienvenue #newClientBtn:HOVER,  #main #divmotbienvenue #newAdminBtn:HOVER {
+		#main #divmotbienvenue span#snewAdminBtn a#anewAdminBtn{
+			background-color:hsl(205, 100%, 50%);
+			text-align:center;
+			text-decoration:none;
+		    color:white;
+			padding:0.15em;
+			width: 100%;
+			z-index: 11500;
+		}
+		
+		#main #divmotbienvenue  #snewClientBtn:HOVER,  #main #divmotbienvenue #snewAdminBtn:HOVER {
 				background-color: darkgray;
-				color:yellow ;
+				color:orange;
 				border: 0.1em yellow solid;
+				width:10em;
 				z-index: 11500;
 		}
 
@@ -787,8 +811,9 @@
             </div>
             
             <div id="divmotbienvenue" class="divmain">
-            	<button type="submit" id="newClientBtn" name="newClientBtn" class="bouton" formaction="#" formmethod="get">New Client</button><br />
-                <button type="submit" id="newAdminBtn" name="newAdminBtn" class="bouton" formaction="#" formmethod="get">New Administrator</button>
+            	<span id="snewClientBtn" class="bouton"><a id="anewClientBtn" href="<spring:url value="/newuser"></spring:url>">New Client</a></span>
+            	<br/>
+            	<span id="snewAdminBtn" class="bouton"><a id="anewAdminBtn" href="<spring:url value="#"></spring:url>" style="width: 241px; ">New Administrator</a></span>
             </div>
   
         </div>
