@@ -751,6 +751,20 @@
 		    color:navy/*#0068AC*/;
 		}
 		
+		#main #divrecentitems {
+			
+			height : 25em;
+			width: auto;
+			overflow: scroll;
+			
+		}
+		
+		#main #divrecentitems div{
+			margin-right: 0.4em;
+			height : 7 em;
+			width: 10 em;
+			
+		}
 		/*==============================================================================================================================================
 		    La boîte aside
 		    =======================================================================
@@ -795,14 +809,23 @@
 		</header>
 
         <nav>
-            <!-- a id="aaccueil" href="#">Home</a><br /><br />
-            <a href="#">S'incrire</a><br /><br />
-            <a href="#">Nous contacter</a -->
+            
         </nav>
         
         <div id="main">
             <h2>${welcomeTitle}</h2>
             <hr />
+            <div id="divrecentitems">
+            	<c:forEach items="${items1 }" var="item"> 
+            		<div>
+                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a><input id="${item.itemId}" type="checkbox" class="ckbox"/>
+                		<br />
+                		${item.description}
+                		<br />
+                		<em>${item.price}<span>$</span></em>
+                	</div>
+            	</c:forEach>
+            </div>
             
             <div id="divimagepcple" class="divmain">
                 <h1 id="OLShopping">OnLine Shopping</h1>

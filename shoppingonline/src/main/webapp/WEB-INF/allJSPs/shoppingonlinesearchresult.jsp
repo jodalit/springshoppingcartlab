@@ -813,37 +813,20 @@
         <div id="main">
             <h2>${resultSearch}</h2>
             <hr />
-            
+            <h3 style="text-align: center; color: darkorange;">${sizeitemsforname} Item(s)</h3>
             <div id="divimagepcple" class="divmain">
-                <p>
-                	<a href="#"><img alt="image 1" src="#"></a><input type="checkbox" class="ckbox"/>
-                </p>
+            	<c:forEach items="${itemsforname}" var="item"> 
+            		<p>
+                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a><input id="${item.itemId}" type="checkbox" class="ckbox"/>
+                		<br />
+                		${item.description}
+                		<br />
+                		<em>${item.price}<span>$</span></em>
+                	</p>
+                	<hr align="center" />
+                	<br />
+            	</c:forEach>
                 
-                <p>
-                	<a href="#"><img alt="image 2" src="#"></a> <input type="checkbox" class="ckbox"/>
-                </p>
-                
-                <p>
-                	<a href="#"><img alt="image 3" src="#"></a> <input type="checkbox" class="ckbox"/>
-                </p>
-                
-                <p>
-                	<a href="#"><img alt="image 4" src="#"></a><input type="checkbox" class="ckbox"/>
-                </p>
-                
-                <p>
-                	<a href="#"><img alt="image 5" src="#"></a> <input type="checkbox" class="ckbox"/>
-                </p>
-                
-                <p>
-                	<a href="#"><img alt="image 6" src="#"></a> <input type="checkbox" class="ckbox"/>
-                </p>
-                
-                <p>
-                	<a href="#"><img alt="image 1" src="#"></a> <input type="checkbox" class="ckbox"/>
-                </p>
-                <br>
-				<h3>${numberItem}</h3>
             </div>
             
             <div id="divmotbienvenue" class="divmain">

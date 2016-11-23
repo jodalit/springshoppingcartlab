@@ -188,7 +188,7 @@
 		/*Formatage des zones de texte*/
 		input, select, textarea {
 		    width:15.75em/*px*/;
-		    height:7%/*px*/;
+		    height:5%/*px*/;
 		    text-align:left;
 		    padding:7px;
 		    border:inset;
@@ -199,7 +199,7 @@
 		    text-align:right;
 		}
 		
-		input#sexe {
+		input#sex {
 		    width:9%;
 		}
 		
@@ -227,18 +227,13 @@
 		    border:thin;
 		}
 		
-		input.agri_part, input.typePartenaire{
-		    
+		input.localisationClient{
+			    
 		    width:3.5%;
-		    margin-right:0;
+		    
+		    margin:0;
 		}
 		
-		
-		input#agri_part_oui, input#typePartenaire_non{
-		    
-		    
-		    margin-left:2.5em;
-		}
 		/*Règles de formatage des boutons*/
 		button, #sinscription, #sconnexion, #sdeconnexion{
 		    height:9%/*px*/;
@@ -821,17 +816,7 @@
                 <!--span id="sconnexion" class="bouton"><a id="aconnexion" href="#">Connexion</a></span-->
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>
-		
-            <!-- div id="divSearch">
-                <form action="#" method="post">
-                    <fieldset>
-                        <label for="itemNameToFind">Item's name</label>
-                        <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
-                        <button type="submit" id="searchItem" name="searchItem" class="bouton">Search</button>
-                    </fieldset>
-                </form>
-            </div -->
+			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>    
 		</header>
 
         <nav>
@@ -839,7 +824,7 @@
         </nav>
         
         <div id="main">
-            <h2>${connexion}</h2>
+            <h2>${client}</h2>
             <hr />
             
             <div id="divimagepcple" class="divmain">
@@ -847,7 +832,7 @@
                     <fieldset>
                     	<br/>
                         <label for="personName">Name </label><br/>
-                        <input type="text" id="personConnexion" name="personConnexion" size="30" maxlength="45" size="30" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
+                        <input type="text" id="personConnexion" name="personConnexion" size="30" maxlength="45" size="30" placeholder="Enter your name, ..." /><span id="personConnexion"></span><br />
                         <label for="personSex">Sex </label><br/>
                         <select id="personSex">
                         	<option label="---" value="---" />
@@ -856,36 +841,45 @@
                         	<option label="Other" value="Other" />
                         </select><br />
                         <label for="personBirthDate">Birth Date </label><br/>
-                        <input type="datetime" id="personBirthDate" name="personBirthDate" size="20" maxlength="20" size="30" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
+                        <input type="datetime" id="personBirthDate" name="personBirthDate" size="20" maxlength="20" size="30" placeholder=" ..." /><span id="spersonBirthDate"></span><br />
                         <br/>
                     </fieldset>
                     
                     <fieldset>
                     	<br/>
-                        <label for="personAddress">Address </label><br/>
-                        <input type="text" id="personAddress" name="personAddress" size="30" maxlength="45" size="30" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
-                        <label for="personTel">Telephone </label><br/>
-                        <input type="text" id="personTel" name="personTel" size="20" maxlength="20" size="20" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
+                        <label for="connexionName">Connexion name </label><br/>
+                        <input type="text" id="connexionName" name="connexionName" size="20" maxlength="20" size="20" placeholder="Enter your connexion name, ..." /><span id="sconnexionName"></span><br />
+                        <label for="password">Pass word </label><br/>
+                        <input type="password" id="connexionName" name="connexionName" size="20" maxlength="20" size="20" /><span id="sconnexionName"></span><br />
                     </fieldset>
                     
                     <fieldset>
                     	<br/>
                         <label for="personAddress">Address </label><br/>
-                        <input type="text" id="personAddress" name="personAddress" size="30" maxlength="45" size="30" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
+                        <input type="text" id="personAddress" name="personAddress" size="30" maxlength="45" size="30" placeholder="Enter your adresse, ..." /><span id="spersonConnexion"></span><br />
                         <label for="personTel">Telephone </label><br/>
-                        <input type="text" id="personTel" name="personTel" size="20" maxlength="20" size="20" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
+                        <input type="text" id="personTel" name="personTel" size="20" maxlength="20" size="20" placeholder=" ..." /><span id="spersonTel"></span><br />
+                    </fieldset>
+                    
+                    <fieldset>
+                    	<br/>
+                        <label for="typeClient">Type client </label><br/>
+                        <select id="typeClient">
+                        	<option label="---" value="---" />
+                        	<option label="Wholesaler" value="Wholesaler" />
+                        	<option label="Retailer" value="Retailer" />
+                        </select><br />
+                        <label for="localisationClient">Localisation </label><br/>
+                        <input type="radio" id="localisationClientLocal" class="localisationClient" name="localisationClient" value="Local" checked="checked"/><span>Local</span>
+                        <input type="radio" id="localisationClientOther" class="localisationClient" name="localisationClient" value="Other" /><span>Other</span>
                     </fieldset>
                     
                     <fieldset>
                         <br/>
-                        <button type="submit" id="connexionBtn" name="connexion" class="bouton">Connect</button>
+                        <button type="submit" id="addBtn" name="addBtn" class="bouton">Add</button>
                         <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
                         <br/>
                     </fieldset>
-                    <br/>
-                    <br/>
-                    <a id="anewuser" href="<spring:url value='/newuser' />">New user, get your account here !!!</a>
-                    <br/>
                 </form>
             </div>
             

@@ -1,9 +1,14 @@
 package com.formatiointerne.springmvc.pratiq1.datamodels;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Item {
+public class Item implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long itemId;
 	private String itemName;
 	private String description;

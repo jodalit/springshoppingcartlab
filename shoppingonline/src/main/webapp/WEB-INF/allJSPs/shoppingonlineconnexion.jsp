@@ -843,28 +843,31 @@
             <hr />
             
             <div id="divimagepcple" class="divmain">
-                <form action="#" method="post">
-                    <fieldset>
-                    	<br/>
-                        <label for="personConnexion">Connexion name</label><br/>
-                        <input type="text" id="personConnexion" name="personConnexion" size="20" maxlength="20" size="25" placeholder="Enter your connexion name, ..." /><span id="spersonConnexion"></span><br />
-                        <label for="personPassword">Pass word</label><br/>
-                        <input type="password" id="personPassword" name="personPassword" size="20" maxlength="20" size="25" placeholder="Enter your connexion name, ..." /><span id="spersonPassword"></span><br />
-                        <br/>
-                    </fieldset>
-                    
-                    <fieldset>
-                        <br/>
-                        <button type="submit" id="connexionBtn" name="connexion" class="bouton">Connect</button>
-                        <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
-                        <br/>
-                    </fieldset>
-                    <br/>
-                    <br/>
-                    <a id="anewuser" href="<spring:url value='/newuser' />">New user, get your account here !!!</a>
-                    <br/>
-                </form>
-            </div>
+				<form action='<spring:url value="#"></spring:url>' method="post">
+					<fieldset>
+						<br /> <label for="personConnexion">Connexion name</label><br /> <input
+							type="text" id="personConnexion" name="personConnexion" size="20"
+							maxlength="20" size="25"
+							placeholder="Enter your connexion name, ..." /><span
+							id="spersonConnexion"></span><br /> <label for="personPassword">Pass
+							word</label><br /> <input type="password" id="personPassword"
+							name="personPassword" size="20" maxlength="20" size="25"
+							placeholder="Enter your connexion name, ..." /><span
+							id="spersonPassword"></span><br /> <br />
+					</fieldset>
+
+					<fieldset>
+						<br />
+						<button type="submit" id="connexionBtn" name="connexion"
+							class="bouton">Connect</button>
+						<button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
+						<br />
+					</fieldset>
+					<br /> <br /> <a id="anewuser"
+						href="<spring:url value='/newuser' />">New user, get your
+						account here !!!</a> <br />
+				</form>
+			</div>
             
             <div id="divmotbienvenue" class="divmain">
                 

@@ -740,7 +740,7 @@
         <header>
             <div id="headerCommandeMenu">
                 <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-
+				
                 <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
                 <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Deconnexion</a></span>
             </div>
@@ -767,9 +767,9 @@
         <div id="main">
             <h2>${basket}</h2>
             <hr />
-            
+            <span>${connexionname}, hi!!!</span>
             <div id="divimagepcple" class="divmain">
-                <table>
+                <!-- table>
                 <caption>Your current basket</caption>
                 <thead>
                 	<tr>
@@ -791,7 +791,7 @@
                 </tbody>
                 </table>
                 <br />
-				<h3>${basketSize}</h3>
+				<h3>${basketSize}</h3 -->
             </div>
             
             <div id="divmotbienvenue" class="divmain">

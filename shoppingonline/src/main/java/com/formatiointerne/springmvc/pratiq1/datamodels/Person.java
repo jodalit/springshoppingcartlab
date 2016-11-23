@@ -11,7 +11,7 @@ public class Person {
 	private String personAdress;
 	private String personTelephone;
 	private String connexionname;
-	private String motdepasse;
+	private String password;
 	
 	public Person() {
 	}
@@ -24,6 +24,18 @@ public class Person {
 		this.personBirthDate = personBirthDate;
 		this.personAdress = personAdress;
 		this.personTelephone = personTelephone;
+	}
+	
+	public Person(Long personId, String personName, String personSex, LocalDate personBirthDate, String personAdress,
+			String personTelephone, String connexionName, String password) {
+		this.personId = personId;
+		this.personName = personName;
+		this.personSex = personSex;
+		this.personBirthDate = personBirthDate;
+		this.personAdress = personAdress;
+		this.personTelephone = personTelephone;
+		this.connexionname = connexionName;
+		this.password = password;
 	}
 
 	public Long getPersonId() {
@@ -82,12 +94,12 @@ public class Person {
 		this.connexionname = connexionname;
 	}
 
-	public String getMotdepasse() {
-		return motdepasse;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMotdepasse(String motdepasse) {
-		this.motdepasse = motdepasse;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -99,7 +111,7 @@ public class Person {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(personId, personName, personSex, personBirthDate, personAdress, personTelephone, connexionname, motdepasse);
+		return Objects.hash(personId, personName, personSex, personBirthDate, personAdress, personTelephone, connexionname, password);
 	}
 
 	@Override
@@ -116,10 +128,10 @@ public class Person {
 				return false;
 		} else if (!connexionname.equals(other.connexionname))
 			return false;
-		if (motdepasse == null) {
-			if (other.motdepasse != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!motdepasse.equals(other.motdepasse))
+		} else if (!password.equals(other.password))
 			return false;
 		if (personAdress == null) {
 			if (other.personAdress != null)

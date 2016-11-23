@@ -2,16 +2,26 @@ package com.formatiointerne.springmvc.pratiq1.controllers;
 
 import javax.jws.WebParam.Mode;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
+import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
 
 @Controller
 public class ShoppingOnlineSomeUtilities {
 	public static final String CONNEXION ="Connexion to your on line store";
 	public static final String BASKET ="Basket Breakdown";
 	public static final String NEWUSER ="Choose your profil";
+	
+	@Autowired
+	private ShoppingServiceImplementation shoppingServiceImplementation;
+	
+	@Autowired
+	private ItemServiceImplementation itemService;
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.GET)
 	public String getConnexion(Model model){
