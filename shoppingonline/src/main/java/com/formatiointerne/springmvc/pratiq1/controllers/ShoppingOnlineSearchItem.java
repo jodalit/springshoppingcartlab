@@ -2,6 +2,7 @@ package com.formatiointerne.springmvc.pratiq1.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,13 @@ import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementat
 public class ShoppingOnlineSearchItem {
 	public static final String RESULTSEARCHTITLE ="Search result";
 	public static final String NUMBERITEMS ="Search result";
-	
-	@Autowired
-	ShoppingServiceImplementation shoppingServiceImplementation;
 	@Autowired
 	private ItemServiceImplementation itemService;
+	@Autowired
+	ShoppingServiceImplementation shoppingServiceImplementation;
+ 
 	
-	HttpSession sessionItems;
+	//HttpSession sessionItems;
 	
 
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.GET)
@@ -40,25 +41,25 @@ public class ShoppingOnlineSearchItem {
 	}
 	
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.POST)
-	public String getResultSearchItem(Model model, @RequestParam("itemNameToFind") String itemNameToFind){
-		List<Item> items = itemService.items;
+	public String getResultSearchItem(Model model, @RequestParam("itemNameToFind") String itemNameToFind, HttpServletRequest request){
+	 
 		List<Item> itemsforname = itemService.getItemByName(itemNameToFind);
-		int sizeitems = items.size();
+	
 		int sizeitemsforname = itemsforname.size();
-		
-		//sessionItems.setAttribute("items", items);
+	
 		model.addAttribute("resultSearch", RESULTSEARCHTITLE);
 		model.addAttribute("numberItem", "0");
-		model.addAttribute("items1", items);
+	
 		model.addAttribute("itemsforname", itemsforname);
-		model.addAttribute("sizeitems", sizeitems);
+
 		model.addAttribute("sizeitemsforname", sizeitemsforname);
 		
-		System.out.println("items : "+items.toString());
+
 		System.out.println("itemsforname : "+itemsforname.toString());
-		//System.out.println("sessionItems : "+sessionItems.getAttribute("items"));
+		System.out.println("sessionItems : "+ request.getSession().getAttribute("items"));
 		System.out.println("itemNameToFind : "+ itemNameToFind);
 		System.out.println("sizeitemsforname : "+ sizeitemsforname);
+		System.out.println("request.getSession().getAttribute(items)\n" + request.getSession().getAttribute("items"));
 		return "shoppingonlinesearchresult";
 	}
 }

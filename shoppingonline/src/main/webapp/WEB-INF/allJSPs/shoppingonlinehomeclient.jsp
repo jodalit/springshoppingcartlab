@@ -768,6 +768,19 @@
             <h2>${basket}</h2>
             <hr />
             <span>${connexionname}, hi!!!</span>
+            
+            <div id="divrecentitems">
+            	<c:forEach items="${items}" var="item"> 
+            		<div>
+                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a><input id="${item.itemId}" type="checkbox" class="ckbox"/>
+                		<br />
+                		${item.description}
+                		<br />
+                		<em>${item.price}<span>$</span></em>
+                	</div>
+            	</c:forEach>
+            </div>
+            
             <div id="divimagepcple" class="divmain">
                 <!-- table>
                 <caption>Your current basket</caption>

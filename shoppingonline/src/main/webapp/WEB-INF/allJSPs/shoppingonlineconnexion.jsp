@@ -843,7 +843,7 @@
             <hr />
             
             <div id="divimagepcple" class="divmain">
-				<form action='<spring:url value="#"></spring:url>' method="post">
+				<form action='<spring:url value="/makeconnexion"></spring:url>' method="post">
 					<fieldset>
 						<br /> <label for="personConnexion">Connexion name</label><br /> <input
 							type="text" id="personConnexion" name="personConnexion" size="20"

@@ -47,7 +47,7 @@ public class ShoppingOnlineSomeUtilities {
 	
 	@RequestMapping(value="/deconnexion", method=RequestMethod.GET)
 	public String getDeconnexion(Model model){
-		model.addAttribute("connexion", CONNEXION);
+		model.addAttribute("connexionname", null);
 		return "redirect:/";
 	}
 }

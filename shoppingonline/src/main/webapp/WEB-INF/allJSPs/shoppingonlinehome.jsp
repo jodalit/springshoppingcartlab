@@ -753,16 +753,24 @@
 		
 		#main #divrecentitems {
 			
-			height : 25em;
+			height : 17em;
 			width: auto;
 			overflow: scroll;
 			
 		}
 		
+		#main #divrecentitems div img{
+		   
+			height : 3.7 em;
+			width: 4.8 em;
+			
+		}
+		
 		#main #divrecentitems div{
+		   display:table-row-group;
 			margin-right: 0.4em;
 			height : 7 em;
-			width: 10 em;
+			width: 8 em;
 			
 		}
 		/*==============================================================================================================================================
@@ -816,7 +824,7 @@
             <h2>${welcomeTitle}</h2>
             <hr />
             <div id="divrecentitems">
-            	<c:forEach items="${items1 }" var="item"> 
+            	<c:forEach items="${items}" var="item"> 
             		<div>
                 		<a href="#"><img alt="image 1" src="#">${item.itemName}</a><input id="${item.itemId}" type="checkbox" class="ckbox"/>
                 		<br />

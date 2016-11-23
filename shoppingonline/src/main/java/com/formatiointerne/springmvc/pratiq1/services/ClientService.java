@@ -15,5 +15,4 @@ public interface ClientService {
 	boolean modifyCaracteristicClient (Long clientId, String clientType, boolean isLocalClient); 
 	Client getClientById(Long id);
 	boolean removeClient(Long id);
-	Person getClientByConnexionPassword(String connexion, String password);
 }

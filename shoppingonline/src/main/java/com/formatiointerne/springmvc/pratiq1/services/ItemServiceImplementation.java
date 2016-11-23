@@ -19,11 +19,11 @@ public class ItemServiceImplementation implements ItemService {
 		items.add(new Item(new Long(2), "alithya", "Item orekj398 irew", new Double(21.46)));
 		items.add(new Item(new Long(15), "iuejkfdjhsfd ", "-043lkewdkljd jkfdjkfdjk ", new Double(8.97)));
 		items.add(new Item(new Long(8), "Item alithya", "uyerjhdfnmfd okjfdkmfdkj jkuydfsudfsjh jkfdjkdfkj", new Double(31.25)));
-		items.add(new Item(new Long(25), "alithya Item 1", "98rekjmn jkfdjfdsiu kfdkfdkj", new Double(11.99)));
+		items.add(new Item(new Long(25), "alithya Item 1", "98rekjmn jkfdjfdsiu alithya kfdkfdkj", new Double(11.99)));
 		items.add(new Item(new Long(17), "Item 1 alithya", "87dfkjfdskjds lkjfdsiuofdsoim, kmjvc", new Double(56.8)));
 		items.add(new Item(new Long(6), "alithya Item", "98fdkjfdui lkiofdm,fd  lkfdlifd", new Double(9.65)));
 		items.add(new Item(new Long(87), "alithya montreal", "iufdnm kjfdskj832  434jhfdnmkj -0", new Double(15.12)));
-		items.add(new Item(new Long(17), "Item 1", "iufdnm kjfdskj832  434jhfdnmkj -0", new Double(36.25)));
+		items.add(new Item(new Long(17), "Item 1", "iufdnm kjfdskj832  alithya 434jhfdnmkj -0", new Double(36.25)));
 		items.forEach(System.out::println);
 	}
 	
@@ -69,9 +69,11 @@ public class ItemServiceImplementation implements ItemService {
 	public List<Item> getItemByName(String name) {
 		List<Item> l = new LinkedList<>();
 		for (Item item : items) {
-			if (item.getItemName().equals(name) || item.getItemName()==name){
+			if (item.getDescription().toLowerCase().contains(name.trim().toLowerCase()) ){
 				l.add(item);
-			}
+			} else if (item.getItemName().toLowerCase().contains(name.trim().toLowerCase())) {
+				l.add(item);
+			} 
 		}
 		l.forEach(System.out::println);
 		return l;
