@@ -14,7 +14,7 @@ public class ServicePersonImplementation implements ServicePerson {
 	
 	
 	public ServicePersonImplementation() {
-		persons.add(new Person(new Long(1), "admin", null, LocalDate.now(), null, null, "admin", "admin"));
+		persons.add(new Person(new Long(1), "admin", null, LocalDate.now(), null, null, "admin", "admin", 0));
 		System.out.println(persons);
 	}
 

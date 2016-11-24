@@ -12,6 +12,7 @@ public class Person {
 	private String personTelephone;
 	private String connexionname;
 	private String password;
+	private int profile; //1 for admin and 2 for client 
 	
 	public Person() {
 	}
@@ -27,7 +28,7 @@ public class Person {
 	}
 	
 	public Person(Long personId, String personName, String personSex, LocalDate personBirthDate, String personAdress,
-			String personTelephone, String connexionName, String password) {
+			String personTelephone, String connexionName, String password, int profile) {
 		this.personId = personId;
 		this.personName = personName;
 		this.personSex = personSex;
@@ -36,6 +37,7 @@ public class Person {
 		this.personTelephone = personTelephone;
 		this.connexionname = connexionName;
 		this.password = password;
+		this.profile= profile;
 	}
 
 	public Long getPersonId() {
@@ -101,17 +103,20 @@ public class Person {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public int getProfile() {
+		return profile;
+	}
+
+	public void setProfile(int profile) {
+		this.profile = profile;
+	}
 
 	@Override
 	public String toString() {
 		return "Person [\npersonId= " + personId + ", personName= " + personName + ", personSex= " + personSex
 				+ ", personBirthDate= " + personBirthDate + ", personAdress= " + personAdress + ", personTelephone= "
-				+ personTelephone + ", connexionname= " + connexionname + "\n]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(personId, personName, personSex, personBirthDate, personAdress, personTelephone, connexionname, password);
+				+ personTelephone + ", connexionname= " + connexionname + ", profil = " + profile + "\n]";
 	}
 
 	@Override
@@ -163,7 +168,18 @@ public class Person {
 				return false;
 		} else if (!personTelephone.equals(other.personTelephone))
 			return false;
+		if (profile != other.profile)
+			return false;
 		return true;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(personId, personName, personSex, personBirthDate, personAdress, personTelephone, connexionname, password, profile);
+	}
+	
+	
+
+	
 	
 }

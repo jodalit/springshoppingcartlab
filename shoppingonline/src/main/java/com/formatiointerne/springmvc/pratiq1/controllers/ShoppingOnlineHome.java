@@ -21,7 +21,7 @@ public class ShoppingOnlineHome {
 	@RequestMapping("/") //shoppingonlinehome
 	public String goShoppingOnlineHome(Model model, HttpServletRequest request){
 		List<Item> items = itemService.items;
-		request.getSession().setAttribute("items",items);
+		request.getSession().setAttribute("items", items);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);
 				

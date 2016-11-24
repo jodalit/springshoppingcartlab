@@ -61,7 +61,11 @@ public class ItemServiceImplementation implements ItemService {
 
 	@Override
 	public Item getItemById(Long id) {
-		// TODO Auto-generated method stub
+		for (Item item : items) {
+			if (item.getItemId()==id)
+				return item;
+		}
+		
 		return null;
 	}
 	
