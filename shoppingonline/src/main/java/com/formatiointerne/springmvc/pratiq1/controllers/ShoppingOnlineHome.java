@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
+import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
 
 @Controller
 public class ShoppingOnlineHome {
@@ -18,8 +19,12 @@ public class ShoppingOnlineHome {
 	public static final String WELCOMEDECLARATION ="Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/>";
 	@Autowired
 	private ItemServiceImplementation itemService;
+	//@Autowired
+	//private ShoppingServiceImplementation shoppingService;
+	
 	@RequestMapping("/") //shoppingonlinehome
 	public String goShoppingOnlineHome(Model model, HttpServletRequest request){
+		//shoppingService.removeItemsToBasket();
 		List<Item> items = itemService.items;
 		request.getSession().setAttribute("items", items);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);

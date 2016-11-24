@@ -42,7 +42,11 @@ public class ShoppingServiceImplementation implements shoppingService {
 		System.out.println("Basket size : " + basket.size());
 	}
 	
-	public void removeItemToBasket() {
+	public void removeItemToBasket(Long itemId) {
+		basket.remove(itemId);
+	}
+	
+	public void removeItemsToBasket() {
 		basket.forEach(System.out::println);
 		System.out.println("Basket size : " + basket.size());
 		basket.clear();

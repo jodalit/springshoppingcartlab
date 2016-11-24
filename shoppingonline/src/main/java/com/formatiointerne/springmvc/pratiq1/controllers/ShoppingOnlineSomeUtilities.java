@@ -59,77 +59,95 @@ public class ShoppingOnlineSomeUtilities {
 
 	@RequestMapping("/addtobasket/{itemId}")
 	public String addToBasket(@PathVariable Long itemId, HttpServletRequest request) {
-		/*System.out.println("!!!! I SHOULD BE CALLED ONLY ONCE!!!!!");
-		System.out.println("itemId : " + itemId);
-		List<Item> items = (List<Item>) request.getSession().getAttribute("items");
-		System.out.println("items : " + items);
-		boolean b = false;
-
-		for (Item item : items) {
-			if (item.getItemId().equals(itemId)) {
-				System.out.println("item : " + item);
-				b = true;
-				break;
-			}
-		}
-
-		if (b == true) {
-			shoppingServiceImplementation.addItemToBasket(itemId);
-			request.getSession().setAttribute("items", items);
-			request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
-			request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
-			System.out.println("request.getServletContext().getServletContextName()"+ request.getServletContext().getServletContextName());
-		}*/
 		infoBasket(itemId, request);
 		return "shoppingonlinehome";
-	}
-	
-	public void infoBasket(Long itemId, HttpServletRequest request){
-		System.out.println("!!!! I SHOULD BE CALLED ONLY ONCE!!!!!");
-		System.out.println("itemId : " + itemId);
-		List<Item> items = (List<Item>) request.getSession().getAttribute("items");
-		System.out.println("items : " + items);
-		boolean b = false;
-
-		for (Item item : items) {
-			if (item.getItemId().equals(itemId)) {
-				System.out.println("item : " + item);
-				b = true;
-				break;
-			}
-		}
-
-		if (b == true) {
-			shoppingServiceImplementation.addItemToBasket(itemId);
-			request.getSession().setAttribute("items", items);
-			request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
-			request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
-			//System.out.println("request.getServletContext().getServletContextName()"+ request.getServletContext().getServletContextName());
-		}
 	}
 	
 	@RequestMapping("/addtobasketfromresultsearch/{itemId}")
 	public String addToBasketFromResultSearch(@PathVariable Long itemId, HttpServletRequest request) {
 		infoBasket(itemId, request);
-		return "redirect:/";
+		return "shoppingonlinesearchresult";
 	}
 	
 	@RequestMapping("/payitems")
 	private String payItems(HttpServletRequest request) {
 		List<Item> basket = (List<Item>) request.getSession().getAttribute("basket");
+		
+		if (basket==null){
+			return "redirect:/";
+		}
+		
 		basket.forEach(System.out::println);
-		shoppingServiceImplementation.removeItemToBasket();
+		shoppingServiceImplementation.removeItemsToBasket();
 		request.getSession().setAttribute("basket", null);
 		request.getSession().setAttribute("basketsize", 0);
 		
-		return "shoppingonlinesearchresult";
+		return "shoppingonlinebasketreceived";
 	}
-
+	
+	@RequestMapping("/removefrombasket/{itemId}")
+	private String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
+		List<Item> basket = (List<Item>) request.getSession().getAttribute("basket");
+		
+		if (basket==null){
+			return "redirect:/";
+		}
+		
+		System.out.println("Basket : " + basket);
+		boolean b = false;
+		int i = 0;
+		for (Item item : basket) {
+			if (item.getItemId().equals(itemId)) {
+				System.out.println("item : " + item);
+				i++;
+				b = true;
+				break;
+			}
+		}
+		basket.remove(i);
+		System.out.println("Basket");
+		basket.forEach(System.out::println);
+		
+		
+		if (b == true) {
+			shoppingServiceImplementation.removeItemToBasket(itemId);
+			
+			request.getSession().setAttribute("basket", basket);
+			request.getSession().setAttribute("basketsize",basket.size());	
+	//		request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
+	//		request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
+			basket.forEach(System.out::println);
+			//System.out.println("request.getServletContext().getServletContextName()"+ request.getServletContext().getServletContextName());
+		}
+		
+		return "shoppingonlinebasket";
+	}
+	
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
 	public String getDeconnexion(Model model, HttpServletRequest request) {
 		model.addAttribute("connexionname", null);
-		// request.getSession().setAttribute("items", null);
-		// request.getSession().setAttribute("basket", null);
 		return "redirect:/";
+	}
+	
+	public void infoBasket(Long itemId, HttpServletRequest request){
+		System.out.println("itemId : " + itemId);
+		List<Item> items = (List<Item>) request.getSession().getAttribute("items");
+		System.out.println("items : " + items);
+		boolean b = false;
+
+		for (Item item : items) {
+			if (item.getItemId().equals(itemId)) {
+				System.out.println("item : " + item);
+				b = true;
+				break;
+			}
+		}
+
+		if (b == true) {
+			shoppingServiceImplementation.addItemToBasket(itemId);
+			request.getSession().setAttribute("items", items);
+			request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
+			request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
+		}
 	}
 }
