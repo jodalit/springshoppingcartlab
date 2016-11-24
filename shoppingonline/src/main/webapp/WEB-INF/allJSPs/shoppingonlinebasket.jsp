@@ -839,6 +839,8 @@
             	<span>Quantity: ${basketsize} </span> 
             	<br />
             	<span>Total ($) : </span> 
+            	
+            	<span id="spayitems" name="spayitems" class="bouton"><a id="apayitems" name="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span>
             </div>
             
             <div id="divimagepcple" class="divmain">

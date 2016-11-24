@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Seach Result</title>
+    <title>Your Basket</title>
     <!--link href="CSS/default.css" rel="stylesheet" />
     
     <script src="Scripts/jquery-2.1.4.js"></script>
@@ -673,15 +673,6 @@
 		#main #divimagepcple img{
 			margin-left:auto;
 		    margin-right:auto;
-		    margin-bottom: .7em;
-		    width: 7em;
-		    height: 5em;
-		}
-		
-		#main #divimagepcple .ckbox{
-			margin-left:.5em;
-		    width: 0.75em;
-		    height: 0.75em;
 		}
 		
 		#main #divmotbienvenue{
@@ -692,7 +683,6 @@
 			width:37%;
 		    box-sizing:border-box;
 		}
-		
 		#main #divmotbienvenue p{
 		    text-align:justify;
 		    margin-left:auto;
@@ -761,6 +751,28 @@
 		    color:navy/*#0068AC*/;
 		}
 		
+		#main #divrecentitems {
+			
+			height : 17em;
+			width: auto;
+			overflow: scroll;
+			
+		}
+		
+		#main #divrecentitems div img{
+		   
+			height : 3.7 em;
+			width: 4.8 em;
+			
+		}
+		
+		#main #divrecentitems div{
+		   display:table-row-group;
+			margin-right: 0.4em;
+			height : 7 em;
+			width: 8 em;
+			
+		}
 		/*==============================================================================================================================================
 		    La boîte aside
 		    =======================================================================
@@ -785,16 +797,16 @@
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
-                <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
+                <span id="saccueil"><a id="aaccueil" href='<spring:url value="/"></spring:url>'>Home</a></span>
 
                 <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
                 <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
+			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a> ${basketsize}</span>
 		
             <div id="divSearch">
-                <form action="#" method="post">
+                <form action="<spring:url value='/resultsearchitem' />" method="post">
                     <fieldset>
                         <label for="itemNameToFind">Item's name</label>
                         <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
@@ -805,28 +817,34 @@
 		</header>
 
         <nav>
-            <!-- a id="aaccueil" href="#">Home</a><br /><br />
-            <a href="#">S'incrire</a><br /><br />
-            <a href="#">Nous contacter</a -->
+            
         </nav>
         
         <div id="main">
-            <h2>${resultSearch}</h2>
+            <h2>${welcomeTitle}</h2>
             <hr />
-            <h3 style="text-align: center; color: darkorange;">${sizeitemsforname} Item(s)</h3>
-            <div id="divimagepcple" class="divmain">
-            	<c:forEach items="${itemsforname}" var="item"> 
-            		<p>
-                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a>
-                		<span id="s${item.itemId}" name="${itemId}" class="bouton"><a id="${item.itemId}" name="${item.itemId}" href='<spring:url value="/addtobasketfromresultsearch/${item.itemId}"></spring:url>'>Add to Basket</a></span>
+            <div id="divrecentitems1">
+            	<h3>Your receipt</h3>
+            	<c:forEach items="${basket}" var="b"> 
+            		<div>
+                		<a href="#"><img alt="image 1" src="#">${b.itemName}</a>
+                		<!-- input name="${item.itemId}" id="${item.itemId}" type="checkbox" class="ckbox"/ -->
+                		<span id="s${b.itemId}" name="${b.itemId}" class="bouton"><a id="${b.itemId}" name="${b.itemId}" href='<spring:url value="#"></spring:url>'>Remove to Basket</a></span>
                 		<br />
-                		${item.description}
+                		${b.description}
                 		<br />
-                		<em>${item.price}<span>$</span></em>
-                	</p>
-                	<hr align="center" />
-                	<br />
+                		<em>${b.price}<span>$</span></em>
+                	</div>
             	</c:forEach>
+            	<br/>
+            	<span>Quantity: ${basketsize} </span> 
+            	<br />
+            	<span>Total ($) : </span> 
+            	
+            	<span id="spayitems" name="spayitems" class="bouton"><a id="apayitems" name="apayitems" href='<spring:url value="/payitems"></spring:url>'>Remove to Basket</a></span>
+            </div>
+            
+            <div id="divimagepcple" class="divmain">
                 
             </div>
             

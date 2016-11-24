@@ -41,6 +41,14 @@ public class ShoppingServiceImplementation implements shoppingService {
 		basket.forEach(System.out::println);
 		System.out.println("Basket size : " + basket.size());
 	}
+	
+	public void removeItemToBasket() {
+		basket.forEach(System.out::println);
+		System.out.println("Basket size : " + basket.size());
+		basket.clear();
+		basket.forEach(System.out::println);
+		System.out.println("Basket size : " + basket.size());
+	}
 
 	@Override
 	public void removeItemOnItemsListOfClient(Item item, List<Item> items) {
