@@ -34,16 +34,19 @@ public class ShoppingServiceImplementation implements shoppingService {
 	}
 
 	@Override
-	public void addItemToBasket(Item item) {
-		basket.add(item);
+	public void addItemToBasket(Long itemId) {
+		Item i = itemService.getItemById(itemId);
+		basket.add(i);
 		System.out.println("All Items in your Basket : ");
 		basket.forEach(System.out::println);
-		
 		System.out.println("Basket size : " + basket.size());
 	}
 
 	@Override
 	public void removeItemOnItemsListOfClient(Item item, List<Item> items) {
+		System.out.println("All availlable Items:");
+		items.forEach(System.out::println);
+		
 		items.remove(item);
 		System.out.println("All availlable Items:");
 		items.forEach(System.out::println);
