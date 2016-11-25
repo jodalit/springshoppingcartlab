@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your Basket</title>
+    <title>Add Item</title>
     <!--link href="CSS/default.css" rel="stylesheet" />
     
     <script src="Scripts/jquery-2.1.4.js"></script>
@@ -188,7 +188,7 @@
 		/*Formatage des zones de texte*/
 		input, select, textarea {
 		    width:15.75em/*px*/;
-		    height:7%/*px*/;
+		    height:5%/*px*/;
 		    text-align:left;
 		    padding:7px;
 		    border:inset;
@@ -199,7 +199,7 @@
 		    text-align:right;
 		}
 		
-		input#sexe {
+		input#sex {
 		    width:9%;
 		}
 		
@@ -227,18 +227,13 @@
 		    border:thin;
 		}
 		
-		input.agri_part, input.typePartenaire{
-		    
+		input.localisationClient{
+			    
 		    width:3.5%;
-		    margin-right:0;
+		    
+		    margin:0;
 		}
 		
-		
-		input#agri_part_oui, input#typePartenaire_non{
-		    
-		    
-		    margin-left:2.5em;
-		}
 		/*Règles de formatage des boutons*/
 		button, #sinscription, #sconnexion, #sdeconnexion{
 		    height:9%/*px*/;
@@ -658,8 +653,8 @@
 		    margin-right:auto;
 		    margin-top:0;
 		    margin-bottom:.7em;
-		    border-radius :15px;
-		    width:95%;
+		    border-radius :5px;
+		    width:auto;
 		}
 		#main #divimagepcple{
 			float:left;
@@ -673,7 +668,46 @@
 		#main #divimagepcple img{
 			margin-left:auto;
 		    margin-right:auto;
+		    margin-bottom: .7em;
+		    width: 7em;
+		    height: 5em;
 		}
+		
+		#main #divimagepcple .ckbox{
+			margin-left:.5em;
+		    width: 0.75em;
+		    height: 0.75em;
+		}
+		
+		
+		#main #divimagepcple label{
+			margin:0;
+			width: 60%;
+		}
+		
+		#main #divimagepcple #connexionBtn {
+			margin-left:1em;
+			margin-bottom:0.25em;
+			margin-top:0;
+			margin-right:0.4em;
+		}
+		
+		#main #divimagepcple #resetBtn{
+			margin-left:0;
+			margin-right:0;
+			margin-top:0;
+			margin-bottom:0.25em;
+		}
+		
+		
+		#main #divimagepcple #personConnexion{
+		
+		}
+		
+		#main #divimagepcple #personPassword{
+		
+		}
+		
 		
 		#main #divmotbienvenue{
 			float:left;
@@ -683,6 +717,7 @@
 			width:37%;
 		    box-sizing:border-box;
 		}
+		
 		#main #divmotbienvenue p{
 		    text-align:justify;
 		    margin-left:auto;
@@ -751,28 +786,6 @@
 		    color:navy/*#0068AC*/;
 		}
 		
-		#main #divrecentitems {
-			
-			height : 17em;
-			width: auto;
-			overflow: scroll;
-			
-		}
-		
-		#main #divrecentitems div img{
-		   
-			height : 3.7 em;
-			width: 4.8 em;
-			
-		}
-		
-		#main #divrecentitems div{
-		   display:table-row-group;
-			margin-right: 0.4em;
-			height : 7 em;
-			width: 8 em;
-			
-		}
 		/*==============================================================================================================================================
 		    La boîte aside
 		    =======================================================================
@@ -800,26 +813,16 @@
                 <c:choose>
                 	<c:when test="${not empty connexionname }">
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/deconnexion"></spring:url>'>Quit</a></span>
                 	</c:when>
                 	<c:otherwise>
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Quit</a></span>
 					</c:otherwise>
-	              </c:choose>                
+	              </c:choose>
+				
+                <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Quit</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
-		
-            <div id="divSearch">
-                <form action="<spring:url value='/resultsearchitem' />" method="post">
-                    <fieldset>
-                        <label for="itemNameToFind">Item's name</label>
-                        <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
-                        <button type="submit" id="searchItem" name="searchItem" class="bouton">Search</button>
-                    </fieldset>
-                </form>
-            </div>
+			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>    
 		</header>
 
         <nav>
@@ -827,32 +830,63 @@
         </nav>
         
         <div id="main">
-        	<c:if test="${not empty connexionname}"><em>${connexionname}, hi!!!</em></c:if>
-            <h2>${welcomeTitle}</h2>
+            <h2>${addnewitem}</h2>
             <hr />
-            <div id="divrecentitems1">
-            	<h3>Your receipt</h3>
-            	<c:forEach items="${basket}" var="b"> 
-            		<div>
-                		<a href="#"><img alt="image 1" src="#">${b.itemName}</a>
-                		<!-- input name="${item.itemId}" id="${item.itemId}" type="checkbox" class="ckbox"/ -->
-                		<span id="s${b.itemId}" name="${b.itemId}" class="bouton"><a id="${b.itemId}" name="${b.itemId}" href='<spring:url value="#"></spring:url>'>Remove to Basket</a></span>
-                		<br />
-                		${b.description}
-                		<br />
-                		<em>${b.price}<span>$</span></em>
-                	</div>
-            	</c:forEach>
-            	<br/>
-            	<span>Quantity: ${basketsize} </span> 
-            	<br />
-            	<span>Total ($) : </span> 
-            	
-            	<span id="spayitems" name="spayitems" class="bouton"><a id="apayitems" name="apayitems" href='<spring:url value="/payitems"></spring:url>'>Remove to Basket</a></span>
-            </div>
             
             <div id="divimagepcple" class="divmain">
-                
+                <form action="#" method="post">
+                    <fieldset>
+                    	<br/>
+                        <label for="personName">Name </label><br/>
+                        <input type="text" id="personConnexion" name="personConnexion" size="30" maxlength="45" size="30" placeholder="Enter your name, ..." /><span id="personConnexion"></span><br />
+                        <label for="personSex">Sex </label><br/>
+                        <select id="personSex">
+                        	<option label="---" value="---" />
+                        	<option label="Woman" value="Woman" />
+                        	<option label="Man" value="Man" />
+                        	<option label="Other" value="Other" />
+                        </select><br />
+                        <label for="personBirthDate">Birth Date </label><br/>
+                        <input type="datetime" id="personBirthDate" name="personBirthDate" size="20" maxlength="20" size="30" placeholder=" ..." /><span id="spersonBirthDate"></span><br />
+                        <br/>
+                    </fieldset>
+                    
+                    <fieldset>
+                    	<br/>
+                        <label for="connexionName">Connexion name </label><br/>
+                        <input type="text" id="connexionName" name="connexionName" size="20" maxlength="20" size="20" placeholder="Enter your connexion name, ..." /><span id="sconnexionName"></span><br />
+                        <label for="password">Pass word </label><br/>
+                        <input type="password" id="connexionName" name="connexionName" size="20" maxlength="20" size="20" /><span id="sconnexionName"></span><br />
+                    </fieldset>
+                    
+                    <fieldset>
+                    	<br/>
+                        <label for="personAddress">Address </label><br/>
+                        <input type="text" id="personAddress" name="personAddress" size="30" maxlength="45" size="30" placeholder="Enter your adresse, ..." /><span id="spersonConnexion"></span><br />
+                        <label for="personTel">Telephone </label><br/>
+                        <input type="text" id="personTel" name="personTel" size="20" maxlength="20" size="20" placeholder=" ..." /><span id="spersonTel"></span><br />
+                    </fieldset>
+                    
+                    <fieldset>
+                    	<br/>
+                        <label for="typeClient">Type client </label><br/>
+                        <select id="typeClient">
+                        	<option label="---" value="---" />
+                        	<option label="Wholesaler" value="Wholesaler" />
+                        	<option label="Retailer" value="Retailer" />
+                        </select><br />
+                        <label for="localisationClient">Localisation </label><br/>
+                        <input type="radio" id="localisationClientLocal" class="localisationClient" name="localisationClient" value="Local" checked="checked"/><span>Local</span>
+                        <input type="radio" id="localisationClientOther" class="localisationClient" name="localisationClient" value="Other" /><span>Other</span>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <br/>
+                        <button type="submit" id="addBtn" name="addBtn" class="bouton">Add</button>
+                        <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
+                        <br/>
+                    </fieldset>
+                </form>
             </div>
             
             <div id="divmotbienvenue" class="divmain">
@@ -862,7 +896,7 @@
         </div>
         
         <aside>
-            <h2>&diams; &diams; &diams;</h2>
+            
         </aside>
         
         <footer>

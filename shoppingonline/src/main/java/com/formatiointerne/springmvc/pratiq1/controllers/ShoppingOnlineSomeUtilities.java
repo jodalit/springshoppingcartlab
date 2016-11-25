@@ -47,6 +47,12 @@ public class ShoppingOnlineSomeUtilities {
 
 		return "shoppingonlinehomeclient";
 	}
+	
+	@RequestMapping(value = "/connect", method = RequestMethod.GET)
+	public String getShoppingOnlineHomeClient(Model model, HttpServletRequest request) {
+		model.addAttribute("connexion", CONNEXION);
+		return "shoppingonlinehomeclient";
+	}
 
 	@RequestMapping(value = "/showbasket", method = RequestMethod.GET)
 	public String getBasket() {
@@ -124,7 +130,9 @@ public class ShoppingOnlineSomeUtilities {
 	
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
 	public String getDeconnexion(Model model, HttpServletRequest request) {
-		model.addAttribute("connexionname", null);
+		//model.addAttribute("connexionname", null);
+		request.getSession().setAttribute("basketsize", 0);
+		request.getSession().setAttribute("connexionname", null);
 		request.getSession().setAttribute("itemsforname", null);
 		request.getSession().setAttribute("items", null);
 		request.getSession().setAttribute("basket", null);

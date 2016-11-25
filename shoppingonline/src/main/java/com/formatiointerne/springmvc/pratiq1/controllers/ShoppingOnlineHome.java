@@ -27,6 +27,7 @@ public class ShoppingOnlineHome {
 		//shoppingService.removeItemsToBasket();
 		Set<Item> items = itemService.items;
 		request.getSession().setAttribute("items", items);
+		request.getSession().setAttribute("basketsize", 0);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);
 				

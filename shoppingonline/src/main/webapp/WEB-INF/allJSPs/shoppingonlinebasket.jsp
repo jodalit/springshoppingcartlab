@@ -797,10 +797,16 @@
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
-                <span id="saccueil"><a id="aaccueil" href='<spring:url value="/"></spring:url>'>Home</a></span>
-
-                <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
+                <c:choose>
+                	<c:when test="${not empty connexionname }">
+                		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/deconnexion"></spring:url>'>Quit</a></span>
+                	</c:when>
+                	<c:otherwise>
+                		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Quit</a></span>
+					</c:otherwise>
+	              </c:choose>                
             </div>
             
 			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a> ${basketsize}</span>
@@ -821,6 +827,7 @@
         </nav>
         
         <div id="main">
+        	<c:if test="${not empty connexionname}"><em>${connexionname}, hi!!!</em></c:if>
             <h2>${welcomeTitle}</h2>
             <hr />
             <div id="divrecentitems1">

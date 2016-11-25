@@ -615,6 +615,12 @@
 		    border-radius :5px;
 		    width:auto;
 		}
+		
+		#main em {
+			color: navy;
+			text-align: right;
+		}
+		
 		#main #divimagepcple{
 			float:left;
 			font-size:13.5pt;
@@ -739,13 +745,19 @@
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
-                <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
+                <c:choose>
+                	<c:when test="${not empty connexionname }">
+                		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
+                	</c:when>
+                	<c:otherwise>
+                		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
+					</c:otherwise>
+	              </c:choose>
 				
-                <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Deconnexion</a></span>
+                <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Quit</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>
+			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
 		
             <div id="divSearch">
                 <form action="<spring:url value='/resultsearchitem' />" method="post">
@@ -759,15 +771,13 @@
 		</header>
 
         <nav>
-            <!-- a id="aaccueil" href="#">Home</a><br /><br />
-            <a href="#">S'incrire</a><br /><br />
-            <a href="#">Nous contacter</a -->
+            <a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a>
         </nav>
         
         <div id="main">
-            <h2>${basket}</h2>
+        	<em>${connexionname}, hi!!!</em>
+            <h2>Welcome on your web store</h2>
             <hr />
-            <span>${connexionname}, hi!!!</span>
             
             <div id="divrecentitems">
             	<c:forEach items="${items}" var="item"> 

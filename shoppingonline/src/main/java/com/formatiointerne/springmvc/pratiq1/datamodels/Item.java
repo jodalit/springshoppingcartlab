@@ -64,6 +64,14 @@ public class Item implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	public LocalDate getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(LocalDate expireDate) {
+		this.expireDate = expireDate;
+	}
 
 	@Override
 	public String toString() {

@@ -15,7 +15,6 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 @Service
 public class ItemServiceImplementation implements ItemService {
-	//public List<Item> items = new LinkedList<>();
 	public Set<Item> items = new HashSet<>();
 	
 	public ItemServiceImplementation() {
@@ -35,7 +34,52 @@ public class ItemServiceImplementation implements ItemService {
 	public Item createItem(Long id, String name, String description, Double price, LocalDate expireDate) {
 		return new Item(id, name, description, price, expireDate);
 	}
+	
+	@Override
+	public boolean modifyNameItem(Long id, String name) {
+		Item item = this.getItemById(id);
 
+		if (item==null)
+			return false;
+		
+		item.setItemName(name);
+		
+		return true;
+	}
+	@Override
+	public boolean modifyNameDescriptionItem(Long id, String description) {
+		Item item = this.getItemById(id);
+
+		if (item==null)
+			return false;
+		
+		item.setDescription(description);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean modifyPriceItem(Long id, Double price) {
+		Item item = this.getItemById(id);
+
+		if (item==null)
+			return false;
+		
+		item.setPrice(price);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean modifyExpiredateItem(Long id, LocalDate expireDate) {
+		Item item = getItemById(id);
+		if (item!=null){
+			item.setExpireDate(expireDate);
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean modifyNameDescriptionPriceItem(Long id, String name, String description, Double price) {
 		Item item = this.getItemById(id);
@@ -51,22 +95,16 @@ public class ItemServiceImplementation implements ItemService {
 	}
 
 	@Override
-	public boolean modifyNameDescriptionPriceItem(Long id, String name, String description, Double price,
+	public boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, Double price,
 			LocalDate expireDate) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifyNameDescriptionPriceItem(Item item, String name, String description, Double price) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifyNameDescriptionPriceItem(Item item, String name, String description, Double price,
-			LocalDate expireDate) {
-		// TODO Auto-generated method stub
+		Item item = getItemById(id);
+		if (item!=null){
+			item.setItemName(name);
+			item.setDescription(description);
+			item.setPrice(price);
+			item.setExpireDate(expireDate);
+			return true;
+		}
 		return false;
 	}
 
@@ -82,7 +120,7 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Override
 	public Set<Item> getItemByName(String name) {
-		//List<Item> l = new LinkedList<>();
+		
 		Set<Item> l = new HashSet<>();
 		for (Item item : items) {
 			if (item.getDescription().toLowerCase().contains(name.trim().toLowerCase()) ){
@@ -97,7 +135,11 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Override
 	public boolean removeItem(Long id) {
-		// TODO Auto-generated method stub
+		Item item = getItemById(id);
+		if (item!=null){
+			items.remove(item);
+			return true;
+		}
 		return false;
 	}
 
