@@ -771,7 +771,9 @@
 		</header>
 
         <nav>
-            <a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a>
+            
+            <h3><a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a></h3>
+            <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
         </nav>
         
         <div id="main">
@@ -780,58 +782,34 @@
             <hr />
             
             <div id="divrecentitems">
-            	<c:forEach items="${items}" var="item"> 
-            		<div>
-                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a>
-                		<!-- input name="${item.itemId}" id="${item.itemId}" type="checkbox" class="ckbox"/ -->
-                		<span id="s${item.itemId}" name="s${itemId}" class="bouton"><a id="a${item.itemId}" name="a${item.itemId}" href='<spring:url value="/addtobasket/${item.itemId}"></spring:url>'>Add to Basket</a></span>
-                		<br />
-                		${item.description}
-                		<br />
-                		<em>${item.price}<span>$</span></em>
-                	</div>
-            	</c:forEach>
-            	<!--  
-            	<c:forEach items="${items}" var="item"> 
-            		<div>
-                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a><input id="${item.itemId}" type="checkbox" class="ckbox"/>
-                		<br />
-                		${item.description}
-                		<br />
-                		<em>${item.price}<span>$</span></em>
-                	</div>
-            	</c:forEach>
-            	-->
-            </div>
-            
-            <div id="divimagepcple" class="divmain">
-                <!-- table>
-                <caption>Your current basket</caption>
-                <thead>
-                	<tr>
-                		<th>Item name</th>
-                		<th>Description</th>
-                		<th>Price ($)</th>
-                		<th>Quantity</th>
-                		<th>Amount ($)</th>
-                	</tr>
-                </thead>
-                <tbody>
-                	<tr>
-                		<td>Itemmmmmmmmmmmmmmm mmmmmmmmmmm</td>
-                		<td>iiiiiiiiiiiiiiiiiiiiiiiiiiii ttttttttttttttttttttttttttttttttttttttttttt</td>
-                		<td>100.0</td>
-                		<th>12</th>
-                		<th>1200.0</th>
-                	</tr>
-                </tbody>
-                </table>
-                <br />
-				<h3>${basketSize}</h3 -->
-            </div>
-            
-            <div id="divmotbienvenue" class="divmain">
-                
+            	
+            	<table border="1">
+            		<caption>${allitems}</caption>
+	 			  <tbody>
+	            	<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Expire date</th>
+						<th>Action</th>
+					</tr>
+					<c:forEach items="${items}" var="item"> 
+						
+						<tr>
+							<!-- td><a href='<spring:url value="/${p.personId}" />'>${p.personId}</a></td -->
+							<td>${item.itemName}</td> 
+							<td>${item.description}</td>
+							<td>${item.price}</td>
+							<td>${item.expireDate}</td>
+							<td>
+								<a href="#">View</a>
+								<a href="#">Update</a>
+								<a href="#">Remove</a>
+							 </td>
+						</tr>
+					</c:forEach>
+				   </tbody>
+				  </table>
             </div>
   
         </div>

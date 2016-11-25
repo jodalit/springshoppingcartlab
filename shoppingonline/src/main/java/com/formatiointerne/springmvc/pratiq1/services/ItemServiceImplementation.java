@@ -1,6 +1,7 @@
 package com.formatiointerne.springmvc.pratiq1.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 @Service
 public class ItemServiceImplementation implements ItemService {
 	public Set<Item> items = new HashSet<>();
+	public int i=0;
 	
 	public ItemServiceImplementation() {
 		items.add(new Item(new Long(10), "Item 1", "Item 1 kjlsddslkjds kjsdakjdsjkdskj kkdskldslksd", new Double(12.3)));
@@ -31,8 +33,14 @@ public class ItemServiceImplementation implements ItemService {
 	}
 	
 	@Override
-	public Item createItem(Long id, String name, String description, Double price, LocalDate expireDate) {
-		return new Item(id, name, description, price, expireDate);
+	public Item createItem(String id, String name, String description, String price, String expireDate) {
+		 Item item = new Item(new Long(id), name, description, new Double(price), LocalDate.now());
+		 items.add(item);
+		 System.out.println("item ;;;;;;;" +item);
+		 System.out.println("items.add(item)");
+		 items.forEach(System.out::println);
+		 
+		 return item;
 	}
 	
 	@Override

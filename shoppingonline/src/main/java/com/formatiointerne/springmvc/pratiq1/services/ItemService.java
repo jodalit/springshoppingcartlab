@@ -7,7 +7,7 @@ import java.util.Set;
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 public interface ItemService {
-	Item createItem(Long id, String name, String description, Double price, LocalDate expireDate);
+	Item createItem(String id, String name, String description, String price, String expireDate);
 	boolean modifyNameDescriptionPriceItem(Long id, String name, String description,  Double price); //Only the mandatories fields
 	//boolean modifyNameDescriptionPriceItem(Item item, String name, String description,  Double price); //Only the mandatories fields
 	//boolean modifyNameDescriptionPriceExpiredateItem(Item item, String name, String description,  Double price, LocalDate expireDate); //All possible fields

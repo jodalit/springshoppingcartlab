@@ -830,44 +830,38 @@
         </nav>
         
         <div id="main">
-            <h2>${addnewitem}</h2>
+            <h2>${allitems}</h2>
             <hr />
             
-            <div id="divimagepcple" class="divmain">
-            	<spring:url value="/saveitem" var="saveItem" />
-            	<form action="${saveItem}" method="POST">
-            		<h3>${saveresult} ${Itemnumero }</h3>
-                    <fieldset>
-                    	<br/>
-                        <label for="itemName">Name </label><br/>
-                        <input name="itemName" id="itemName"  size="30" maxlength="45" tabindex="0"/> <span id="itemNamespan"></span><br />
-                        <label for="itemDescription">Description </label><br/>
-                        <textarea id="itemDescription" name="itemDescription"  rows="4"  cols="40" >
-                        
-                        </textarea>
-                        <br/>
-                    </fieldset>
-                    
-                    <fieldset>
-                    	<br/>
-                        <label for="itemPrice">Price ($) </label><br/>
-                        <input type="text" id="itemPrice" name="itemPrice" size="15" maxlength="15" size="20" /><span id="itemPricespan"></span><br />
-                        <label for="itemExpireDate">Expire date </label><br/>
-                        <input type="datetime" id="itemExpireDate" name="itemExpireDate" size="20" maxlength="20" size="20" /><span id="itemExpireDatespan"></span><br />
-                    </fieldset>
-                    
-                    <fieldset>
-                        <br/>
-                        <button type="submit" id="saveBtn" name="saveBtn" class="bouton">Save</button>
-                        <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
-                        <br/>
-                    </fieldset>
-                </form>
+            <div id="divrecentitems">
+            	<table border="1">
+	 			  <tbody>
+	            	<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Expire date</th>
+						<th>Action</th>
+					</tr>
+					<c:forEach items="${items}" var="item"> 
+						
+						<tr>
+							<!-- td><a href='<spring:url value="/${p.personId}" />'>${p.personId}</a></td -->
+							<td>${item.itemName}</td> 
+							<td>${item.description}</td>
+							<td>${item.price}</td>
+							<td>${item.expireDate}</td>
+							<td>
+								<a href="#">View</a>
+								<a href="#">Update</a>
+								<a href="#">Remove</a><br />
+							 </td>
+						</tr>
+					</c:forEach>
+				   </tbody>
+				  </table>
             </div>
             
-            <div id="divmotbienvenue" class="divmain">
-                
-            </div>
   
         </div>
         
