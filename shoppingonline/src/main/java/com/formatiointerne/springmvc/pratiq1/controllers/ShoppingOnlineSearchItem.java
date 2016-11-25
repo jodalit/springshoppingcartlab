@@ -1,6 +1,6 @@
 package com.formatiointerne.springmvc.pratiq1.controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,7 +41,7 @@ public class ShoppingOnlineSearchItem {
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.POST)
 	public String getResultSearchItem(Model model, @RequestParam("itemNameToFind") String itemNameToFind, HttpServletRequest request){
 	 
-		List<Item> itemsforname = itemService.getItemByName(itemNameToFind);
+		Set<Item> itemsforname = itemService.getItemByName(itemNameToFind);
 	
 		int sizeitemsforname = itemsforname.size();
 	

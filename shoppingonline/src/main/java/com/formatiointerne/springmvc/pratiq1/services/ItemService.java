@@ -2,6 +2,7 @@ package com.formatiointerne.springmvc.pratiq1.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
@@ -13,5 +14,5 @@ public interface ItemService {
 	boolean modifyNameDescriptionPriceItem(Item item, String name, String description,  Double price, LocalDate expireDate); //All possible fields
 	Item getItemById(Long id);
 	boolean removeItem(Long id);
-	List<Item> getItemByName(String name);
+	Set<Item> getItemByName(String name);
 }

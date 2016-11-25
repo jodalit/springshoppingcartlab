@@ -1,9 +1,12 @@
 package com.formatiointerne.springmvc.pratiq1.services;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -12,7 +15,8 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 @Service
 public class ItemServiceImplementation implements ItemService {
-	public List<Item> items = new LinkedList<>();
+	//public List<Item> items = new LinkedList<>();
+	public Set<Item> items = new HashSet<>();
 	
 	public ItemServiceImplementation() {
 		items.add(new Item(new Long(10), "Item 1", "Item 1 kjlsddslkjds kjsdakjdsjkdskj kkdskldslksd", new Double(12.3)));
@@ -29,14 +33,21 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Override
 	public Item createItem(Long id, String name, String description, Double price, LocalDate expireDate) {
-		
-		return null;
+		return new Item(id, name, description, price, expireDate);
 	}
 
 	@Override
 	public boolean modifyNameDescriptionPriceItem(Long id, String name, String description, Double price) {
-		// TODO Auto-generated method stub
-		return false;
+		Item item = this.getItemById(id);
+
+		if (item==null)
+			return false;
+		
+		item.setItemName(name);
+		item.setDescription(description);
+		item.setPrice(price);
+		
+		return true;
 	}
 
 	@Override
@@ -70,8 +81,9 @@ public class ItemServiceImplementation implements ItemService {
 	}
 	
 	@Override
-	public List<Item> getItemByName(String name) {
-		List<Item> l = new LinkedList<>();
+	public Set<Item> getItemByName(String name) {
+		//List<Item> l = new LinkedList<>();
+		Set<Item> l = new HashSet<>();
 		for (Item item : items) {
 			if (item.getDescription().toLowerCase().contains(name.trim().toLowerCase()) ){
 				l.add(item);

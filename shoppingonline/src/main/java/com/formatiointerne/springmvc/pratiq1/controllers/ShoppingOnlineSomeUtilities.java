@@ -2,6 +2,7 @@ package com.formatiointerne.springmvc.pratiq1.controllers;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +73,7 @@ public class ShoppingOnlineSomeUtilities {
 	
 	@RequestMapping("/payitems")
 	private String payItems(HttpServletRequest request) {
-		List<Item> basket = (List<Item>) request.getSession().getAttribute("basket");
+		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
 		
 		if (basket==null){
 			return "redirect:/";
@@ -88,7 +89,7 @@ public class ShoppingOnlineSomeUtilities {
 	
 	@RequestMapping("/removefrombasket/{itemId}")
 	private String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
-		List<Item> basket = (List<Item>) request.getSession().getAttribute("basket");
+		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
 		
 		if (basket==null){
 			return "redirect:/";
@@ -98,7 +99,8 @@ public class ShoppingOnlineSomeUtilities {
 		basket.forEach(System.out::println);
 		boolean b = false;
 		int i = 0;
-		Iterator<Item> iterat = basket.listIterator();
+
+		Iterator<Item> iterat = basket.iterator(); //.listIterator();
 		while (iterat.hasNext()) {
 			Item item = (Item) iterat.next();
 			if (item.getItemId().equals(itemId)){
@@ -133,7 +135,7 @@ public class ShoppingOnlineSomeUtilities {
 		System.out.println("itemId : " + itemId);
 		boolean b = false;
 
-		for (Item item : (List<Item>) request.getSession().getAttribute("items")) {
+		for (Item item : (Set<Item>) request.getSession().getAttribute("items")) {
 			if (item.getItemId().equals(itemId)) {
 				System.out.println("item : " + item);
 				b = true;
