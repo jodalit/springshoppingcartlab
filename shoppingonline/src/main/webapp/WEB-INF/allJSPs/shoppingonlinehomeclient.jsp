@@ -770,23 +770,17 @@
             <span>${connexionname}, hi!!!</span>
             
             <div id="divrecentitems">
-            	<c:forEach items="${basket}" var="b"> 
+            	<c:forEach items="${items}" var="item"> 
             		<div>
-                		<a href="#"><img alt="image 1" src="#">${b.itemName}</a>
+                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a>
                 		<!-- input name="${item.itemId}" id="${item.itemId}" type="checkbox" class="ckbox"/ -->
-                		<span id="s${b.itemId}" name="${b.itemId}" class="bouton"><a id="${b.itemId}" name="${b.itemId}" href='<spring:url value="/removefrombasket/${b.itemId}"></spring:url>'>Remove from Basket</a></span>
+                		<span id="s${item.itemId}" name="s${itemId}" class="bouton"><a id="a${item.itemId}" name="a${item.itemId}" href='<spring:url value="/addtobasket/${item.itemId}"></spring:url>'>Add to Basket</a></span>
                 		<br />
-                		${b.description}
+                		${item.description}
                 		<br />
-                		<em>${b.price}<span>$</span></em>
+                		<em>${item.price}<span>$</span></em>
                 	</div>
             	</c:forEach>
-            	<br/>
-            	<span>Quantity: ${basketsize} </span> 
-            	<br />
-            	<span>Total ($) : </span> 
-            	
-            	<span id="spayitems" name="spayitems" class="bouton"><a id="apayitems" name="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span>
             	<!--  
             	<c:forEach items="${items}" var="item"> 
             		<div>

@@ -35,11 +35,29 @@ public class ShoppingServiceImplementation implements shoppingService {
 
 	@Override
 	public void addItemToBasket(Long itemId) {
-		Item i = itemService.getItemById(itemId);
-		basket.add(i);
-		System.out.println("All Items in your Basket : ");
-		basket.forEach(System.out::println);
-		System.out.println("Basket size : " + basket.size());
+		System.out.println("existItemInBasketOrNo(itemId) : " + existItemInBasketOrNo(itemId));
+		if (!existItemInBasketOrNo(itemId)){
+			Item i = itemService.getItemById(itemId);
+			basket.add(i);
+			System.out.println("All Items in your Basket : ");
+			basket.forEach(System.out::println);
+			System.out.println("Basket size : " + basket.size());
+		}
+	}
+	
+	public boolean existItemInBasketOrNo(Long itemId){
+		boolean b = false;
+		int i = 0;
+		for (Item item : basket) {
+			if (item.getItemId().equals(itemId)) {
+				System.out.println("item : " + item);
+				i++;
+				b = true;
+				break;
+			}
+		}
+		
+		return b;
 	}
 	
 	public void removeItemToBasket(Long itemId) {

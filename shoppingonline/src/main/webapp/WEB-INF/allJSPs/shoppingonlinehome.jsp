@@ -828,7 +828,7 @@
             		<div>
                 		<a href="#"><img alt="image 1" src="#">${item.itemName}</a>
                 		<!-- input name="${item.itemId}" id="${item.itemId}" type="checkbox" class="ckbox"/ -->
-                		<span id="s${item.itemId}" name="${itemId}" class="bouton"><a id="${item.itemId}" name="${item.itemId}" href='<spring:url value="/addtobasket/${item.itemId}"></spring:url>'>Add to Basket</a></span>
+                		<span id="s${item.itemId}" name="s${itemId}" class="bouton"><a id="a${item.itemId}" name="a${item.itemId}" href='<spring:url value="/addtobasket/${item.itemId}"></spring:url>'>Add to Basket</a></span>
                 		<br />
                 		${item.description}
                 		<br />
