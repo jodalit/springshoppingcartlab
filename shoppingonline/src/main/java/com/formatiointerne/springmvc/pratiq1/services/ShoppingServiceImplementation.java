@@ -21,11 +21,11 @@ public class ShoppingServiceImplementation implements shoppingService {
 	@Override
 	public Set<Item> getAllItems() {
 		System.out.println("getAllItems() calls itemService.items : ");
-		itemService.items.forEach(System.out::println);
+		itemService.items.values().forEach(System.out::println);
 		
 		System.out.println("All Items in your Basket : ");
 		basket.forEach(System.out::println);
-		return itemService.items;
+		return (Set<Item>) itemService.items.values();
 	}
 
 	@Override

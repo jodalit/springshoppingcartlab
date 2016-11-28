@@ -29,12 +29,13 @@ public class ShoppingOnlineSomeUtilities {
 	public static final String CONNEXION = "Connexion to your on line store";
 	public static final String BASKET = "Basket Breakdown";
 	public static final String NEWUSER = "Choose your profil";
-
+	
 	@Autowired
 	private ShoppingServiceImplementation shoppingServiceImplementation;
 
 	@Autowired
 	private ItemServiceImplementation itemService;
+	
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
 	public String getConnexion(Model model, HttpServletRequest request) {
@@ -51,6 +52,9 @@ public class ShoppingOnlineSomeUtilities {
 
 		return "shoppingonlinehomeclient";
 	}
+	
+	
+	
 	
 	@RequestMapping(value = "/connect", method = RequestMethod.GET)
 	public String getShoppingOnlineHomeClient(Model model, HttpServletRequest request) {
@@ -142,6 +146,8 @@ public class ShoppingOnlineSomeUtilities {
 		request.getSession().setAttribute("itemsforname", null);
 		request.getSession().setAttribute("items", null);
 		request.getSession().setAttribute("basket", null);
+		request.getSession().setAttribute("people", null);
+		
 		
 		sessionstatus.setComplete();
 		webrequest.removeAttribute("basketsize", WebRequest.SCOPE_SESSION);
@@ -149,6 +155,7 @@ public class ShoppingOnlineSomeUtilities {
 		webrequest.removeAttribute("itemsforname", WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute("items", WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute("basket", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute("people", WebRequest.SCOPE_SESSION);
 		
 		return "redirect:/";
 	}

@@ -827,6 +827,7 @@
 
         <nav>
             <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
+            
         </nav>
         
         <div id="main">

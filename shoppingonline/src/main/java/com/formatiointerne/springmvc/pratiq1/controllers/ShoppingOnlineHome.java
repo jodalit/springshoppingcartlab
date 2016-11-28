@@ -1,5 +1,8 @@
 package com.formatiointerne.springmvc.pratiq1.controllers;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +27,10 @@ public class ShoppingOnlineHome {
 	
 	@RequestMapping("/") //shoppingonlinehome
 	public String goShoppingOnlineHome(Model model, HttpServletRequest request){
-		//shoppingService.removeItemsToBasket();
-		Set<Item> items = itemService.items;
-		request.getSession().setAttribute("items", items);
+	
+		//Collection<Item> items = itemService.items.values();
+		//Collections.list(Collections.enumeration(itemService.items.values()));
+		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
 		request.getSession().setAttribute("basketsize", 0);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);

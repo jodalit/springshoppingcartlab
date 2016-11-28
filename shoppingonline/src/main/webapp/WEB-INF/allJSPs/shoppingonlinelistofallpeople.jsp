@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>All Items</title>
+    <title>All authoriserid people</title>
     <!--link href="CSS/default.css" rel="stylesheet" />
     
     <script src="Scripts/jquery-2.1.4.js"></script>
@@ -826,9 +826,11 @@
 		</header>
 
         <nav>
-            <h3><a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a></h3>
+            <h3><a id="aaddclient" href="<spring:url value='/updateadmin' />">Add new Item</a></h3>
+            <h3><a id="aaddclient" href="<spring:url value='/updateclient' />">Add new Item</a></h3>
             <br />
-            
+            <h3><a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a></h3>
+            <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
         </nav>
         
         <div id="main">
@@ -840,24 +842,51 @@
 	 			  <tbody>
 	            	<tr>
 						<th>Name</th>
-						<th>Description</th>
-						<th>Price</th>
-						<th>Expire date</th>
+						<th>Sex</th>
+						<th>Date of birth</th>
+						<th>Adresse</th>
+						<th>Telephone</th>
+						<th>Connexion</th>
+						<th>Profile</th>
 						<th>Action</th>
 					</tr>
-					<c:forEach items="${items}" var="item"> 
+					<c:forEach items="${people}" var="p"> 
 						
 						<tr>
 							<!-- td><a href='<spring:url value="/${p.personId}" />'>${p.personId}</a></td -->
-							<td>${item.itemName}</td> 
-							<td>${item.description}</td>
-							<td>${item.price}</td>
-							<td>${item.expireDate}</td>
-							<td>
-								<a href="<spring:url value="/${item.itemId}" />">View</a>
-								<a href="<spring:url value="/updateitem/${item.itemId}" />">Update</a>
-								<a href="<spring:url value="/removeitem/${item.itemId}" />">Remove</a><br />
-							 </td>
+							<td>${p.personName}</td> 
+							<td>${p.personSex}</td>
+							<td>${p.personBirthDate}</td>
+							<td>${p.personAdress}</td>
+							<td>${p.personTelephone}</td>
+							<td>${p.connexionname}</td>
+							<c:choose>
+								<c:when test="${p.profile ==0}">
+									<td><em>Super administrator</em></td>
+									<td>
+										<a href="<spring:url value="#" />">View</a>
+										<a href="<spring:url value="#" />">Update</a>
+										<a href="<spring:url value="#" />">Disabled</a><br />
+									 </td>
+								</c:when>
+								<c:when test="${p.profile==1}">
+									<td>Administrator</td>
+									<td>
+										<a href="<spring:url value="#" />">View</a>
+										<a href="<spring:url value="#" />">Update</a>
+										<a href="<spring:url value="#" />">Disabled</a><br />
+									 </td>
+								</c:when>
+								<c:when test="${p.profile==2}">
+									<td>Client</td>
+									<td>
+										<a href="<spring:url value="#" />">View</a>
+										<a href="<spring:url value="#" />">Update client</a>
+										<a href="<spring:url value="#" />">Disabled client</a><br />
+									 </td>
+								</c:when>
+								
+							</c:choose>
 						</tr>
 					</c:forEach>
 				   </tbody>

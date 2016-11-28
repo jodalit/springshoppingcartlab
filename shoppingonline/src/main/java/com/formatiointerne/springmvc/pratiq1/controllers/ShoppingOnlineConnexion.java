@@ -16,6 +16,7 @@ import com.formatiointerne.springmvc.pratiq1.services.ServicePersonImplementatio
 
 @Controller
 public class ShoppingOnlineConnexion {
+	public static final String ALLPEOPLE = "All people";
 	
 	@Autowired
 	ServicePersonImplementation servicePerson;
@@ -25,20 +26,30 @@ public class ShoppingOnlineConnexion {
 		System.out.println("servicePerson.persons : \n"+ request.getSession().getAttribute("items"));
 		System.out.println("request.getSession().getAttribute(items) : \n"+ request.getSession().getAttribute("items"));
 		
+		/*request.getSession().setAttribute("people", servicePerson.persons);
+		System.out.println("people : \n"+ request.getSession().getAttribute("people"));*/
+		
 		for (Person person : servicePerson.persons) {
-			if (person.getConnexionname().trim().equals(personConnexion) && person.getPassword().trim().equals(personPassword)){
+			if (person.getConnexionname().trim().equalsIgnoreCase(personConnexion) && person.getPassword().trim().equalsIgnoreCase(personPassword)){
 				request.getSession().setAttribute("connexionname", person.getConnexionname().trim());
 				if (person.getProfile()==1){ //admin
 					return "shoppingonlinehomeclient";
 				} else if (person.getProfile()==2){ //client
 					
 				}else if (person.getProfile()==0){ //super admin
-					
+					return "shoppingonlinehomesuperadmin";
 				}
 				
 			}
 		}
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/listpeople", method=RequestMethod.GET)
+	public String getAllItems(Model model, HttpServletRequest request){
+		model.addAttribute("allpeople", ALLPEOPLE);
+		request.getSession().setAttribute("people", servicePerson.persons);
+		return "shoppingonlinelistofallpeople";
 	}
 }
