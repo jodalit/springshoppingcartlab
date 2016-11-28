@@ -3,6 +3,7 @@ package com.formatiointerne.springmvc.pratiq1.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -79,10 +80,10 @@ public class ItemServiceImplementation implements ItemService {
 	}
 	
 	@Override
-	public boolean modifyExpiredateItem(Long id, LocalDate expireDate) {
+	public boolean modifyExpiredateItem(Long id, String expireDate) {
 		Item item = getItemById(id);
 		if (item!=null){
-			item.setExpireDate(expireDate);
+			item.setExpireDate(LocalDate.now());
 			return true;
 		}
 		return false;
@@ -103,14 +104,14 @@ public class ItemServiceImplementation implements ItemService {
 	}
 
 	@Override
-	public boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, Double price,
-			LocalDate expireDate) {
+	public boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, String price,
+			String expireDate) {
 		Item item = getItemById(id);
 		if (item!=null){
 			item.setItemName(name);
 			item.setDescription(description);
-			item.setPrice(price);
-			item.setExpireDate(expireDate);
+			item.setPrice(new Double(price) );
+			item.setExpireDate(LocalDate.now());//expireDate);
 			return true;
 		}
 		return false;
@@ -118,11 +119,15 @@ public class ItemServiceImplementation implements ItemService {
 
 	@Override
 	public Item getItemById(Long id) {
-		for (Item item : items) {
+		Iterator<Item> iterator = items.iterator();
+		
+		while (iterator.hasNext()) {
+			Item item = (Item) iterator.next();
 			if (item.getItemId().equals(id))
 				return item;
+			
 		}
-		
+				
 		return null;
 	}
 	
@@ -143,11 +148,30 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Override
 	public boolean removeItem(Long id) {
-		Item item = getItemById(id);
+		/*Item item = getItemById(id);
 		if (item!=null){
 			items.remove(item);
 			return true;
+		}*/
+		
+		
+		Iterator<Item> iterator = items.iterator();
+		
+		while (iterator.hasNext()) {
+			Item item = (Item) iterator.next();
+			if (item.getItemId().equals(id)){
+				System.out.println("items before remove");
+				items.forEach(System.out::println);
+				
+				items.remove(item);
+				
+				System.out.println();
+				System.out.println("items after remove");
+				items.forEach(System.out::println);
+				return true;
+			}
 		}
+		
 		return false;
 	}
 

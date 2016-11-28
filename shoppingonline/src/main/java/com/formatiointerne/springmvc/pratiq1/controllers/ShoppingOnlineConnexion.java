@@ -27,9 +27,15 @@ public class ShoppingOnlineConnexion {
 		
 		for (Person person : servicePerson.persons) {
 			if (person.getConnexionname().trim().equals(personConnexion) && person.getPassword().trim().equals(personPassword)){
-				//model.addAttribute("connexionname", person.getConnexionname().trim());
 				request.getSession().setAttribute("connexionname", person.getConnexionname().trim());
-				return "shoppingonlinehomeclient";
+				if (person.getProfile()==1){ //admin
+					return "shoppingonlinehomeclient";
+				} else if (person.getProfile()==2){ //client
+					
+				}else if (person.getProfile()==0){ //super admin
+					
+				}
+				
 			}
 		}
 		

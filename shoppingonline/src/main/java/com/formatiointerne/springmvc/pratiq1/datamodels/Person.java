@@ -12,7 +12,7 @@ public class Person {
 	private String personTelephone;
 	private String connexionname;
 	private String password;
-	private int profile; //1 for admin and 2 for client 
+	private int profile; //1 for admin; 2 for client; 0 for super admin 
 	
 	public Person() {
 	}

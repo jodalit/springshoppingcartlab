@@ -17,22 +17,6 @@ public class ShoppingServiceImplementation implements shoppingService {
 	
 	@Autowired
 	ItemServiceImplementation itemService;
-	
-	/*@Override
-	public Set<Item> getItemByName(String name) {
-		Set<Item> items = new HashSet<>();
-		System.out.println("All Items in your Basket : ");
-		basket.forEach(System.out::println);
-		
-		for (Item item : itemService.getItemByName(name)) {
-			if (item.getItemName().equals(name)) {
-				System.out.println("item : " + item);
-				
-			}
-		}
-		
-		return null;
-	}*/
 
 	@Override
 	public Set<Item> getAllItems() {

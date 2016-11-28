@@ -1,5 +1,6 @@
 package com.formatiointerne.springmvc.pratiq1.controllers;
 
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionAttributeStore;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
@@ -129,13 +133,23 @@ public class ShoppingOnlineSomeUtilities {
 	}
 	
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
-	public String getDeconnexion(Model model, HttpServletRequest request) {
+	public String getDeconnexion(Model model, HttpServletRequest request, WebRequest webrequest, SessionStatus sessionstatus) {
 		//model.addAttribute("connexionname", null);
+		
+		
 		request.getSession().setAttribute("basketsize", 0);
 		request.getSession().setAttribute("connexionname", null);
 		request.getSession().setAttribute("itemsforname", null);
 		request.getSession().setAttribute("items", null);
 		request.getSession().setAttribute("basket", null);
+		
+		sessionstatus.setComplete();
+		webrequest.removeAttribute("basketsize", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute("connexionname", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute("itemsforname", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute("items", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute("basket", WebRequest.SCOPE_SESSION);
+		
 		return "redirect:/";
 	}
 	

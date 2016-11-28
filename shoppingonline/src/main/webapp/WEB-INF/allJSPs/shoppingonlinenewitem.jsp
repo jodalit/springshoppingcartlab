@@ -842,7 +842,7 @@
                         <label for="itemName">Name </label><br/>
                         <input name="itemName" id="itemName"  size="30" maxlength="45" tabindex="0"/> <span id="itemNamespan"></span><br />
                         <label for="itemDescription">Description </label><br/>
-                        <textarea id="itemDescription" name="itemDescription"  rows="4"  cols="40" >
+                        <textarea id="itemDescription" name="itemDescription"  rows="4"  cols="40"  tabindex="1">
                         
                         </textarea>
                         <br/>
@@ -851,9 +851,9 @@
                     <fieldset>
                     	<br/>
                         <label for="itemPrice">Price ($) </label><br/>
-                        <input type="text" id="itemPrice" name="itemPrice" size="15" maxlength="15" size="20" /><span id="itemPricespan"></span><br />
+                        <input type="text" id="itemPrice" name="itemPrice" size="15" maxlength="15" size="20" tabindex="2" /><span id="itemPricespan"></span><br />
                         <label for="itemExpireDate">Expire date </label><br/>
-                        <input type="datetime" id="itemExpireDate" name="itemExpireDate" size="20" maxlength="20" size="20" /><span id="itemExpireDatespan"></span><br />
+                        <input type="datetime" id="itemExpireDate" name="itemExpireDate" size="20" maxlength="20" size="20" tabindex="3" /><span id="itemExpireDatespan"></span><br />
                     </fieldset>
                     
                     <fieldset>

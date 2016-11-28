@@ -17,8 +17,8 @@ public interface ItemService {
 	boolean modifyNameItem(Long id, String name);
 	boolean modifyNameDescriptionItem(Long id, String description);
 	boolean modifyPriceItem(Long id, Double price);
-	boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, Double price,
-			LocalDate expireDate);
-	boolean modifyExpiredateItem(Long id, LocalDate expireDate);
+	boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, String price,
+			String expireDate);
+	boolean modifyExpiredateItem(Long id, String expireDate);
 	
 }

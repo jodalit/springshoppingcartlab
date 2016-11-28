@@ -798,7 +798,7 @@
                 	</c:when>
                 	<c:otherwise>
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Quit</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
 					</c:otherwise>
 	              </c:choose>                
             </div>

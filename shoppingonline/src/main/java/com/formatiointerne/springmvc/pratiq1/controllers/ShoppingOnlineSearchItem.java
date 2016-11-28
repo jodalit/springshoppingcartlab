@@ -50,14 +50,8 @@ public class ShoppingOnlineSearchItem {
 	
 		request.getSession().setAttribute("itemsforname", itemsforname);
 		request.getSession().setAttribute("sizeitemsforname", sizeitemsforname);
-		
-		/*
-		model.addAttribute("itemsforname", itemsforname);
-
-		model.addAttribute("sizeitemsforname", sizeitemsforname);
-		*/
-
 		System.out.println("itemsforname : "+itemsforname.toString());
+		
 		System.out.println("sessionItems : "+ request.getSession().getAttribute("items"));
 		System.out.println("itemNameToFind : "+ itemNameToFind);
 		System.out.println("sizeitemsforname : "+ sizeitemsforname);

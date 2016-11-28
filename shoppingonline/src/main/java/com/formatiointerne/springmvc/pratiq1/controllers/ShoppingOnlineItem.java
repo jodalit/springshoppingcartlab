@@ -16,6 +16,7 @@ import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 public class ShoppingOnlineItem {
 	public static final String ADDNEWITEM ="Add New Item";
 	public static final String ALLITEMS ="List of all items";
+	public static final String UPDATEITEM ="Updating Item : ";
 	public static final String SAVERESULT ="Item : ";
 	public int i = 100;
 	@Autowired
@@ -55,13 +56,42 @@ public class ShoppingOnlineItem {
 		return "shoppingonlinedetailofitem";
 	}
 	
+	@RequestMapping(value="/updateitem/{itemId}", method=RequestMethod.GET)
+	public String updateDetailItem(@PathVariable("itemId") Long itemId, Model model, HttpServletRequest request){
+		System.out.println("@PathVariable(itemId) Long itemId : "+itemId);
+		model.addAttribute("item", itemService.getItemById(itemId));		
+		model.addAttribute("updateitem", UPDATEITEM);
+		request.getSession().setAttribute("items", itemService.items);
+		return "shoppingonlineupdateitem";
+	}
+	
+	@RequestMapping(value="/updateitem/{itemId}", method=RequestMethod.POST)
+	public String updateDetailItem(@PathVariable("itemId") Long itemId, @RequestParam("itemName") String itemName, @RequestParam("itemDescription") String itemDescription, @RequestParam("itemPrice") String itemPrice, @RequestParam("itemExpireDate") String itemExpireDate, Model model, HttpServletRequest request){
+		/*
+		System.out.println("@PathVariable(itemId) Long itemId : "+itemId);
+		model.addAttribute("item", itemService.removeItem(itemId));
+		request.getSession().setAttribute("items", itemService.items);
+		model.addAttribute("saveresult", null);
+		*/
+		System.out.println("Allo updateDetailItem(@PathVariable(itemId) Long itemId, @RequestParam(itemName) ...)");
+		System.out.println("!!!!itemId:"+itemId+":");
+		System.out.println("!!!!itemName:"+itemName+":");
+		System.out.println("!!!!itemDescription:"+itemDescription+":");
+		System.out.println("!!!!itemPrice:"+itemPrice+":");
+		boolean b = itemService.modifyNameDescriptionPriceExpiredateItem(itemId , itemName, itemDescription, itemPrice, itemExpireDate);
+		System.out.println("@itemService.modifyNameDescriptionPriceExpiredateItem(itemId, itemName, itemDescription, itemPrice, itemExpireDate) : \n"+b);
+		request.getSession().setAttribute("items", itemService.items);
+		
+		return "redirect:/listitems";
+	}
+	
 	@RequestMapping(value="/removeitem/{itemId}", method=RequestMethod.GET)
 	public String removeDetailItem(@PathVariable("itemId") Long itemId, Model model, HttpServletRequest request){
 		System.out.println("@PathVariable(itemId) Long itemId : "+itemId);
 		model.addAttribute("item", itemService.removeItem(itemId));
 		request.getSession().setAttribute("items", itemService.items);
 		model.addAttribute("saveresult", null);
-		request.getSession().setAttribute("items", itemService.items);
-		return "shoppingonlinelistofallitems";
+		//request.getSession().setAttribute("items", itemService.items);
+		return "redirect:/listitems";
 	}
 }
