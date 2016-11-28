@@ -822,11 +822,11 @@
                 <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Quit</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>    
+			<!--  span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span-->    
 		</header>
 
         <nav>
-            
+            <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
         </nav>
         
         <div id="main">

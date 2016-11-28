@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Add New Item</title>
+    <title>User Home</title>
     <!--link href="CSS/default.css" rel="stylesheet" />
     
     <script src="Scripts/jquery-2.1.4.js"></script>
@@ -188,7 +188,7 @@
 		/*Formatage des zones de texte*/
 		input, select, textarea {
 		    width:15.75em/*px*/;
-		    height:5%/*px*/;
+		    height:7%/*px*/;
 		    text-align:left;
 		    padding:7px;
 		    border:inset;
@@ -199,7 +199,7 @@
 		    text-align:right;
 		}
 		
-		input#sex {
+		input#sexe {
 		    width:9%;
 		}
 		
@@ -227,13 +227,18 @@
 		    border:thin;
 		}
 		
-		input.localisationClient{
-			    
-		    width:3.5%;
+		input.agri_part, input.typePartenaire{
 		    
-		    margin:0;
+		    width:3.5%;
+		    margin-right:0;
 		}
 		
+		
+		input#agri_part_oui, input#typePartenaire_non{
+		    
+		    
+		    margin-left:2.5em;
+		}
 		/*Règles de formatage des boutons*/
 		button, #sinscription, #sconnexion, #sdeconnexion{
 		    height:9%/*px*/;
@@ -351,36 +356,14 @@
 		    box-sizing:border-box;
 		}
 					
-		header #headerCommandeMenu span#sconnexion{
-		    position:relative;
-		    top: 1.15em;
-			/*top: 0.8em;
-			left:73.5em;*/
-		    background-color:hsl(205, 100%, 50%);
-			width: 6.9em;
-			margin-left:91.5%;
-		    /*margin-left:0.1em;*/
-			border-radius :10px;
-			z-index: 11500;
-		}
-								
-		header #headerCommandeMenu span#sconnexion a#aconnexion{
-			position:relative;
-			color:lightyellow;
-			text-align:center;
-			text-decoration:none;
-			padding:0.15em;
-			width: 100%;
-			z-index: 11500;
-		}
 								
 		header #headerCommandeMenu span#sdeconnexion{	
 		    position:relative;
-		    top: 0.65em;
+		    top: 1em;
 			/*top: 1em;
 			left:73.5em;*/
 		    background-color:hsl(205, 100%, 50%);
-			width: 6.7em;
+			width: 7.7em;
 		    margin-left:86.5%;
 			border-radius :10px;
 			z-index: 11500;
@@ -429,30 +412,6 @@
 			height:50px;
 			width: 41px;
 			z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sinscription:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sinscription a#ainscription:HOVER{
-				color:yellow ;
-				z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sconnexion:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sconnexion a#aconnexion:HOVER{
-				color:yellow ;
-				z-index: 11500;
 		}
 					
 		header #headerCommandeMenu span#sdeconnexion:HOVER {
@@ -656,11 +615,17 @@
 		    border-radius :5px;
 		    width:auto;
 		}
+		
+		#main em {
+			color: navy;
+			text-align: right;
+		}
+		
 		#main #divimagepcple{
 			float:left;
 			font-size:13.5pt;
 			font-weight: bold;
-			width:60%;
+			width:85%;
 		    padding:1.5em;
 		    box-sizing:border-box;
 		}
@@ -679,42 +644,12 @@
 		    height: 0.75em;
 		}
 		
-		
-		#main #divimagepcple label{
-			margin:0;
-			width: 60%;
-		}
-		
-		#main #divimagepcple #connexionBtn {
-			margin-left:1em;
-			margin-bottom:0.25em;
-			margin-top:0;
-			margin-right:0.4em;
-		}
-		
-		#main #divimagepcple #resetBtn{
-			margin-left:0;
-			margin-right:0;
-			margin-top:0;
-			margin-bottom:0.25em;
-		}
-		
-		
-		#main #divimagepcple #personConnexion{
-		
-		}
-		
-		#main #divimagepcple #personPassword{
-		
-		}
-		
-		
 		#main #divmotbienvenue{
 			float:left;
 			font-size:14pt;
 		    margin:1px;
 		    padding:1px;
-			width:37%;
+			width:14%;
 		    box-sizing:border-box;
 		}
 		
@@ -822,51 +757,52 @@
                 <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Quit</a></span>
             </div>
             
-			<!--  span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span-->    
+			<!-- span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span-->
+		
+            <div id="divSearch">
+                <form action="<spring:url value='/resultsearchitem' />" method="post">
+                    <fieldset>
+                        <label for="itemNameToFind">Item's name</label>
+                        <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
+                        <button type="submit" id="searchItem" name="searchItem" class="bouton">Search</button>
+                    </fieldset>
+                </form>
+            </div>
 		</header>
 
         <nav>
-            <h3><a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a></h3>
+            <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
+            
         </nav>
         
         <div id="main">
-            <h2>${allitems}</h2>
+        	<em>${connexionname}, hi!!!</em>
+            <h2>Item ${item.itemId}</h2>
             <hr />
             
-            <div id="divrecentitems">
-            	<table border="1">
-	 			  <tbody>
-	            	<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th>Price</th>
-						<th>Expire date</th>
-						<th>Action</th>
-					</tr>
-					<c:forEach items="${items}" var="item"> 
-						
-						<tr>
-							<!-- td><a href='<spring:url value="/${p.personId}" />'>${p.personId}</a></td -->
-							<td>${item.itemName}</td> 
-							<td>${item.description}</td>
-							<td>${item.price}</td>
-							<td>${item.expireDate}</td>
-							<td>
-								<a href="<spring:url value="/${item.itemId}" />">View</a>
-								<a href="#">Update</a>
-								<a href="<spring:url value="/removeitem/${item.itemId}" />">Remove</a><br />
-							 </td>
-						</tr>
-					</c:forEach>
-				   </tbody>
-				  </table>
+            <div id="divimagepcple" class="divmain">
+            	<img alt="image 1" src="#" /><br />
+            	<em>${item.itemName}</em><br /><br />
+            	<span>Description</span><br/>
+                ${item.description}
+                		<br />
+                <em>${item.price}<span>$</span></em>
+                <br />
+                <span>Date of expiration : </span>${item.expireDate}
+            	<br />
+            	<br />
+            	<a href="#">Update</a>
+				<a href="<spring:url value="/removeitem/${item.itemId}" />">Remove</a><br />
             </div>
             
+            <div id="divmotbienvenue" class="divmain">
+                
+            </div>
   
         </div>
         
         <aside>
-            
+            <h2>&diams; &diams; &diams;</h2>
         </aside>
         
         <footer>

@@ -802,7 +802,7 @@
 							<td>${item.price}</td>
 							<td>${item.expireDate}</td>
 							<td>
-								<a href="#">View</a>
+								<a href="<spring:url value="/${item.itemId}" />">View</a>
 								<a href="#">Update</a>
 								<a href="#">Remove</a>
 							 </td>
