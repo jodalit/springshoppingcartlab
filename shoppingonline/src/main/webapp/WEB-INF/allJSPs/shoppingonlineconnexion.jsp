@@ -492,8 +492,9 @@
 			position:relative;
 		    top: 4.2em;
 		    background-color:navy;/*hsl(205, 100%, 50%);*/
-			width: 10.1em;
-			height:2.5em;
+			width: 10.5em;
+			height:3.15em;
+			padding:0.15em;
 			margin-left:86.5%;
 			border-radius :7px;
 			z-index: 9500
@@ -821,17 +822,7 @@
                 <!--span id="sconnexion" class="bouton"><a id="aconnexion" href="#">Connexion</a></span-->
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span>
-		
-            <!-- div id="divSearch">
-                <form action="#" method="post">
-                    <fieldset>
-                        <label for="itemNameToFind">Item's name</label>
-                        <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
-                        <button type="submit" id="searchItem" name="searchItem" class="bouton">Search</button>
-                    </fieldset>
-                </form>
-            </div -->
+			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket ${basketsize}</a></span>
 		</header>
 
         <nav>

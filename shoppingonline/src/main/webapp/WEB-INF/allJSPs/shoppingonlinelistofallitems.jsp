@@ -483,17 +483,6 @@
 				z-index: 11500;
 		}
 		
-		header span#sbasket{
-			position:relative;
-		    top: 4.2em;
-		    background-color:navy;/*hsl(205, 100%, 50%);*/
-			width: 10.1em;
-			height:2.5em;
-			margin-left:86.5%;
-			border-radius :7px;
-			z-index: 9500
-		}
-		
 		header span#sbasket a#abasket{
 			position:relative;
 			color:orange;

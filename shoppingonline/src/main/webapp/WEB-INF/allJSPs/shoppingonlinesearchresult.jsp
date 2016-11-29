@@ -36,9 +36,6 @@
 		
 		header {
 		    height: 126.5px;
-		    /*background-image: url('../images/imageLeKoYah.png');*/
-		    /*background-repeat: no-repeat;*/
-		    /*background-color:rgba(255,255,255,25);*/
 		    margin-top: .5px;
 		    margin-left: 2px;
 		    margin-right: 2px;
@@ -59,29 +56,7 @@
 		    padding:7px;
 		}
 		
-		#headerText{
-		    position:absolute;
-		    top:25px;
-		    left:132px; 
-		    /*width:100%;*/
-		    margin-top:10px;
-		}
 		
-		h1#LShopping{
-		    font-family:Impact;
-		    font-size:33pt;
-		    text-align:center;
-		    color:darkgreen;
-		    background-color:white;
-		    width:6em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:0.02em;
-		    margin-bottom:.15em;
-		    padding:.05em;
-		    border:double;
-		    border-radius:3px;
-		}
 		
 		h2{
 		    display:block;
@@ -90,13 +65,7 @@
 		    color:hsl(24, 100%, 50%);
 		}
 		
-		h2#intitule{
-		    width:42%;
-		     margin-left:auto;
-		    margin-right:auto;
-		    margin-top:0.15em;
-		    margin-bottom:.15em;
-		}
+		
 		
 		h3{
 		    display:block;
@@ -112,16 +81,14 @@
 		    position:relative;
 		    
 		    float:left;
-		    width:15em/*19%*/;
+		    width:15em;
 		    min-width:17em;
 		    padding-top:5em;
 		    padding-left:10px;
 		    margin-top:15px;
 		    
 		}
-		 nav a#aaccueil{
-		     margin-top:3em;
-		 }
+		 
 		
 		#main{
 		    position:relative;
@@ -129,7 +96,7 @@
 		    margin-top:5px;
 		    padding:7px;
 		    float:left;
-		    width:77.25em/*60%*/;
+		    width:77.25em;
 		    border:outset;
 		}
 		
@@ -152,7 +119,7 @@
 		    position:relative;
 		    
 		    float:left;
-		    width: 15em/*19%*/;
+		    width: 15em;
 		    min-width:15em;
 		    padding-left:10px;
 		}
@@ -164,7 +131,7 @@
 		footer{
 		    position:relative;
 		    clear:both;
-		    width:auto/*136.5em100%*/;
+		    width:auto;
 		    height:25px;
 		    font-size:10px;
 		    text-align:center;
@@ -185,7 +152,7 @@
 		    
 		}
 		
-		/*Formatage des zones de texte*/
+		/*Input text Formating */
 		input, select, textarea {
 		    width:15.75em/*px*/;
 		    height:7%/*px*/;
@@ -194,54 +161,10 @@
 		    border:inset;
 		}
 		
-		input#idClient{
-		    width:25%/*px*/;
-		    text-align:right;
-		}
 		
-		input#sexe {
-		    width:9%;
-		}
-		
-		input#datenaissance {
-		    width:20%;
-		}
-		
-		input#telephone {
-		    width:20%;
-		}
-		
-		input#pseudo {
-		    width:20%;
-		}
-		
-		input#motdepasse {
-		    width:20%;
-		}
-		
-		input#confirmation {
-		    width:20%;
-		}
-		
-		input#niveau{
-		    border:thin;
-		}
-		
-		input.agri_part, input.typePartenaire{
-		    
-		    width:3.5%;
-		    margin-right:0;
-		}
-		
-		
-		input#agri_part_oui, input#typePartenaire_non{
-		    
-		    
-		    margin-left:2.5em;
-		}
-		/*Règles de formatage des boutons*/
+		/*Buttons formating */
 		button, #sinscription, #sconnexion, #sdeconnexion{
-		    height:9%/*px*/;
+		    height:9%;
 		    border:outset;
 		    padding:4px;
 		    text-align:center;
@@ -250,8 +173,8 @@
 		
 		.bouton{   
 		    background-color:olive;
-		    width:7.5em/*px*/;
-		    border-color:green;/*hsl(119, 90%, 24%);*/
+		    width:7.5em;
+		    border-color:green;
 		    color:lightyellow;
 		    margin-left:24%;
 		}
@@ -259,7 +182,7 @@
 		.boutonreset{   
 		    background-color:olive;
 		    width:7.5em/*px*/;
-		    border-color:green;/*hsl(119, 90%, 24%);*/
+		    border-color:green;
 		    color:lightyellow;
 		    margin-left:.75%;
 		}
@@ -275,7 +198,7 @@
 		    color: hsl(0, 9%, 80%);
 		}
 		
-		/*Forme d'un bouton lorsqu'on clique dessus*/
+		/*Buttons formatting on clicking*/
 		button:active{
 		    border:inset;
 		    border-width:thick;
@@ -291,7 +214,7 @@
 		    background-color:hsl(0, 9%, 80%);
 		}
 		
-		/*Règles de formatage communes aux boutons et zones de texte*/
+		/*Formating of buttons and input*/
 		input, button, label, select, textarea{
 		    font-family:Arial;
 		    font-size:14.75pt;
@@ -300,24 +223,12 @@
 		    margin: 3px;
 		}
 		
-		/*Règles de formatage de la zone de texte Resultat indiquant qu'elle est seulement en lecture seule*/
-		/*#txtResult{*/
+		
 		[readonly]{
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		/*Règles de formatage de la classe cClear*/
-		.cClear{
-		    color:hsl(250, 100%, 100%);
-		    background-color:hsl(0, 100%, 50%);
-		    font-weight:bold;
-		}
-		
-		.cClear:hover{
-		    background-color:hsl(24, 100%, 50%);
-		}
-		
-		/*------------------Formattage des boutons contenus dans les formulaires----------------------------*/
+		/*------------------Formatting buttons and inputs in forms----------------------------*/
 		form input{
 		    vertical-align:top;
 		}
@@ -336,7 +247,7 @@
 		}
 		
 		/*==============================================================================================================================================
-		    Boutons de la barre de menus horizontale
+		    The header box
 		    =======================================================================
 		*/
 		header #headerCommandeMenu{
@@ -436,18 +347,6 @@
 			z-index: 11500;
 		}
 					
-		header #headerCommandeMenu span#sinscription:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sinscription a#ainscription:HOVER{
-				color:yellow ;
-				z-index: 11500;
-		}
-					
 		header #headerCommandeMenu span#sconnexion:HOVER {
 				background-color: darkgray;
 				color:yellow ;
@@ -491,9 +390,10 @@
 		header span#sbasket{
 			position:relative;
 		    top: 4.2em;
-		    background-color:navy;/*hsl(205, 100%, 50%);*/
-			width: 10.1em;
-			height:2.5em;
+		    background-color:navy;
+			width: 10.5em;
+			height:3.15em;
+			padding:0.15em;
 			margin-left:86.5%;
 			border-radius :7px;
 			z-index: 9500
@@ -817,9 +717,7 @@
 		</header>
 
         <nav>
-            <!-- a id="aaccueil" href="#">Home</a><br /><br />
-            <a href="#">S'incrire</a><br /><br />
-            <a href="#">Nous contacter</a -->
+            
         </nav>
         
         <div id="main">
@@ -830,8 +728,8 @@
             <div id="divimagepcple" class="divmain">
             	<c:forEach items="${itemsforname}" var="item"> 
             		<p>
-                		<a href="#"><img alt="image 1" src="#">${item.itemName}</a>
-                		<span id="s${item.itemId}" name="s${itemId}" class="bouton"><a id="a${item.itemId}" name="a${item.itemId}" href='<spring:url value="/addtobasketfromresultsearch/${item.itemId}"></spring:url>'>Add to Basket</a></span>
+                		<a href="#"><img alt="image 1" src="#" src="#" style="height: 5em; width: 7.25em;">${item.itemName}</a>
+                		<span id="s${item.itemId}" style="position: relative; top: -2.75em; color:white; background-color:navy; height:3%; width:3.5em;border:outset; padding:1px; margin-top:0.5em; margin-left: 75%;margin-right:0.25em; text-align:center; border-radius:5px; z-index: 11500;"><a id="a${item.itemId}" href='<spring:url value="/addtobasketfromresultsearch/${item.itemId}"></spring:url>' style="color:white; text-align:center; text-decoration:none; z-index: 11500;">Add to Basket</a></span>
                 		<br />
                 		${item.description}
                 		<br />
@@ -850,7 +748,7 @@
         </div>
         
         <aside>
-            <h2>&diams; &diams; &diams;</h2>
+            
         </aside>
         
         <footer>

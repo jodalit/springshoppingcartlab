@@ -97,6 +97,7 @@ public class ShoppingOnlineSomeUtilities {
 		shoppingServiceImplementation.removeItemsToBasket();
 		request.getSession().setAttribute("basket", null);
 		request.getSession().setAttribute("basketsize", 0);
+		request.getSession().setAttribute("baskettotal", 0);
 		
 		return "shoppingonlinebasketreceived";
 	}
@@ -142,6 +143,7 @@ public class ShoppingOnlineSomeUtilities {
 		
 		
 		request.getSession().setAttribute("basketsize", 0);
+		request.getSession().setAttribute("baskettotal", 0);
 		request.getSession().setAttribute("connexionname", null);
 		request.getSession().setAttribute("itemsforname", null);
 		request.getSession().setAttribute("items", null);
@@ -151,6 +153,7 @@ public class ShoppingOnlineSomeUtilities {
 		
 		sessionstatus.setComplete();
 		webrequest.removeAttribute("basketsize", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute("baskettotal", WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute("connexionname", WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute("itemsforname", WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute("items", WebRequest.SCOPE_SESSION);
@@ -162,21 +165,12 @@ public class ShoppingOnlineSomeUtilities {
 	
 	public void infoBasket(Long itemId, HttpServletRequest request){
 		System.out.println("itemId : " + itemId);
-		boolean b = false;
-
-		for (Item item : (List<Item>) request.getSession().getAttribute("items")) {
-			if (item.getItemId().equals(itemId)) {
-				System.out.println("item : " + item);
-				b = true;
-				break;
-			}
-		}
-
-		if (b == true) {
-			shoppingServiceImplementation.addItemToBasket(itemId);
-			request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
-			request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
-		}
+		
+		shoppingServiceImplementation.addItemToBasket(itemId);
+		request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
+		request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
+		request.getSession().setAttribute("baskettotal", shoppingServiceImplementation.totalBasket);
+		
 	}
 	
 }

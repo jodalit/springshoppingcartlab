@@ -13,8 +13,9 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 @Service
 public class ShoppingServiceImplementation implements shoppingService {
-	//public List<Item> basket = new LinkedList<>();
 	public Set<Item> basket = new HashSet<>();
+	public double totalBasket=0.0;
+	public double price = 0.0;
 	
 	@Autowired
 	ItemServiceImplementation itemService;
@@ -31,14 +32,17 @@ public class ShoppingServiceImplementation implements shoppingService {
 
 	@Override
 	public void addItemToBasket(Long itemId) {
-		System.out.println("existItemInBasketOrNo(itemId) : " + existItemInBasketOrNo(itemId));
-		//if (!existItemInBasketOrNo(itemId)){
-			Item i = itemService.getItemById(itemId);
-			basket.add(i);
-			System.out.println("All Items in your Basket : ");
-			basket.forEach(System.out::println);
-			System.out.println("Basket size : " + basket.size());
-		//}
+		Item i = itemService.getItemById(itemId);
+		
+		basket.add(i);
+		
+		if ( i.getPrice().doubleValue()!=price ){
+			 price =i.getPrice().doubleValue();
+			 totalBasket += i.getPrice().doubleValue();
+		}
+			
+		System.out.println("i.getPrice().doubleValue() : " + i.getPrice());
+		System.out.println("totalBasket : " + totalBasket);
 	}
 	
 	public boolean existItemInBasketOrNo(Long itemId){
@@ -76,6 +80,6 @@ public class ShoppingServiceImplementation implements shoppingService {
 		items.remove(item);
 		System.out.println("All availlable Items:");
 		items.forEach(System.out::println);
-	}	
-	
+	}
+
 }
