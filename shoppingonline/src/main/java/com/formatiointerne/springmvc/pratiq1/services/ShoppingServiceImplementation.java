@@ -1,5 +1,6 @@
 package com.formatiointerne.springmvc.pratiq1.services;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,13 +20,13 @@ public class ShoppingServiceImplementation implements shoppingService {
 	ItemServiceImplementation itemService;
 
 	@Override
-	public Set<Item> getAllItems() {
+	public List<Item> getAllItems() {
 		System.out.println("getAllItems() calls itemService.items : ");
 		itemService.items.values().forEach(System.out::println);
 		
 		System.out.println("All Items in your Basket : ");
 		basket.forEach(System.out::println);
-		return (Set<Item>) itemService.items.values();
+		return Collections.list(Collections.enumeration(itemService.items.values())) ;
 	}
 
 	@Override

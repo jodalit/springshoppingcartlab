@@ -87,7 +87,7 @@ public class ShoppingOnlineSomeUtilities {
 	
 	@RequestMapping("/payitems")
 	private String payItems(HttpServletRequest request) {
-		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
+		List<Item> basket = (List<Item>) request.getSession().getAttribute("basket");
 		
 		if (basket==null){
 			return "redirect:/";
@@ -103,7 +103,7 @@ public class ShoppingOnlineSomeUtilities {
 	
 	@RequestMapping("/removefrombasket/{itemId}")
 	private String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
-		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
+		List<Item> basket = (List<Item>) request.getSession().getAttribute("basket");
 		
 		if (basket==null){
 			return "redirect:/";
@@ -164,7 +164,7 @@ public class ShoppingOnlineSomeUtilities {
 		System.out.println("itemId : " + itemId);
 		boolean b = false;
 
-		for (Item item : (Set<Item>) request.getSession().getAttribute("items")) {
+		for (Item item : (List<Item>) request.getSession().getAttribute("items")) {
 			if (item.getItemId().equals(itemId)) {
 				System.out.println("item : " + item);
 				b = true;

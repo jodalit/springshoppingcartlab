@@ -7,7 +7,7 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 public interface shoppingService {
 	//Set<Item> getItemByName(String name);
-	Set<Item> getAllItems();
+	List<Item> getAllItems();
 	//void addItemToBasket(Item item);
 	//void removeItemOnItemsListOfClient(Long itemId);
 	void removeItemOnItemsListOfClient(Item item, List<Item> items);
