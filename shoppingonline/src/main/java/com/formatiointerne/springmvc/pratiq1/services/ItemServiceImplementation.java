@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
+import com.formatiointerne.springmvc.pratiq1.Conversion.ConvertStringToDouble;
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 @Service
@@ -41,7 +42,7 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Override
 	public Item createItem(String id, String name, String description, String price, String expireDate) {
-		 Item item = new Item(new Long(id), name, description, new Double(price), LocalDate.now());
+		 Item item = new Item(new Long(id), name, description, Double.valueOf(convert(price)), LocalDate.now());
 		 items.put(Long.valueOf(id), item);
 		 return item;
 	}
@@ -114,7 +115,7 @@ public class ItemServiceImplementation implements ItemService {
 		
 		items.get(id).setItemName(name);
 		items.get(id).setDescription(description);
-		items.get(id).setPrice(Double.valueOf(price));;
+		items.get(id).setPrice(Double.valueOf(convert(price+"")));;
 		items.get(id).setExpireDate(LocalDate.now());;
 		
 		return true;
@@ -156,6 +157,17 @@ public class ItemServiceImplementation implements ItemService {
 			return null;
 		
 		return Collections.max(idSet);
+	}
+	
+	public static Double convert(String value) {
+		Double d =0.0;
+		try{
+			 d = Double.parseDouble(value.trim());
+		} catch (NumberFormatException e) {
+			e.getMessage();
+		}
+		
+		return d;
 	}
 
 }

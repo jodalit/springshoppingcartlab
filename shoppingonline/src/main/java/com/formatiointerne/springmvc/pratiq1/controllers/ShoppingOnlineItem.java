@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.formatiointerne.springmvc.pratiq1.Conversion.ConvertStringToDouble;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 
 @Controller
@@ -24,6 +26,7 @@ public class ShoppingOnlineItem {
 	
 	@Autowired
 	ItemServiceImplementation itemService;
+	
 	
 	@RequestMapping(value="/additem", method=RequestMethod.GET)
 	public String getAddItem(Model model){
@@ -41,7 +44,7 @@ public class ShoppingOnlineItem {
 		model.addAttribute("Itemnumero ", identifiant);
 		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
 		
-		return "shoppingonlinenewitem";
+		return "shoppingonlinelistofallitems";
 	}
 	
 	@RequestMapping(value="/listitems", method=RequestMethod.GET)
@@ -70,17 +73,21 @@ public class ShoppingOnlineItem {
 	
 	@RequestMapping(value="/updateitem/{itemId}", method=RequestMethod.POST)
 	public String updateDetailItem(@PathVariable("itemId") Long itemId, @RequestParam("itemName") String itemName, @RequestParam("itemDescription") String itemDescription, @RequestParam("itemPrice") String itemPrice, @RequestParam("itemExpireDate") String itemExpireDate, Model model, HttpServletRequest request){
-		boolean b = itemService.modifyNameDescriptionPriceExpiredateItem(itemId , itemName, itemDescription, itemPrice, itemExpireDate);
-		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
+		if (itemService.modifyNameDescriptionPriceExpiredateItem(itemId , itemName, itemDescription, itemPrice, itemExpireDate)){
+			request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
+		}
+		
 		
 		return "redirect:/listitems";
 	}
 	
 	@RequestMapping(value="/removeitem/{itemId}", method=RequestMethod.GET)
-	public String removeDetailItem(@PathVariable("itemId") Long itemId, Model model, HttpServletRequest request){		
-		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
-		model.addAttribute("saveresult", null);
+	public String removeDetailItem(@PathVariable("itemId") Long itemId, Model model, HttpServletRequest request){
+		if (itemService.removeItem(itemId)){
+			request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
+		}
 		
 		return "redirect:/listitems";
 	}
+	
 }

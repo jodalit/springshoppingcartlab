@@ -19,7 +19,7 @@ import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementat
 @Controller
 public class ShoppingOnlineHome {
 	public static final String WELCOMETITLE ="Welcome to our online IT store !!!";
-	public static final String WELCOMEDECLARATION ="Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/>";
+	public static final String WELCOMEDECLARATION ="Welcome !!!";
 	@Autowired
 	private ItemServiceImplementation itemService;
 	

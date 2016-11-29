@@ -583,7 +583,7 @@
 			width: 60%;
 		}
 		
-		#main #divimagepcple #connexionBtn {
+		#main #divimagepcple #updateBtn {
 			margin-left:1em;
 			margin-bottom:0.25em;
 			margin-top:0;

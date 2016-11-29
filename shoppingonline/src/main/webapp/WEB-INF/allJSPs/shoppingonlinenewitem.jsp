@@ -66,13 +66,13 @@
 		    color:hsl(24, 100%, 50%);
 		}
 		
+		
 		h3{
 		    display:block;
 		    font-size:14.5px;
 		    line-height:16px;
 		    font-style:italic;
-		
-
+		}
 		img{
 		    background:none repeat scroll 0 0 #F8F8F8;
 		    border:outset;
@@ -98,7 +98,7 @@
 		    margin-top:5px;
 		    padding:7px;
 		    float:left;
-		    width:77.25em/*60%*/;
+		    width:77.25em;
 		    border:outset;
 		}
 		
@@ -121,7 +121,7 @@
 		    position:relative;
 		    
 		    float:left;
-		    width: 15em/*19%*/;
+		    width: 15em;
 		    min-width:15em;
 		    padding-left:10px;
 		}
@@ -133,7 +133,7 @@
 		footer{
 		    position:relative;
 		    clear:both;
-		    width:auto/*136.5em100%*/;
+		    width:auto;
 		    height:25px;
 		    font-size:10px;
 		    text-align:center;
@@ -153,7 +153,7 @@
 		    box-sizing:border-box;
 		    
 		}
-	
+		
 		input, select, textarea {
 		    width:15.75em/*px*/;
 		    height:5%/*px*/;
@@ -172,7 +172,7 @@
 		
 		.bouton{   
 		    background-color:olive;
-		    width:7.5em;
+		    width:7.5em/*px*/;
 		    border-color:green;
 		    color:lightyellow;
 		    margin-left:24%;
@@ -270,12 +270,9 @@
 		header #headerCommandeMenu span#sconnexion{
 		    position:relative;
 		    top: 1.15em;
-			/*top: 0.8em;
-			left:73.5em;*/
 		    background-color:hsl(205, 100%, 50%);
 			width: 6.9em;
 			margin-left:91.5%;
-		    /*margin-left:0.1em;*/
 			border-radius :10px;
 			z-index: 11500;
 		}
@@ -293,8 +290,6 @@
 		header #headerCommandeMenu span#sdeconnexion{	
 		    position:relative;
 		    top: 0.65em;
-			/*top: 1em;
-			left:73.5em;*/
 		    background-color:hsl(205, 100%, 50%);
 			width: 6.7em;
 		    margin-left:86.5%;
@@ -329,7 +324,6 @@
 		}
 					
 		header #headerCommandeMenu span#saccueil a#aaccueil{
-			
 			color:green;
 			text-align:center;
 			text-decoration:none;
@@ -344,11 +338,6 @@
 			height:50px;
 			width: 41px;
 			z-index: 11500;
-		}
-						
-		header #headerCommandeMenu span#sinscription a#ainscription:HOVER{
-				color:yellow ;
-				z-index: 11500;
 		}
 					
 		header #headerCommandeMenu span#sconnexion:HOVER {
@@ -391,7 +380,166 @@
 				z-index: 11500;
 		}
 		
+		header span#sbasket{
+			position:relative;
+		    top: 4.2em;
+		    background-color:navy;
+			width: 10.1em;
+			height:2.5em;
+			margin-left:86.5%;
+			border-radius :7px;
+			z-index: 9500
+		}
 		
+		header span#sbasket a#abasket{
+			position:relative;
+			color:orange;
+			text-align:center;
+			text-decoration:none;
+			padding:0.5em;
+			width: 100%;
+			z-index: 9500;
+		}
+		
+		header span#sbasket:HOVER{
+		    height:2.5em;
+			background-color: darkgray;
+			color:tomato;
+			border: 0.1em yellow solid;
+			z-index: 9500;
+		}
+		
+		header span#sbasket a#abasket:HOVER{
+			color:tomato;
+			z-index: 9500;
+		}
+		
+		
+		div#divSearch form {
+			position: absolute;
+			top:3.5em;
+			width:55em;
+			margin:auto;
+			padding:0.2em;
+			margin-left:21em;
+			background-color:fffddd;
+			border: 0.1em green solid;
+			display: block;
+			overflow:auto;
+			border-radius :10px;
+			z-index: 1001;
+		}
+							
+		div#divSearch form fieldset {
+			position: relative;
+			padding:0.12%;
+			margin: auto;
+			border: 0.1% #0568CD solid;
+			width:99%;
+			display: block;
+			overflow: no-display;
+			border-radius :10px;
+			z-index: 1002;
+		}
+								
+		div#divSearch form fieldset legend {
+			font-size:16pt;
+			font-weight: bold;
+			color: navy;
+			width: 35%;
+			padding:0.15%;
+		}
+				
+		div#divSearch form fieldset p#pannonce {
+			font-size:14.5pt;
+			font-weight: bold;
+			padding:0.4%;
+			color: blue;
+			margin-left:auto;
+			margin-right:auto;
+		}
+					
+		#motbienvenue p#info {
+			font-style:italic;
+			color: #E8A22B;
+		}
+					
+		div#divSearch form fieldset label{
+			position:relative;
+			font-size:13pt;
+			float: left;
+			width: 23%;
+			padding:0.5%;
+			margin: 0% 0% 0% 0%;
+			margin-left:0.5%;
+			margin-top: 0.5%;
+			margin-bottom: 0.5%;
+						
+		}
+								
+		div#divSearch form fieldset input{
+			/*clear:left;*/
+			position:relative;
+			font-size:13pt;
+			width:56.5%;
+			padding:0.5%;
+			border: 0.1% #999 solid;
+			margin: 0% 0% 0% 0%;
+			margin-top: 0.5%;
+			margin-bottom: 0.5%;
+			border-radius :3px;
+			z-index: 1003;
+		}
+														
+		div#divSearch form fieldset button#searchItem{
+				position:relative;
+				font-size:12pt;
+				font-weight:bold;
+		        width:13%;
+		        margin-left:.4%;
+		        z-index: 1007;		
+		}
+					
+		div#divSearch form fieldset span.requis{
+				color: #c00;
+				margin: 0% 0% 0% 0%;
+		}
+					
+					
+		div#divSearch form fieldset span.erreur{
+			font-size:10.5pt;
+						 
+		}
+					
+		div#divSearch form fieldset p.erreur{
+			font-family:"tunga";
+			font-size:15pt;
+			font-weight:bold;
+			text-align:center;
+			color: #900;
+		}
+					
+		div#divSearch form fieldset p.succes{
+			font-family:"tunga";
+			font-size:15pt;
+			font-weight:bold;
+			text-align:center;
+			color: green;
+		}	
+					
+		div#divSearch form fieldset p#pinfo{
+			margin-left: auto;
+			margin-right: auto;
+			font-size:13.5pt;
+			font-weight: bold;
+			color: fff;
+		}
+		
+		
+		/*==============================================================================================================================================
+		    La boîte main
+		    =======================================================================
+		*/		
 		#main h2{
 		    font-size:15.5pt;
 		    display:block;
@@ -434,6 +582,21 @@
 			width: 60%;
 		}
 		
+		#main #divimagepcple #saveBtn {
+			margin-left:1em;
+			margin-bottom:0.25em;
+			margin-top:0;
+			margin-right:0.4em;
+		}
+		
+		#main #divimagepcple #resetBtn{
+			margin-left:0;
+			margin-right:0;
+			margin-top:0;
+			margin-bottom:0.25em;
+		}
+		
+		
 		#main #divmotbienvenue{
 			float:left;
 			font-size:14pt;
@@ -467,7 +630,7 @@
 		    margin-top:1em;
 		    border-radius :15px;
 		}
- 
+    
     </style>
 </head>
 <body>

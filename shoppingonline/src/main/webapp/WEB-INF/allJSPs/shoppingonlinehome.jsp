@@ -580,7 +580,7 @@
 		
 		#main #divrecentitems {
 			
-			height : 17em;
+			height : 30em;
 			width: auto;
 			overflow: scroll;
 			
