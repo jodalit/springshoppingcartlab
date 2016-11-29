@@ -10,11 +10,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>All authoriserid people</title>
-    <!--link href="CSS/default.css" rel="stylesheet" />
-    
-    <script src="Scripts/jquery-2.1.4.js"></script>
-    <script src="Scripts/default.js"></script-->
+    <title>All authoriserd people</title>
+  
     <style type="text/css">
     	*{
 		    margin:0;
@@ -28,7 +25,7 @@
 		
 		body {
 		    width:100%;
-		    background-color: #F8F8F8;/*hsl(252, 95%, 95%);*/
+		    background-color: #F8F8F8;
 		    font-family: Cambria, 'Times New Roman', serif;
 		    color:green /*#0068AC*/;
 		    box-sizing:border-box;
@@ -36,9 +33,7 @@
 		
 		header {
 		    height: 126.5px;
-		    /*background-image: url('../images/imageLeKoYah.png');*/
-		    /*background-repeat: no-repeat;*/
-		    /*background-color:rgba(255,255,255,25);*/
+		    
 		    margin-top: .5px;
 		    margin-left: 2px;
 		    margin-right: 2px;
@@ -67,21 +62,6 @@
 		    margin-top:10px;
 		}
 		
-		h1#LShopping{
-		    font-family:Impact;
-		    font-size:33pt;
-		    text-align:center;
-		    color:darkgreen;
-		    background-color:white;
-		    width:6em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:0.02em;
-		    margin-bottom:.15em;
-		    padding:.05em;
-		    border:double;
-		    border-radius:3px;
-		}
 		
 		h2{
 		    display:block;
@@ -185,7 +165,6 @@
 		    
 		}
 		
-		/*Formatage des zones de texte*/
 		input, select, textarea {
 		    width:15.75em/*px*/;
 		    height:5%/*px*/;
@@ -234,7 +213,6 @@
 		    margin:0;
 		}
 		
-		/*Règles de formatage des boutons*/
 		button, #sinscription, #sconnexion, #sdeconnexion{
 		    height:9%/*px*/;
 		    border:outset;
@@ -246,7 +224,7 @@
 		.bouton{   
 		    background-color:olive;
 		    width:7.5em/*px*/;
-		    border-color:green;/*hsl(119, 90%, 24%);*/
+		    border-color:green;
 		    color:lightyellow;
 		    margin-left:24%;
 		}
@@ -254,7 +232,7 @@
 		.boutonreset{   
 		    background-color:olive;
 		    width:7.5em/*px*/;
-		    border-color:green;/*hsl(119, 90%, 24%);*/
+		    border-color:green;
 		    color:lightyellow;
 		    margin-left:.75%;
 		}
@@ -270,7 +248,6 @@
 		    color: hsl(0, 9%, 80%);
 		}
 		
-		/*Forme d'un bouton lorsqu'on clique dessus*/
 		button:active{
 		    border:inset;
 		    border-width:thick;
@@ -286,7 +263,6 @@
 		    background-color:hsl(0, 9%, 80%);
 		}
 		
-		/*Règles de formatage communes aux boutons et zones de texte*/
 		input, button, label, select, textarea{
 		    font-family:Arial;
 		    font-size:14.75pt;
@@ -295,13 +271,10 @@
 		    margin: 3px;
 		}
 		
-		/*Règles de formatage de la zone de texte Resultat indiquant qu'elle est seulement en lecture seule*/
-		/*#txtResult{*/
 		[readonly]{
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		/*Règles de formatage de la classe cClear*/
 		.cClear{
 		    color:hsl(250, 100%, 100%);
 		    background-color:hsl(0, 100%, 50%);
@@ -312,7 +285,6 @@
 		    background-color:hsl(24, 100%, 50%);
 		}
 		
-		/*------------------Formattage des boutons contenus dans les formulaires----------------------------*/
 		form input{
 		    vertical-align:top;
 		}
@@ -329,16 +301,11 @@
 		    vertical-align:top;
 		    margin:7px;
 		}
-		
-		/*==============================================================================================================================================
-		    Boutons de la barre de menus horizontale
-		    =======================================================================
-		*/
+	
 		header #headerCommandeMenu{
 		    position:absolute;
 		    top:.5px;
-		    /*left:161.5px;*/ 
-		    width:99%;/*66.25em; width:auto136.5em100%;*/
+		    width:99%;
 		    height:55px;
 		    margin-top:.1px;
 		    padding:3px;
@@ -354,12 +321,9 @@
 		header #headerCommandeMenu span#sconnexion{
 		    position:relative;
 		    top: 1.15em;
-			/*top: 0.8em;
-			left:73.5em;*/
 		    background-color:hsl(205, 100%, 50%);
 			width: 6.9em;
 			margin-left:91.5%;
-		    /*margin-left:0.1em;*/
 			border-radius :10px;
 			z-index: 11500;
 		}
@@ -377,8 +341,6 @@
 		header #headerCommandeMenu span#sdeconnexion{	
 		    position:relative;
 		    top: 0.65em;
-			/*top: 1em;
-			left:73.5em;*/
 		    background-color:hsl(205, 100%, 50%);
 			width: 6.7em;
 		    margin-left:86.5%;
@@ -404,7 +366,6 @@
 			padding:0.15em;
 			text-align:center;
 			height: 50px;
-			/*border: 0.1em green solid;*/
 			border-radius :10px;
 		    margin-top:0.1em;
 		    margin-bottom:0.1em;
@@ -414,7 +375,7 @@
 		}
 					
 		header #headerCommandeMenu span#saccueil a#aaccueil{
-			
+
 			color:green;
 			text-align:center;
 			text-decoration:none;
@@ -486,7 +447,7 @@
 		header span#sbasket{
 			position:relative;
 		    top: 4.2em;
-		    background-color:navy;/*hsl(205, 100%, 50%);*/
+		    background-color:navy;
 			width: 10.1em;
 			height:2.5em;
 			margin-left:86.5%;
@@ -638,11 +599,6 @@
 			color: fff;
 		}
 		
-		
-		/*==============================================================================================================================================
-		    La boîte main
-		    =======================================================================
-		*/		
 		#main h2{
 		    font-size:15.5pt;
 		    display:block;
@@ -685,30 +641,6 @@
 			width: 60%;
 		}
 		
-		#main #divimagepcple #connexionBtn {
-			margin-left:1em;
-			margin-bottom:0.25em;
-			margin-top:0;
-			margin-right:0.4em;
-		}
-		
-		#main #divimagepcple #resetBtn{
-			margin-left:0;
-			margin-right:0;
-			margin-top:0;
-			margin-bottom:0.25em;
-		}
-		
-		
-		#main #divimagepcple #personConnexion{
-		
-		}
-		
-		#main #divimagepcple #personPassword{
-		
-		}
-		
-		
 		#main #divmotbienvenue{
 			float:left;
 			font-size:14pt;
@@ -727,69 +659,11 @@
 			display:block;
 		}
 		
-		#main #divmotbienvenue #submitAgriculteur{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:5.75em;
-		    margin-bottom:0;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitPartenaire{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:-0.5em;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur a, #main #divmotbienvenue #submitPartenaire a{
-			position:relative;
-			color:khaki;
-		    margin:.25em;
-			text-align:center;
-			text-decoration:none;
-			padding:0.15em;
-			width: 100%;
-			z-index: 11500;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur:HOVER,  #main #divmotbienvenue #submitPartenaire:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		#main #divmotbienvenue #submitAgriculteur a:hover, #main #divmotbienvenue #submitPartenaire a:hover{
-				color:yellow ;
-				z-index: 11500;
-		}
-		
-		
-		
 		#main .divmain{
 			/*display:inline-block;*/
 		    color:navy/*#0068AC*/;
 		}
 		
-		/*==============================================================================================================================================
-		    La boîte aside
-		    =======================================================================
-		*/		
 		aside h2{
 		    font-size:25pt;
 		    display:block;

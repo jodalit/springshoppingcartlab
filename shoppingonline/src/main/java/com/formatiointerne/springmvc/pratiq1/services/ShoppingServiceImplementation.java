@@ -1,5 +1,6 @@
 package com.formatiointerne.springmvc.pratiq1.services;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,17 +17,14 @@ public class ShoppingServiceImplementation implements shoppingService {
 	public Set<Item> basket = new HashSet<>();
 	public double totalBasket=0.0;
 	public double price = 0.0;
+	public double pricetoberemoved = 0.0;
 	
 	@Autowired
 	ItemServiceImplementation itemService;
 
 	@Override
 	public List<Item> getAllItems() {
-		System.out.println("getAllItems() calls itemService.items : ");
-		itemService.items.values().forEach(System.out::println);
 		
-		System.out.println("All Items in your Basket : ");
-		basket.forEach(System.out::println);
 		return Collections.list(Collections.enumeration(itemService.items.values())) ;
 	}
 
@@ -34,15 +32,12 @@ public class ShoppingServiceImplementation implements shoppingService {
 	public void addItemToBasket(Long itemId) {
 		Item i = itemService.getItemById(itemId);
 		
-		basket.add(i);
-		
 		if ( i.getPrice().doubleValue()!=price ){
 			 price =i.getPrice().doubleValue();
 			 totalBasket += i.getPrice().doubleValue();
+			 basket.add(i);
 		}
 			
-		System.out.println("i.getPrice().doubleValue() : " + i.getPrice());
-		System.out.println("totalBasket : " + totalBasket);
 	}
 	
 	public boolean existItemInBasketOrNo(Long itemId){
@@ -61,25 +56,24 @@ public class ShoppingServiceImplementation implements shoppingService {
 	}
 	
 	public void removeItemToBasket(Long itemId) {
-		basket.remove(itemId);
+		if ( itemService.getItemById(itemId).getPrice().doubleValue()!=pricetoberemoved ){			
+			pricetoberemoved = itemService.getItemById(itemId).getPrice().doubleValue();
+			totalBasket = totalBasket - itemService.getItemById(itemId).getPrice().doubleValue();
+			basket.remove(itemId);
+		}
+		
+		if (totalBasket<1)
+			totalBasket =0.0;
+			
 	}
 	
 	public void removeItemsToBasket() {
-		basket.forEach(System.out::println);
-		System.out.println("Basket size : " + basket.size());
 		basket.clear();
-		basket.forEach(System.out::println);
-		System.out.println("Basket size : " + basket.size());
 	}
 
 	@Override
 	public void removeItemOnItemsListOfClient(Item item, List<Item> items) {
-		System.out.println("All availlable Items:");
-		items.forEach(System.out::println);
-		
 		items.remove(item);
-		System.out.println("All availlable Items:");
-		items.forEach(System.out::println);
-	}
 
+	}
 }

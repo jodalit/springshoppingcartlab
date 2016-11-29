@@ -11,10 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome</title>
-    <!--link href="CSS/default.css" rel="stylesheet" />
     
-    <script src="Scripts/jquery-2.1.4.js"></script>
-    <script src="Scripts/default.js"></script-->
     <style type="text/css">
     	*{
 		    margin:0;
@@ -28,7 +25,7 @@
 		
 		body {
 		    width:100%;
-		    background-color: #F8F8F8;/*hsl(252, 95%, 95%);*/
+		    background-color: #F8F8F8;
 		    font-family: Cambria, 'Times New Roman', serif;
 		    color:green /*#0068AC*/;
 		    box-sizing:border-box;
@@ -152,7 +149,6 @@
 		    
 		}
 		
-		/*Input text Formating */
 		input, select, textarea {
 		    width:15.75em/*px*/;
 		    height:7%/*px*/;
@@ -161,8 +157,6 @@
 		    border:inset;
 		}
 		
-		
-		/*Buttons formating */
 		button, #sinscription, #sconnexion, #sdeconnexion{
 		    height:9%;
 		    border:outset;
@@ -198,7 +192,6 @@
 		    color: hsl(0, 9%, 80%);
 		}
 		
-		/*Buttons formatting on clicking*/
 		button:active{
 		    border:inset;
 		    border-width:thick;
@@ -214,7 +207,6 @@
 		    background-color:hsl(0, 9%, 80%);
 		}
 		
-		/*Formating of buttons and input*/
 		input, button, label, select, textarea{
 		    font-family:Arial;
 		    font-size:14.75pt;
@@ -228,7 +220,6 @@
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		/*------------------Formatting buttons and inputs in forms----------------------------*/
 		form input{
 		    vertical-align:top;
 		}
@@ -388,7 +379,7 @@
 		header span#sbasket{
 			position:relative;
 		    top: 4.2em;
-		    background-color:navy;/*hsl(205, 100%, 50%);*/
+		    background-color:navy;
 			width: 10.5em;
 			height:3.15em;
 			padding:0.15em;

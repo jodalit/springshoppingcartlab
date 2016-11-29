@@ -22,14 +22,9 @@ public class ShoppingOnlineHome {
 	public static final String WELCOMEDECLARATION ="Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/> Welcome !!!<br/>";
 	@Autowired
 	private ItemServiceImplementation itemService;
-	//@Autowired
-	//private ShoppingServiceImplementation shoppingService;
 	
-	@RequestMapping("/") //shoppingonlinehome
+	@RequestMapping("/") 
 	public String goShoppingOnlineHome(Model model, HttpServletRequest request){
-	
-		//Collection<Item> items = itemService.items.values();
-		//Collections.list(Collections.enumeration(itemService.items.values()));
 		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
 		request.getSession().setAttribute("basketsize", 0);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);

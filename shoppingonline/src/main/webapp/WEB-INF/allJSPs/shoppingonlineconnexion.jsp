@@ -185,7 +185,6 @@
 		    
 		}
 		
-		/*Formatage des zones de texte*/
 		input, select, textarea {
 		    width:15.75em/*px*/;
 		    height:7%/*px*/;
@@ -194,53 +193,7 @@
 		    border:inset;
 		}
 		
-		input#idClient{
-		    width:25%/*px*/;
-		    text-align:right;
-		}
-		
-		input#sexe {
-		    width:9%;
-		}
-		
-		input#datenaissance {
-		    width:20%;
-		}
-		
-		input#telephone {
-		    width:20%;
-		}
-		
-		input#pseudo {
-		    width:20%;
-		}
-		
-		input#motdepasse {
-		    width:20%;
-		}
-		
-		input#confirmation {
-		    width:20%;
-		}
-		
-		input#niveau{
-		    border:thin;
-		}
-		
-		input.agri_part, input.typePartenaire{
-		    
-		    width:3.5%;
-		    margin-right:0;
-		}
-		
-		
-		input#agri_part_oui, input#typePartenaire_non{
-		    
-		    
-		    margin-left:2.5em;
-		}
-		/*Règles de formatage des boutons*/
-		button, #sinscription, #sconnexion, #sdeconnexion{
+		button, #sconnexion, #sdeconnexion{
 		    height:9%/*px*/;
 		    border:outset;
 		    padding:4px;
@@ -275,7 +228,6 @@
 		    color: hsl(0, 9%, 80%);
 		}
 		
-		/*Forme d'un bouton lorsqu'on clique dessus*/
 		button:active{
 		    border:inset;
 		    border-width:thick;
@@ -291,7 +243,7 @@
 		    background-color:hsl(0, 9%, 80%);
 		}
 		
-		/*Règles de formatage communes aux boutons et zones de texte*/
+		
 		input, button, label, select, textarea{
 		    font-family:Arial;
 		    font-size:14.75pt;
@@ -300,13 +252,12 @@
 		    margin: 3px;
 		}
 		
-		/*Règles de formatage de la zone de texte Resultat indiquant qu'elle est seulement en lecture seule*/
-		/*#txtResult{*/
+		
 		[readonly]{
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		/*Règles de formatage de la classe cClear*/
+		
 		.cClear{
 		    color:hsl(250, 100%, 100%);
 		    background-color:hsl(0, 100%, 50%);
@@ -317,7 +268,6 @@
 		    background-color:hsl(24, 100%, 50%);
 		}
 		
-		/*------------------Formattage des boutons contenus dans les formulaires----------------------------*/
 		form input{
 		    vertical-align:top;
 		}
@@ -335,15 +285,11 @@
 		    margin:7px;
 		}
 		
-		/*==============================================================================================================================================
-		    Boutons de la barre de menus horizontale
-		    =======================================================================
-		*/
+		
 		header #headerCommandeMenu{
 		    position:absolute;
 		    top:.5px;
-		    /*left:161.5px;*/ 
-		    width:99%;/*66.25em; width:auto136.5em100%;*/
+		    width:99%;
 		    height:55px;
 		    margin-top:.1px;
 		    padding:3px;
@@ -359,12 +305,9 @@
 		header #headerCommandeMenu span#sconnexion{
 		    position:relative;
 		    top: 0.65em;
-			/*top: 0.8em;
-			left:73.5em;*/
 		    background-color:hsl(205, 100%, 50%);
 			width: 6.9em;
 			margin-left:91.5%;
-		    /*margin-left:0.1em;*/
 			border-radius :10px;
 			z-index: 11500;
 		}
@@ -409,7 +352,6 @@
 			padding:0.15em;
 			text-align:center;
 			height: 50px;
-			/*border: 0.1em green solid;*/
 			border-radius :10px;
 		    margin-top:0.1em;
 		    margin-bottom:0.1em;
@@ -434,18 +376,6 @@
 			height:50px;
 			width: 41px;
 			z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sinscription:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		header #headerCommandeMenu span#sinscription a#ainscription:HOVER{
-				color:yellow ;
-				z-index: 11500;
 		}
 					
 		header #headerCommandeMenu span#sconnexion:HOVER {
@@ -572,83 +502,8 @@
 			font-style:italic;
 			color: #E8A22B;
 		}
-					
-		div#divSearch form fieldset label{
-			position:relative;
-			font-size:13pt;
-			float: left;
-			width: 23%;
-			padding:0.5%;
-			margin: 0% 0% 0% 0%;
-			margin-left:0.5%;
-			margin-top: 0.5%;
-			margin-bottom: 0.5%;
-						
-		}
-								
-		div#divSearch form fieldset input{
-			/*clear:left;*/
-			position:relative;
-			font-size:13pt;
-			width:56.5%;
-			padding:0.5%;
-			border: 0.1% #999 solid;
-			margin: 0% 0% 0% 0%;
-			margin-top: 0.5%;
-			margin-bottom: 0.5%;
-			border-radius :3px;
-			z-index: 1003;
-		}
-														
-		div#divSearch form fieldset button#searchItem{
-				position:relative;
-				font-size:12pt;
-				font-weight:bold;
-		        width:13%;
-		        margin-left:.4%;
-		        z-index: 1007;		
-		}
-					
-		div#divSearch form fieldset span.requis{
-				color: #c00;
-				margin: 0% 0% 0% 0%;
-		}
-					
-					
-		div#divSearch form fieldset span.erreur{
-			font-size:10.5pt;
-						 
-		}
-					
-		div#divSearch form fieldset p.erreur{
-			font-family:"tunga";
-			font-size:15pt;
-			font-weight:bold;
-			text-align:center;
-			color: #900;
-		}
-					
-		div#divSearch form fieldset p.succes{
-			font-family:"tunga";
-			font-size:15pt;
-			font-weight:bold;
-			text-align:center;
-			color: green;
-		}	
-					
-		div#divSearch form fieldset p#pinfo{
-			margin-left: auto;
-			margin-right: auto;
-			font-size:13.5pt;
-			font-weight: bold;
-			color: fff;
-		}
 		
 		
-		/*==============================================================================================================================================
-		    La boîte main
-		    =======================================================================
-		*/		
 		#main h2{
 		    font-size:15.5pt;
 		    display:block;
@@ -707,11 +562,11 @@
 		
 		
 		#main #divimagepcple #personConnexion{
-		
+			width: 12em;
 		}
 		
 		#main #divimagepcple #personPassword{
-		
+			width: 12em;
 		}
 		
 		
@@ -732,60 +587,6 @@
 		    margin-bottom:.05em;
 			display:block;
 		}
-		
-		#main #divmotbienvenue #submitAgriculteur{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:5.75em;
-		    margin-bottom:0;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitPartenaire{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:-0.5em;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur a, #main #divmotbienvenue #submitPartenaire a{
-			position:relative;
-			color:khaki;
-		    margin:.25em;
-			text-align:center;
-			text-decoration:none;
-			padding:0.15em;
-			width: 100%;
-			z-index: 11500;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur:HOVER,  #main #divmotbienvenue #submitPartenaire:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		#main #divmotbienvenue #submitAgriculteur a:hover, #main #divmotbienvenue #submitPartenaire a:hover{
-				color:yellow ;
-				z-index: 11500;
-		}
-		
-		
 		
 		#main .divmain{
 			/*display:inline-block;*/
@@ -817,12 +618,9 @@
         <header>
             <div id="headerCommandeMenu">
                 <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-
-                <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <!--span id="sconnexion" class="bouton"><a id="aconnexion" href="#">Connexion</a></span-->
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket ${basketsize}</a></span>
+			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>your Basket ${basketsize}</a></span>
 		</header>
 
         <nav>

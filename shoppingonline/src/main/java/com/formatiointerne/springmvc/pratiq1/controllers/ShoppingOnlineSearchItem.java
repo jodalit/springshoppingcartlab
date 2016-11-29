@@ -28,9 +28,7 @@ public class ShoppingOnlineSearchItem {
 	private ItemServiceImplementation itemService;
 	@Autowired
 	ShoppingServiceImplementation shoppingServiceImplementation;
- 
-	//HttpSession sessionItems;
-	
+ 	
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.GET)
 	public String getSearchItem(Model model){
 		model.addAttribute("resultSearch", RESULTSEARCHTITLE);
@@ -41,7 +39,7 @@ public class ShoppingOnlineSearchItem {
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.POST)
 	public String getResultSearchItem(Model model, @RequestParam("itemNameToFind") String itemNameToFind, HttpServletRequest request){
 	 
-		Set<Item> itemsforname = itemService.getItemByName(itemNameToFind);
+		Set<Item> itemsforname = itemService.getItemByNameDescription(itemNameToFind);
 	
 		int sizeitemsforname = itemsforname.size();
 	
@@ -50,12 +48,7 @@ public class ShoppingOnlineSearchItem {
 	
 		request.getSession().setAttribute("itemsforname", itemsforname);
 		request.getSession().setAttribute("sizeitemsforname", sizeitemsforname);
-		/*System.out.println("itemsforname : "+itemsforname.toString());
 		
-		System.out.println("sessionItems : "+ request.getSession().getAttribute("items"));
-		System.out.println("itemNameToFind : "+ itemNameToFind);
-		System.out.println("sizeitemsforname : "+ sizeitemsforname);
-		System.out.println("request.getSession().getAttribute(items)\n" + request.getSession().getAttribute("items"));*/
 		return "shoppingonlinesearchresult";
 	}
 }

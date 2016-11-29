@@ -218,7 +218,7 @@
 		    background-color:hsl(250, 50%, 50%);
 		}
 		
-		.bouton:active, .boutonreset:active{
+		.bouton:active, .boutonreset:active, #spayitem:active{
 		    border:inset;
 		    border-width:thick;
 		    color:hsl(0, 2%, 17%);
@@ -684,8 +684,6 @@
             	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
             </div>
 
-			
-  
         </div>
         
         <aside>

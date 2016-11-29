@@ -11,10 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>All Items</title>
-    <!--link href="CSS/default.css" rel="stylesheet" />
-    
-    <script src="Scripts/jquery-2.1.4.js"></script>
-    <script src="Scripts/default.js"></script-->
+  
     <style type="text/css">
     	*{
 		    margin:0;
@@ -36,9 +33,6 @@
 		
 		header {
 		    height: 126.5px;
-		    /*background-image: url('../images/imageLeKoYah.png');*/
-		    /*background-repeat: no-repeat;*/
-		    /*background-color:rgba(255,255,255,25);*/
 		    margin-top: .5px;
 		    margin-left: 2px;
 		    margin-right: 2px;
@@ -63,7 +57,6 @@
 		    position:absolute;
 		    top:25px;
 		    left:132px; 
-		    /*width:100%;*/
 		    margin-top:10px;
 		}
 		
@@ -90,13 +83,6 @@
 		    color:hsl(24, 100%, 50%);
 		}
 		
-		h2#intitule{
-		    width:42%;
-		     margin-left:auto;
-		    margin-right:auto;
-		    margin-top:0.15em;
-		    margin-bottom:.15em;
-		}
 		
 		h3{
 		    display:block;
@@ -626,12 +612,7 @@
 			font-weight: bold;
 			color: fff;
 		}
-		
-		
-		/*==============================================================================================================================================
-		    La boîte main
-		    =======================================================================
-		*/		
+	
 		#main h2{
 		    font-size:15.5pt;
 		    display:block;
@@ -662,41 +643,10 @@
 		    height: 5em;
 		}
 		
-		#main #divimagepcple .ckbox{
-			margin-left:.5em;
-		    width: 0.75em;
-		    height: 0.75em;
-		}
-		
-		
 		#main #divimagepcple label{
 			margin:0;
 			width: 60%;
 		}
-		
-		#main #divimagepcple #connexionBtn {
-			margin-left:1em;
-			margin-bottom:0.25em;
-			margin-top:0;
-			margin-right:0.4em;
-		}
-		
-		#main #divimagepcple #resetBtn{
-			margin-left:0;
-			margin-right:0;
-			margin-top:0;
-			margin-bottom:0.25em;
-		}
-		
-		
-		#main #divimagepcple #personConnexion{
-		
-		}
-		
-		#main #divimagepcple #personPassword{
-		
-		}
-		
 		
 		#main #divmotbienvenue{
 			float:left;
@@ -716,69 +666,10 @@
 			display:block;
 		}
 		
-		#main #divmotbienvenue #submitAgriculteur{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:5.75em;
-		    margin-bottom:0;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitPartenaire{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:-0.5em;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur a, #main #divmotbienvenue #submitPartenaire a{
-			position:relative;
-			color:khaki;
-		    margin:.25em;
-			text-align:center;
-			text-decoration:none;
-			padding:0.15em;
-			width: 100%;
-			z-index: 11500;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur:HOVER,  #main #divmotbienvenue #submitPartenaire:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		#main #divmotbienvenue #submitAgriculteur a:hover, #main #divmotbienvenue #submitPartenaire a:hover{
-				color:yellow ;
-				z-index: 11500;
-		}
-		
-		
-		
 		#main .divmain{
-			/*display:inline-block;*/
 		    color:navy/*#0068AC*/;
 		}
 		
-		/*==============================================================================================================================================
-		    La boîte aside
-		    =======================================================================
-		*/		
 		aside h2{
 		    font-size:25pt;
 		    display:block;
@@ -790,9 +681,7 @@
 		    margin-top:1em;
 		    border-radius :15px;
 		}
-    
-    
-    
+  
     </style>
 </head>
 <body>
@@ -811,7 +700,6 @@
                 <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Quit</a></span>
             </div>
             
-			<!--  span id="sbasket" class="bouton"><a id="abasket" href="#">your Basket</a></span-->    
 		</header>
 
         <nav>

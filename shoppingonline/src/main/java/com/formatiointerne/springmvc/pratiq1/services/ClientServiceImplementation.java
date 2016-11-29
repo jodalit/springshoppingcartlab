@@ -25,43 +25,41 @@ public class ClientServiceImplementation implements ClientService {
 	@Override
 	public Client createNewClient(String name, String sex, LocalDate birthDate, String adress, String telephone,
 			String connexionname, String motdepasse, String clientType, boolean isLocalClient) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public boolean modifyIdentityClient(Long clientId, String name, String sex, LocalDate birthDate) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean modifyAdressClient(Long clientId, String adress, String telephone) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean modifyConnexionIdentifiants(Long clientId, String connexionname, String motdepasse) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean modifyCaracteristicClient(Long clientId, String clientType, boolean isLocalClient) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public Client getClientById(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean removeClient(Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

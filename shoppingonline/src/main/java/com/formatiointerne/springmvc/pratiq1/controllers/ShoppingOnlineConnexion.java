@@ -23,11 +23,6 @@ public class ShoppingOnlineConnexion {
 	
 	@RequestMapping(value="/makeconnexion", method=RequestMethod.POST)
 	public String getshoppingonlinehomeclient(@RequestParam("personConnexion") String personConnexion, @RequestParam("personPassword") String personPassword, Model model, HttpServletRequest request){
-		System.out.println("servicePerson.persons : \n"+ request.getSession().getAttribute("items"));
-		System.out.println("request.getSession().getAttribute(items) : \n"+ request.getSession().getAttribute("items"));
-		
-		/*request.getSession().setAttribute("people", servicePerson.persons);
-		System.out.println("people : \n"+ request.getSession().getAttribute("people"));*/
 		
 		for (Person person : servicePerson.persons) {
 			if (person.getConnexionname().trim().equalsIgnoreCase(personConnexion) && person.getPassword().trim().equalsIgnoreCase(personPassword)){
@@ -50,6 +45,7 @@ public class ShoppingOnlineConnexion {
 	public String getAllItems(Model model, HttpServletRequest request){
 		model.addAttribute("allpeople", ALLPEOPLE);
 		request.getSession().setAttribute("people", servicePerson.persons);
+		
 		return "shoppingonlinelistofallpeople";
 	}
 }

@@ -19,9 +19,6 @@ public class ServicePersonImplementation implements ServicePerson {
 		persons.add(new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1));
 		persons.add(new Person(new Long(3), "client", null, LocalDate.now(), null, null, "client", "client", 2));
 		persons.add(new Person(new Long(1), " super admin", null, LocalDate.now(), null, null, "super", "super", 0));
-		
-		System.out.println("People in the persons' set : ");
-		persons.forEach(System.out::println);
 	}
 
 

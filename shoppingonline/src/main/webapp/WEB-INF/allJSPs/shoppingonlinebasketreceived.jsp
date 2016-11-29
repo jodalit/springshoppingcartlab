@@ -36,9 +36,6 @@
 		
 		header {
 		    height: 126.5px;
-		    /*background-image: url('../images/imageLeKoYah.png');*/
-		    /*background-repeat: no-repeat;*/
-		    /*background-color:rgba(255,255,255,25);*/
 		    margin-top: .5px;
 		    margin-left: 2px;
 		    margin-right: 2px;
@@ -59,29 +56,7 @@
 		    padding:7px;
 		}
 		
-		#headerText{
-		    position:absolute;
-		    top:25px;
-		    left:132px; 
-		    /*width:100%;*/
-		    margin-top:10px;
-		}
 		
-		h1#LShopping{
-		    font-family:Impact;
-		    font-size:33pt;
-		    text-align:center;
-		    color:darkgreen;
-		    background-color:white;
-		    width:6em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:0.02em;
-		    margin-bottom:.15em;
-		    padding:.05em;
-		    border:double;
-		    border-radius:3px;
-		}
 		
 		h2{
 		    display:block;
@@ -90,13 +65,7 @@
 		    color:hsl(24, 100%, 50%);
 		}
 		
-		h2#intitule{
-		    width:42%;
-		     margin-left:auto;
-		    margin-right:auto;
-		    margin-top:0.15em;
-		    margin-bottom:.15em;
-		}
+		
 		
 		h3{
 		    display:block;
@@ -112,16 +81,14 @@
 		    position:relative;
 		    
 		    float:left;
-		    width:15em/*19%*/;
+		    width:15em;
 		    min-width:17em;
 		    padding-top:5em;
 		    padding-left:10px;
 		    margin-top:15px;
 		    
 		}
-		 nav a#aaccueil{
-		     margin-top:3em;
-		 }
+		 
 		
 		#main{
 		    position:relative;
@@ -129,7 +96,7 @@
 		    margin-top:5px;
 		    padding:7px;
 		    float:left;
-		    width:77.25em/*60%*/;
+		    width:77.25em;
 		    border:outset;
 		}
 		
@@ -152,7 +119,7 @@
 		    position:relative;
 		    
 		    float:left;
-		    width: 15em/*19%*/;
+		    width: 15em;
 		    min-width:15em;
 		    padding-left:10px;
 		}
@@ -164,7 +131,7 @@
 		footer{
 		    position:relative;
 		    clear:both;
-		    width:auto/*136.5em100%*/;
+		    width:auto;
 		    height:25px;
 		    font-size:10px;
 		    text-align:center;
@@ -185,7 +152,7 @@
 		    
 		}
 		
-		/*Formatage des zones de texte*/
+		/*Input text Formating */
 		input, select, textarea {
 		    width:15.75em/*px*/;
 		    height:7%/*px*/;
@@ -194,54 +161,10 @@
 		    border:inset;
 		}
 		
-		input#idClient{
-		    width:25%/*px*/;
-		    text-align:right;
-		}
 		
-		input#sexe {
-		    width:9%;
-		}
-		
-		input#datenaissance {
-		    width:20%;
-		}
-		
-		input#telephone {
-		    width:20%;
-		}
-		
-		input#pseudo {
-		    width:20%;
-		}
-		
-		input#motdepasse {
-		    width:20%;
-		}
-		
-		input#confirmation {
-		    width:20%;
-		}
-		
-		input#niveau{
-		    border:thin;
-		}
-		
-		input.agri_part, input.typePartenaire{
-		    
-		    width:3.5%;
-		    margin-right:0;
-		}
-		
-		
-		input#agri_part_oui, input#typePartenaire_non{
-		    
-		    
-		    margin-left:2.5em;
-		}
-		/*Règles de formatage des boutons*/
-		button, #sinscription, #sconnexion, #sdeconnexion{
-		    height:9%/*px*/;
+		/*Buttons formating */
+		button, #sconnexion, #sdeconnexion{
+		    height:9%;
 		    border:outset;
 		    padding:4px;
 		    text-align:center;
@@ -250,8 +173,8 @@
 		
 		.bouton{   
 		    background-color:olive;
-		    width:7.5em/*px*/;
-		    border-color:green;/*hsl(119, 90%, 24%);*/
+		    width:7.5em;
+		    border-color:green;
 		    color:lightyellow;
 		    margin-left:24%;
 		}
@@ -259,23 +182,38 @@
 		.boutonreset{   
 		    background-color:olive;
 		    width:7.5em/*px*/;
-		    border-color:green;/*hsl(119, 90%, 24%);*/
+		    border-color:green;
 		    color:lightyellow;
 		    margin-left:.75%;
 		}
 		
+		#spayitems{
+			color:white;
+			background-color:royalblue;
+		    height:9%;
+		    border:outset;
+		    padding:4px;
+		    text-align:center;
+		    border-color:kaki;
+		    border-radius:10px;
+		}
+		
+		#spayitems a{
+			color: white;
+			text-decoration: none;
+		}
 		
 		button:hover{
 		    background-color: hsl(150, 50%, 90%);
 		}
 		
-		.bouton:hover, .boutonreset:hover{
+		.bouton:hover, .boutonreset:hover, #spayitem:hover{
 		    background-color:hsl(0, 2%, 17%);
 		    border-color: hsl(0, 9%, 80%);
 		    color: hsl(0, 9%, 80%);
 		}
 		
-		/*Forme d'un bouton lorsqu'on clique dessus*/
+		/*Buttons formatting on clicking*/
 		button:active{
 		    border:inset;
 		    border-width:thick;
@@ -283,7 +221,7 @@
 		    background-color:hsl(250, 50%, 50%);
 		}
 		
-		.bouton:active, .boutonreset:active{
+		.bouton:active, .boutonreset:active, #spayitem:active{
 		    border:inset;
 		    border-width:thick;
 		    color:hsl(0, 2%, 17%);
@@ -291,7 +229,7 @@
 		    background-color:hsl(0, 9%, 80%);
 		}
 		
-		/*Règles de formatage communes aux boutons et zones de texte*/
+		/*Formating of buttons and input*/
 		input, button, label, select, textarea{
 		    font-family:Arial;
 		    font-size:14.75pt;
@@ -306,18 +244,7 @@
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		/*Règles de formatage de la classe cClear*/
-		.cClear{
-		    color:hsl(250, 100%, 100%);
-		    background-color:hsl(0, 100%, 50%);
-		    font-weight:bold;
-		}
-		
-		.cClear:hover{
-		    background-color:hsl(24, 100%, 50%);
-		}
-		
-		/*------------------Formattage des boutons contenus dans les formulaires----------------------------*/
+		/*------------------Formatting buttons and inputs in forms----------------------------*/
 		form input{
 		    vertical-align:top;
 		}
@@ -336,7 +263,7 @@
 		}
 		
 		/*==============================================================================================================================================
-		    Boutons de la barre de menus horizontale
+		   	The header box
 		    =======================================================================
 		*/
 		header #headerCommandeMenu{
@@ -364,7 +291,6 @@
 		    background-color:hsl(205, 100%, 50%);
 			width: 6.9em;
 			margin-left:91.5%;
-		    /*margin-left:0.1em;*/
 			border-radius :10px;
 			z-index: 11500;
 		}
@@ -382,9 +308,7 @@
 		header #headerCommandeMenu span#sdeconnexion{	
 		    position:relative;
 		    top: -1em;
-			/*top: 1em;
-			left:73.5em;*/
-		    background-color:hsl(205, 100%, 50%);
+			background-color:hsl(205, 100%, 50%);
 			width: 6.7em;
 		    margin-left:86.5%;
 			border-radius :10px;
@@ -409,7 +333,6 @@
 			padding:0.15em;
 			text-align:center;
 			height: 50px;
-			/*border: 0.1em green solid;*/
 			border-radius :10px;
 		    margin-top:0.1em;
 		    margin-bottom:0.1em;
@@ -417,7 +340,7 @@
 		    box-sizing:border-box;
 			z-index: 11500;
 		}
-					
+				
 		header #headerCommandeMenu span#saccueil a#aaccueil{
 			
 			color:green;
@@ -474,7 +397,6 @@
 					
 		header #headerCommandeMenu span#saccueil:HOVER {
 				background-color: white;
-				/*border: 0.1em yellow solid;*/
 				z-index: 11500;
 		}
 					
@@ -491,7 +413,7 @@
 		header span#sbasket{
 			position:relative;
 		    top: 4.2em;
-		    background-color:navy;/*hsl(205, 100%, 50%);*/
+		    background-color:navy;
 			width: 10.5em;
 			height:3.15em;
 			padding:0.15em;
@@ -587,7 +509,6 @@
 		}
 								
 		div#divSearch form fieldset input{
-			/*clear:left;*/
 			position:relative;
 			font-size:13pt;
 			width:56.5%;
@@ -646,7 +567,7 @@
 		
 		
 		/*==============================================================================================================================================
-		    La boîte main
+		    The main box
 		    =======================================================================
 		*/		
 		#main h2{
@@ -662,90 +583,6 @@
 		    border-radius :15px;
 		    width:95%;
 		}
-		#main #divimagepcple{
-			float:left;
-			font-size:13.5pt;
-			font-weight: bold;
-			width:60%;
-		    padding:1.5em;
-		    box-sizing:border-box;
-		}
-		
-		#main #divimagepcple img{
-			margin-left:auto;
-		    margin-right:auto;
-		}
-		
-		#main #divmotbienvenue{
-			float:left;
-			font-size:14pt;
-		    margin:1px;
-		    padding:1px;
-			width:37%;
-		    box-sizing:border-box;
-		}
-		#main #divmotbienvenue p{
-		    text-align:justify;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:.25em;
-		    margin-bottom:.05em;
-			display:block;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:5.75em;
-		    margin-bottom:0;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitPartenaire{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:-0.5em;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur a, #main #divmotbienvenue #submitPartenaire a{
-			position:relative;
-			color:khaki;
-		    margin:.25em;
-			text-align:center;
-			text-decoration:none;
-			padding:0.15em;
-			width: 100%;
-			z-index: 11500;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur:HOVER,  #main #divmotbienvenue #submitPartenaire:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		#main #divmotbienvenue #submitAgriculteur a:hover, #main #divmotbienvenue #submitPartenaire a:hover{
-				color:yellow ;
-				z-index: 11500;
-		}
-		
-		
 		
 		#main .divmain{
 			/*display:inline-block;*/
@@ -805,13 +642,11 @@
                 	</c:when>
                 	<c:otherwise>
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Quit</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
 					</c:otherwise>
 	              </c:choose>                
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
-		
             <div id="divSearch">
                 <form action="<spring:url value='/resultsearchitem' />" method="post">
                     <fieldset>
@@ -829,41 +664,37 @@
         
         <div id="main">
         	<c:if test="${not empty connexionname}"><em>${connexionname}, hi!!!</em></c:if>
-            <h2>${welcomeTitle}</h2>
+            <h2>Your current Basket</h2>
             <hr />
             <div id="divrecentitems1">
-            	<h3>Your receipt</h3>
             	<c:forEach items="${basket}" var="b"> 
             		<div>
-                		<a href="#"><img alt="image 1" src="#">${b.itemName}</a>
-                		<!-- input name="${item.itemId}" id="${item.itemId}" type="checkbox" class="ckbox"/ -->
-                		<span id="s${b.itemId}" name="${b.itemId}" class="bouton"><a id="${b.itemId}" name="${b.itemId}" href='<spring:url value="#"></spring:url>'>Remove to Basket</a></span>
-                		<br />
-                		${b.description}
-                		<br />
-                		<em>${b.price}<span>$</span></em>
+            			<p>
+	                		<a href="#"><img alt="image 1" src="#" src="#" style="height: 5em; width: 7.25em;">${b.itemName}</a>
+							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href='<spring:url value="/removefrombasket/${b.itemId}"></spring:url>' style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
+	                		<br />
+	                		${b.description}
+	                		<br />
+	                		<em>${b.price}<span>$</span></em>
+                		</p>
                 	</div>
             	</c:forEach>
             	<br/>
-            	<span>Quantity: ${basketsize} </span> 
+            	<span>Quantity : ${basketsize} </span> 
             	<br />
-            	<span>Total ($) : </span> 
+            	<span>Total ($) : ${baskettotal }</span> <br/> <br/>
             	
-            	<span id="spayitems" name="spayitems" class="bouton"><a id="apayitems" name="apayitems" href='<spring:url value="/payitems"></spring:url>'>Remove to Basket</a></span>
+            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
             </div>
-            
-            <div id="divimagepcple" class="divmain">
-                
+            <hr />
+            <div>
+                <h1>Thank you very much for your recent purchase on our web site!</h1>
             </div>
-            
-            <div id="divmotbienvenue" class="divmain">
-                
-            </div>
-  
+          
         </div>
         
         <aside>
-            <h2>&diams; &diams; &diams;</h2>
+           
         </aside>
         
         <footer>

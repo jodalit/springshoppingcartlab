@@ -11,10 +11,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Seach Result</title>
-    <!--link href="CSS/default.css" rel="stylesheet" />
-    
-    <script src="Scripts/jquery-2.1.4.js"></script>
-    <script src="Scripts/default.js"></script-->
     <style type="text/css">
     	*{
 		    margin:0;
@@ -28,7 +24,7 @@
 		
 		body {
 		    width:100%;
-		    background-color: #F8F8F8;/*hsl(252, 95%, 95%);*/
+		    background-color: #F8F8F8;
 		    font-family: Cambria, 'Times New Roman', serif;
 		    color:green /*#0068AC*/;
 		    box-sizing:border-box;
@@ -608,62 +604,7 @@
 			display:block;
 		}
 		
-		#main #divmotbienvenue #submitAgriculteur{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:5.75em;
-		    margin-bottom:0;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitPartenaire{
-		    background-color:hsl(205, 100%, 50%);
-		    width:75%;
-		    height:2em;
-		    margin-left:auto;
-		    margin-right:auto;
-		    margin-top:-0.5em;
-			display:block;
-		    z-index: 11500;
-		    padding:0.25em;
-			border-radius :5px;
-		    box-sizing:border-box;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur a, #main #divmotbienvenue #submitPartenaire a{
-			position:relative;
-			color:khaki;
-		    margin:.25em;
-			text-align:center;
-			text-decoration:none;
-			padding:0.15em;
-			width: 100%;
-			z-index: 11500;
-		}
-		
-		#main #divmotbienvenue #submitAgriculteur:HOVER,  #main #divmotbienvenue #submitPartenaire:HOVER {
-				background-color: darkgray;
-				color:yellow ;
-				border: 0.1em yellow solid;
-				z-index: 11500;
-		}
-					
-		#main #divmotbienvenue #submitAgriculteur a:hover, #main #divmotbienvenue #submitPartenaire a:hover{
-				color:yellow ;
-				z-index: 11500;
-		}
-		
-		
-		
 		#main .divmain{
-			/*display:inline-block;*/
 		    color:navy/*#0068AC*/;
 		}
 		
