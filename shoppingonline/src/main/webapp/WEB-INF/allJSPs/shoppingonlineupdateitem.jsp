@@ -681,8 +681,8 @@
                     	<br/>
                         <label for="itemPrice">Price ($) </label><br/>
                         <input type="text" id="itemPrice" name="itemPrice" size="15" maxlength="15" size="20" tabindex="2" value="${item.price}" /><span id="itemPricespan"></span><br />
-                        <label for="itemExpireDate">Expire date </label><br/>
-                        <input type="datetime" id="itemExpireDate" name="itemExpireDate" size="20" maxlength="20" size="20" tabindex="3" value="${item.expireDate}" /><span id="itemExpireDatespan"></span><br />
+                        <!-- label for="itemExpireDate">Expire date </label><br/ -->
+                        <input type="hidden" id="itemExpireDate" name="itemExpireDate" size="20" maxlength="20" size="20" tabindex="3" value="${item.expireDate}" /><span id="itemExpireDatespan"></span><br />
                     </fieldset>
                     
                     <fieldset>
