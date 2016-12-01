@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
+import com.formatiointerne.springmvc.pratiq1.services.ItemService;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
 
@@ -21,11 +22,11 @@ public class ShoppingOnlineHome {
 	public static final String WELCOMETITLE ="Welcome to our online IT store !!!";
 	public static final String WELCOMEDECLARATION ="Welcome !!!";
 	@Autowired
-	private ItemServiceImplementation itemService;
+	private ItemService itemService;
 	
 	@RequestMapping("/") 
 	public String goShoppingOnlineHome(Model model, HttpServletRequest request){
-		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.items.values())));
+		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
 		request.getSession().setAttribute("basketsize", 0);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);

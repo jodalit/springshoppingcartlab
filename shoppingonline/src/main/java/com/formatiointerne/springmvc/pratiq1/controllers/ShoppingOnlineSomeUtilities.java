@@ -21,8 +21,10 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
+import com.formatiointerne.springmvc.pratiq1.services.ItemService;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
+import com.formatiointerne.springmvc.pratiq1.services.shoppingService;
 
 @Controller
 public class ShoppingOnlineSomeUtilities {
@@ -31,10 +33,10 @@ public class ShoppingOnlineSomeUtilities {
 	public static final String NEWUSER = "Choose your profil";
 	
 	@Autowired
-	private ShoppingServiceImplementation shoppingServiceImplementation;
+	private shoppingService shoppingService;
 
 	@Autowired
-	private ItemServiceImplementation itemService;
+	private ItemService itemService;
 	
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
@@ -89,7 +91,7 @@ public class ShoppingOnlineSomeUtilities {
 			return "redirect:/";
 		}
 		
-		shoppingServiceImplementation.removeItemsToBasket();
+		shoppingService.removeItemsToBasket();
 		request.getSession().setAttribute("basket", null);
 		request.getSession().setAttribute("basketsize", 0);
 		request.getSession().setAttribute("baskettotal", 0);
@@ -118,11 +120,11 @@ public class ShoppingOnlineSomeUtilities {
 			}
 		}
 		
-		shoppingServiceImplementation.removeItemToBasket(itemId);
+		shoppingService.removeItemToBasket(itemId);
 			
 		request.getSession().setAttribute("basket", basket);
 		request.getSession().setAttribute("basketsize",basket.size());	
-		request.getSession().setAttribute("baskettotal",shoppingServiceImplementation.totalBasket);
+		request.getSession().setAttribute("baskettotal", shoppingService.getTotalBasket());
 	
 		return "shoppingonlinebasket";
 	}
@@ -152,10 +154,10 @@ public class ShoppingOnlineSomeUtilities {
 	}
 	
 	public void infoBasket(Long itemId, HttpServletRequest request){
-		shoppingServiceImplementation.addItemToBasket(itemId);
-		request.getSession().setAttribute("basket", shoppingServiceImplementation.basket);
-		request.getSession().setAttribute("basketsize", shoppingServiceImplementation.basket.size());
-		request.getSession().setAttribute("baskettotal", shoppingServiceImplementation.totalBasket);
+		shoppingService.addItemToBasket(itemId);
+		request.getSession().setAttribute("basket", shoppingService.getBasket());
+		request.getSession().setAttribute("basketsize", shoppingService.getBasket().size());
+		request.getSession().setAttribute("baskettotal", shoppingService.getTotalBasket());
 		
 	}
 	

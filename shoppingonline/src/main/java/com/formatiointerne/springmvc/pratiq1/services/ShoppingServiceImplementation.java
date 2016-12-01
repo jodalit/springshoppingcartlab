@@ -14,18 +14,18 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 @Service
 public class ShoppingServiceImplementation implements shoppingService {
-	public Set<Item> basket = new HashSet<>();
-	public double totalBasket=0.0;
-	public double price = 0.0;
-	public double pricetoberemoved = 0.0;
+	//public Set<Item> basket = new HashSet<>();
+	private Set<Item> basket = new HashSet<>();
+	private double totalBasket=0.0;
+	private double price = 0.0;
+	private double pricetoberemoved = 0.0;
 	
 	@Autowired
 	ItemServiceImplementation itemService;
 
 	@Override
 	public List<Item> getAllItems() {
-		
-		return Collections.list(Collections.enumeration(itemService.items.values())) ;
+		return Collections.list(Collections.enumeration(itemService.getItems().values())) ;
 	}
 
 	@Override
@@ -40,9 +40,12 @@ public class ShoppingServiceImplementation implements shoppingService {
 			
 	}
 	
+	@Override
 	public boolean existItemInBasketOrNo(Long itemId){
 		boolean b = false;
 		int i = 0;
+		Set<Item> basket = this.getBasket();
+		
 		for (Item item : basket) {
 			if (item.getItemId().equals(itemId)) {
 				System.out.println("item : " + item);
@@ -55,6 +58,7 @@ public class ShoppingServiceImplementation implements shoppingService {
 		return b;
 	}
 	
+	@Override
 	public void removeItemToBasket(Long itemId) {
 		if ( itemService.getItemById(itemId).getPrice().doubleValue()!=pricetoberemoved ){			
 			pricetoberemoved = itemService.getItemById(itemId).getPrice().doubleValue();
@@ -67,6 +71,7 @@ public class ShoppingServiceImplementation implements shoppingService {
 			
 	}
 	
+	@Override
 	public void removeItemsToBasket() {
 		basket.clear();
 	}
@@ -76,4 +81,45 @@ public class ShoppingServiceImplementation implements shoppingService {
 		items.remove(item);
 
 	}
+	
+	@Override
+	public Set<Item> getBasket() {
+		return basket;
+	}
+	
+	@Override
+	public void setBasket(Set<Item> basket) {
+		this.basket = basket;
+	}
+	
+	@Override
+	public double getTotalBasket() {
+		return totalBasket;
+	}
+	
+	@Override
+	public void setTotalBasket(double totalBasket) {
+		this.totalBasket = totalBasket;
+	}
+	
+	@Override
+	public double getPrice() {
+		return price;
+	}
+	
+	@Override
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	@Override
+	public double getPricetoberemoved() {
+		return pricetoberemoved;
+	}
+	
+	@Override
+	public void setPricetoberemoved(double pricetoberemoved) {
+		this.pricetoberemoved = pricetoberemoved;
+	}
+	
 }

@@ -5,16 +5,24 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.formatiointerne.springmvc.pratiq1.configurations.MyDispatcherServlet;
+import com.formatiointerne.springmvc.pratiq1.configurations.MyWebAppContextConfig;
 import com.formatiointerne.springmvc.pratiq1.controllers.ShoppingOnlineConnexion;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes={MyDispatcherServlet.class, MyWebAppContextConfig.class})
+@WebAppConfiguration
 public class ShoppingOnlineSearchItemTest {
 	@Mock
 	private ItemServiceImplementation itemServiceMock;

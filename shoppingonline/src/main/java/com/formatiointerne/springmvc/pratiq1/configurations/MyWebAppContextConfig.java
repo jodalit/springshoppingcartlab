@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.formatiointerne.springmvc.pratiq1")
+@ComponentScan({"com.formatiointerne.springmvc.pratiq1","com.formatiointerne.springmvc.pratiq1.tests.mock"})
 public class MyWebAppContextConfig extends WebMvcConfigurerAdapter {
 
 	@Override

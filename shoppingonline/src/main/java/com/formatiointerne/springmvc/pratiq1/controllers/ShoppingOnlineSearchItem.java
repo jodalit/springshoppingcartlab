@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
+import com.formatiointerne.springmvc.pratiq1.services.ItemService;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
+import com.formatiointerne.springmvc.pratiq1.services.shoppingService;
 
 @Controller
 @Scope("session")
@@ -25,9 +27,9 @@ public class ShoppingOnlineSearchItem {
 	public static final String RESULTSEARCHTITLE ="Search result";
 	public static final String NUMBERITEMS ="Search result";
 	@Autowired
-	private ItemServiceImplementation itemService;
+	private ItemService itemService;
 	@Autowired
-	ShoppingServiceImplementation shoppingServiceImplementation;
+	shoppingService shoppingService;
  	
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.GET)
 	public String getSearchItem(HttpServletRequest request){

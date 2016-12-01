@@ -2,8 +2,6 @@ package com.formatiointerne.springmvc.pratiq1.tests.controllers;
 
 import static org.hamcrest.CoreMatchers.isA;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +33,9 @@ import com.formatiointerne.springmvc.pratiq1.configurations.MyDispatcherServlet;
 import com.formatiointerne.springmvc.pratiq1.configurations.MyWebAppContextConfig;
 import com.formatiointerne.springmvc.pratiq1.controllers.ShoppingOnlineConnexion;
 import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
+import com.formatiointerne.springmvc.pratiq1.services.ServicePerson;
 import com.formatiointerne.springmvc.pratiq1.services.ServicePersonImplementation;
+import com.formatiointerne.springmvc.pratiq1.tests.mock.MockServicePerson;
 import com.sun.javafx.sg.prism.NGShape.Mode;
 import com.sun.xml.internal.ws.policy.AssertionSet;
 
@@ -47,14 +47,17 @@ import junit.framework.Assert;
 @WebAppConfiguration
 public class ShoppingOnlineConnexionTest {
 	@Autowired 
-	private ServicePersonImplementation servicePerson;
+	private ServicePerson servicePerson;
+	
+	/*@Autowired 
+	private MockServicePerson mockservicePerson;*/
 	@Autowired
 	MockHttpServletRequest request;
 	
 
 	
 	@Mock
-	private ServicePersonImplementation servicePersonMock;
+	private ServicePerson servicePersonMock;
 	
 	ShoppingOnlineConnexion connexion;
  	
@@ -93,18 +96,5 @@ public class ShoppingOnlineConnexionTest {
 			assertTrue(true);
 	}
 	
-	@Test
-	public void verifyConnexion_withMockObject_() {
-	 	Person p = new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
-	 	 	 Set<Person> persons = new HashSet<Person>();
-		persons.add(new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1));
-		persons.add(new Person(new Long(3), "client", null, LocalDate.now(), null, null, "client", "client", 2));
-		persons.add(new Person(new Long(1), " super admin", null, LocalDate.now(), null, null, "super", "super", 0)); 
-		 servicePersonMock.persons = persons;
-		when(servicePersonMock.getPersonByConnexionPassword("admin", "admin")).thenReturn(p);
-		String s = connexion.getshoppingonlinehomeclient("admin", "admin",  request);
-		
-		verify(connexion).getshoppingonlinehomeclient("admin", "admin", request);
-		
-	}
+	
 }
