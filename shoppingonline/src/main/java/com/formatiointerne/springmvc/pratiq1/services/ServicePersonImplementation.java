@@ -13,7 +13,7 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
 @Service
 public class ServicePersonImplementation implements ServicePerson {
 	//public List<Person> persons = new LinkedList<>();
-	public Set<Person> persons = new HashSet<>();
+	public Set<Person> persons = new HashSet<Person>();
 	
 	public ServicePersonImplementation() {
 		persons.add(new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1));
@@ -29,7 +29,7 @@ public class ServicePersonImplementation implements ServicePerson {
 				return person;
 			}
 		}
-		return new Person();
+		return null;
 	}
 
 }

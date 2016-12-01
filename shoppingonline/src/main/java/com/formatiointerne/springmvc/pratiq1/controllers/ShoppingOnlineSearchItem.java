@@ -30,21 +30,21 @@ public class ShoppingOnlineSearchItem {
 	ShoppingServiceImplementation shoppingServiceImplementation;
  	
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.GET)
-	public String getSearchItem(Model model){
-		model.addAttribute("resultSearch", RESULTSEARCHTITLE);
+	public String getSearchItem(HttpServletRequest request){
+		request.getSession().setAttribute("resultSearch", RESULTSEARCHTITLE);
 		
 		return "shoppingonlinesearchresult";
 	}
 	
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.POST)
-	public String getResultSearchItem(Model model, @RequestParam("itemNameToFind") String itemNameToFind, HttpServletRequest request){
+	public String getResultSearchItem(@RequestParam("itemNameToFind") String itemNameToFind, HttpServletRequest request){
 	 
 		Set<Item> itemsforname = itemService.getItemByNameDescription(itemNameToFind);
 	
 		int sizeitemsforname = itemsforname.size();
 	
-		model.addAttribute("resultSearch", RESULTSEARCHTITLE);
-		model.addAttribute("numberItem", "0");
+		request.getSession().setAttribute("resultSearch", RESULTSEARCHTITLE);
+		request.getSession().setAttribute("numberItem", "0");
 	
 		request.getSession().setAttribute("itemsforname", itemsforname);
 		request.getSession().setAttribute("sizeitemsforname", sizeitemsforname);

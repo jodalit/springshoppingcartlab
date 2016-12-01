@@ -22,27 +22,22 @@ public class ShoppingOnlineConnexion {
 	ServicePersonImplementation servicePerson;
 	
 	@RequestMapping(value="/makeconnexion", method=RequestMethod.POST)
-	public String getshoppingonlinehomeclient(@RequestParam("personConnexion") String personConnexion, @RequestParam("personPassword") String personPassword, Model model, HttpServletRequest request){
-		
-		for (Person person : servicePerson.persons) {
-			if (person.getConnexionname().trim().equalsIgnoreCase(personConnexion) && person.getPassword().trim().equalsIgnoreCase(personPassword)){
-				request.getSession().setAttribute("connexionname", person.getConnexionname().trim());
-				if (person.getProfile()==1){ //admin
-					return "shoppingonlinehomeclient";
-				} else if (person.getProfile()==2){ //client
-					
-				}else if (person.getProfile()==0){ //super admin
-					return "shoppingonlinehomesuperadmin";
-				}
-				
-			}
+	public String getshoppingonlinehomeclient(@RequestParam("personConnexion") String personConnexion, @RequestParam("personPassword") String personPassword, HttpServletRequest request){
+		if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword)!=(null) ){
+			request.getSession().setAttribute("connexionname", servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getConnexionname());
+			
+			if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 1)
+				return "shoppingonlinehomeclient"; //admin
+			else if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile()==0) 
+				return "shoppingonlinehomesuperadmin"; //super admin
+			//else if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile()==2) 
 		}
-		
+
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/listpeople", method=RequestMethod.GET)
-	public String getAllItems(Model model, HttpServletRequest request){
+	public String getAllPeople(Model model, HttpServletRequest request){
 		model.addAttribute("allpeople", ALLPEOPLE);
 		request.getSession().setAttribute("people", servicePerson.persons);
 		
