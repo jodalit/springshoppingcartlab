@@ -1,7 +1,10 @@
 package com.formatiointerne.springmvc.pratiq1.tests.controllers;
 
 import static org.hamcrest.CoreMatchers.isA;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,8 +21,10 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -28,6 +33,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 
 import com.formatiointerne.springmvc.pratiq1.configurations.MyDispatcherServlet;
 import com.formatiointerne.springmvc.pratiq1.configurations.MyWebAppContextConfig;
@@ -49,30 +55,26 @@ public class ShoppingOnlineConnexionTest {
 	@Autowired 
 	private ServicePerson servicePerson;
 	
-	/*@Autowired 
-	private MockServicePerson mockservicePerson;*/
-	@Autowired
-	MockHttpServletRequest request;
-	
-
-	
 	@Mock
 	private ServicePerson servicePersonMock;
-	
+	@Autowired
+	MockHttpServletRequest request;
+		
 	ShoppingOnlineConnexion connexion;
  	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		System.out.println("Beginning test with mocked HttpServletRequest ");
 		request.setParameter("personConnexion", "admin");
 		request.setParameter("personPassword", "admin");
 		connexion = new ShoppingOnlineConnexion();
+		connexion.setServicePerson(servicePersonMock);
 	}
  
 	 @After
 	public void tearDown() throws Exception {
-		System.out.println("End test");
+		 connexion=null;
+		 request = null;
 	}
 	 
 	@Test
@@ -96,5 +98,66 @@ public class ShoppingOnlineConnexionTest {
 			assertTrue(true);
 	}
 	
+	@Test //testGetAllPeople()
+	public void verifyGetAllPeople_returnNamePageInvoque(){
+		Set<Person> persons = new HashSet<>();
+		when(servicePersonMock.getPersons()).thenReturn(persons);
+		ModelMap model = new ModelMap();
+		String result = connexion.getAllPeople(model, request);
+		assertNotNull(result);
+		assertSame("shoppingonlinelistofallpeople", result);
+		assertEquals("shoppingonlinelistofallpeople", result);
+	}
 	
+	@Test //testGetshoppingonlinehomeclient()
+	public void verifyGetshoppingonlinehomeclient_withMockServicePerson(){
+		Set<Person> persons = new HashSet<>();
+		when(servicePersonMock.getPersons()).thenReturn(persons);
+		Person person = new Person();
+		when(servicePersonMock.getPersonByConnexionPassword(anyString(), anyString())).thenReturn(person);
+		String result = connexion.getshoppingonlinehomeclient(request.getParameter("personConnexion"), request.getParameter("personPassword"), request);
+		System.out.println("result : " + result);
+		assertNotNull(result);
+		assertSame("displays super administrator session", "shoppingonlinehomesuperadmin", result);
+	}
+	
+	@Test //testGetshoppingonlinehomeclient()
+	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_AdminSession(){
+		Set<Person> persons = new HashSet<>();
+		when(servicePersonMock.getPersons()).thenReturn(persons);
+		Person person = new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
+		when(servicePersonMock.getPersonByConnexionPassword("admin", "admin")).thenReturn(person);
+		String result = connexion.getshoppingonlinehomeclient("admin", "admin", request);
+		System.out.println("result : " + result);
+		assertNotNull(result);
+		assertSame("displays administrator session", "shoppingonlinehomeclient", result);
+	}
+	
+	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
+	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_InternauteSession(){
+		when(servicePersonMock.getPersonByConnexionPassword(anyString(), anyString())).thenReturn(null);
+		String result = connexion.getshoppingonlinehomeclient(anyString(), anyString(), request);
+		System.out.println("result : " + result);
+		assertNotNull(result);
+		assertSame("displays internaute session", "redirect:/", result);
+	}
+	
+	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
+	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_InternauteSession_2(){
+		when(servicePersonMock.getPersonByConnexionPassword("admin", "super")).thenReturn(null);
+		String result = connexion.getshoppingonlinehomeclient(anyString(), anyString(), request);
+		System.out.println("result : " + result);
+		assertNotNull(result);
+		assertSame("displays internaute session", "redirect:/", result);
+	}
+	
+	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
+	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_InternauteSession_3(){
+		Person person = new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
+		when(servicePersonMock.getPersonByConnexionPassword("admin", "super")).thenReturn(person);
+		String result = connexion.getshoppingonlinehomeclient(anyString(), anyString(), request);
+		System.out.println("result : " + result);
+		assertNotNull(result);
+		assertNotSame("displays page administrator", "shoppingonlinehomeclient", result);
+	}
 }

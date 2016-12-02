@@ -17,19 +17,25 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.formatiointerne.springmvc.pratiq1.configurations.MyDispatcherServlet;
 import com.formatiointerne.springmvc.pratiq1.configurations.MyWebAppContextConfig;
 import com.formatiointerne.springmvc.pratiq1.controllers.ShoppingOnlineConnexion;
+import com.formatiointerne.springmvc.pratiq1.controllers.ShoppingOnlineSearchItem;
+import com.formatiointerne.springmvc.pratiq1.services.ItemService;
 import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
 import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
+import com.formatiointerne.springmvc.pratiq1.services.shoppingService;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={MyDispatcherServlet.class, MyWebAppContextConfig.class})
 @WebAppConfiguration
 public class ShoppingOnlineSearchItemTest {
 	@Mock
-	private ItemServiceImplementation itemServiceMock;
+	private ItemService itemServiceMock;
 	@Mock
-	private ShoppingServiceImplementation shoppingServiceMock;
+	private shoppingService shoppingServiceMock;
 	@Autowired
 	MockHttpServletRequest request;
+	
+	private ShoppingOnlineSearchItem searchItem;
 		
 	@Before
 	public void setUp() throws Exception {

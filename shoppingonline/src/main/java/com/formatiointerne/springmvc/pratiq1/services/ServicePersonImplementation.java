@@ -12,7 +12,6 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
 
 @Service
 public  class ServicePersonImplementation implements ServicePerson {
-	//public List<Person> persons = new LinkedList<>();
 	private Set<Person> persons = new HashSet<>();
 	
 	public ServicePersonImplementation() {

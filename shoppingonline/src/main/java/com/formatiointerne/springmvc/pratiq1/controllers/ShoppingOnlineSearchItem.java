@@ -53,4 +53,20 @@ public class ShoppingOnlineSearchItem {
 		
 		return "shoppingonlinesearchresult";
 	}
+
+	public ItemService getItemService() {
+		return itemService;
+	}
+
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+
+	public shoppingService getShoppingService() {
+		return shoppingService;
+	}
+
+	public void setShoppingService(shoppingService shoppingService) {
+		this.shoppingService = shoppingService;
+	}
 }

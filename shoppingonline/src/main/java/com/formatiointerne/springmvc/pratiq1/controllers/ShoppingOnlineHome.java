@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
@@ -25,12 +26,21 @@ public class ShoppingOnlineHome {
 	private ItemService itemService;
 	
 	@RequestMapping("/") 
-	public String goShoppingOnlineHome(Model model, HttpServletRequest request){
+	public String goShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
 		request.getSession().setAttribute("basketsize", 0);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);
-				
+		
 		return "shoppingonlinehome";
 	}
+
+	public ItemService getItemService() {
+		return itemService;
+	}
+
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+	
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,10 +39,19 @@ public class ShoppingOnlineConnexion {
 	}
 	
 	@RequestMapping(value="/listpeople", method=RequestMethod.GET)
-	public String getAllPeople(Model model, HttpServletRequest request){
+	public String getAllPeople(ModelMap model, HttpServletRequest request){
 		model.addAttribute("allpeople", ALLPEOPLE);
 		request.getSession().setAttribute("people", servicePerson.getPersons());
 		
 		return "shoppingonlinelistofallpeople";
 	}
+
+	public ServicePerson getServicePerson() {
+		return servicePerson;
+	}
+
+	public void setServicePerson(ServicePerson servicePerson) {
+		this.servicePerson = servicePerson;
+	}
+		
 }
