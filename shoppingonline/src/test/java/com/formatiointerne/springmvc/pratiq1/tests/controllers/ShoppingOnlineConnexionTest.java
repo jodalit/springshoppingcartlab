@@ -41,7 +41,6 @@ import com.formatiointerne.springmvc.pratiq1.controllers.ShoppingOnlineConnexion
 import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
 import com.formatiointerne.springmvc.pratiq1.services.ServicePerson;
 import com.formatiointerne.springmvc.pratiq1.services.ServicePersonImplementation;
-import com.formatiointerne.springmvc.pratiq1.tests.mock.MockServicePerson;
 import com.sun.javafx.sg.prism.NGShape.Mode;
 import com.sun.xml.internal.ws.policy.AssertionSet;
 
@@ -77,15 +76,15 @@ public class ShoppingOnlineConnexionTest {
 		 request = null;
 	}
 	 
-	@Test
+	/*@Test
 	public void verifyAllServices_areNotNull(){
 		assertNotNull(servicePerson);
 	}
 	
 	@Test
-	public void verifyAllMockServices_areNotNull(){
+	public void verifyAllMockServicesNotNull(){
 		assertNotNull(servicePersonMock);
-	}
+	} 
 	
 	@Test
 	public void verifyExitance_ofUser_using_ConnexionnamePassword_providedBy_mockHttpServletRequest(){
@@ -97,32 +96,21 @@ public class ShoppingOnlineConnexionTest {
 		if (servicePerson.getPersonByConnexionPassword(request.getParameter("personConnexion"), request.getParameter("personPassword"))!=null)
 			assertTrue(true);
 	}
-	
-	@Test //testGetAllPeople()
-	public void verifyGetAllPeople_returnNamePageInvoque(){
-		Set<Person> persons = new HashSet<>();
-		when(servicePersonMock.getPersons()).thenReturn(persons);
-		ModelMap model = new ModelMap();
-		String result = connexion.getAllPeople(model, request);
-		assertNotNull(result);
-		assertSame("shoppingonlinelistofallpeople", result);
-		assertEquals("shoppingonlinelistofallpeople", result);
-	}
-	
+	*/
+
 	@Test //testGetshoppingonlinehomeclient()
 	public void verifyGetshoppingonlinehomeclient_withMockServicePerson(){
-		Set<Person> persons = new HashSet<>();
-		when(servicePersonMock.getPersons()).thenReturn(persons);
-		Person person = new Person();
-		when(servicePersonMock.getPersonByConnexionPassword(anyString(), anyString())).thenReturn(person);
+	
+		when(servicePersonMock.getPersonByConnexionPassword(anyString(), anyString())).thenReturn(new Person());
+		request.setParameter("personConnexion", "admin");
+		request.setParameter("personPassword", "admin");
 		String result = connexion.getshoppingonlinehomeclient(request.getParameter("personConnexion"), request.getParameter("personPassword"), request);
-		System.out.println("result : " + result);
 		assertNotNull(result);
 		assertSame("displays super administrator session", "shoppingonlinehomesuperadmin", result);
 	}
 	
 	@Test //testGetshoppingonlinehomeclient()
-	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_AdminSession(){
+	public void verifySuccessfulAdminLogin(){
 		Set<Person> persons = new HashSet<>();
 		when(servicePersonMock.getPersons()).thenReturn(persons);
 		Person person = new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
@@ -139,11 +127,12 @@ public class ShoppingOnlineConnexionTest {
 		String result = connexion.getshoppingonlinehomeclient(anyString(), anyString(), request);
 		System.out.println("result : " + result);
 		assertNotNull(result);
+		assertNotSame("displays page administrator", "shoppingonlinehomeclient", result);
 		assertSame("displays internaute session", "redirect:/", result);
 	}
 	
 	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
-	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_InternauteSession_2(){
+	public void verifyWrongAdminPassword(){
 		when(servicePersonMock.getPersonByConnexionPassword("admin", "super")).thenReturn(null);
 		String result = connexion.getshoppingonlinehomeclient(anyString(), anyString(), request);
 		System.out.println("result : " + result);
@@ -151,13 +140,26 @@ public class ShoppingOnlineConnexionTest {
 		assertSame("displays internaute session", "redirect:/", result);
 	}
 	
-	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
+	/*@Test //testGetshoppingonlinehomeclient() for invalid credentials 
 	public void verifyGetshoppingonlinehomeclient_withMockServicePerson_toDisplay_InternauteSession_3(){
 		Person person = new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
 		when(servicePersonMock.getPersonByConnexionPassword("admin", "super")).thenReturn(person);
 		String result = connexion.getshoppingonlinehomeclient(anyString(), anyString(), request);
 		System.out.println("result : " + result);
 		assertNotNull(result);
-		assertNotSame("displays page administrator", "shoppingonlinehomeclient", result);
-	}
+ 
+	}*/
+	
+	//TODO This feature will be enabled during Spring Security exercise 
+	/*
+	@Test //testGetAllPeople()
+	public void verifyGetAllPeople_withMockServicePerson_returnNamePageInvoque(){
+		Set<Person> persons = new HashSet<>();
+		when(servicePersonMock.getPersons()).thenReturn(persons);
+		ModelMap model = new ModelMap();
+		String result = connexion.getAllPeople(model, request);
+		assertNotNull(result);
+		assertSame("shoppingonlinelistofallpeople", result);
+		assertEquals("shoppingonlinelistofallpeople", result);
+	}*/
 }

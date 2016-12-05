@@ -52,20 +52,15 @@ public class ShoppingOnlineHomeTest {
 		home.setItemService(itemServiceMock);
 	}
 	
-	@After
-	public void tearDown() throws Exception {
-		System.out.println("End test");
-	}
-
-	@Test
+	/*@Test
 	public void verifyAllServices_areNotNull(){
 		assertNotNull(itemService);
-	}
+	} 
 	
 	@Test
 	public void verifyAllMockServices_areNotNull(){
 		assertNotNull(itemServiceMock);
-	}
+	}*/
 	
 	@Test
 	public void verifyGoShoppingOnlineHome_returnNamePage() {

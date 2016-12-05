@@ -27,7 +27,6 @@ import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
 
 @Service
 public class ItemServiceImplementation implements ItemService {
-	//public Map<Long, Item> items = new HashMap<>();
 	private  Map<Long, Item> items = new HashMap<>();
 	
 	public int i=0;
@@ -48,15 +47,29 @@ public class ItemServiceImplementation implements ItemService {
 		items.put(6L, new Item(6L, "Alithya Item 12 orekj398", "Item Montréllllll irewItem 1", 69.11D));
 		items.put(7L, new Item(7L, "item 145", "Item orekj398 irewItem 1", 8.45D));
 		items.put(9L, new Item(9L, "alithya 589 item", "Item orekj398 irewItem 1", 6.12D));
+		items.put(11L, new Item(11L, "centre", "centre de formation", 6.12D));
 	}
 	
 	@Override
 	public Item createItem(String id, String name, String description, String price, String expireDate) {
-		Long idLong =0L;
-		if (isNumeric(id))
-			idLong=Long.valueOf(id);
+		Long idLong = 0L;
+		try{
+			idLong = (long) Integer.parseInt(id);
+		}catch (NumberFormatException e) {
+			e.getMessage();
+			return null;
+		}
+				
+		Double d = 0.0;
+		try{
+			 d = Double.parseDouble(price.trim());
+		} catch (NumberFormatException e) {
+			e.getMessage();
+			return null;
+		}
 		
-		Item item = new Item(idLong, name, description, Double.valueOf(convert(price)), LocalDate.now());
+		//Item item = new Item(Long.valueOf(id), name, description, Double.valueOf(convert(price)), LocalDate.now());
+		Item item = new Item(Long.valueOf(id), name, description, d, LocalDate.now());
 		items.put(Long.valueOf(id), item);
 		return item;
 	}

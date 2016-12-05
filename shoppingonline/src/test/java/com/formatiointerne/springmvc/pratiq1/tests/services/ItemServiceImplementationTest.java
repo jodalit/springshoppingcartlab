@@ -69,7 +69,7 @@ public class ItemServiceImplementationTest {
 
 	@Test
 	public void verify_createItem_returnPerson() {
-		Item i = itemService.createItem("1", anyString(), anyString(), anyString(), anyString());
+		Item i = itemService.createItem("1", "AS", "AS", "12.5", LocalDate.now().toString());
 		assertNotNull(i);
 	}
 	

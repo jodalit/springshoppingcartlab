@@ -35,10 +35,6 @@ public class ShoppingOnlineHome {
 		return "shoppingonlinehome";
 	}
 
-	public ItemService getItemService() {
-		return itemService;
-	}
-
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
 	}
