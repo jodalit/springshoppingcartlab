@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.objenesis.instantiator.basic.NewInstanceInstantiator;
 import org.springframework.stereotype.Service;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Client;
-import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
+import com.alithya.shoppingcart.model.Client;
+import com.alithya.shoppingcart.model.Person;
 
 @Service
 public class ClientServiceImplementation implements ClientService {

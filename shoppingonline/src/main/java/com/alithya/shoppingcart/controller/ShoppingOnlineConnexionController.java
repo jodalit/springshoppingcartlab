@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.controllers;
+package com.alithya.shoppingcart.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,30 +9,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.formatiointerne.springmvc.pratiq1.services.ServicePerson;
+import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
-public class ShoppingOnlineConnexion {
+public class ShoppingOnlineConnexionController {
 	public static final String ALLPEOPLE = "All people";
 
 	@Autowired
 	ServicePerson servicePerson;
 
 	@RequestMapping(value = "/makeconnexion", method = RequestMethod.POST)
-	public String getshoppingonlinehomeclient(@RequestParam("personConnexion") String personConnexion,
+	public String getshoppingonlinehomeadmin(@RequestParam("personConnexion") String personConnexion,
 			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
 		if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword) != (null)) {
 			request.getSession().setAttribute("connexionname",
 					servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getConnexionname());
 
 			if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 1)
-				return "shoppingonlinehomeclient"; // admin
+				return "shoppingonlinehomeadmin"; // admin
 			// TODO unfinished feature please refer to JIRA task xyz
 			else if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 0)
 				return "shoppingonlinehomesuperadmin"; // super admin
-			// else if
-			// (servicePerson.getPersonByConnexionPassword(personConnexion,
-			// personPassword).getProfile()==2)
 		}
 
 		return "redirect:/";

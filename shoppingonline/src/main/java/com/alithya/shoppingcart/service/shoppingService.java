@@ -1,9 +1,9 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.util.List;
 import java.util.Set;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
+import com.alithya.shoppingcart.model.Item;
 
 public interface shoppingService {
 	List<Item> getAllItems();
@@ -20,4 +20,5 @@ public interface shoppingService {
 	public void setPrice(double price);
 	public double getPricetoberemoved();
 	public void setPricetoberemoved(double pricetoberemoved);
+	void setItemService(ItemServiceImplementation itemService);
 }

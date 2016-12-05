@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.controllers;
+package com.alithya.shoppingcart.controller;
 
 import java.util.Set;
 
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
-import com.formatiointerne.springmvc.pratiq1.services.ItemService;
-import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
-import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
-import com.formatiointerne.springmvc.pratiq1.services.shoppingService;
+import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.service.ItemService;
+import com.alithya.shoppingcart.service.ItemServiceImplementation;
+import com.alithya.shoppingcart.service.ShoppingServiceImplementation;
+import com.alithya.shoppingcart.service.shoppingService;
 
 @Controller
 @Scope("session")
-public class ShoppingOnlineSearchItem {
+public class ShoppingOnlineSearchItemController {
 	public static final String RESULTSEARCHTITLE ="Search result";
 	public static final String NUMBERITEMS ="Search result";
 	@Autowired

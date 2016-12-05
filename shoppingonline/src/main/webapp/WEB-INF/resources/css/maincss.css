@@ -1,19 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="springform" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Welcome</title>
-    <!--  link href="<spring:url value='/resources/css/maincss.css' />" rel="stylesheet"/-->
-    <style type="text/css">
-    	*{
+*{
 		    margin:0;
 		    padding:0;
 		}
@@ -53,8 +38,6 @@
 		    padding:7px;
 		}
 		
-		
-		
 		h2{
 		    display:block;
 		    font-size:24px;
@@ -86,7 +69,6 @@
 		    
 		}
 		 
-		
 		#main{
 		    position:relative;
 		    
@@ -615,75 +597,3 @@
 		    margin-top:1em;
 		    border-radius :15px;
 		}
-    
-    </style>
-</head>
-<body>
-    <div id="container">
-        <header>
-            <div id="headerCommandeMenu">
-                <span id="saccueil"><a id="aaccueil" href='<spring:url value="/"></spring:url>'>Home</a></span>
-
-                <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
-            </div>
-            
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
-		
-            <div id="divSearch">
-                <form action="<spring:url value='/resultsearchitem' />" method="post">
-                    <fieldset>
-                        <label for="itemNameToFind">Item's name</label>
-                        <input type="text" id="itemNameToFind" name="itemNameToFind" size="45" maxlength="45" placeholder="Enter the item's name here, ..." />
-                        <button type="submit" id="searchItem" name="searchItem" class="bouton">Search</button>
-                    </fieldset>
-                </form>
-            </div>
-		</header>
-
-        <nav>
-            
-        </nav>
-        
-        <div id="main">
-            <h2>${welcomeTitle}</h2>
-            <hr />
-            <div id="divrecentitems">
-            	<c:forEach items="${items}" var="item"> 
-            		<div>
-                		<a href="#"><img alt="image 1" src="#" style="height: 5em; width: 7.25em;">${item.itemName}</a>
-                		
-                		<span id="s${item.itemId}" style="position: relative; top: -2.75em; color:white; background-color:navy; height:3%; width:3.5em;border:outset; padding:1px; margin-top:0.5em; margin-left: 75%;margin-right:0.25em; text-align:center; border-radius:5px; z-index: 11500;"><a id="a${item.itemId}" href='<spring:url value="/addtobasket/${item.itemId}"></spring:url>' style="color:white; text-align:center; text-decoration:none; z-index: 11500;">Add to Basket</a></span>
-                		<br />
-                		${item.description}
-                		<br />
-                		<em>${item.price}<span>$</span></em>
-                	</div>
-            	</c:forEach>
-            </div>
-            
-            <div id="divimagepcple" class="divmain">
-                <h1 id="OLShopping">OnLine Shopping</h1>
-            </div>
-            
-            <div id="divmotbienvenue" class="divmain">
-                <p id="pmotbienvenue">
-                     <em>${welcomeDeclaration }</em>
-                </p>
-
-            </div>
-  
-        </div>
-        
-        <aside>
-           
-        </aside>
-        
-        <footer>
-            <p>
-                Copyright &copy; 2016, <a href="mail:juoud1@gmail.com">Centre de formation</a>, GNU Licence
-            </p>
-        </footer>
-    </div>
-</body>
-</html>

@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.datamodels;
+package com.alithya.shoppingcart.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;

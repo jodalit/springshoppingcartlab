@@ -1,8 +1,8 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.time.LocalDate;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Client;
+import com.alithya.shoppingcart.model.Client;
 
 public interface ClientService {
 

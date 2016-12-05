@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.controllers;
+package com.alithya.shoppingcart.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ShoppingOnlineClient {
+public class ShoppingOnlineAdminController {
 	public static final String CLIENT ="New Client of the on line store";
 		
 	@RequestMapping(value="/client", method=RequestMethod.GET)
 	public String getNewClient(Model model){
 		model.addAttribute("client", CLIENT);
-		return "shoppingonlinenewclient";
+		return "shoppingonlinehomeadmin";
 	}
 
 }

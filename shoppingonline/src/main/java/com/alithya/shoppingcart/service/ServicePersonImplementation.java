@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
+import com.alithya.shoppingcart.model.Person;
 
 @Service
 public  class ServicePersonImplementation implements ServicePerson {

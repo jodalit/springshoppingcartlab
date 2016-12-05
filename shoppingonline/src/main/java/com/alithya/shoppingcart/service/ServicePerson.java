@@ -1,9 +1,9 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
+import com.alithya.shoppingcart.model.Person;
 
 public interface ServicePerson {
 	public Person getPersonByConnexionPassword(String connexion, String password);

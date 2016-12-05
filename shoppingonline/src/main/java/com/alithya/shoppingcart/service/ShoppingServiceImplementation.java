@@ -1,20 +1,17 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
-import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
+
+import com.alithya.shoppingcart.model.Item;
 
 @Service
 public class ShoppingServiceImplementation implements shoppingService {
-	//public Set<Item> basket = new HashSet<>();
 	private Set<Item> basket = new HashSet<>();
 	private double totalBasket=0.0;
 	private double price = 0.0;
@@ -43,13 +40,11 @@ public class ShoppingServiceImplementation implements shoppingService {
 	@Override
 	public boolean existItemInBasketOrNo(Long itemId){
 		boolean b = false;
-		int i = 0;
 		Set<Item> basket = this.getBasket();
 		
 		for (Item item : basket) {
 			if (item.getItemId().equals(itemId)) {
 				System.out.println("item : " + item);
-				i++;
 				b = true;
 				break;
 			}
@@ -121,5 +116,11 @@ public class ShoppingServiceImplementation implements shoppingService {
 	public void setPricetoberemoved(double pricetoberemoved) {
 		this.pricetoberemoved = pricetoberemoved;
 	}
+	
+	@Override
+	public void setItemService(ItemServiceImplementation itemService) {
+		this.itemService = itemService;
+	}
+	
 	
 }

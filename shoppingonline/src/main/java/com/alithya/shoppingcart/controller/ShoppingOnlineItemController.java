@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.controllers;
+package com.alithya.shoppingcart.controller;
 
 import java.util.Collections;
 
@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.formatiointerne.springmvc.pratiq1.Conversion.ConvertStringToDouble;
-import com.formatiointerne.springmvc.pratiq1.services.ItemService;
-import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
+import com.alithya.shoppingcart.service.ItemService;
+import com.alithya.shoppingcart.service.ItemServiceImplementation;
 
 @Controller
-public class ShoppingOnlineItem {
+public class ShoppingOnlineItemController {
 	public static final String ADDNEWITEM ="Add New Item";
 	public static final String ALLITEMS ="List of all items";
 	public static final String UPDATEITEM ="Updating Item : ";

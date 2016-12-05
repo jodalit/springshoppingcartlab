@@ -1,8 +1,8 @@
-package com.formatiointerne.springmvc.pratiq1.configurations;
+package com.alithya.shoppingcart.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class MyDispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -14,7 +14,7 @@ public class MyDispatcherServlet extends AbstractAnnotationConfigDispatcherServl
 	protected Class<?>[] getServletConfigClasses() {
 		
 		return new Class[]{
-				MyWebAppContextConfig.class
+				ShoppingOnlineWebApplicationContextConfig.class
 		};
 	}
 

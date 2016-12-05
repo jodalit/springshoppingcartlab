@@ -11,7 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome</title>
-    <!--  link href="<spring:url value='/resources/css/maincss.css' />" rel="stylesheet"/-->
+    
     <style type="text/css">
     	*{
 		    margin:0;
@@ -615,6 +615,8 @@
 		    margin-top:1em;
 		    border-radius :15px;
 		}
+    
+    
     
     </style>
 </head>

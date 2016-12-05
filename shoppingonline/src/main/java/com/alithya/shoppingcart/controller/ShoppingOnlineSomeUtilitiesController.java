@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.controllers;
+package com.alithya.shoppingcart.controller;
 
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -19,15 +19,15 @@ import org.springframework.web.bind.support.SessionAttributeStore;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
-import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
-import com.formatiointerne.springmvc.pratiq1.services.ItemService;
-import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
-import com.formatiointerne.springmvc.pratiq1.services.ShoppingServiceImplementation;
-import com.formatiointerne.springmvc.pratiq1.services.shoppingService;
+import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.model.Person;
+import com.alithya.shoppingcart.service.ItemService;
+import com.alithya.shoppingcart.service.ItemServiceImplementation;
+import com.alithya.shoppingcart.service.ShoppingServiceImplementation;
+import com.alithya.shoppingcart.service.shoppingService;
 
 @Controller
-public class ShoppingOnlineSomeUtilities {
+public class ShoppingOnlineSomeUtilitiesController {
 	public static final String CONNEXION = "Connexion to your on line store";
 	public static final String BASKET = "Basket Breakdown";
 	public static final String NEWUSER = "Choose your profil";
@@ -51,13 +51,13 @@ public class ShoppingOnlineSomeUtilities {
 		model.addAttribute("basketSize", basketSize);
 		model.addAttribute("basket", BASKET);
 
-		return "shoppingonlinehomeclient";
+		return "shoppingonlinehomeadmin";
 	}
 	
 	@RequestMapping(value = "/connect", method = RequestMethod.GET)
 	public String getShoppingOnlineHomeClient(Model model, HttpServletRequest request) {
 		model.addAttribute("connexion", CONNEXION);
-		return "shoppingonlinehomeclient";
+		return "shoppingonlinehomeadmin";
 	}
 
 	@RequestMapping(value = "/showbasket", method = RequestMethod.GET)

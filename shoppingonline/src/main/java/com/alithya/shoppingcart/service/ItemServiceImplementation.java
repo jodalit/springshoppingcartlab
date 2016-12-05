@@ -1,4 +1,4 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,8 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.stereotype.Service;
 
-import com.formatiointerne.springmvc.pratiq1.Conversion.ConvertStringToDouble;
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
+import com.alithya.shoppingcart.model.Item;
 
 @Service
 public class ItemServiceImplementation implements ItemService {

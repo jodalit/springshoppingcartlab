@@ -1,11 +1,10 @@
-package com.formatiointerne.springmvc.pratiq1.tests.services;
+package com.alithya.shoppingcart.test.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 
 import java.time.LocalDate;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,13 +15,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.formatiointerne.springmvc.pratiq1.configurations.MyDispatcherServlet;
-import com.formatiointerne.springmvc.pratiq1.configurations.MyWebAppContextConfig;
-import com.formatiointerne.springmvc.pratiq1.datamodels.Person;
-import com.formatiointerne.springmvc.pratiq1.services.ServicePersonImplementation;
+import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
+import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
+import com.alithya.shoppingcart.model.Person;
+import com.alithya.shoppingcart.service.ServicePersonImplementation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={MyDispatcherServlet.class, MyWebAppContextConfig.class})
+@ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
 public class ServicePersonImplementationTest {
 	private ServicePersonImplementation servicePerson;
@@ -37,25 +36,13 @@ public class ServicePersonImplementationTest {
 		request.setParameter("personPassword", "admin");
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		servicePerson = null;
-		request = null;
-	}
-
 	@Test
-	public void verifyAllServices_areNotNull(){
-		assertNotNull(servicePerson);
-		assertNotNull(request);
-	}
-
-	@Test
-	public void verifySetOfPeople() {
+	public void verifySetOfPeopleNotNull() {
 		assertNotNull(servicePerson.getPersons());
 	}
 	
 	@Test
-	public void testGetPersonByConnexionPassword_when_notEmptyStrings() {
+	public void testGetPersonByConnexionPasswordNotEmptyStringEquals() {
 		String connexion = "admin";
 		String password = "admin";
 		Person p = new Person(Long.valueOf(2), "admin", null, LocalDate.now(), null, null, connexion, password, 1);//"admin", "admin", 1);
@@ -66,10 +53,8 @@ public class ServicePersonImplementationTest {
 	}
 	
 	@Test
-	public void testGetPersonByConnexionPassword_when_anyString() {
-		
+	public void testGetPersonByConnexionPasswordAnyStringNotEquals() {
 		Person p = new Person(Long.valueOf(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
-		
 		Person person = servicePerson.getPersonByConnexionPassword(anyString(), anyString());
 		assertNotEquals(p, person);
 		

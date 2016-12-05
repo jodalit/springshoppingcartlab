@@ -1,9 +1,9 @@
-package com.formatiointerne.springmvc.pratiq1.services;
+package com.alithya.shoppingcart.service;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
+import com.alithya.shoppingcart.model.Item;
 
 public interface ItemService {
 	public Item getItemById(Long id);

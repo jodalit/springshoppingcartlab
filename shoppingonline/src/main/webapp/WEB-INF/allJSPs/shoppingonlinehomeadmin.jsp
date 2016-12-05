@@ -610,8 +610,6 @@
 		    border-radius :15px;
 		}
     
-    
-    
     </style>
 </head>
 <body>

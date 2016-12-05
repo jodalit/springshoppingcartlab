@@ -1,20 +1,15 @@
-package com.formatiointerne.springmvc.pratiq1.tests.controllers;
+package com.alithya.shoppingcart.test.controller;
 
-import static org.hamcrest.CoreMatchers.isA;
+
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyCollection;
-import static org.mockito.Matchers.anyMap;
 import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,46 +19,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.ui.ModelMap;
 
-import com.formatiointerne.springmvc.pratiq1.configurations.MyDispatcherServlet;
-import com.formatiointerne.springmvc.pratiq1.configurations.MyWebAppContextConfig;
-import com.formatiointerne.springmvc.pratiq1.controllers.ShoppingOnlineHome;
-import com.formatiointerne.springmvc.pratiq1.datamodels.Item;
-import com.formatiointerne.springmvc.pratiq1.services.ItemService;
-import com.formatiointerne.springmvc.pratiq1.services.ItemServiceImplementation;
+import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
+import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
+import com.alithya.shoppingcart.controller.ShoppingOnlineHomeController;
+import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.service.ItemService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={MyDispatcherServlet.class, MyWebAppContextConfig.class})
+@ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
-public class ShoppingOnlineHomeTest {
-	@Autowired
-	private ItemService itemService;
-		
+public class ShoppingOnlineHomeControllerTest {
 	@Autowired 
 	MockHttpServletRequest request;
 	
 	@Mock
 	private ItemService itemServiceMock;
-	private ShoppingOnlineHome home;
+	private ShoppingOnlineHomeController home;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		home = new ShoppingOnlineHome();
+		home = new ShoppingOnlineHomeController();
 		home.setItemService(itemServiceMock);
 	}
 	
-	/*@Test
-	public void verifyAllServices_areNotNull(){
-		assertNotNull(itemService);
-	} 
-	
 	@Test
-	public void verifyAllMockServices_areNotNull(){
-		assertNotNull(itemServiceMock);
-	}*/
-	
-	@Test
-	public void verifyGoShoppingOnlineHome_returnNamePage() {
+	public void verifyGoShoppingOnlineHomeReturnNamePage() {
 		Map<Long, Item> items = new HashMap<>();
 		when(itemServiceMock.getItems()).thenReturn(items);
 		ModelMap model = new ModelMap();
@@ -71,6 +52,5 @@ public class ShoppingOnlineHomeTest {
 		assertNotNull(pagename);
 		assertEquals("shoppingonlinehome", pagename);
 	}
-	
-	
+		
 }
