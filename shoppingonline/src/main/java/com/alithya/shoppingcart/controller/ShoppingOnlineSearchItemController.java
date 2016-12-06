@@ -24,6 +24,7 @@ import com.alithya.shoppingcart.service.shoppingService;
 @Controller
 @Scope("session")
 public class ShoppingOnlineSearchItemController {
+	public static final String SHOPPING_ONLINE_SEARCH_RESULT = "shoppingonlinesearchresult";
 	public static final String RESULTSEARCHTITLE ="Search result";
 	public static final String NUMBERITEMS ="Search result";
 	@Autowired
@@ -35,7 +36,7 @@ public class ShoppingOnlineSearchItemController {
 	public String getSearchItem(HttpServletRequest request){
 		request.getSession().setAttribute("resultSearch", RESULTSEARCHTITLE);
 		
-		return "shoppingonlinesearchresult";
+		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 	
 	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.POST)
@@ -51,7 +52,7 @@ public class ShoppingOnlineSearchItemController {
 		request.getSession().setAttribute("itemsforname", itemsforname);
 		request.getSession().setAttribute("sizeitemsforname", sizeitemsforname);
 		
-		return "shoppingonlinesearchresult";
+		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 
 	public void setItemService(ItemService itemService) {

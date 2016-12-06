@@ -13,6 +13,12 @@ import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
 public class ShoppingOnlineConnexionController {
+	public static final String REDIRECT = "redirect:/";
+
+	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
+
+	public static final String SHOPPING_ONLINE_HOME_SUPERADMIN = "shoppingonlinehomesuperadmin";
+
 	public static final String ALLPEOPLE = "All people";
 
 	@Autowired
@@ -26,27 +32,17 @@ public class ShoppingOnlineConnexionController {
 					servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getConnexionname());
 
 			if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 1)
-				return "shoppingonlinehomeadmin"; // admin
+				return SHOPPING_ONLINE_HOME_ADMIN; // admin
 			// TODO unfinished feature please refer to JIRA task xyz
 			else if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 0)
-				return "shoppingonlinehomesuperadmin"; // super admin
+				return SHOPPING_ONLINE_HOME_SUPERADMIN; // super admin
 		}
 
-		return "redirect:/";
+		return REDIRECT;
 	}
 
 	public void setServicePerson(ServicePerson servicePerson) {
 		this.servicePerson = servicePerson;
 	}
-
-	// TODO This feature will be enabled during Spring Security exercise
-	/*
-	 * @RequestMapping(value="/listpeople", method=RequestMethod.GET) public
-	 * String getAllPeople(ModelMap model, HttpServletRequest request){
-	 * model.addAttribute("allpeople", ALLPEOPLE);
-	 * request.getSession().setAttribute("people", servicePerson.getPersons());
-	 * 
-	 * return "shoppingonlinelistofallpeople"; }
-	 */
-
+	
 }

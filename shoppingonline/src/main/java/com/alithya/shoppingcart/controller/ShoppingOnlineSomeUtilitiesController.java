@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,14 @@ import com.alithya.shoppingcart.service.shoppingService;
 
 @Controller
 public class ShoppingOnlineSomeUtilitiesController {
+	public static final String SHOPPING_ONLINE_BASKET_RECEIVED = "shoppingonlinebasketreceived";
+	public static final String REDIRECT = "redirect:/";
+	public static final String SHOPPING_ONLINE_SEARCH_RESULT = "shoppingonlinesearchresult";
+	public static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
+	public static final String SHOPPING_ONLINE_NEWUSER = "shoppingonlinenewuser";
+	public static final String SHOPPING_ONLINE_BASKET = "shoppingonlinebasket";
+	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
+	public static final String SHOPPING_ONLINE_CONNEXION = "shoppingonlineconnexion";
 	public static final String CONNEXION = "Connexion to your on line store";
 	public static final String BASKET = "Basket Breakdown";
 	public static final String NEWUSER = "Choose your profil";
@@ -40,77 +49,76 @@ public class ShoppingOnlineSomeUtilitiesController {
 	
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
-	public String getConnexion(Model model, HttpServletRequest request) {
+	public String getConnexion(ModelMap model, HttpServletRequest request) {
 		model.addAttribute("connexion", CONNEXION);
-		return "shoppingonlineconnexion";
+		return SHOPPING_ONLINE_CONNEXION;
 	}
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.POST)
-	public String sumitConnexion(Model model) {
+	public String sumitConnexion(ModelMap model) {
 		int basketSize = 1;
 		model.addAttribute("basketSize", basketSize);
 		model.addAttribute("basket", BASKET);
 
-		return "shoppingonlinehomeadmin";
+		return SHOPPING_ONLINE_HOME_ADMIN;
 	}
 	
 	@RequestMapping(value = "/connect", method = RequestMethod.GET)
-	public String getShoppingOnlineHomeClient(Model model, HttpServletRequest request) {
+	public String getShoppingOnlineHomeAdmin(ModelMap model, HttpServletRequest request) {
 		model.addAttribute("connexion", CONNEXION);
-		return "shoppingonlinehomeadmin";
+		return SHOPPING_ONLINE_HOME_ADMIN;
 	}
 
 	@RequestMapping(value = "/showbasket", method = RequestMethod.GET)
 	public String getBasket() {
-		return "shoppingonlinebasket";
+		return SHOPPING_ONLINE_BASKET;
 	}
 
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
-	public String getNewUser(Model model) {
+	public String getNewUser(ModelMap model) {
 		model.addAttribute("newuser", NEWUSER);
-		return "shoppingonlinenewuser";
+		return SHOPPING_ONLINE_NEWUSER;
 	}
 
 	@RequestMapping("/addtobasket/{itemId}")
 	public String addToBasket(@PathVariable Long itemId, HttpServletRequest request) {
 		infoBasket(itemId, request);
-		return "shoppingonlinehome";
+		return SHOPPING_ONLINE_HOME;
 	}
 	
 	@RequestMapping("/addtobasketfromresultsearch/{itemId}")
 	public String addToBasketFromResultSearch(@PathVariable Long itemId, HttpServletRequest request) {
 		infoBasket(itemId, request);
-		return "shoppingonlinesearchresult";
+		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 	
 	@RequestMapping("/payitems")
-	private String payItems(HttpServletRequest request) {
+	public String payItems(HttpServletRequest request) {
 		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
 		
-		if (basket==null){
-			return "redirect:/";
-		}
+		if (basket==null)
+			return REDIRECT;
 		
-		shoppingService.removeItemsToBasket();
+		if (!shoppingService.removeItemsToBasket())
+			return REDIRECT;
+		
 		request.getSession().setAttribute("basket", null);
 		request.getSession().setAttribute("basketsize", 0);
 		request.getSession().setAttribute("baskettotal", 0);
 		
-		return "shoppingonlinebasketreceived";
+		return SHOPPING_ONLINE_BASKET_RECEIVED;
 	}
 	
 	@RequestMapping("/removefrombasket/{itemId}")
-	private String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
+	public String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
 		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
 		
-		if (basket==null){
-			return "redirect:/";
-		}
+		if (basket==null)
+			return REDIRECT;
 		
+		if (!shoppingService.removeItemToBasket(itemId))
+			return REDIRECT;
 		
-		boolean b = false;
-		int i = 0;
-
 		Iterator<Item> iterat = basket.iterator(); 
 		while (iterat.hasNext()) {
 			Item item = (Item) iterat.next();
@@ -126,11 +134,11 @@ public class ShoppingOnlineSomeUtilitiesController {
 		request.getSession().setAttribute("basketsize",basket.size());	
 		request.getSession().setAttribute("baskettotal", shoppingService.getTotalBasket());
 	
-		return "shoppingonlinebasket";
+		return SHOPPING_ONLINE_BASKET;
 	}
 	
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
-	public String getDeconnexion(Model model, HttpServletRequest request, WebRequest webrequest, SessionStatus sessionstatus) {
+	public String getDeconnexion(ModelMap model, HttpServletRequest request, WebRequest webrequest, SessionStatus sessionstatus) {
 		
 		request.getSession().setAttribute("basketsize", 0);
 		request.getSession().setAttribute("baskettotal", 0);
@@ -150,15 +158,24 @@ public class ShoppingOnlineSomeUtilitiesController {
 		webrequest.removeAttribute("basket", WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute("people", WebRequest.SCOPE_SESSION);
 		
-		return "redirect:/";
+		return REDIRECT;
 	}
 	
 	public void infoBasket(Long itemId, HttpServletRequest request){
-		shoppingService.addItemToBasket(itemId);
-		request.getSession().setAttribute("basket", shoppingService.getBasket());
-		request.getSession().setAttribute("basketsize", shoppingService.getBasket().size());
-		request.getSession().setAttribute("baskettotal", shoppingService.getTotalBasket());
-		
+		if (shoppingService.addItemToBasket(itemId)){
+			request.getSession().setAttribute("basket", shoppingService.getBasket());
+			request.getSession().setAttribute("basketsize", shoppingService.getBasket().size());
+			request.getSession().setAttribute("baskettotal", shoppingService.getTotalBasket());
+		}
 	}
+
+	public void setShoppingService(shoppingService shoppingService) {
+		this.shoppingService = shoppingService;
+	}
+
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+	
 	
 }

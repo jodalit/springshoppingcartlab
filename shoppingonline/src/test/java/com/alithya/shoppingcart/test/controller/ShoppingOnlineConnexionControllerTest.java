@@ -30,7 +30,6 @@ import com.alithya.shoppingcart.service.ServicePerson;
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
 public class ShoppingOnlineConnexionControllerTest {
-	
 	@Mock
 	private ServicePerson servicePersonMock;
 	@Autowired
@@ -45,12 +44,6 @@ public class ShoppingOnlineConnexionControllerTest {
 		connexion.setServicePerson(servicePersonMock);
 	}
  
-	 @After
-	public void tearDown() throws Exception {
-		 connexion=null;
-		 request = null;
-	}
-	
 	@Test //testGetshoppingonlinehomeclient()
 	public void verifyGetshoppingonlinehomeadminReturnValidPage(){
 		when(servicePersonMock.getPersonByConnexionPassword(anyString(), anyString())).thenReturn(new Person());
@@ -58,19 +51,7 @@ public class ShoppingOnlineConnexionControllerTest {
 		request.setParameter("personPassword", "admin");
 		String result = connexion.getshoppingonlinehomeadmin(request.getParameter("personConnexion"), request.getParameter("personPassword"), request);
 		assertNotNull(result);
-		assertSame("displays super administrator session", "shoppingonlinehomesuperadmin", result);
-	}
-	
-	@Test //testGetshoppingonlinehomeclient()
-	public void verifySuccessfulAdminLogin(){
-		Set<Person> persons = new HashSet<>();
-		when(servicePersonMock.getPersons()).thenReturn(persons);
-		Person person = new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1);
-		when(servicePersonMock.getPersonByConnexionPassword("admin", "admin")).thenReturn(person);
-		String result = connexion.getshoppingonlinehomeadmin("admin", "admin", request);
-		System.out.println("result : " + result);
-		assertNotNull(result);
-		assertSame("displays administrator session", "shoppingonlinehomeclient", result);
+		assertSame("displays super administrator session", connexion.SHOPPING_ONLINE_HOME_SUPERADMIN, result);
 	}
 	
 	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
@@ -79,8 +60,8 @@ public class ShoppingOnlineConnexionControllerTest {
 		String result = connexion.getshoppingonlinehomeadmin(anyString(), anyString(), request);
 		System.out.println("result : " + result);
 		assertNotNull(result);
-		assertNotSame("displays page administrator", "shoppingonlinehomeclient", result);
-		assertSame("displays internaute session", "redirect:/", result);
+		assertNotSame("displays page administrator", connexion.SHOPPING_ONLINE_HOME_SUPERADMIN, result);
+		assertSame("displays internaute session", connexion.REDIRECT, result);
 	}
 	
 	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
@@ -89,7 +70,7 @@ public class ShoppingOnlineConnexionControllerTest {
 		String result = connexion.getshoppingonlinehomeadmin(anyString(), anyString(), request);
 		System.out.println("result : " + result);
 		assertNotNull(result);
-		assertSame("displays internaute session", "redirect:/", result);
+		assertSame("displays internaute session", connexion.REDIRECT, result);
 	}
 	
 }

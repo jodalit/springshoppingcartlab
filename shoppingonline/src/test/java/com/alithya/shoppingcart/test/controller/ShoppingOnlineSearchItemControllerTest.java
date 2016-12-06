@@ -45,15 +45,21 @@ public class ShoppingOnlineSearchItemControllerTest {
 		searchItem.setShoppingService(shoppingServiceMock);
 	}
 
-	//TODO you should have 2 tests, one for get and one for post
 	@Test
 	public void testGetResultSearchItemRetunValidPage() {
 		String itemToFind =  (String)request.getAttribute("itemNameToFind");
 		when(itemServiceMock.getItemByNameDescription(itemToFind)).thenReturn(new HashSet<>());
 		String result = searchItem.getResultSearchItem(itemToFind, request);
 		assertNotNull(result);
-		assertSame("Display result page of search","shoppingonlinesearchresult", result);
+		assertSame("Display result page of search", searchItem.SHOPPING_ONLINE_SEARCH_RESULT, result);
 		// TODO try to test the values of the following items as per how they
 		// are filled in the controller:
+	}
+	
+	@Test
+	public void testGetSearchItemRetunValidPage() {
+		String result = searchItem.getSearchItem(request);
+		assertNotNull(result);
+		assertSame(searchItem.SHOPPING_ONLINE_SEARCH_RESULT, result);
 	}
 }

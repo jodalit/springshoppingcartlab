@@ -12,6 +12,7 @@ import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
 public class ShoppingOnlineHomeController {
+	public static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
 	public static final String WELCOMETITLE ="Welcome to our online IT store !!!";
 	public static final String WELCOMEDECLARATION ="Welcome !!!";
 	@Autowired
@@ -24,7 +25,7 @@ public class ShoppingOnlineHomeController {
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);
 		
-		return "shoppingonlinehome";
+		return SHOPPING_ONLINE_HOME;
 	}
 
 	public void setItemService(ItemService itemService) {

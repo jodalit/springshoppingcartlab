@@ -26,15 +26,17 @@ public class ShoppingServiceImplementation implements shoppingService {
 	}
 
 	@Override
-	public void addItemToBasket(Long itemId) {
+	public boolean addItemToBasket(Long itemId) {
 		Item i = itemService.getItemById(itemId);
 		
 		if ( i.getPrice().doubleValue()!=price ){
 			 price =i.getPrice().doubleValue();
 			 totalBasket += i.getPrice().doubleValue();
 			 basket.add(i);
+			 return true;
 		}
-			
+		
+		return false;
 	}
 	
 	@Override
@@ -54,21 +56,28 @@ public class ShoppingServiceImplementation implements shoppingService {
 	}
 	
 	@Override
-	public void removeItemToBasket(Long itemId) {
+	public boolean removeItemToBasket(Long itemId) {
 		if ( itemService.getItemById(itemId).getPrice().doubleValue()!=pricetoberemoved ){			
 			pricetoberemoved = itemService.getItemById(itemId).getPrice().doubleValue();
 			totalBasket = totalBasket - itemService.getItemById(itemId).getPrice().doubleValue();
 			basket.remove(itemId);
+			
+			if (totalBasket<1)
+				totalBasket =0.0;
+			
+			return true;
 		}
 		
-		if (totalBasket<1)
-			totalBasket =0.0;
-			
+		return false;	
 	}
 	
 	@Override
-	public void removeItemsToBasket() {
-		basket.clear();
+	public boolean removeItemsToBasket() {
+		if (this.getBasket().isEmpty())
+			return false;
+		
+		getBasket().clear();
+		return true;
 	}
 
 	@Override

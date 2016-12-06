@@ -29,6 +29,8 @@ import com.alithya.shoppingcart.service.ItemService;
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
 public class ShoppingOnlineHomeControllerTest {
+	private static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
+
 	@Autowired 
 	MockHttpServletRequest request;
 	
@@ -50,7 +52,7 @@ public class ShoppingOnlineHomeControllerTest {
 		ModelMap model = new ModelMap();
 		String pagename = home.goShoppingOnlineHome(model, request);
 		assertNotNull(pagename);
-		assertEquals("shoppingonlinehome", pagename);
+		assertEquals(SHOPPING_ONLINE_HOME, pagename);
 	}
 		
 }
