@@ -7,7 +7,9 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		
-		return null;
+		return new Class[]{
+				ShoppingOnlineRootApplicationContextConfig.class
+		};
 	}
 
 	@Override
