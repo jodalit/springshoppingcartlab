@@ -96,7 +96,7 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value="/removeitem/{itemId}", method=RequestMethod.GET)
 	public String removeDetailItem(@PathVariable("itemId") Long itemId, ModelMap model, HttpServletRequest request){
 		if (itemService.removeItem(itemId)){
-			model.addAttribute("item", itemService.getItemById(itemId));
+			model.addAttribute("item", null);
 			request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
 		}
 		

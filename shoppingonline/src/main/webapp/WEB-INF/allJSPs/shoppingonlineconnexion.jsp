@@ -652,9 +652,7 @@
 						<button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
 						<br />
 					</fieldset>
-					<br /> <br /> <a id="anewuser"
-						href="<spring:url value='/newuser' />">New user, get your
-						account here !!!</a> <br />
+					<br />  <br />
 				</form>
 			</div>
             

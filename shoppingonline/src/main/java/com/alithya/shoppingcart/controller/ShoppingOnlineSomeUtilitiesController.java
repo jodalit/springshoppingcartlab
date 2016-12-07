@@ -47,7 +47,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 	@Autowired
 	private ItemService itemService;
 	
-
 	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
 	public String getConnexion(ModelMap model, HttpServletRequest request) {
 		model.addAttribute("connexion", CONNEXION);
