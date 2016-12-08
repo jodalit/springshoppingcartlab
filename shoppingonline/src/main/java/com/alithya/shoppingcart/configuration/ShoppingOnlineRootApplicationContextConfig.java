@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -19,12 +20,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan({"com.alithya.shoppingcart"})
+@PropertySource("classpath:/property/shoppingcart_info_db.properties")
 @EnableTransactionManagement
 public class ShoppingOnlineRootApplicationContextConfig {
 	@Autowired
 	private Environment env;
 	
-	@Bean(name="dataSource")
+	@Bean(name="dataSource", destroyMethod="shutdown")
 	@Profile("test")
 	public DataSource dataSourceForTest(){
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -33,18 +35,6 @@ public class ShoppingOnlineRootApplicationContextConfig {
 				.setType(EmbeddedDatabaseType.DERBY)
 				.addScript("db/sql/insert.sql")
 				.build();
-	}
-	
-	@Bean(name="dataSource")
-	@Profile("prod")
-	public DataSource dataSourceForProduction(){
-		BasicDataSource dataSource =new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("db.driver"));
-		dataSource.setUrl(env.getProperty("db.url"));
-		dataSource.setUsername(env.getProperty("db.user"));
-		dataSource.setPassword(env.getProperty("db.pass"));
-	
-		return dataSource;
 	}
 	
 	@Bean
@@ -60,11 +50,18 @@ public class ShoppingOnlineRootApplicationContextConfig {
 		return new DataSourceTransactionManager(dataSourceForTest());
 	}
 	
-	@Bean
+	
+	@Bean(name="dataSource")
 	@Profile("prod")
-	public NamedParameterJdbcTemplate getJdbcTemplateForProduction(){
+	public DataSource dataSourceForProduction(){
+		BasicDataSource dataSource =new BasicDataSource();
+		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername(env.getProperty("jdbc.user"));
+		dataSource.setPassword(env.getProperty("jdbc.pass"));
 		
-		return new NamedParameterJdbcTemplate(dataSourceForProduction());
+		System.out.println("dataSourceForProduction() : allo");
+		return dataSource;
 	}
 	
 	@Bean(name = "transactionManager")
@@ -73,4 +70,12 @@ public class ShoppingOnlineRootApplicationContextConfig {
 		
 		return new DataSourceTransactionManager(dataSourceForProduction());
 	}
+	
+	@Bean
+	@Profile("prod")
+	public NamedParameterJdbcTemplate getJdbcTemplateForProduction(){
+		
+		return new NamedParameterJdbcTemplate(dataSourceForProduction());
+	}
+
 }

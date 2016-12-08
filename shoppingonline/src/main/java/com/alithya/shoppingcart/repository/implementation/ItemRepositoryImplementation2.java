@@ -7,11 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
 import javax.swing.tree.RowMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,20 +18,11 @@ import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Repository
-public class ItemRepositoryImplementation implements ItemRepository {
+public class ItemRepositoryImplementation2 implements ItemRepository {
 	public static final String SELECT_FROM_ITEM = "SELECT * FROM Item";
-	private static int nextId = 4;
-	
-	private JdbcTemplate jdbcTemplateShoppingCart;
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	public ItemRepositoryImplementation (DataSource dataSouce) {
-		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
-	}
-	
 		
 	@Override
 	public List<Item> getAllItems() {
