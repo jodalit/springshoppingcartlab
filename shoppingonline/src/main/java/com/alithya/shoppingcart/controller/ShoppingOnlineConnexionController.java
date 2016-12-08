@@ -13,29 +13,28 @@ import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
 public class ShoppingOnlineConnexionController {
+	public static final int USER_PROFILE = 1;
+
 	public static final String REDIRECT = "redirect:/";
 
 	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
-
-	public static final String SHOPPING_ONLINE_HOME_SUPERADMIN = "shoppingonlinehomesuperadmin";
 
 	public static final String ALLPEOPLE = "All people";
 
 	@Autowired
 	ServicePerson servicePerson;
 
-	@RequestMapping(value = "/makeconnexion", method = RequestMethod.POST)
-	public String getshoppingonlinehomeadmin(@RequestParam("personConnexion") String personConnexion,
+	@RequestMapping(value = "/makeconnection", method = RequestMethod.POST)
+	public String getshoppingonlinehomeadmin(@RequestParam("personConnectionName") String personConnectionName,
 			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
-		if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword) != (null)) {
+		
+		if (servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword) != null) {
 			request.getSession().setAttribute("connexionname",
-					servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getConnexionname());
+					servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword).getPersonConnectionName());
 
-			if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 1)
-				return SHOPPING_ONLINE_HOME_ADMIN; // admin
-			// TODO unfinished feature please refer to JIRA task xyz
-			else if (servicePerson.getPersonByConnexionPassword(personConnexion, personPassword).getProfile() == 0)
-				return SHOPPING_ONLINE_HOME_SUPERADMIN; // super admin
+			if (servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword).getProfile() == USER_PROFILE)
+				return SHOPPING_ONLINE_HOME_ADMIN; 
+			
 		}
 
 		return REDIRECT;

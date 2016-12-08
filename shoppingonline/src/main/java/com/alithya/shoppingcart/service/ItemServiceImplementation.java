@@ -1,8 +1,5 @@
 package com.alithya.shoppingcart.service;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

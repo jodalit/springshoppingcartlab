@@ -51,7 +51,7 @@ public class ShoppingOnlineConnexionControllerTest {
 		request.setParameter("personPassword", "admin");
 		String result = connexion.getshoppingonlinehomeadmin(request.getParameter("personConnexion"), request.getParameter("personPassword"), request);
 		assertNotNull(result);
-		assertSame("displays super administrator session", connexion.SHOPPING_ONLINE_HOME_SUPERADMIN, result);
+		assertSame("displays super administrator session", connexion.SHOPPING_ONLINE_HOME_ADMIN, result);
 	}
 	
 	@Test //testGetshoppingonlinehomeclient() for invalid credentials 
@@ -60,7 +60,7 @@ public class ShoppingOnlineConnexionControllerTest {
 		String result = connexion.getshoppingonlinehomeadmin(anyString(), anyString(), request);
 		System.out.println("result : " + result);
 		assertNotNull(result);
-		assertNotSame("displays page administrator", connexion.SHOPPING_ONLINE_HOME_SUPERADMIN, result);
+		assertNotSame("displays page administrator", connexion.SHOPPING_ONLINE_HOME_ADMIN, result);
 		assertSame("displays internaute session", connexion.REDIRECT, result);
 	}
 	

@@ -27,7 +27,7 @@ public  class ServicePersonImplementation implements ServicePerson {
 	@Override
 	public Person getPersonByConnexionPassword(String connexion, String password) {
 		for (Person person : persons) {
-			if (person.getConnexionname().equals(connexion) && person.getPassword().equals(password)){
+			if (person.getPersonConnectionName().equals(connexion) && person.getPersonPassword().equals(password)){
 				return person;
 			}
 		}
