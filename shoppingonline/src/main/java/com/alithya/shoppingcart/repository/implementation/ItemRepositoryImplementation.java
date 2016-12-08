@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import javax.swing.tree.RowMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,6 +21,7 @@ import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Repository
+//@Profile("prod")
 public class ItemRepositoryImplementation implements ItemRepository {
 	public static final String SELECT_FROM_ITEM = "SELECT * FROM Item";
 	private static int nextId = 4;
@@ -34,14 +36,21 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
 	}
 	
-		
-	@Override
+	
 	public List<Item> getAllItems() {
-		Map<String, Object> params = new HashMap<>();
+		/*Map<String, Object> params = new HashMap<>();
 		
 		List<Item> result = jdbcTemplate.query(SELECT_FROM_ITEM, params, new ItemMapper());
-		return result;
+		return result;*/
+		return jdbcTemplate.query(SELECT_FROM_ITEM, new ItemMapper());
 	}
+	
+	/*@Override
+	public List<Item> getAllItems() {
+		System.out.println("jdbcTemplateShoppingCart.query : " + jdbcTemplateShoppingCart.query(SELECT_FROM_ITEM, new ItemMapper()));
+		return jdbcTemplateShoppingCart.query(SELECT_FROM_ITEM, new ItemMapper());
+	}*/
+	
 	
 	private static final class ItemMapper implements org.springframework.jdbc.core.RowMapper<Item> {
 		public static final String ITEM_ID = "ITEMID";
@@ -62,5 +71,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 			return item;
 		}
 		
-	}
+	} 
+	
+	
 }

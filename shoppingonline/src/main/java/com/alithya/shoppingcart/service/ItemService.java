@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.repository.ItemRepository;
 
 public interface ItemService {
 	public Item getItemById(Long id);
@@ -22,5 +23,7 @@ public interface ItemService {
 	public void setItems(Map<Long, Item> items);
 
 	public Map<Long, Item> getItems();
+
+	void setItemRepository(ItemRepository itemRepository);
 
 }

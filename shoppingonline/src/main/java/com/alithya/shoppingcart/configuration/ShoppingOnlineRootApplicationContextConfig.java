@@ -19,14 +19,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan({"com.alithya.shoppingcart"})
+@ComponentScan({"com.alithya.shoppingcart.repository"})
 @PropertySource("classpath:/property/shoppingcart_info_db.properties")
 @EnableTransactionManagement
 public class ShoppingOnlineRootApplicationContextConfig {
 	@Autowired
 	private Environment env;
 	
-	@Bean(name="dataSource", destroyMethod="shutdown")
+	/*@Bean(name="dataSource", destroyMethod="shutdown")
 	@Profile("test")
 	public DataSource dataSourceForTest(){
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -50,29 +50,30 @@ public class ShoppingOnlineRootApplicationContextConfig {
 		return new DataSourceTransactionManager(dataSourceForTest());
 	}
 	
+	*/
 	
 	@Bean(name="dataSource")
-	@Profile("prod")
+	//@Profile("prod")
 	public DataSource dataSourceForProduction(){
 		BasicDataSource dataSource =new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
 		dataSource.setUrl(env.getProperty("jdbc.url"));
-		dataSource.setUsername(env.getProperty("jdbc.user"));
-		dataSource.setPassword(env.getProperty("jdbc.pass"));
+		dataSource.setUsername(env.getProperty("jdbc.username"));
+		dataSource.setPassword(env.getProperty("jdbc.password"));
 		
 		System.out.println("dataSourceForProduction() : allo");
 		return dataSource;
 	}
 	
 	@Bean(name = "transactionManager")
-	@Profile("prod")
+	//@Profile("prod")
 	public PlatformTransactionManager transactionManager(){
 		
 		return new DataSourceTransactionManager(dataSourceForProduction());
 	}
 	
 	@Bean
-	@Profile("prod")
+	//@Profile("prod")
 	public NamedParameterJdbcTemplate getJdbcTemplateForProduction(){
 		
 		return new NamedParameterJdbcTemplate(dataSourceForProduction());

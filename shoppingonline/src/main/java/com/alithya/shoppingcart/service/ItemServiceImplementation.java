@@ -23,9 +23,13 @@ import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.stereotype.Service;
 
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Service
 public class ItemServiceImplementation implements ItemService {
+	@Autowired
+	private ItemRepository itemRepository;
+	
 	private  Map<Long, Item> items = new HashMap<>();
 	
 	public int i=0;
@@ -46,7 +50,9 @@ public class ItemServiceImplementation implements ItemService {
 		items.put(6L, new Item(6L, "Alithya Item 12 orekj398", "Item Montréllllll irewItem 1", 69.11D));
 		items.put(7L, new Item(7L, "item 145", "Item orekj398 irewItem 1", 8.45D));
 		items.put(9L, new Item(9L, "alithya 589 item", "Item orekj398 irewItem 1", 6.12D));
-		items.put(11L, new Item(11L, "centre", "centre de formation", 6.12D));
+		items.put(11L, new Item(11L, "centre", "centre de formation", 6.12D));	
+		
+		//itemRepository.getAllItems().forEach(System.out::println);
 	}
 	
 	@Override
@@ -177,11 +183,17 @@ public class ItemServiceImplementation implements ItemService {
 	@Override
 	public  Map<Long, Item> getItems() {
 		return items;
+		//return new HashMap<>() itemRepository.getAllItems();
 	}
 	
 	@Override
 	public void setItems(Map<Long, Item> items) {
 		this.items = items;
+	}
+	
+	@Override
+	public void setItemRepository(ItemRepository itemRepository) {
+		this.itemRepository = itemRepository;
 	}
 	
 }

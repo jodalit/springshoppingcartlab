@@ -7,10 +7,14 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.repository.ItemRepository;
+import com.alithya.shoppingcart.repository.implementation.ItemRepositoryImplementation;
 
 @Service
+@Transactional
 public class ShoppingServiceImplementation implements shoppingService {
 	private Set<Item> basket = new HashSet<>();
 	private double totalBasket=0.0;
@@ -18,11 +22,14 @@ public class ShoppingServiceImplementation implements shoppingService {
 	private double pricetoberemoved = 0.0;
 	
 	@Autowired
+	private ItemRepository itemRepository;
+	
+	@Autowired
 	ItemServiceImplementation itemService;
 
 	@Override
 	public List<Item> getAllItems() {
-		return Collections.list(Collections.enumeration(itemService.getItems().values())) ;
+		return itemRepository.getAllItems() ;/*Collections.list(Collections.enumeration(itemService.getItems().values())) ;*/
 	}
 
 	@Override
