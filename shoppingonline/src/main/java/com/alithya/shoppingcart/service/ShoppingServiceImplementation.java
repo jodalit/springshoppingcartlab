@@ -14,7 +14,6 @@ import com.alithya.shoppingcart.repository.ItemRepository;
 import com.alithya.shoppingcart.repository.implementation.ItemRepositoryImplementation;
 
 @Service
-@Transactional
 public class ShoppingServiceImplementation implements shoppingService {
 	private Set<Item> basket = new HashSet<>();
 	private double totalBasket=0.0;
@@ -29,7 +28,7 @@ public class ShoppingServiceImplementation implements shoppingService {
 
 	@Override
 	public List<Item> getAllItems() {
-		return itemRepository.getAllItems() ;/*Collections.list(Collections.enumeration(itemService.getItems().values())) ;*/
+		return itemRepository.getAllItems() ; 
 	}
 
 	@Override

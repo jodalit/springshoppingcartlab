@@ -26,34 +26,7 @@ public class ShoppingOnlineRootApplicationContextConfig {
 	@Autowired
 	private Environment env;
 	
-	/*@Bean(name="dataSource", destroyMethod="shutdown")
-	@Profile("test")
-	public DataSource dataSourceForTest(){
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		
-		return builder
-				.setType(EmbeddedDatabaseType.DERBY)
-				.addScript("db/sql/insert.sql")
-				.build();
-	}
-	
-	@Bean
-	@Profile("test")
-	public NamedParameterJdbcTemplate getJdbcTemplateForTes(){	
-		return new NamedParameterJdbcTemplate(dataSourceForTest());
-	}
-	
-	@Bean(name = "transactionManager")
-	@Profile("test")
-	public PlatformTransactionManager transactionManagerForTest(){
-		
-		return new DataSourceTransactionManager(dataSourceForTest());
-	}
-	
-	*/
-	
 	@Bean(name="dataSource")
-	//@Profile("prod")
 	public DataSource dataSourceForProduction(){
 		BasicDataSource dataSource =new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
@@ -61,19 +34,16 @@ public class ShoppingOnlineRootApplicationContextConfig {
 		dataSource.setUsername(env.getProperty("jdbc.username"));
 		dataSource.setPassword(env.getProperty("jdbc.password"));
 		
-		System.out.println("dataSourceForProduction() : allo");
 		return dataSource;
 	}
 	
 	@Bean(name = "transactionManager")
-	//@Profile("prod")
 	public PlatformTransactionManager transactionManager(){
 		
 		return new DataSourceTransactionManager(dataSourceForProduction());
 	}
 	
 	@Bean
-	//@Profile("prod")
 	public NamedParameterJdbcTemplate getJdbcTemplateForProduction(){
 		
 		return new NamedParameterJdbcTemplate(dataSourceForProduction());

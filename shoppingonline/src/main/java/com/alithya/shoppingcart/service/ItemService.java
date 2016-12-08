@@ -23,7 +23,9 @@ public interface ItemService {
 	public void setItems(Map<Long, Item> items);
 
 	public Map<Long, Item> getItems();
-
+	
+	public Map<Long, Item> itemsList();
+	
 	void setItemRepository(ItemRepository itemRepository);
-
+	
 }

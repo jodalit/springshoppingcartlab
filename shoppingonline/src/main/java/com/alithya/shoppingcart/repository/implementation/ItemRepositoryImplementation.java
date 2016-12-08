@@ -21,36 +21,18 @@ import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Repository
-//@Profile("prod")
 public class ItemRepositoryImplementation implements ItemRepository {
 	public static final String SELECT_FROM_ITEM = "SELECT * FROM Item";
-	private static int nextId = 4;
-	
-	private JdbcTemplate jdbcTemplateShoppingCart;
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	public ItemRepositoryImplementation (DataSource dataSouce) {
-		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
-	}
-	
-	
 	public List<Item> getAllItems() {
-		/*Map<String, Object> params = new HashMap<>();
+		Map<String, Object> params = new HashMap<>();
 		
 		List<Item> result = jdbcTemplate.query(SELECT_FROM_ITEM, params, new ItemMapper());
-		return result;*/
-		return jdbcTemplate.query(SELECT_FROM_ITEM, new ItemMapper());
+		return result;
 	}
-	
-	/*@Override
-	public List<Item> getAllItems() {
-		System.out.println("jdbcTemplateShoppingCart.query : " + jdbcTemplateShoppingCart.query(SELECT_FROM_ITEM, new ItemMapper()));
-		return jdbcTemplateShoppingCart.query(SELECT_FROM_ITEM, new ItemMapper());
-	}*/
-	
 	
 	private static final class ItemMapper implements org.springframework.jdbc.core.RowMapper<Item> {
 		public static final String ITEM_ID = "ITEMID";
@@ -71,6 +53,13 @@ public class ItemRepositoryImplementation implements ItemRepository {
 			return item;
 		}
 		
+	}
+
+	@Override
+	public boolean updateItem(Long itemId, String itemName, String itemDescription, String itemPrice,
+			String itemExpireDate) {
+		
+		return false;
 	} 
 	
 	

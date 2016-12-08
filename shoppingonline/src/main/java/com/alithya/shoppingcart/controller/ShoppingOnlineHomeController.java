@@ -17,15 +17,14 @@ public class ShoppingOnlineHomeController {
 	public static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
 	public static final String WELCOMETITLE ="Welcome to our online IT store !!!";
 	public static final String WELCOMEDECLARATION ="Welcome !!!";
+
 	@Autowired
 	private ItemService itemService;
-	@Autowired
-	private ItemRepository itemRepository;
 	
 	@RequestMapping("/") 
 	public String goShoppingOnlineHome(ModelMap model, HttpServletRequest request){
-		//request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
-		request.getSession().setAttribute("items", itemRepository.getAllItems());
+		
+		request.getSession().setAttribute("items", itemService.itemsList().values());
 		request.getSession().setAttribute("basketsize", 0);
 		model.addAttribute("welcomeTitle", WELCOMETITLE);
 		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);
