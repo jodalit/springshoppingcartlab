@@ -14,6 +14,9 @@ import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
 public class ShoppingOnlineHomeController {
+	public static final String MODEL_NAME_WELCOME_INFO = "welcomeDeclaration";
+	public static final String MODEL_NAME_WELCOME_TITLE = "welcomeTitle";
+	public static final String REQUESTMAPPING_HOME = "/";
 	public static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
 	public static final String WELCOMETITLE ="Welcome to our online IT store !!!";
 	public static final String WELCOMEDECLARATION ="Welcome !!!";
@@ -21,13 +24,13 @@ public class ShoppingOnlineHomeController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping("/") 
+	@RequestMapping(REQUESTMAPPING_HOME) 
 	public String goShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		
 		request.getSession().setAttribute("items", itemService.itemsList().values());
 		request.getSession().setAttribute("basketsize", 0);
-		model.addAttribute("welcomeTitle", WELCOMETITLE);
-		model.addAttribute("welcomeDeclaration", WELCOMEDECLARATION);
+		model.addAttribute(MODEL_NAME_WELCOME_TITLE, WELCOMETITLE);
+		model.addAttribute(MODEL_NAME_WELCOME_INFO, WELCOMEDECLARATION);
 		
 		return SHOPPING_ONLINE_HOME;
 	}

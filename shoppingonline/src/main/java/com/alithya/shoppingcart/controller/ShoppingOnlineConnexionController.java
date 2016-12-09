@@ -13,6 +13,8 @@ import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
 public class ShoppingOnlineConnexionController {
+	private static final String MODEL_NAME_CONNECTION_NAME = "connectionname";
+
 	public static final int USER_PROFILE = 1;
 
 	public static final String REDIRECT = "redirect:/";
@@ -29,7 +31,7 @@ public class ShoppingOnlineConnexionController {
 			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
 		
 		if (servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword) != null) {
-			request.getSession().setAttribute("connexionname",
+			request.getSession().setAttribute(MODEL_NAME_CONNECTION_NAME,
 					servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword).getPersonConnectionName());
 
 			if (servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword).getProfile() == USER_PROFILE)

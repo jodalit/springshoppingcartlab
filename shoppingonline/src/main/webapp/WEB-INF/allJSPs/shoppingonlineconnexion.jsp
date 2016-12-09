@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Connexion</title>
+    <title>Connection</title>
     <!--link href="CSS/default.css" rel="stylesheet" />
     
     <script src="Scripts/jquery-2.1.4.js"></script>
@@ -628,13 +628,13 @@
         </nav>
         
         <div id="main">
-            <h2>${connexion}</h2>
+            <h2>${connection }</h2>
             <hr />
             
             <div id="divimagepcple" class="divmain">
 				<form action='<spring:url value="/makeconnection"></spring:url>' method="post">
 					<fieldset>
-						<br /> <label for="personConnectionName">Connexion name</label><br /> <input
+						<br /> <label for="personConnectionName">Connection name</label><br /> <input
 							type="text" id="personConnectionName" name="personConnectionName" size="20"
 							maxlength="20" size="25"
 							placeholder="Enter your connexion name, ..." /><span
