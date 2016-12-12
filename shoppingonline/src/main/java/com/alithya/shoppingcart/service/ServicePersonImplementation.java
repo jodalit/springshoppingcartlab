@@ -1,48 +1,41 @@
 package com.alithya.shoppingcart.service;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alithya.shoppingcart.model.Person;
+import com.alithya.shoppingcart.repository.PersonRepository;
 
 @Service
 public  class ServicePersonImplementation implements ServicePerson {
-	private Set<Person> persons = new HashSet<>();
-	
-	public ServicePersonImplementation() {
-		fillPersons();
-	}
-
-	public void fillPersons(){
-		persons.add(new Person(new Long(2), "admin", null, LocalDate.now(), null, null, "admin", "admin", 1));
-		persons.add(new Person(new Long(3), "client", null, LocalDate.now(), null, null, "client", "client", 2));
-		persons.add(new Person(new Long(1), " super admin", null, LocalDate.now(), null, null, "super", "super", 0));
-	}
+	private int profile;
+	 
+	@Autowired
+	private PersonRepository personRepository;
 	
 	@Override
-	public Person getPersonByConnexionPassword(String connexion, String password) {
-		for (Person person : persons) {
-			if (person.getPersonConnectionName().equals(connexion) && person.getPersonPassword().equals(password)){
-				return person;
+	public boolean getPersonByConnexionNamePassword(String connectionName, String password) {
+		
+		boolean response = false; 
+		
+		for (Person person : personRepository.getAllPeople()) {
+			if (person.getPersonConnectionName().equals(connectionName) && person.getPersonPassword().equals(password)){
+				response = true;
+				setProfile(person.getProfile());
+				break;
 			}
 		}
-		return null;
-	}
-
-	@Override
-	public Set<Person> getPersons() {
-		return persons;
-	}
-
-	@Override
-	public void setPersons(Set<Person> persons) {
-		this.persons = persons;
+		
+		return response;
 	}
 	
+	@Override
+	public int getProfile() {
+		return profile;
+	}
 	
+	@Override
+	public void setProfile(int profile) {
+		this.profile = profile;
+	}
 }

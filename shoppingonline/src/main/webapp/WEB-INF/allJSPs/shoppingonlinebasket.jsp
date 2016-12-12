@@ -635,11 +635,11 @@
                 <c:choose>
                 	<c:when test="${not empty connectionname }">
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/deconnexion"></spring:url>'>Quit</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/deconnection"></spring:url>'>Quit</a></span>
                 	</c:when>
                 	<c:otherwise>
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connection"></spring:url>'>Connection</a></span>
 					</c:otherwise>
 	              </c:choose>                
             </div>
@@ -660,7 +660,7 @@
         </nav>
         
         <div id="main">
-        	<c:if test="${not empty connexionname}"><em>${connexionname}, hi!!!</em></c:if>
+        	<c:if test="${not empty connectionname}"><em>${connectionname}, hi!!!</em></c:if>
             <h2>Your current Basket</h2>
             <hr />
             <div id="divrecentitems1">

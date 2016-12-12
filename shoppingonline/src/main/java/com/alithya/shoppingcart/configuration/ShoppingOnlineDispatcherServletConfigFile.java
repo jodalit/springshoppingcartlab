@@ -4,6 +4,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+	public static final String URL_FOR_MAPPING = "/";
+
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		
@@ -23,7 +25,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	@Override
 	protected String[] getServletMappings() {
 		
-		return new String[]{"/"};
+		return new String[]{URL_FOR_MAPPING};
 	}
 
 }

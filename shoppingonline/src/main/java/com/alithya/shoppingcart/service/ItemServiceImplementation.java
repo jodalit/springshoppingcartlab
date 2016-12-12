@@ -1,28 +1,15 @@
 package com.alithya.shoppingcart.service;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.IssuerSerialNumRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
@@ -34,7 +21,7 @@ public class ItemServiceImplementation implements ItemService {
 	
 	private  Map<Long, Item> items = new HashMap<>();
 	
-	public int i=0;
+	//public int i=0;
 	
 	@Override
 	public Map<Long, Item> itemsList(){
@@ -50,29 +37,13 @@ public class ItemServiceImplementation implements ItemService {
 	}
 	
 	@Override
-	public Item createItem(String id, String name, String description, String price, String expireDate) {
+	public Long createItem(String name, String description, String price, String expireDate) {
 		
-		this.setItems(itemsList());
-		
-		Long idLong = 0L;
-		try{
-			idLong = (long) Integer.parseInt(id);
-		}catch (NumberFormatException e) {
-			e.getMessage();
-			return null;
+		if (itemRepository.insertItem(name, description, price, expireDate)){
+			return this.getMaxItemId();
 		}
-				
-		Double d = 0.0;
-		try{
-			 d = Double.parseDouble(price.trim());
-		} catch (NumberFormatException e) {
-			e.getMessage();
-			return null;
-		}
-		
-		Item item = new Item(Long.valueOf(id), name, description, d, LocalDate.now());
-		items.put(Long.valueOf(id), item);
-		return item;
+			
+		return 0L;
 	}
 	
 
@@ -80,20 +51,18 @@ public class ItemServiceImplementation implements ItemService {
 	public boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, String price,
 			String expireDate) {
 		
-		this.setItems(itemsList());
-		
-		if (items.values().isEmpty())
+		if (getItems().values().isEmpty())
 			return false;
 		
-		if (items.get(id)==null) 
+		if (!getItems().containsKey(id)) 
 			return false;
 		
-		items.get(id).setItemName(name);
-		items.get(id).setDescription(description);
-		items.get(id).setPrice(Double.valueOf(convert(price+"")));;
-		items.get(id).setExpireDate(LocalDate.now());;
-		
-		return true;
+		if (itemRepository.updateItem(id, name, description, price, expireDate)){
+			this.setItems(itemsList());
+			return true;
+		}
+	
+		return false;
 	}
 
 	@Override
@@ -104,7 +73,7 @@ public class ItemServiceImplementation implements ItemService {
 		if (items.get(Long.valueOf(id)).getItemName().trim().isEmpty())
 			return null;
 		
-		return items.get(Long.valueOf(id));
+		return getItems().get(Long.valueOf(id));
 	}
 	
 	@Override
@@ -126,18 +95,19 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Override
 	public boolean removeItem(Long id) {
-		this.setItems(itemsList());
-		
-		if (items.values().isEmpty())
+				
+		if (getItems().values().isEmpty())
 			return false;
 		
-		if (!isNumeric(id.toString()))
+		if (!getItems().containsKey(id)) 
 			return false;
 		
-		System.out.println("removeItem(Long id) : " + id);
-		items.remove(convertToLong(id.toString().trim()));
+		if (itemRepository.deleteItem(id)){
+			this.setItems(itemsList());
+			return true;
+		}
 		
-		return true;
+		return false;
 	}
 
 	@Override
@@ -150,41 +120,6 @@ public class ItemServiceImplementation implements ItemService {
 			return null;
 		
 		return Collections.max(idSet);
-	}
-	
-	
-	public static Double convert(String value) {
-		Double d =0.0;
-		try{
-			 d = Double.parseDouble(value.trim());
-		} catch (NumberFormatException e) {
-			e.getMessage();
-		}
-		
-		return d;
-	}
-	
-	public static Long convertToLong(String value) {
-		Long l=0L;
-		try{
-			 l = Long.valueOf(value.trim());
-			 System.out.println("convertToLong : " + value);
-		} catch (NumberFormatException e) {
-			e.getMessage();
-		}
-		
-		return l;
-	}
-	
-	public static boolean isNumeric(String str)
-	{
-	    for (char c : str.toCharArray())
-	    {
-	        if (!Character.isDigit(c)) return false;
-	    }
-	    System.out.println("isNumeric : " + str);
-	    
-	    return true;
 	}
 	
 	@Override

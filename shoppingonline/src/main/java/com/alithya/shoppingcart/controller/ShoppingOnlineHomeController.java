@@ -14,6 +14,9 @@ import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
 public class ShoppingOnlineHomeController {
+	
+	public static final String SESSION_BASKETSIZE = "basketsize";
+	public static final String SESSION_ITEMS = "items";
 	public static final String MODEL_NAME_WELCOME_INFO = "welcomeDeclaration";
 	public static final String MODEL_NAME_WELCOME_TITLE = "welcomeTitle";
 	public static final String REQUESTMAPPING_HOME = "/";
@@ -27,8 +30,8 @@ public class ShoppingOnlineHomeController {
 	@RequestMapping(REQUESTMAPPING_HOME) 
 	public String goShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		
-		request.getSession().setAttribute("items", itemService.itemsList().values());
-		request.getSession().setAttribute("basketsize", 0);
+		request.getSession().setAttribute(SESSION_ITEMS, itemService.itemsList().values());
+		request.getSession().setAttribute(SESSION_BASKETSIZE, 0);
 		model.addAttribute(MODEL_NAME_WELCOME_TITLE, WELCOMETITLE);
 		model.addAttribute(MODEL_NAME_WELCOME_INFO, WELCOMEDECLARATION);
 		

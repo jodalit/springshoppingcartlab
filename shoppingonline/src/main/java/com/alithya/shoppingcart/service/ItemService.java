@@ -9,7 +9,7 @@ import com.alithya.shoppingcart.repository.ItemRepository;
 public interface ItemService {
 	public Item getItemById(Long id);
 
-	public Item createItem(String id, String name, String description, String price, String expireDate);
+	public Long createItem(String name, String description, String price, String expireDate);
 
 	public boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, String price,
 			String expireDate);

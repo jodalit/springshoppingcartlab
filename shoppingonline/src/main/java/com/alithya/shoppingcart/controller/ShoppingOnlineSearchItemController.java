@@ -24,22 +24,25 @@ import com.alithya.shoppingcart.service.shoppingService;
 @Controller
 @Scope("session")
 public class ShoppingOnlineSearchItemController {
+	
+	public static final String REQUESTMAPPING_RESULT_SEARCH_ITEM = "/resultsearchitem";
 	public static final String SHOPPING_ONLINE_SEARCH_RESULT = "shoppingonlinesearchresult";
 	public static final String RESULTSEARCHTITLE ="Search result";
 	public static final String NUMBERITEMS ="Search result";
+	
 	@Autowired
 	private ItemService itemService;
 	@Autowired
 	shoppingService shoppingService;
  	
-	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.GET)
+	@RequestMapping(value = REQUESTMAPPING_RESULT_SEARCH_ITEM, method = RequestMethod.GET)
 	public String getSearchItem(HttpServletRequest request){
 		request.getSession().setAttribute("resultSearch", RESULTSEARCHTITLE);
 		
 		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 	
-	@RequestMapping(value = "/resultsearchitem", method = RequestMethod.POST)
+	@RequestMapping(value = REQUESTMAPPING_RESULT_SEARCH_ITEM, method = RequestMethod.POST)
 	public String getResultSearchItem(@RequestParam("itemNameToFind") String itemNameToFind, HttpServletRequest request){
 	 
 		Set<Item> itemsforname = itemService.getItemByNameDescription(itemNameToFind);

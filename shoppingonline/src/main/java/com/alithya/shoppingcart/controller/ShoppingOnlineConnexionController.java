@@ -1,5 +1,7 @@
 package com.alithya.shoppingcart.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +15,11 @@ import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
 public class ShoppingOnlineConnexionController {
+	
 	private static final String MODEL_NAME_CONNECTION_NAME = "connectionname";
-
 	public static final int USER_PROFILE = 1;
-
 	public static final String REDIRECT = "redirect:/";
-
 	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
-
 	public static final String ALLPEOPLE = "All people";
 
 	@Autowired
@@ -30,11 +29,10 @@ public class ShoppingOnlineConnexionController {
 	public String getshoppingonlinehomeadmin(@RequestParam("personConnectionName") String personConnectionName,
 			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
 		
-		if (servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword) != null) {
-			request.getSession().setAttribute(MODEL_NAME_CONNECTION_NAME,
-					servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword).getPersonConnectionName());
-
-			if (servicePerson.getPersonByConnexionPassword(personConnectionName, personPassword).getProfile() == USER_PROFILE)
+		if (servicePerson.getPersonByConnexionNamePassword(personConnectionName, personPassword)) {
+			
+			request.getSession().setAttribute(MODEL_NAME_CONNECTION_NAME, personConnectionName);
+			if (servicePerson.getProfile() == USER_PROFILE)
 				return SHOPPING_ONLINE_HOME_ADMIN; 
 			
 		}

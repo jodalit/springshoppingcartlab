@@ -29,6 +29,7 @@ import com.alithya.shoppingcart.service.shoppingService;
 
 @Controller
 public class ShoppingOnlineSomeUtilitiesController {
+	
 	public static final String SESSION_BASKETTOTAL = "baskettotal";
 	public static final String SESSION_BASKETSIZE = "basketsize";
 	public static final String MODEL_NAME_NEWUSER = "newuser";

@@ -20,6 +20,14 @@ import com.alithya.shoppingcart.service.ItemServiceImplementation;
 
 @Controller
 public class ShoppingOnlineItemController {
+	
+	public static final String MODEL_ITEMS = "items";
+	public static final String MODEL_UPDATE_ITEM = "updateitem";
+	public static final String MODEL_ITEM = "item";
+	public static final String MODEL_ALL_ITEMS = "allitems";
+	public static final String MODEL_NEW_ITEM_ID = "Itemnumero";
+	public static final String MODEL_SAVE_RESULT = "saveresult";
+	public static final String MODEL_ADD_NEW_ITEM = "addnewitem";
 	public static final String REQUESTMAPPING_REMOVEITEM_ITEM_ID = "/removeitem/{itemId}";
 	public static final String REQUESTMAPPING_UPDATEITEM_ITEM_ID = "/updateitem/{itemId}";
 	public static final String REQUESTMAPPING_ITEM_ID = "/{itemId}";
@@ -40,7 +48,6 @@ public class ShoppingOnlineItemController {
 	public static final String ALLITEMS ="List of all items";
 	public static final String UPDATEITEM ="Updating Item : ";
 	public static final String SAVERESULT ="Item : ";
-	public Long identifiant = 0l;
 	
 	@Autowired
 	ItemService itemService;
@@ -48,8 +55,8 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value=REQUESTMAPPING_ADD_ITEM, method=RequestMethod.GET)
 	public String addItem(ModelMap model){
 		
-		model.addAttribute("addnewitem", ADDNEWITEM);
-		model.addAttribute("saveresult", null);
+		model.addAttribute(MODEL_ADD_NEW_ITEM, ADDNEWITEM);
+		model.addAttribute(MODEL_SAVE_RESULT, null);
 		
 		return SHOPPING_ONLINE_NEWITEM;
 	}
@@ -57,16 +64,13 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value=REQUESTMAPPING_SAVE_ITEM, method=RequestMethod.POST)
 	public String getSaveItem(ModelMap model,@RequestParam(ITEM_NAME) String itemName, @RequestParam(ITEM_DESCRIPTION) String itemDescription, @RequestParam(ITEM_PRICE) String itemPrice, @RequestParam(ITEM_EXPIRE_DATE) String itemExpireDate, HttpServletRequest request){
 		
-		identifiant= itemService.getMaxItemId() +1;
-		Item item = itemService.createItem(identifiant+"", itemName, itemDescription, itemPrice, itemExpireDate);
-		
-		if (item == null)
+		Long newItemId = itemService.createItem(itemName, itemDescription, itemPrice, itemExpireDate);
+		if (newItemId == 0L)
 			return SHOPPING_ONLINE_NEWITEM;
 		
-		model.addAttribute("saveresult", SAVERESULT);
-		model.addAttribute("Itemnumero", identifiant);
-		model.addAttribute("item", item);
-		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
+		model.addAttribute(MODEL_SAVE_RESULT, SAVERESULT);
+		model.addAttribute(MODEL_NEW_ITEM_ID, newItemId);
+		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
 		
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
@@ -74,7 +78,7 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value=REQUESTMAPPING_LIST_ITEMS, method=RequestMethod.GET)
 	public String getAllItems(ModelMap model, HttpServletRequest request){
 		
-		model.addAttribute("allitems", ALLITEMS);
+		model.addAttribute(MODEL_ALL_ITEMS, ALLITEMS);
 	
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
@@ -82,7 +86,7 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
 	public String showDetailOfItems(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
-		model.addAttribute("item", itemService.getItemById(itemId));
+		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
 		
 		return SHOPPING_ONLINE_DETAIL_OF_ITEM;
 	}
@@ -90,9 +94,9 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value=REQUESTMAPPING_UPDATEITEM_ITEM_ID, method=RequestMethod.GET)
 	public String updateDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
-		model.addAttribute("item", itemService.getItemById(itemId));		
-		model.addAttribute("updateitem", UPDATEITEM);
-		request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
+		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));		
+		model.addAttribute(MODEL_UPDATE_ITEM, UPDATEITEM);
+		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
 		
 		return SHOPPING_ONLINE_UPDATE_ITEM;
 	}
@@ -102,8 +106,8 @@ public class ShoppingOnlineItemController {
 		
 		if (itemService.modifyNameDescriptionPriceExpiredateItem(itemId , itemName, itemDescription, itemPrice, itemExpireDate)){
 			
-			model.addAttribute("item", itemService.getItemById(itemId));
-			request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
+			model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
+			request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
 		}
 				
 		return REDIRECT_LISTITEMS;
@@ -113,8 +117,8 @@ public class ShoppingOnlineItemController {
 	public String removeDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
 		if (itemService.removeItem(itemId)){
-			model.addAttribute("item", null);
-			request.getSession().setAttribute("items", Collections.list(Collections.enumeration(itemService.getItems().values())));
+			model.addAttribute(MODEL_ITEM, null);
+			request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
 		}
 		
 		return REDIRECT_LISTITEMS;
