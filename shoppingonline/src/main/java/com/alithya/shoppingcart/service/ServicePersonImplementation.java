@@ -19,7 +19,7 @@ public  class ServicePersonImplementation implements ServicePerson {
 		boolean response = false; 
 		
 		for (Person person : personRepository.getAllPeople()) {
-			if (person.getPersonConnectionName().equals(connectionName) && person.getPersonPassword().equals(password)){
+			if (person.getPersonConnectionName().equalsIgnoreCase(connectionName) && person.getPersonPassword().equals(password)){
 				response = true;
 				setProfile(person.getProfile());
 				break;
@@ -38,4 +38,10 @@ public  class ServicePersonImplementation implements ServicePerson {
 	public void setProfile(int profile) {
 		this.profile = profile;
 	}
+	
+	@Override
+	public void setPersonRepository(PersonRepository personRepository) {
+		this.personRepository = personRepository;
+	}
+		
 }

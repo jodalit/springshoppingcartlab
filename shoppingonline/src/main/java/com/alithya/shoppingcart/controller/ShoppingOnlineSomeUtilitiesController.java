@@ -30,6 +30,10 @@ import com.alithya.shoppingcart.service.shoppingService;
 @Controller
 public class ShoppingOnlineSomeUtilitiesController {
 	
+	public static final String SESSION_PEOPLE = "people";
+	public static final String SESSION_ITEMS = "items";
+	public static final String SESSION_ITEMS_FOR_NAME = "itemsforname";
+	public static final String SESSION_CONNECTION_NAME = "connectionname";
 	public static final String SESSION_BASKETTOTAL = "baskettotal";
 	public static final String SESSION_BASKETSIZE = "basketsize";
 	public static final String MODEL_NAME_NEWUSER = "newuser";
@@ -65,7 +69,7 @@ public class ShoppingOnlineSomeUtilitiesController {
 	private ItemService itemService;
 	
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.GET)
-	public String getConnexion(ModelMap model, HttpServletRequest request) {
+	public String getConnection(ModelMap model, HttpServletRequest request) {
 		
 		model.addAttribute(MODEL_NAME_CONNECTION, CONNEXION);
 		
@@ -73,7 +77,7 @@ public class ShoppingOnlineSomeUtilitiesController {
 	}
 
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.POST)
-	public String sumitConnexion(ModelMap model) {
+	public String sumitConnection(ModelMap model) {
 		
 		int basketSize = 1;
 		model.addAttribute(MODEL_NAME_BASKET_SIZE, basketSize);
@@ -171,21 +175,21 @@ public class ShoppingOnlineSomeUtilitiesController {
 		
 		request.getSession().setAttribute(SESSION_BASKETSIZE, 0);
 		request.getSession().setAttribute(SESSION_BASKETTOTAL, 0);
-		request.getSession().setAttribute("connectionname", null);
-		request.getSession().setAttribute("itemsforname", null);
-		request.getSession().setAttribute("items", null);
+		request.getSession().setAttribute(SESSION_CONNECTION_NAME, null);
+		request.getSession().setAttribute(SESSION_ITEMS_FOR_NAME, null);
+		request.getSession().setAttribute(SESSION_ITEMS, null);
 		request.getSession().setAttribute(MODEL_NAME_BASKET, null);
-		request.getSession().setAttribute("people", null);
+		request.getSession().setAttribute(SESSION_PEOPLE, null);
 		
 		
 		sessionstatus.setComplete();
 		webrequest.removeAttribute(SESSION_BASKETSIZE, WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute(SESSION_BASKETTOTAL, WebRequest.SCOPE_SESSION);
-		webrequest.removeAttribute("connexionname", WebRequest.SCOPE_SESSION);
-		webrequest.removeAttribute("itemsforname", WebRequest.SCOPE_SESSION);
-		webrequest.removeAttribute("items", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute(SESSION_CONNECTION_NAME, WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute(SESSION_ITEMS_FOR_NAME, WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute(SESSION_ITEMS, WebRequest.SCOPE_SESSION);
 		webrequest.removeAttribute(MODEL_NAME_BASKET, WebRequest.SCOPE_SESSION);
-		webrequest.removeAttribute("people", WebRequest.SCOPE_SESSION);
+		webrequest.removeAttribute(SESSION_PEOPLE, WebRequest.SCOPE_SESSION);
 		
 		return REDIRECT;
 	}

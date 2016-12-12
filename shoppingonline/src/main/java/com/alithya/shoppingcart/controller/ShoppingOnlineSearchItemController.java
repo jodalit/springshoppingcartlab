@@ -25,6 +25,10 @@ import com.alithya.shoppingcart.service.shoppingService;
 @Scope("session")
 public class ShoppingOnlineSearchItemController {
 	
+	public static final String SESSION_SIZE_ITEMS_FOR_NAME = "sizeitemsforname";
+	public static final String SESSION_ITEMS_FOR_NAME = "itemsforname";
+	public static final String SESSION_NUMBER_ITEM = "numberItem";
+	public static final String SESSION_RESULT_SEARCH = "resultSearch";
 	public static final String REQUESTMAPPING_RESULT_SEARCH_ITEM = "/resultsearchitem";
 	public static final String SHOPPING_ONLINE_SEARCH_RESULT = "shoppingonlinesearchresult";
 	public static final String RESULTSEARCHTITLE ="Search result";
@@ -37,7 +41,7 @@ public class ShoppingOnlineSearchItemController {
  	
 	@RequestMapping(value = REQUESTMAPPING_RESULT_SEARCH_ITEM, method = RequestMethod.GET)
 	public String getSearchItem(HttpServletRequest request){
-		request.getSession().setAttribute("resultSearch", RESULTSEARCHTITLE);
+		request.getSession().setAttribute(SESSION_RESULT_SEARCH, RESULTSEARCHTITLE);
 		
 		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
@@ -49,11 +53,11 @@ public class ShoppingOnlineSearchItemController {
 	
 		int sizeitemsforname = itemsforname.size();
 	
-		request.getSession().setAttribute("resultSearch", RESULTSEARCHTITLE);
-		request.getSession().setAttribute("numberItem", "0");
+		request.getSession().setAttribute(SESSION_RESULT_SEARCH, RESULTSEARCHTITLE);
+		request.getSession().setAttribute(SESSION_NUMBER_ITEM, "0");
 	
-		request.getSession().setAttribute("itemsforname", itemsforname);
-		request.getSession().setAttribute("sizeitemsforname", sizeitemsforname);
+		request.getSession().setAttribute(SESSION_ITEMS_FOR_NAME, itemsforname);
+		request.getSession().setAttribute(SESSION_SIZE_ITEMS_FOR_NAME, sizeitemsforname);
 		
 		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}

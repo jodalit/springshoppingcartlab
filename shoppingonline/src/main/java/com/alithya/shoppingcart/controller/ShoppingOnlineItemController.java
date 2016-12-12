@@ -44,18 +44,18 @@ public class ShoppingOnlineItemController {
 	public static final String SHOPPING_ONLINE_DETAIL_OF_ITEM = "shoppingonlinedetailofitem";
 	public static final String SHOPPING_ONLINE_LIST_OF_ALLITEMS = "shoppingonlinelistofallitems";
 	public static final String SHOPPING_ONLINE_NEWITEM = "shoppingonlinenewitem";
-	public static final String ADDNEWITEM ="Add New Item";
-	public static final String ALLITEMS ="List of all items";
-	public static final String UPDATEITEM ="Updating Item : ";
-	public static final String SAVERESULT ="Item : ";
+	public static final String ADD_NEW_ITEM ="Add New Item";
+	public static final String ALL_ITEMS ="List of all items";
+	public static final String UPDATE_ITEM ="Updating Item : ";
+	public static final String SAVE_RESULT ="Item : ";
 	
 	@Autowired
 	ItemService itemService;
 	
 	@RequestMapping(value=REQUESTMAPPING_ADD_ITEM, method=RequestMethod.GET)
-	public String addItem(ModelMap model){
+	public String getAddItem(ModelMap model){
 		
-		model.addAttribute(MODEL_ADD_NEW_ITEM, ADDNEWITEM);
+		model.addAttribute(MODEL_ADD_NEW_ITEM, ADD_NEW_ITEM);
 		model.addAttribute(MODEL_SAVE_RESULT, null);
 		
 		return SHOPPING_ONLINE_NEWITEM;
@@ -68,7 +68,7 @@ public class ShoppingOnlineItemController {
 		if (newItemId == 0L)
 			return SHOPPING_ONLINE_NEWITEM;
 		
-		model.addAttribute(MODEL_SAVE_RESULT, SAVERESULT);
+		model.addAttribute(MODEL_SAVE_RESULT, SAVE_RESULT);
 		model.addAttribute(MODEL_NEW_ITEM_ID, newItemId);
 		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
 		
@@ -78,7 +78,7 @@ public class ShoppingOnlineItemController {
 	@RequestMapping(value=REQUESTMAPPING_LIST_ITEMS, method=RequestMethod.GET)
 	public String getAllItems(ModelMap model, HttpServletRequest request){
 		
-		model.addAttribute(MODEL_ALL_ITEMS, ALLITEMS);
+		model.addAttribute(MODEL_ALL_ITEMS, ALL_ITEMS);
 	
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
@@ -95,7 +95,7 @@ public class ShoppingOnlineItemController {
 	public String updateDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
 		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));		
-		model.addAttribute(MODEL_UPDATE_ITEM, UPDATEITEM);
+		model.addAttribute(MODEL_UPDATE_ITEM, UPDATE_ITEM);
 		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
 		
 		return SHOPPING_ONLINE_UPDATE_ITEM;

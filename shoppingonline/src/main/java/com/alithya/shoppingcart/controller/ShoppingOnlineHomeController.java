@@ -21,19 +21,19 @@ public class ShoppingOnlineHomeController {
 	public static final String MODEL_NAME_WELCOME_TITLE = "welcomeTitle";
 	public static final String REQUESTMAPPING_HOME = "/";
 	public static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
-	public static final String WELCOMETITLE ="Welcome to our online IT store !!!";
-	public static final String WELCOMEDECLARATION ="Welcome !!!";
+	public static final String WELCOME_TITLE ="Welcome to our online IT store !!!";
+	public static final String WELCOME_INFO ="Welcome !!!";
 
 	@Autowired
 	private ItemService itemService;
 	
 	@RequestMapping(REQUESTMAPPING_HOME) 
-	public String goShoppingOnlineHome(ModelMap model, HttpServletRequest request){
+	public String getShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		
 		request.getSession().setAttribute(SESSION_ITEMS, itemService.itemsList().values());
 		request.getSession().setAttribute(SESSION_BASKETSIZE, 0);
-		model.addAttribute(MODEL_NAME_WELCOME_TITLE, WELCOMETITLE);
-		model.addAttribute(MODEL_NAME_WELCOME_INFO, WELCOMEDECLARATION);
+		model.addAttribute(MODEL_NAME_WELCOME_TITLE, WELCOME_TITLE);
+		model.addAttribute(MODEL_NAME_WELCOME_INFO, WELCOME_INFO);
 		
 		return SHOPPING_ONLINE_HOME;
 	}

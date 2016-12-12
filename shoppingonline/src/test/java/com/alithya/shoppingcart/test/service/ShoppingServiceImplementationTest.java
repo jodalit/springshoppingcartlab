@@ -34,6 +34,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.repository.ItemRepository;
 import com.alithya.shoppingcart.service.ItemServiceImplementation;
 import com.alithya.shoppingcart.service.ShoppingServiceImplementation;
 import com.sun.media.jfxmedia.events.NewFrameEvent;
@@ -42,6 +43,9 @@ import com.sun.media.jfxmedia.events.NewFrameEvent;
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
 public class ShoppingServiceImplementationTest {
+	@Mock
+	ItemRepository itemRepositoryMock;
+	
 	@Mock
 	ItemServiceImplementation itemServiceMock;
 	

@@ -57,41 +57,43 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	}
 
 	@Test
-	public void verifyGetConnexion() {
-		ModelMap model = new ModelMap();
-		String CONNEXION = "Connexion to your on line store";
-		String result =  someUtilities.getConnexion(model, request);
+	public void verifyGetConnection() {
 		
-		assertNotNull(model.containsKey("connexion"));
+		ModelMap model = new ModelMap();
+		String result =  someUtilities.getConnection(model, request);
+		
+		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_CONNECTION));
+		assertEquals(someUtilities.CONNEXION, model.get(someUtilities.MODEL_NAME_CONNECTION));
 		assertSame(someUtilities.SHOPPING_ONLINE_CONNEXION, result);
 		
 	}
 	
 	@Test
-	public void verifySumitConnexion() {
+	public void verifySumitConnection() {
+		
 		ModelMap model = new ModelMap();
-		String result =  someUtilities.sumitConnexion(model);
+		String result =  someUtilities.sumitConnection(model);
 		
-		assertNotNull(model.containsKey("basketSize"));
-		assertNotNull(model.containsKey("basket"));
+		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_BASKET_SIZE));
+		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_BASKET));
 		assertSame(someUtilities.SHOPPING_ONLINE_HOME_ADMIN, result);
-		
-		
 	}
 	
 	@Test
 	public void verifyGetShoppingOnlineHomeAdmin() {
+		
 		ModelMap model = new ModelMap();
 		String result =  someUtilities.getShoppingOnlineHomeAdmin(model, request);
 		
-		assertNotNull(model.containsKey("connexion"));
+		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_CONNECTION));
+		assertEquals(someUtilities.CONNEXION, model.get(someUtilities.MODEL_NAME_CONNECTION));
+	
 		assertSame(someUtilities.SHOPPING_ONLINE_HOME_ADMIN, result);
-		
 	}
 
 	@Test
 	public void verifyGetBasket() {
-		ModelMap model = new ModelMap();
+		
 		String result =  someUtilities.getBasket();
 		
 		assertSame(someUtilities.SHOPPING_ONLINE_BASKET, result);
@@ -100,9 +102,11 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	
 	@Test
 	public void verifyGetNewUser() {
+		
 		ModelMap model = new ModelMap();
 		String result =  someUtilities.getBasket();
 		
+		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_NEWUSER));
 		assertSame(someUtilities.SHOPPING_ONLINE_BASKET, result);
 	}
 	

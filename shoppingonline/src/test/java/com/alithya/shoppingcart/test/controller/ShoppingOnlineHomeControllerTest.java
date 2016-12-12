@@ -36,22 +36,28 @@ public class ShoppingOnlineHomeControllerTest {
 	
 	@Mock
 	private ItemService itemServiceMock;
-	private ShoppingOnlineHomeController home;
+	private ShoppingOnlineHomeController homeController;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		home = new ShoppingOnlineHomeController();
-		home.setItemService(itemServiceMock);
+		homeController = new ShoppingOnlineHomeController();
+		homeController.setItemService(itemServiceMock);
 	}
 	
 	@Test
-	public void verifyGoShoppingOnlineHomeReturnNamePage() {
+	public void verifyGetShoppingOnlineHome() {
 		Map<Long, Item> items = new HashMap<>();
 		when(itemServiceMock.getItems()).thenReturn(items);
+		
 		ModelMap model = new ModelMap();
-		String pagename = home.goShoppingOnlineHome(model, request);
+		String pagename = homeController.getShoppingOnlineHome(model, request);
+		
 		assertNotNull(pagename);
+		assertTrue(model.containsKey(homeController.MODEL_NAME_WELCOME_TITLE));
+		assertTrue(model.containsKey(homeController.MODEL_NAME_WELCOME_INFO));
+		assertSame(homeController.WELCOME_TITLE, model.get(homeController.MODEL_NAME_WELCOME_TITLE));
+		assertSame(homeController.WELCOME_INFO, model.get(homeController.MODEL_NAME_WELCOME_INFO));
 		assertEquals(SHOPPING_ONLINE_HOME, pagename);
 	}
 		

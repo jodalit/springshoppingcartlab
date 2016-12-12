@@ -32,8 +32,9 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	
 	public boolean insertItem(String itemName, String itemDescription, String itemPrice, String itemExpireDate){
 		
+		/*
 		if (SQL_INSERT_ITEM == null)
-			return false;
+			return false;*/
 		
 		if ((itemName.isEmpty() && itemDescription.isEmpty()) && (itemPrice.isEmpty()|| itemPrice.trim().equals("0")))
 			return false;

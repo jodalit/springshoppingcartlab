@@ -18,7 +18,9 @@ import com.alithya.shoppingcart.controller.ShoppingOnlineAdminController;
 import com.alithya.shoppingcart.model.Item;
 
 public class ShoppingOnlineAdminControllerTest {
+	
 	private ShoppingOnlineAdminController adminController;
+	
 	@Autowired
 	MockHttpServletRequest request;
 	
@@ -33,7 +35,11 @@ public class ShoppingOnlineAdminControllerTest {
 	public void verifyGetNewClient() {
 		ModelMap model = new ModelMap();
 		String pagename = adminController.getNewClient(model);
+		
 		assertNotNull(pagename);
+		assertTrue(model.containsKey(adminController.MODEL_NAME_ADMIN));
+		assertSame(adminController.ADMINISTRATION, model.get(adminController.MODEL_NAME_ADMIN));
+		
 		assertEquals(adminController.SHOPPING_ONLINE_HOME_ADMIN, pagename);
 	}
 

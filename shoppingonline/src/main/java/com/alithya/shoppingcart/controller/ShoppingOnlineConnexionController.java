@@ -16,7 +16,8 @@ import com.alithya.shoppingcart.service.ServicePerson;
 @Controller
 public class ShoppingOnlineConnexionController {
 	
-	private static final String MODEL_NAME_CONNECTION_NAME = "connectionname";
+	public static final String REQUESTMAPPING_MAKE_CONNECTION = "/makeconnection";
+	public static final String MODEL_NAME_CONNECTION_NAME = "connectionname";
 	public static final int USER_PROFILE = 1;
 	public static final String REDIRECT = "redirect:/";
 	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
@@ -25,8 +26,8 @@ public class ShoppingOnlineConnexionController {
 	@Autowired
 	ServicePerson servicePerson;
 
-	@RequestMapping(value = "/makeconnection", method = RequestMethod.POST)
-	public String getshoppingonlinehomeadmin(@RequestParam("personConnectionName") String personConnectionName,
+	@RequestMapping(value = REQUESTMAPPING_MAKE_CONNECTION, method = RequestMethod.POST)
+	public String getShoppingOnLineHomeAdmin(@RequestParam("personConnectionName") String personConnectionName,
 			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
 		
 		if (servicePerson.getPersonByConnexionNamePassword(personConnectionName, personPassword)) {

@@ -1,11 +1,18 @@
 package com.alithya.shoppingcart.test.controller;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.jdt.internal.compiler.apt.model.IElementInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +27,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.controller.ShoppingOnlineSearchItemController;
+import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.ItemService;
 import com.alithya.shoppingcart.service.shoppingService;
 
@@ -46,20 +54,30 @@ public class ShoppingOnlineSearchItemControllerTest {
 	}
 
 	@Test
-	public void testGetResultSearchItemRetunValidPage() {
-		String itemToFind =  (String)request.getAttribute("itemNameToFind");
-		when(itemServiceMock.getItemByNameDescription(itemToFind)).thenReturn(new HashSet<>());
+	public void verifyGetResultSearchItem_With_HTTP_POST_METHOD() {
+		
+		String itemToFind =  "Training";
+		Item item = new Item(Long.valueOf(18),"Training Center", "Alithya's Training Center", 78.27D, LocalDate.now());
+		Set<Item> items = new HashSet<>();
+		items.add(item);
+		
+		when(itemServiceMock.getItemByNameDescription(itemToFind)).thenReturn(items);
+		
 		String result = searchItem.getResultSearchItem(itemToFind, request);
+		
 		assertNotNull(result);
-		assertSame("Display result page of search", searchItem.SHOPPING_ONLINE_SEARCH_RESULT, result);
-		// TODO try to test the values of the following items as per how they
-		// are filled in the controller:
+		assertEquals(1, request.getSession().getAttribute(searchItem.SESSION_SIZE_ITEMS_FOR_NAME));
+		assertSame(searchItem.SHOPPING_ONLINE_SEARCH_RESULT, result);
+		
 	}
 	
 	@Test
-	public void testGetSearchItemRetunValidPage() {
+	public void verifyGetSearchItem_With_HTTP_GET_METHOD() {
+		
 		String result = searchItem.getSearchItem(request);
 		assertNotNull(result);
+		
+		assertEquals(searchItem.RESULTSEARCHTITLE, request.getSession().getAttribute(searchItem.SESSION_RESULT_SEARCH));
 		assertSame(searchItem.SHOPPING_ONLINE_SEARCH_RESULT, result);
 	}
 }
