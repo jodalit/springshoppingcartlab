@@ -22,8 +22,6 @@ public class PersonRepositoryImplementation implements PersonRepository {
 	
 	@Override
 	public List<Person> getAllPeople() {
-		if (SQL_SELECT_ALL_PEOPLE_PROFILE == null)
-			return null;
 		
 		Map<String, Object> params = new HashMap<>();
 		

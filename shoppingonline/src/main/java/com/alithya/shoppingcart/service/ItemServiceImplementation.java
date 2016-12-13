@@ -16,6 +16,7 @@ import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Service
 public class ItemServiceImplementation implements ItemService {
+	
 	@Autowired
 	private ItemRepository itemRepository;
 	

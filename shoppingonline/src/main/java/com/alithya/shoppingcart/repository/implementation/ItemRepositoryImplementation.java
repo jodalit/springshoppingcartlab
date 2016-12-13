@@ -16,6 +16,7 @@ import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Repository
 public class ItemRepositoryImplementation implements ItemRepository {
+	
 	public static final String PRAM_ITEM_ID = "id";
 	public static final String PRAM_ITEM_PRICE = "price";
 	public static final String PRAM_ITEM_DESCRIPTION = "description";
@@ -32,10 +33,6 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	
 	public boolean insertItem(String itemName, String itemDescription, String itemPrice, String itemExpireDate){
 		
-		/*
-		if (SQL_INSERT_ITEM == null)
-			return false;*/
-		
 		if ((itemName.isEmpty() && itemDescription.isEmpty()) && (itemPrice.isEmpty()|| itemPrice.trim().equals("0")))
 			return false;
 		
@@ -51,9 +48,6 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	
 	@Override
 	public List<Item> getAllItems() {
-		if (SQL_SELECT_ALL_ITEM == null)
-			return null;
-		
 		Map<String, Object> params = new HashMap<>();
 		
 		return jdbcTemplate.query(SQL_SELECT_ALL_ITEM, params, new ItemMapper());
@@ -62,9 +56,6 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	@Override
 	public boolean updateItem(Long itemId, String itemName, String itemDescription, String itemPrice,
 			String itemExpireDate) {
-		
-		if (SQL_UPDATE_ITEM == null)
-			return false;
 		
 		if ((itemName.isEmpty() && itemDescription.isEmpty()) && (itemPrice.isEmpty()|| itemPrice.trim().equals("0")))
 			return false;
@@ -82,9 +73,6 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	
 	@Override
 	public boolean deleteItem(Long itemId) {
-		
-		if (SQL_DELETE_ITEM == null)
-			return false;
 		
 		Map<String, Object> params = new HashMap<>();
 		params.put(PRAM_ITEM_ID, itemId);
