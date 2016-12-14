@@ -1,6 +1,9 @@
 package com.alithya.shoppingcart.controller;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,18 +95,17 @@ public class ShoppingOnlineBasketController {
 	@RequestMapping(REQUESTMAPPING_REMOVEFROMBASKET_ITEM_ID)
 	public String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
 		
-		Set<Item> basket = (Set<Item>) request.getSession().getAttribute(MODEL_NAME_BASKET);
+//		Set<Item> basket = new HashSet<>(request.getSession().getAttribute(MODEL_NAME_BASKET));// (Set<Item>) request.getSession().getAttribute(MODEL_NAME_BASKET);
+		Collection<Item> basket = (Collection<Item>) request.getSession().getAttribute(MODEL_NAME_BASKET);
 		
 		if (basket==null)
 			return REDIRECT;
 		
-		if (!basketService.removeItemToBasket(itemId))
-			return REDIRECT;
-		else {
+		if (basketService.removeItemToBasket(itemId)){
 			infoBasket(itemId, request);
-			return SHOPPING_ONLINE_BASKET;
 		}
-		
+	
+		return SHOPPING_ONLINE_BASKET;
 	}
 	
 	public void infoBasket(Long itemId, HttpServletRequest request){
@@ -113,9 +115,6 @@ public class ShoppingOnlineBasketController {
 	}
 	
 	public void initBasket(HttpServletRequest request){
-		System.out.println(basketService.initBasket().get(1));
-		System.out.println(basketService.initBasket().get(2));
-		System.out.println(basketService.initBasket().get(3));
 		request.getSession().setAttribute(MODEL_NAME_BASKET, basketService.initBasket().get(1));
 		request.getSession().setAttribute(SESSION_BASKETSIZE, basketService.initBasket().get(2));
 		request.getSession().setAttribute(SESSION_BASKETTOTAL, basketService.initBasket().get(3));
