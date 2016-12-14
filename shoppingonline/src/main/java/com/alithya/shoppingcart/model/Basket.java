@@ -1,15 +1,23 @@
 package com.alithya.shoppingcart.model;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Basket {
+public class Basket implements Serializable {
 	private Map<Long, Item> basketItems;
 	private int basketQuantity;
 	private Double basketTotalAmount;
 	
-	public Map<Long, Item> getBasketItems() {
+	public Basket() {
+		Map<Long,Item> basketItems = new HashMap<>(); 
+		
+	}
+	
+    public Map<Long, Item> getBasketItems() {
+		
 		return basketItems;
 	}
 
@@ -67,5 +75,7 @@ public class Basket {
 		return "Basket [basketItems=" + basketItems + ", basketQuantity=" + basketQuantity
 				+ ", basketTotalAmount=" + basketTotalAmount + "]";
 	}
+
+	
 	
 }

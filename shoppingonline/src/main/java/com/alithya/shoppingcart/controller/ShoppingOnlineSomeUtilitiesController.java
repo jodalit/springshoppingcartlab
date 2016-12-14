@@ -94,12 +94,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 		return SHOPPING_ONLINE_HOME_ADMIN;
 	}
 
-	@RequestMapping(value = REQUESTMAPPING_SHOWBASKET, method = RequestMethod.GET)
-	public String getBasket() {
-		
-		return SHOPPING_ONLINE_BASKET;
-	}
-
 	@RequestMapping(value = REQUESTMAPPING_NEWUSER, method = RequestMethod.GET)
 	public String getNewUser(ModelMap model) {
 		
@@ -108,6 +102,13 @@ public class ShoppingOnlineSomeUtilitiesController {
 		return SHOPPING_ONLINE_NEWUSER;
 	}
 
+	/*
+	@RequestMapping(value = REQUESTMAPPING_SHOWBASKET, method = RequestMethod.GET)
+	public String getBasket() {
+		
+		return SHOPPING_ONLINE_BASKET;
+	}
+	
 	@RequestMapping(REQUESTMAPPING_ADDTOBASKET_ITEM_ID)
 	public String addToBasket(@PathVariable Long itemId, HttpServletRequest request) {
 		
@@ -169,6 +170,7 @@ public class ShoppingOnlineSomeUtilitiesController {
 	
 		return SHOPPING_ONLINE_BASKET;
 	}
+	*/
 	
 	@RequestMapping(value = REQUESTMAPPING_DECONNECTION, method = RequestMethod.GET)
 	public String getDeconnexion(ModelMap model, HttpServletRequest request, WebRequest webrequest, SessionStatus sessionstatus) {
