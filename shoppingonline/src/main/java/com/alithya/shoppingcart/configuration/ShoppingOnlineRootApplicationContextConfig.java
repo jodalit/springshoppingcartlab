@@ -34,7 +34,6 @@ public class ShoppingOnlineRootApplicationContextConfig {
 	@Autowired
 	private Environment env;
 	
-	//@Bean(name="dataSource", destroyMethod="shutdown")
 	@Bean(name=BEAN_DATA_SOURCE, destroyMethod="shutdown")
 	@Profile("test")
 	public DataSource dataSourceForTest(){
@@ -48,7 +47,6 @@ public class ShoppingOnlineRootApplicationContextConfig {
 				.addScript("/db/sql/create_Item.sql")
 				.addScripts("/db/sql/insert_Item.sql")
 				.build();
-		//.addScript("db/sql/upadate.sql")
 	}
 	
 	@Bean

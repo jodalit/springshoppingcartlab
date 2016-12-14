@@ -27,17 +27,24 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	public static final String PRAM_ITEM_DESCRIPTION = "description";
 	public static final String PRAM_ITEM_NAME = "name";
 
-	//public static final String SQL_INSERT_ITEM = "INSERT INTO Item (itemId, itemName, itemDescription, itemPrice) VALUE (:id, :name, :description, :price)";
-	public static final String SQL_INSERT_ITEM = "INSERT INTO Item (itemName, itemDescription, itemPrice) VALUE (:name, :description, :price)";
+	public static final String SQL_INSERT_ITEM = "INSERT INTO Item (itemId, itemName, itemDescription, itemPrice) VALUE (:id,:name, :description, :price)";
 	public static final String SQL_UPDATE_ITEM = "UPDATE Item SET itemName = :name, itemDescription = :description, itemPrice = :price WHERE itemId = :id";
 	public static final String SQL_DELETE_ITEM = "DELETE FROM Item WHERE itemId = :id";
 	public static final String SQL_SELECT_ALL_ITEM = "SELECT * FROM Item ORDER BY itemId DESC";
 	public static final String SQL_SELECT_LAST_ITEM = "SELECT * FROM Item ORDER itemId DESC LIMIT 1";
 	
+	
+	private static int nextId = 4;
+	
+	private JdbcTemplate jdbcTemplateShoppingCart;
+	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
-	private static int nextId = 27;
+	@Autowired
+	public ItemRepositoryImplementation (DataSource dataSouce) {
+		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
+	}
 
 	
 	public boolean insertItem(String itemName, String itemDescription, String itemPrice, String itemExpireDate){
@@ -46,12 +53,12 @@ public class ItemRepositoryImplementation implements ItemRepository {
 			return false;
 		
 		Map<String, Object> params = new HashMap<>();
-		//params.put(PRAM_ITEM_NAME, itemName);
 		params.put(PRAM_ITEM_NAME, itemName);
 		params.put(PRAM_ITEM_DESCRIPTION, itemDescription);
 		params.put(PRAM_ITEM_PRICE, Double.valueOf( itemPrice));
 		
-		jdbcTemplate.update(SQL_INSERT_ITEM, params);
+		//jdbcTemplate.update(SQL_INSERT_ITEM, params);
+		jdbcTemplateShoppingCart.update(SQL_INSERT_ITEM, params);
 		
 		return true;
 	}
@@ -60,8 +67,8 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	public List<Item> getAllItems() {
 		Map<String, Object> params = new HashMap<>();
 		
-		return jdbcTemplate.query(SQL_SELECT_ALL_ITEM, params, new ItemMapper());
-		//return jdbcTemplateShoppingCart.query(SQL_SELECT_ALL_ITEM, new ItemMapper());
+		//return jdbcTemplate.query(SQL_SELECT_ALL_ITEM, params, new ItemMapper());
+		return jdbcTemplateShoppingCart.query(SQL_SELECT_ALL_ITEM, new ItemMapper());
 	}
 	
 	@Override
@@ -77,8 +84,8 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		params.put(PRAM_ITEM_PRICE, Double.valueOf( itemPrice));
 		params.put(PRAM_ITEM_ID, itemId);
 		
-		jdbcTemplate.update(SQL_UPDATE_ITEM, params);
-		//jdbcTemplateShoppingCart.update(SQL_UPDATE_ITEM, params);
+		//jdbcTemplate.update(SQL_UPDATE_ITEM, params);
+		jdbcTemplateShoppingCart.update(SQL_UPDATE_ITEM, params);
 		return true;
 	}
 	
@@ -88,8 +95,8 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		Map<String, Object> params = new HashMap<>();
 		params.put(PRAM_ITEM_ID, itemId);
 		
-		jdbcTemplate.update(SQL_DELETE_ITEM, params);
-		//jdbcTemplateShoppingCart.update(SQL_DELETE_ITEM, params);
+		//jdbcTemplate.update(SQL_DELETE_ITEM, params);
+		jdbcTemplateShoppingCart.update(SQL_DELETE_ITEM, params);
 		
 		return true;
 	}

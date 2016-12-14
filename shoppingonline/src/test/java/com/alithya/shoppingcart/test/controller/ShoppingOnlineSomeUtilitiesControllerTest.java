@@ -29,6 +29,7 @@ import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContex
 import com.alithya.shoppingcart.controller.ShoppingOnlineConnexionController;
 import com.alithya.shoppingcart.controller.ShoppingOnlineSomeUtilitiesController;
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.service.BasketService;
 import com.alithya.shoppingcart.service.ItemService;
 import com.alithya.shoppingcart.service.shoppingService;
 
@@ -38,6 +39,9 @@ import com.alithya.shoppingcart.service.shoppingService;
 public class ShoppingOnlineSomeUtilitiesControllerTest {
 	@Autowired
 	MockHttpServletRequest request;
+	
+	@Mock
+	private BasketService basketServiceMock;
 	
 	@Mock
 	private shoppingService shoppingServiceMock;
@@ -90,70 +94,15 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	
 		assertSame(someUtilities.SHOPPING_ONLINE_HOME_ADMIN, result);
 	}
-
-	@Test
-	public void verifyGetBasket() {
-		
-		String result =  someUtilities.getBasket();
-		
-		assertSame(someUtilities.SHOPPING_ONLINE_BASKET, result);
-		
-	}
 	
 	@Test
 	public void verifyGetNewUser() {
 		
 		ModelMap model = new ModelMap();
-		String result =  someUtilities.getBasket();
+		String result =  someUtilities.getNewUser(model);
 		
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_NEWUSER));
 		assertSame(someUtilities.SHOPPING_ONLINE_BASKET, result);
 	}
 	
-	@Test
-	public void verifyAddToBasketFromResultSearch() {
-		Long id = Long.valueOf(12);
-		Set<Item> basket = new HashSet<>();
-		when(shoppingServiceMock.getBasket()).thenReturn(basket );
-		someUtilities.infoBasket(id, request);
-		
-		String result =  someUtilities.addToBasketFromResultSearch(id, request);
-		
-		assertNotNull(request.getSession().getAttribute("basket"));
-		assertSame( someUtilities.SHOPPING_ONLINE_SEARCH_RESULT, result);	
-	}
-	
-	@Test
-	public void verifyPayItems() {
-		
-		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
-		when(shoppingServiceMock.getBasket()).thenReturn(basket);
-		when(shoppingServiceMock.removeItemsToBasket()).thenReturn(true);
-		
-		String result = someUtilities.payItems(request);
-		
-		assertNull(request.getSession().getAttribute("basket"));
-		assertSame(0,request.getSession().getAttribute("basketsize"));
-		assertSame(0,request.getSession().getAttribute("baskettotal"));
-		assertSame(someUtilities.SHOPPING_ONLINE_BASKET_RECEIVED, result);	
-	}
-	
-	@Test
-	public void verifyRemoveItemFromBasket() {
-		Set<Item> basket = (Set<Item>) request.getSession().getAttribute("basket");
-		Item item = new Item(Long.valueOf(14),"allo", "allo", 12.2D, LocalDate.now());
-		basket.add(item);
-		shoppingServiceMock.setBasket(basket);
-		int basketSize = basket.size();
-		request.getSession().setAttribute("basketsize", basketSize);
-		
-		when(shoppingServiceMock.getBasket()).thenReturn(basket);
-		when(shoppingServiceMock.getTotalBasket()).thenReturn(900.0);
-		when(shoppingServiceMock.removeItemToBasket(14L)).thenReturn(true);
-		
-		String result = someUtilities.removeItemFromBasket(14L, request);
-		
-		assertSame(0, request.getSession().getAttribute("basketsize"));
-		assertSame(someUtilities.SHOPPING_ONLINE_BASKET, result);
-	}
 }

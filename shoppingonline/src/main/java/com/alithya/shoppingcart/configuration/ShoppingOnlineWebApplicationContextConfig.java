@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.alithya.shoppingcart"})
+@ComponentScan({"com.alithya.shoppingcart", "com.alithya.shoppingcart.service", "com.alithya.shoppingcart.repository", "com.alithya.shoppingcart.repository.implementation", "com.alithya.shoppingcart.model", "com.alithya.shoppingcart.configuration", "com.alithya.shoppingcart.controller"})
 public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	public static final String RESOURCES_DIRECTORY = "/resources/";
