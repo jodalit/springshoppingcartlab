@@ -20,11 +20,11 @@ public interface ItemService {
 
 	public Set<Item> getItemByNameDescription(String name);
 
-	public void setItems(Map<Long, Item> items);
+	//public void setItems(Map<Long, Item> items);
 
-	public Map<Long, Item> getItems();
+	//public Map<Long, Item> getItems();
 	
-	public Map<Long, Item> itemsList();
+	public Map<Long, Item> getItemsList();
 	
 	void setItemRepository(ItemRepository itemRepository);
 	

@@ -18,6 +18,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -38,6 +40,7 @@ public class ItemServiceImplementationTest {
 	
 	@Autowired
 	private ItemService itemService;
+	private ApplicationContext ctx;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -48,7 +51,7 @@ public class ItemServiceImplementationTest {
 	
 	@Test
 	public void verifySetOfPeopleNotNull() {
-		assertNotNull(itemService.getItems());
+		assertNotNull(itemService.getItemsList());
 	}
 	
 	@Test
@@ -70,7 +73,7 @@ public class ItemServiceImplementationTest {
 		Map<Long, Item> mapItems = new HashMap<>();
 		mapItems.put(18L, item);
 		mapItems.put(19L, item1);
-		itemService.setItems(mapItems);
+		//itemService.setItems(mapItems);
 		
 		List<Item> items = new ArrayList<>();
 		items.add( item);
@@ -79,7 +82,7 @@ public class ItemServiceImplementationTest {
 		when(itemRepositoryMock.getAllItems()).thenReturn(items);
 		when(itemRepositoryMock.updateItem(18L, "CDE", "CDE", "45.7D", LocalDate.now().toString())).thenReturn(true);
 		
-		Map<Long, Item> m = itemService.itemsList();
+		Map<Long, Item> m = itemService.getItemsList();
 		
 		boolean response  = itemService.modifyNameDescriptionPriceExpiredateItem(18L, "CDE", "CDE", "45.7D", LocalDate.now().toString());
 		
@@ -95,7 +98,7 @@ public class ItemServiceImplementationTest {
 		Map<Long, Item> mapItems = new HashMap<>();
 		mapItems.put(18L, item);
 		mapItems.put(19L, item1);
-		itemService.setItems(mapItems);
+		//itemService.setItems(mapItems);
 		
 		List<Item> items = new ArrayList<>();
 		items.add( item);
@@ -103,7 +106,7 @@ public class ItemServiceImplementationTest {
 		
 		when(itemRepositoryMock.getAllItems()).thenReturn(items);
 		
-		Map<Long, Item> m = itemService.itemsList();
+		Map<Long, Item> m = itemService.getItemsList();
 		
 		Set<Item> result = itemService.getItemByNameDescription("Center");
 		
@@ -120,7 +123,7 @@ public class ItemServiceImplementationTest {
 		Map<Long, Item> mapItems = new HashMap<>();
 		mapItems.put(18L, item);
 		mapItems.put(19L, item1);
-		itemService.setItems(mapItems);
+		//itemService.setItems(mapItems);
 		
 		List<Item> items = new ArrayList<>();
 		items.add( item);
@@ -129,7 +132,7 @@ public class ItemServiceImplementationTest {
 		when(itemRepositoryMock.getAllItems()).thenReturn(items);
 		when(itemRepositoryMock.deleteItem(18L)).thenReturn(true);
 		
-		Map<Long, Item> m = itemService.itemsList();
+		Map<Long, Item> m = itemService.getItemsList();
 		
 		boolean response = itemService.removeItem(18L);
 		
@@ -145,7 +148,7 @@ public class ItemServiceImplementationTest {
 		Map<Long, Item> mapItems = new HashMap<>();
 		mapItems.put(18L, item);
 		mapItems.put(19L, item1);
-		itemService.setItems(mapItems);
+		//itemService.setItems(mapItems);
 		
 		List<Item> items = new ArrayList<>();
 		items.add( item);
@@ -153,7 +156,7 @@ public class ItemServiceImplementationTest {
 		
 		when(itemRepositoryMock.getAllItems()).thenReturn(items);
 		
-		Map<Long, Item> m = itemService.itemsList();
+		Map<Long, Item> m = itemService.getItemsList();
 		
 		Long response = itemService.getMaxItemId();
 		assertFalse(response.longValue()==0);

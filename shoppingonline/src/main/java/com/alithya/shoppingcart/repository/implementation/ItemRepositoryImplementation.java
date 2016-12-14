@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +19,7 @@ import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Repository
+//@Profile("test")
 public class ItemRepositoryImplementation implements ItemRepository {
 	
 	public static final String PRAM_ITEM_ID = "id";
@@ -22,7 +27,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	public static final String PRAM_ITEM_DESCRIPTION = "description";
 	public static final String PRAM_ITEM_NAME = "name";
 
-	public static final String SQL_INSERT_ITEM = "INSERT INTO Item (itemName, itemDescription, itemPrice) VALUE (:name, :description, :price)";
+	public static final String SQL_INSERT_ITEM = "INSERT INTO Item (itemId, itemName, itemDescription, itemPrice) VALUE (:id,:name, :description, :price)";
 	public static final String SQL_UPDATE_ITEM = "UPDATE Item SET itemName = :name, itemDescription = :description, itemPrice = :price WHERE itemId = :id";
 	public static final String SQL_DELETE_ITEM = "DELETE FROM Item WHERE itemId = :id";
 	public static final String SQL_SELECT_ALL_ITEM = "SELECT * FROM Item ORDER BY itemId DESC";
@@ -30,6 +35,17 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	private static int nextId = 4;
+	
+	//private JdbcTemplate jdbcTemplateShoppingCart;
+	
+	/*
+	@Autowired
+	public ItemRepositoryImplementation (DataSource dataSouce) {
+		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
+	}*/
+
 	
 	public boolean insertItem(String itemName, String itemDescription, String itemPrice, String itemExpireDate){
 		
@@ -42,6 +58,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		params.put(PRAM_ITEM_PRICE, Double.valueOf( itemPrice));
 		
 		jdbcTemplate.update(SQL_INSERT_ITEM, params);
+		//jdbcTemplateShoppingCart.update(SQL_INSERT_ITEM, params);
 		
 		return true;
 	}
@@ -51,6 +68,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		Map<String, Object> params = new HashMap<>();
 		
 		return jdbcTemplate.query(SQL_SELECT_ALL_ITEM, params, new ItemMapper());
+		//return jdbcTemplateShoppingCart.query(SQL_SELECT_ALL_ITEM, new ItemMapper());
 	}
 	
 	@Override
@@ -67,7 +85,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		params.put(PRAM_ITEM_ID, itemId);
 		
 		jdbcTemplate.update(SQL_UPDATE_ITEM, params);
-		
+		//jdbcTemplateShoppingCart.update(SQL_UPDATE_ITEM, params);
 		return true;
 	}
 	
@@ -78,6 +96,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 		params.put(PRAM_ITEM_ID, itemId);
 		
 		jdbcTemplate.update(SQL_DELETE_ITEM, params);
+		//jdbcTemplateShoppingCart.update(SQL_DELETE_ITEM, params);
 		
 		return true;
 	}

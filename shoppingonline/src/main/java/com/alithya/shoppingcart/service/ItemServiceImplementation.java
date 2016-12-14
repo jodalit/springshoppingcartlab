@@ -1,6 +1,9 @@
 package com.alithya.shoppingcart.service;
 
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,13 +22,11 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	private  Map<Long, Item> items = new HashMap<>();
-	
-	//public int i=0;
+
+	//private  Map<Long, Item> items = new HashMap<>();
 	
 	@Override
-	public Map<Long, Item> itemsList(){
+	public Map<Long, Item> getItemsList() {
 		
 		Map<Long, Item> allItems = new HashMap<>();
 		
@@ -47,19 +48,19 @@ public class ItemServiceImplementation implements ItemService {
 		return 0L;
 	}
 	
-
 	@Override
 	public boolean modifyNameDescriptionPriceExpiredateItem(Long id, String name, String description, String price,
 			String expireDate) {
 		
-		if (getItems().values().isEmpty())
+		if (this.getItemsList().values().isEmpty())
 			return false;
 		
-		if (!getItems().containsKey(id)) 
+		if (!this.getItemsList().containsKey(id)) 
 			return false;
 		
 		if (itemRepository.updateItem(id, name, description, price, expireDate)){
-			this.setItems(itemsList());
+			//this.setItems(itemsList());
+			this.getItemsList();
 			return true;
 		}
 	
@@ -68,22 +69,18 @@ public class ItemServiceImplementation implements ItemService {
 
 	@Override
 	public Item getItemById(Long id) {
-		
-		this.setItems(itemsList());
-		
-		if (items.get(Long.valueOf(id)).getItemName().trim().isEmpty())
+
+		if (this.getItemsList().get(Long.valueOf(id)).getItemName().trim().isEmpty())
 			return null;
 		
-		return getItems().get(Long.valueOf(id));
+		return this.getItemsList().get(Long.valueOf(id));
 	}
 	
 	@Override
 	public Set<Item> getItemByNameDescription(String name) {
 		
-		this.setItems(itemsList());
-		
 		Set<Item> l = new HashSet<>();
-		for (Item item : items.values()) {
+		for (Item item : this.getItemsList().values()) {
 			if (item.getDescription().toLowerCase().contains(name.trim().toLowerCase()) ){
 				l.add(item);
 			} else if (item.getItemName().toLowerCase().contains(name.trim().toLowerCase())) {
@@ -97,14 +94,15 @@ public class ItemServiceImplementation implements ItemService {
 	@Override
 	public boolean removeItem(Long id) {
 				
-		if (getItems().values().isEmpty())
+		if (this.getItemsList().values().isEmpty())
 			return false;
 		
-		if (!getItems().containsKey(id)) 
+		if (!this.getItemsList().containsKey(id)) 
 			return false;
 		
 		if (itemRepository.deleteItem(id)){
-			this.setItems(itemsList());
+			//this.setItems(itemsList());
+			this.getItemsList();
 			return true;
 		}
 		
@@ -113,16 +111,16 @@ public class ItemServiceImplementation implements ItemService {
 
 	@Override
 	public Long getMaxItemId() {
+		//this.setItems(itemsList());
 		
-		this.setItems(itemsList());
-		
-		Set<Long> idSet = items.keySet();
+		Set<Long> idSet = this.getItemsList().keySet();
 		if (idSet.isEmpty())
 			return null;
 		
 		return Collections.max(idSet);
 	}
 	
+	/*
 	@Override
 	public  Map<Long, Item> getItems() {
 		return items;
@@ -132,6 +130,7 @@ public class ItemServiceImplementation implements ItemService {
 	public void setItems(Map<Long, Item> items) {
 		this.items = items;
 	}
+	*/
 	
 	@Override
 	public void setItemRepository(ItemRepository itemRepository) {

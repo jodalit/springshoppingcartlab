@@ -70,7 +70,7 @@ public class ShoppingOnlineItemController {
 		
 		model.addAttribute(MODEL_SAVE_RESULT, SAVE_RESULT);
 		model.addAttribute(MODEL_NEW_ITEM_ID, newItemId);
-		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
+		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItemsList().values())));
 		
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
@@ -96,7 +96,7 @@ public class ShoppingOnlineItemController {
 		
 		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));		
 		model.addAttribute(MODEL_UPDATE_ITEM, UPDATE_ITEM);
-		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
+		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItemsList().values())));
 		
 		return SHOPPING_ONLINE_UPDATE_ITEM;
 	}
@@ -107,7 +107,7 @@ public class ShoppingOnlineItemController {
 		if (itemService.modifyNameDescriptionPriceExpiredateItem(itemId , itemName, itemDescription, itemPrice, itemExpireDate)){
 			
 			model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
-			request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
+			request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItemsList().values())));
 		}
 				
 		return REDIRECT_LISTITEMS;
@@ -118,7 +118,7 @@ public class ShoppingOnlineItemController {
 		
 		if (itemService.removeItem(itemId)){
 			model.addAttribute(MODEL_ITEM, null);
-			request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItems().values())));
+			request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItemsList().values())));
 		}
 		
 		return REDIRECT_LISTITEMS;

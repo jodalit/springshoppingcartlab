@@ -1,5 +1,6 @@
 package com.alithya.shoppingcart.controller;
 
+import java.sql.SQLException;
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class ShoppingOnlineHomeController {
 	@RequestMapping(REQUESTMAPPING_HOME) 
 	public String getShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		
-		request.getSession().setAttribute(SESSION_ITEMS, itemService.itemsList().values());
+		request.getSession().setAttribute(SESSION_ITEMS, itemService.getItemsList().values());
 		request.getSession().setAttribute(SESSION_BASKETSIZE, 0);
 		model.addAttribute(MODEL_NAME_WELCOME_TITLE, WELCOME_TITLE);
 		model.addAttribute(MODEL_NAME_WELCOME_INFO, WELCOME_INFO);

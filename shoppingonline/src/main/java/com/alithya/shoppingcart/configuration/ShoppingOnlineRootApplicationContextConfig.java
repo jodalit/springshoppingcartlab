@@ -34,7 +34,39 @@ public class ShoppingOnlineRootApplicationContextConfig {
 	@Autowired
 	private Environment env;
 	
+	//@Bean(name="dataSource", destroyMethod="shutdown")
+	@Bean(name=BEAN_DATA_SOURCE, destroyMethod="shutdown")
+	@Profile("test")
+	public DataSource dataSourceForTest(){
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		
+		return builder
+				.generateUniqueName(true)
+				.setType(EmbeddedDatabaseType.H2)
+				.setScriptEncoding("UTF-8")
+				.ignoreFailedDrops(true)
+				.addScript("/db/sql/create_Item.sql")
+				.addScripts("/db/sql/insert_Item.sql")
+				.build();
+		//.addScript("db/sql/upadate.sql")
+	}
+	
+	@Bean
+	@Profile("test")
+	public NamedParameterJdbcTemplate getJdbcTemplateForTes(){	
+		return new NamedParameterJdbcTemplate(dataSourceForTest());
+	}
+	
+	@Bean(name = "transactionManager")
+	@Profile("test")
+	public PlatformTransactionManager transactionManagerForTest(){
+		
+		return new DataSourceTransactionManager(dataSourceForTest());
+	}
+
+	
 	@Bean(name=BEAN_DATA_SOURCE)
+	@Profile("prod")
 	public DataSource dataSourceForProduction(){
 		BasicDataSource dataSource =new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty(JDBC_DRIVER_CLASS_NAME));
@@ -46,12 +78,14 @@ public class ShoppingOnlineRootApplicationContextConfig {
 	}
 	
 	@Bean(name = BEAN_TRANSACTION_MANAGER)
+	@Profile("prod")
 	public PlatformTransactionManager transactionManager(){
 		
 		return new DataSourceTransactionManager(dataSourceForProduction());
 	}
 	
 	@Bean
+	@Profile("prod")
 	public NamedParameterJdbcTemplate getJdbcTemplateForProduction(){
 		
 		return new NamedParameterJdbcTemplate(dataSourceForProduction());

@@ -48,7 +48,7 @@ public class ShoppingOnlineHomeControllerTest {
 	@Test
 	public void verifyGetShoppingOnlineHome() {
 		Map<Long, Item> items = new HashMap<>();
-		when(itemServiceMock.getItems()).thenReturn(items);
+		when(itemServiceMock.getItemsList()).thenReturn(items);
 		
 		ModelMap model = new ModelMap();
 		String pagename = homeController.getShoppingOnlineHome(model, request);

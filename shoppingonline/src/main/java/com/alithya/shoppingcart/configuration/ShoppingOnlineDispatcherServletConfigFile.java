@@ -1,5 +1,8 @@
 package com.alithya.shoppingcart.configuration;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -27,5 +30,11 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 		
 		return new String[]{URL_FOR_MAPPING};
 	}
+	
+	@Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.setInitParameter("spring.profiles.active", "prod");
+    }
 
 }
