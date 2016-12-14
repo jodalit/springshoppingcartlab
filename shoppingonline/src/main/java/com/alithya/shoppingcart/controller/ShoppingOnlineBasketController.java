@@ -78,10 +78,10 @@ public class ShoppingOnlineBasketController {
 	@RequestMapping(REQUESTMAPPING_PAYITEMS)
 	public String payItems(HttpServletRequest request) {
 		
-		if (basketService.getItemsBasket().isEmpty())
+		if (basketService.getItemsBasket() == null)
 			return REDIRECT;
 		
-		if (!basketService.removeItemsToBasket()){
+		if (basketService.removeItemsToBasket()){
 			initBasket(request);
 			return REDIRECT;
 		}
@@ -113,6 +113,9 @@ public class ShoppingOnlineBasketController {
 	}
 	
 	public void initBasket(HttpServletRequest request){
+		System.out.println(basketService.initBasket().get(1));
+		System.out.println(basketService.initBasket().get(2));
+		System.out.println(basketService.initBasket().get(3));
 		request.getSession().setAttribute(MODEL_NAME_BASKET, basketService.initBasket().get(1));
 		request.getSession().setAttribute(SESSION_BASKETSIZE, basketService.initBasket().get(2));
 		request.getSession().setAttribute(SESSION_BASKETTOTAL, basketService.initBasket().get(3));
