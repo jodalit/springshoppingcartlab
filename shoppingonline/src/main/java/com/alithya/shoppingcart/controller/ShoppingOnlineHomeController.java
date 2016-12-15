@@ -1,8 +1,5 @@
 package com.alithya.shoppingcart.controller;
 
-import java.sql.SQLException;
-import java.util.Collections;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.alithya.shoppingcart.repository.ItemRepository;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
@@ -32,7 +28,6 @@ public class ShoppingOnlineHomeController {
 	public String getShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		
 		request.getSession().setAttribute(SESSION_ITEMS, itemService.getItemsList().values());
-		//request.getSession().setAttribute(SESSION_BASKETSIZE, 0);
 		model.addAttribute(MODEL_NAME_WELCOME_TITLE, WELCOME_TITLE);
 		model.addAttribute(MODEL_NAME_WELCOME_INFO, WELCOME_INFO);
 		

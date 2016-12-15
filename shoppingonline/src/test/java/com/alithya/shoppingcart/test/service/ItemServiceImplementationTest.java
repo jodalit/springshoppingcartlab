@@ -1,8 +1,6 @@
 package com.alithya.shoppingcart.test.service;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -18,8 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -42,7 +38,6 @@ public class ItemServiceImplementationTest {
 	
 	@Autowired
 	private ItemService itemService;
-	private ApplicationContext ctx;
 	
 	@Before
 	public void setUp() throws Exception {

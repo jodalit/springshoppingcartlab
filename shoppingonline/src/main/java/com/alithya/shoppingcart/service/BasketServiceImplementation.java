@@ -1,19 +1,14 @@
 package com.alithya.shoppingcart.service;
 
-import java.awt.print.Printable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.h2.util.New;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Item;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service
 public class BasketServiceImplementation implements BasketService {

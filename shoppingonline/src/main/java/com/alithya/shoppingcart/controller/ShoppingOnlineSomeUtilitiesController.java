@@ -1,30 +1,16 @@
 package com.alithya.shoppingcart.controller;
 
-import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionAttributeStore;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import com.alithya.shoppingcart.model.Item;
-import com.alithya.shoppingcart.model.Person;
 import com.alithya.shoppingcart.service.ItemService;
-import com.alithya.shoppingcart.service.ItemServiceImplementation;
-import com.alithya.shoppingcart.service.ShoppingServiceImplementation;
 import com.alithya.shoppingcart.service.shoppingService;
 
 @Controller
@@ -65,9 +51,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 	@Autowired
 	private shoppingService shoppingService;
 
-	@Autowired
-	private ItemService itemService;
-	
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.GET)
 	public String getConnection(ModelMap model, HttpServletRequest request) {
 		
@@ -141,8 +124,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 	}
 
 	public void setItemService(ItemService itemService) {
-		
-		this.itemService = itemService;
 	}
 	
 	

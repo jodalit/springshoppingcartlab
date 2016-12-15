@@ -1,17 +1,13 @@
 package com.alithya.shoppingcart.service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
-import com.alithya.shoppingcart.repository.implementation.ItemRepositoryImplementation;
 
 @Service
 public class ShoppingServiceImplementation implements shoppingService {

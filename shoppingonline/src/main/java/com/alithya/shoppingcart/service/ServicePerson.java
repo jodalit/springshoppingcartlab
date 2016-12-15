@@ -1,10 +1,5 @@
 package com.alithya.shoppingcart.service;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import com.alithya.shoppingcart.model.Person;
 import com.alithya.shoppingcart.repository.PersonRepository;
 
 public interface ServicePerson {

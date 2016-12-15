@@ -1,8 +1,6 @@
 package com.alithya.shoppingcart.test.controller;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -10,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.internal.compiler.apt.model.IElementInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

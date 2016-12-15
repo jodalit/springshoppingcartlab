@@ -1,8 +1,6 @@
 package com.alithya.shoppingcart.test.service;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.booleanThat;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -23,9 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.model.Person;
-import com.alithya.shoppingcart.repository.ItemRepository;
 import com.alithya.shoppingcart.repository.PersonRepository;
 import com.alithya.shoppingcart.service.ServicePerson;
 import com.alithya.shoppingcart.service.ServicePersonImplementation;

@@ -1,18 +1,9 @@
 package com.alithya.shoppingcart.test.controller;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.anything;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,9 +18,7 @@ import org.springframework.ui.ModelMap;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnlineConnexionController;
 import com.alithya.shoppingcart.controller.ShoppingOnlineSomeUtilitiesController;
-import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.BasketService;
 import com.alithya.shoppingcart.service.ItemService;
 import com.alithya.shoppingcart.service.shoppingService;

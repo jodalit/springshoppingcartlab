@@ -3,14 +3,9 @@ package com.alithya.shoppingcart.test.controller;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +21,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.controller.ShoppingOnlineBasketController;
-import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.BasketService;
-import com.alithya.shoppingcart.service.shoppingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
