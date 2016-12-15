@@ -45,7 +45,7 @@ public class ShoppingOnlineRootApplicationContextConfig {
 				.setScriptEncoding("UTF-8")
 				.ignoreFailedDrops(true)
 				.addScript("/db/sql/create_Item.sql")
-				.addScripts("/db/sql/insert_Item.sql")
+				//.addScripts("/db/sql/insert_Item.sql")
 				.build();
 	}
 	

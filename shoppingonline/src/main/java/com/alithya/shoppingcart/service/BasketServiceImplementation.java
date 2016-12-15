@@ -17,7 +17,6 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service
 public class BasketServiceImplementation implements BasketService {
-	
 	@Autowired
 	private ItemService itemService;
 	
@@ -27,12 +26,15 @@ public class BasketServiceImplementation implements BasketService {
 	public boolean addItemToBasket(Long itemId) {
 		Item item = itemService.getItemById(itemId);
 		
+		Map<Long, Item> mapBasket = new HashMap<>();
+		
 		if(basketData.getBasketItems() != null){
 			if (basketData.getBasketItems().containsKey(itemId))
 				return false;
+			
+			mapBasket = basketData.getBasketItems();
 		} 
-		
-		Map<Long, Item> mapBasket = new HashMap<>();
+			
 		mapBasket.put(itemId, item);
 		basketData.setBasketItems(mapBasket);
 		 
