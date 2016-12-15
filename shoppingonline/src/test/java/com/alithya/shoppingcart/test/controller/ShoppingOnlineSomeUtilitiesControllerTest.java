@@ -104,7 +104,7 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 		String result =  someUtilities.getNewUser(model);
 		
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_NEWUSER));
-		assertSame(someUtilities.SHOPPING_ONLINE_BASKET, result);
+		assertSame(someUtilities.SHOPPING_ONLINE_NEWUSER, result);
 	}
 	
 }

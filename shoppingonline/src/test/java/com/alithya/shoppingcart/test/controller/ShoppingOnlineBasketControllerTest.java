@@ -147,27 +147,6 @@ public class ShoppingOnlineBasketControllerTest {
 		assertSame(basketController.REDIRECT, result);
 	}
 	
-	@Test
-	public void testRemoveItemFromBasket() {
-		Map<Long, Item> basket = new HashMap<>();
-		Item item = new Item(14L,"allo", "allo", 12.2D, LocalDate.now());
-		basket.put(14L,item);
-		
-		Basket basketData = new Basket();
-		basketData.setBasketItems(basket);
-		basketData.setBasketQuantity(1);
-		basketData.setBasketTotalAmount(15.6);
-		basketServiceMock.setBasketData(basketData);
-		basketServiceMock.addItemToBasket(14L);
-		System.out.println(basketServiceMock.getItemsBasket().values());
-		
-		System.out.println(basketServiceMock.getItemsBasket().values());
-		when(basketServiceMock.removeItemToBasket(14L)).thenReturn(true);
-		
-		String result = basketController.removeItemFromBasket(14L, request);
-		
-		assertSame(null, request.getSession().getAttribute(basketController.SESSION_BASKETSIZE));
-		assertSame(basketController.SHOPPING_ONLINE_BASKET, result);
-	}
+	
 
 }

@@ -79,22 +79,13 @@ public class ShoppingServiceImplementationTest {
 		shoppingService.setBasket(basket);
 		assertEquals(true, shoppingService.existItemInBasketOrNo(4L));
 	}
-	
-	@Test
-	public void verifyGetAllItems() {
-		Map<Long, Item> items = new HashMap<>();
-		when(itemServiceMock.getItemsList()).thenReturn(items);
-		List<Item> l = shoppingService.getAllItems();
-		assertNotNull(l);
-	}
-	
 
 	@Test
 	public void verifyAddItemToBasket() {
 		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
 		Map<Long, Item> items = new HashMap<>();
 		items.put(4L, item);
-		//itemServiceMock.setItems(items);
+	
 		when(itemServiceMock.getItemById(4L)).thenReturn(item);
 		
 		shoppingService.addItemToBasket(4L);
@@ -119,7 +110,7 @@ public class ShoppingServiceImplementationTest {
 		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
 		Map<Long, Item> items = new HashMap<>();
 		items.put(4L, item);
-	//	itemServiceMock.setItems(items);
+	
 		when(itemServiceMock.getItemById(4L)).thenReturn(item);
 		
 		Set<Item> basket = new HashSet<>();
