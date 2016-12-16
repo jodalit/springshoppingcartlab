@@ -645,7 +645,7 @@
 		</header>
 
         <nav>
-            <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
+            <h3><a id="listitems" href="<spring:url value='/item/listitems' />">List of all items</a></h3>
             
         </nav>
         

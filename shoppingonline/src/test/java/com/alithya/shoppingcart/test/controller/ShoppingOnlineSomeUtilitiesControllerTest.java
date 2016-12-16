@@ -21,7 +21,7 @@ import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContex
 import com.alithya.shoppingcart.controller.ShoppingOnlineSomeUtilitiesController;
 import com.alithya.shoppingcart.service.BasketService;
 import com.alithya.shoppingcart.service.ItemService;
-import com.alithya.shoppingcart.service.shoppingService;
+import com.alithya.shoppingcart.service.ShoppingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -35,7 +35,7 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	private BasketService basketServiceMock;
 	
 	@Mock
-	private shoppingService shoppingServiceMock;
+	private ShoppingService shoppingServiceMock;
 
 	@Mock
 	private ItemService itemServiceMock;

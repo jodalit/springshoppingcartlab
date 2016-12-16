@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Item implements Serializable {
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+//@XmlRootElement
+public class Item implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long itemId;
 	private String itemName;

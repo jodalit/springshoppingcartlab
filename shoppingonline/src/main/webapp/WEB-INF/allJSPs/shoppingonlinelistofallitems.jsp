@@ -731,7 +731,7 @@
 							<td>${item.price}</td>
 							<td>${item.expireDate}</td>
 							<td>
-								<a href="<spring:url value="/${item.itemId}" />">View</a>
+								<a href="<spring:url value="/item/${item.itemId}" />">View</a>
 								<a href="<spring:url value="/updateitem/${item.itemId}" />">Update</a>
 								<a href="<spring:url value="/removeitem/${item.itemId}" />">Remove</a><br />
 							 </td>

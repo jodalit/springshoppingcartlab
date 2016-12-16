@@ -644,7 +644,7 @@
         <nav>
             
             <h3><a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a></h3>
-            <h3><a id="listitems" href="<spring:url value='/listitems' />">List of all items</a></h3>
+            <h3><a id="listitems" href="<spring:url value='/item/listitems' />">List of all items</a></h3>
         </nav>
         
         <div id="main">
@@ -673,7 +673,7 @@
 							<td>${item.price}</td>
 							<td>${item.expireDate}</td>
 							<td>
-								<a href="<spring:url value="/${item.itemId}" />">View</a>
+								<a href="<spring:url value="/item/${item.itemId}" />">View</a>
 								<a href="<spring:url value="/updateitem/${item.itemId}" />">Update</a>
 								<a href="<spring:url value="/removeitem/${item.itemId}" />">Remove</a><br />
 							 </td>

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
+import org.springframework.context.annotation.Scope;
+
+@Scope("session")
 public class Basket implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Map<Long, Item> basketItems;

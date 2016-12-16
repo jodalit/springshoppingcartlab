@@ -669,10 +669,15 @@
             			<p>
 	                		<a href="#"><img alt="image 1" src="#" src="#" style="height: 5em; width: 7.25em;">${b.itemName}</a>
 							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href='<spring:url value="/removefrombasket/${b.itemId}"></spring:url>' style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
+							
 	                		<br />
 	                		${b.description}
 	                		<br />
 	                		<em>${b.price}<span>$</span></em>
+	                		<br />
+							
+							<h3><a id="itemBasket" href='<spring:url value="rest/basket/${b.itemId}"></spring:url>'>Item's Rest access</a></h3>
+							<br>
                 		</p>
                 	</div>
             	</c:forEach>
@@ -682,6 +687,10 @@
             	<span>Total ($) : ${baskettotal }</span> <br/> <br/>
             	
             	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
+            	<br />
+							
+				<h3><a id="allBasket" href='<spring:url value="rest/basket/items"></spring:url>'>Your items' Rest access</a></h3>
+				<br>
             </div>
 
         </div>

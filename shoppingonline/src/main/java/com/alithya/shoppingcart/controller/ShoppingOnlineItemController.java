@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
@@ -26,8 +28,8 @@ public class ShoppingOnlineItemController {
 	public static final String MODEL_ADD_NEW_ITEM = "addnewitem";
 	public static final String REQUESTMAPPING_REMOVEITEM_ITEM_ID = "/removeitem/{itemId}";
 	public static final String REQUESTMAPPING_UPDATEITEM_ITEM_ID = "/updateitem/{itemId}";
-	public static final String REQUESTMAPPING_ITEM_ID = "/{itemId}";
-	public static final String REQUESTMAPPING_LIST_ITEMS = "/listitems";
+	public static final String REQUESTMAPPING_ITEM_ID = "/item/{itemId}";
+	public static final String REQUESTMAPPING_LIST_ITEMS = "/item/listitems";
 	public static final String REQUESTMAPPING_SAVE_ITEM = "/saveitem";
 	public static final String REQUESTMAPPING_ADD_ITEM = "/additem";
 	public static final String ITEM_ID = "itemId";
@@ -79,13 +81,25 @@ public class ShoppingOnlineItemController {
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
 	
+	/* F2
 	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
-	public String showDetailOfItems(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
+	public String showDetailOfItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
 		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
 		
 		return SHOPPING_ONLINE_DETAIL_OF_ITEM;
 	}
+	
+	
+	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
+	@ResponseBody
+	public Item showDetailOfItems(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
+		
+		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
+		
+		return itemService.getItemById(itemId); //SHOPPING_ONLINE_DETAIL_OF_ITEM;
+	}
+	*/
 	
 	@RequestMapping(value=REQUESTMAPPING_UPDATEITEM_ITEM_ID, method=RequestMethod.GET)
 	public String updateDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){

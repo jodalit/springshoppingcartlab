@@ -12,6 +12,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome</title>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="shoppingonline/resources/js/controllers.js"></script>
+    
     <style type="text/css">
     	*{
 		    margin:0;
@@ -656,6 +659,7 @@
                 		<a href="#"><img alt="image 1" src="#" style="height: 5em; width: 7.25em;">${item.itemName}</a>
                 		
                 		<span id="s${item.itemId}" style="position: relative; top: -2.75em; color:white; background-color:navy; height:3%; width:3.5em;border:outset; padding:1px; margin-top:0.5em; margin-left: 75%;margin-right:0.25em; text-align:center; border-radius:5px; z-index: 11500;"><a id="a${item.itemId}" href='<spring:url value="/addtobasket/${item.itemId}"></spring:url>' style="color:white; text-align:center; text-decoration:none; z-index: 11500;">Add to Basket</a></span>
+                		<a href="#" class="btn btn-warning btn-large"  ng-click="addToBasket('${item.itemId}')"><span></span>Order Now</a>
                 		<br />
                 		${item.description}
                 		<br />

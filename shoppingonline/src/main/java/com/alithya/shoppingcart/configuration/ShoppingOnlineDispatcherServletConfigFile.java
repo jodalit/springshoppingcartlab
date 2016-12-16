@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -34,7 +35,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	@Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        servletContext.setInitParameter("spring.profiles.active", "test");
+        servletContext.setInitParameter("spring.profiles.active", "prod");
     }
-
+	
 }
