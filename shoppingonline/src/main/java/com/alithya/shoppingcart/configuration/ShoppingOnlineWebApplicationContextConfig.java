@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -79,6 +80,14 @@ public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerA
         
        return resolver; 
     }
+	
+	@Bean
+	public CommonsMultipartResolver multiPartResolver(){
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("utf-8");
+		
+		return resolver;
+	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
