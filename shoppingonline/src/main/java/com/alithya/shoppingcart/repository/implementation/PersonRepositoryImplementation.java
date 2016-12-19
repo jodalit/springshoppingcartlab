@@ -28,7 +28,6 @@ public class PersonRepositoryImplementation implements PersonRepository {
 		return jdbcTemplate.query(SQL_SELECT_ALL_PEOPLE_PROFILE, params, new PersonProfileMapper());
 	}
 	
-	
 	private static final class PersonProfileMapper implements org.springframework.jdbc.core.RowMapper<Person> {
 		private static final String PROFILEI_D = "PROFILEID";
 		public static final String PERSON_PASSWORD = "PERSONPASSWORD";
