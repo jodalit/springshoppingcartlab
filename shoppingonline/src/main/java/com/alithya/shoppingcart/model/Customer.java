@@ -3,6 +3,9 @@ package com.alithya.shoppingcart.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.context.annotation.Scope;
+
+@Scope("session")
 public class Customer extends Person {
 	private Long customerId;
 	private Double customerAvailableAmount;
