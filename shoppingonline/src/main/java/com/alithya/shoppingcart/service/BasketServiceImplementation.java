@@ -86,8 +86,6 @@ public class BasketServiceImplementation implements BasketService {
 		basketData.setBasketQuantity(0);
 		basketData.setBasketTotalAmount(0.0);
 		
-		System.out.println(basketData);
-		
 		return true;
 	}
 

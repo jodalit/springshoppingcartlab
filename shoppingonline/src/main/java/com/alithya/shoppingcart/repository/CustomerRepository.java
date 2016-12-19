@@ -7,5 +7,5 @@ import com.alithya.shoppingcart.model.Customer;
 
 public interface CustomerRepository {
 	public Customer getCustomer();
-	public boolean updateAmount(Double amount);
+	public boolean updateAmount(Double amount, Long customerId);
 }

@@ -15,7 +15,11 @@ import com.alithya.shoppingcart.repository.CustomerRepository;
 
 @Repository
 public class CustomerRepositotyImplementation implements CustomerRepository {
+	public static final String ID = "id";
+	public static final String AVAILABLE_AMOUNT = "availableAmount";
+	
 	public static final String SQL_SELECT_CUSTOMER_INFO = "SELECT * FROM Person_Customer_view";
+	public static final String SQL_UPDATE_AVAILABLE_AMOUNT = "UPDATE Customer SET customerAvailableAmount = :availableAmount WHERE customerId = :id";
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -28,9 +32,16 @@ public class CustomerRepositotyImplementation implements CustomerRepository {
 	}
 
 	@Override
-	public boolean updateAmount(Double amount) {
+	public boolean updateAmount(Double amount, Long customerId) {
+		if (amount == null)
+			return false;
 		
-		return false;
+		Map<String, Object> params = new HashMap<>();
+		params.put(AVAILABLE_AMOUNT, amount);
+		params.put(ID, customerId);
+		
+		jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
+		return true;
 	}
 	
 	private static final class CustomerPersonMapper implements org.springframework.jdbc.core.RowMapper<Customer> {	

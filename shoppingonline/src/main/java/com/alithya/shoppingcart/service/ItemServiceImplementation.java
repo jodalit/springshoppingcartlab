@@ -19,8 +19,6 @@ public class ItemServiceImplementation implements ItemService {
 	
 	@Autowired
 	private ItemRepository itemRepository;
-
-	//private  Map<Long, Item> items = new HashMap<>();
 	
 	@Override
 	public Map<Long, Item> getItemsList() {
