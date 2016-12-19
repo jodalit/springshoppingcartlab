@@ -15,9 +15,9 @@ public class Customer extends Person {
 	 super();	
 	}
 	
-	public Customer(Long customerId, Double customerAvailableAmount, String customerName, String customerSex, LocalDate customerBirthDate, String customerAdress, String customerTelephone, String customerConnectionName, String customerPassword ) {
+	public Customer(Long customerId, Double customerAvailableAmount, Long personId, String customerName, String customerSex, LocalDate customerBirthDate, String customerAdress, String customerTelephone, String customerConnectionName, String customerPassword ) {
 		
-		super(customerId, customerName, customerSex, customerBirthDate, customerAdress, customerTelephone, customerConnectionName, customerPassword, 2);
+		super(personId, customerName, customerSex, customerBirthDate, customerAdress, customerTelephone, customerConnectionName, customerPassword, 2);
 		
 		this.customerId = customerId;
 		this.customerAvailableAmount = customerAvailableAmount;
