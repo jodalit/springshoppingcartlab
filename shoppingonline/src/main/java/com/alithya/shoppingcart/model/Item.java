@@ -7,6 +7,8 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.springframework.web.multipart.MultipartFile;
+
 //@XmlRootElement
 public class Item implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -15,6 +17,7 @@ public class Item implements Serializable{
 	private String description;
 	private Double price;
 	private LocalDate expireDate;
+	private MultipartFile itemImage;
 	
 	public Item() {
 	}
@@ -72,6 +75,14 @@ public class Item implements Serializable{
 
 	public void setExpireDate(LocalDate expireDate) {
 		this.expireDate = expireDate;
+	}
+	
+	public MultipartFile getItemImage() {
+		return itemImage;
+	}
+
+	public void setItemImage(MultipartFile itemImage) {
+		this.itemImage = itemImage;
 	}
 
 	@Override
