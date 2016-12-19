@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.BasketService;
+import com.alithya.shoppingcart.service.CustomerService;
 
 @Controller
 public class ShoppingOnlineBasketController {
+	public static final String SESSION_CUSTOMER = "customer";
 	public static final String SESSION_PEOPLE = "people";
 	public static final String SESSION_ITEMS = "items";
 	public static final String SESSION_ITEMS_FOR_NAME = "itemsforname";
 	public static final String SESSION_CONNECTION_NAME = "connectionname";
 	public static final String SESSION_BASKETTOTAL = "baskettotal";
 	public static final String SESSION_BASKETSIZE = "basketsize";
+	public static final String SESSION_BASKETDATA = "basketdata";
 	public static final String MODEL_NAME_NEWUSER = "newuser";
 	public static final String MODEL_NAME_BASKET = "basket";
 	public static final String MODEL_NAME_BASKET_SIZE = "basketSize";
@@ -47,9 +50,14 @@ public class ShoppingOnlineBasketController {
 	
 	@Autowired
 	private BasketService basketService;
+	
+	@Autowired
+	CustomerService customerService;
 
 	@RequestMapping(value = REQUESTMAPPING_SHOWBASKET, method = RequestMethod.GET)
-	public String getBasket() {
+	public String getBasket(HttpServletRequest request) {
+
+		request.getSession().setAttribute(SESSION_CUSTOMER, customerService.getCustomerInfo());
 		
 		return SHOPPING_ONLINE_BASKET;
 	}
@@ -74,6 +82,7 @@ public class ShoppingOnlineBasketController {
 		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 	
+	/*
 	@RequestMapping(REQUESTMAPPING_PAYITEMS)
 	public String payItems(HttpServletRequest request) {
 		
@@ -87,6 +96,7 @@ public class ShoppingOnlineBasketController {
 			
 		return SHOPPING_ONLINE_BASKET_RECEIVED;
 	}
+	*/
 	
 	@RequestMapping(REQUESTMAPPING_REMOVEFROMBASKET_ITEM_ID)
 	public String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
@@ -107,12 +117,14 @@ public class ShoppingOnlineBasketController {
 			request.getSession().setAttribute(MODEL_NAME_BASKET, basketService.getItemsBasket().values());
 			request.getSession().setAttribute(SESSION_BASKETSIZE, basketService.getItemsBasket().size());
 			request.getSession().setAttribute(SESSION_BASKETTOTAL, basketService.getTotalAmountBasket());
+			request.getSession().setAttribute(SESSION_BASKETDATA, basketService.getBasketData());
 	}
 	
 	public void initBasket(HttpServletRequest request){
 		request.getSession().setAttribute(MODEL_NAME_BASKET, basketService.initBasket().get(1));
 		request.getSession().setAttribute(SESSION_BASKETSIZE, basketService.initBasket().get(2));
 		request.getSession().setAttribute(SESSION_BASKETTOTAL, basketService.initBasket().get(3));
+		request.getSession().setAttribute(SESSION_BASKETDATA, null);
 	}
 	
 	public void setBasketService(BasketService basketService) {

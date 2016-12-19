@@ -1,11 +1,13 @@
 package com.alithya.shoppingcart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.repository.CustomerRepository;
 
+@Service
 public class CustomerServiceImplementation implements CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -57,6 +59,11 @@ public class CustomerServiceImplementation implements CustomerService {
 		customerBasket.setBasketTotalAmount(0.0);
 		
 		return true;
+	}
+
+	@Override
+	public Customer getCustomerInfo() {
+		return customerRepository.getCustomer();
 	}
 
 }

@@ -129,6 +129,10 @@ public class BasketServiceImplementation implements BasketService {
 	public void setBasketData(Basket basketData) {
 		this.basketData = basketData;
 	}
-	
+
+	@Override
+	public Basket getBasketData() {
+		return basketData;
+	}
 	
 }

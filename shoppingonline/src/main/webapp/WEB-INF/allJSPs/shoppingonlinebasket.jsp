@@ -686,7 +686,7 @@
             	<br />
             	<span>Total ($) : ${baskettotal }</span> <br/> <br/>
             	
-            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
+            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="customer/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
             	<br />
 							
 				<h3><a id="allBasket" href='<spring:url value="rest/basket/items"></spring:url>'>Your items' Rest access</a></h3>

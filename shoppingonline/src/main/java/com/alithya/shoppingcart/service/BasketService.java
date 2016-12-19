@@ -18,4 +18,5 @@ public interface BasketService {
 	public void setItemService(ItemService itemService);
 
 	public void setBasketData(Basket basketData);
+	public Basket getBasketData();
 }

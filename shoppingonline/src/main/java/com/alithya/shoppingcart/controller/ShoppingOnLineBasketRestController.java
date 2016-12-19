@@ -1,5 +1,6 @@
 package com.alithya.shoppingcart.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +32,10 @@ public class ShoppingOnLineBasketRestController {
 	@RequestMapping(value="/basket/items", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Item> showItems( ModelMap model, HttpServletRequest request){
-				
+		if (basketService.getItemsBasket()==null)
+			return new ArrayList<>();
+		
 		return basketService.getItemsBasket().values();
 	}
-
+	
 }
