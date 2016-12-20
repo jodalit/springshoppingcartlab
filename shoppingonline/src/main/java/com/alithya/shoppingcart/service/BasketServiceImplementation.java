@@ -47,7 +47,8 @@ public class BasketServiceImplementation implements BasketService {
 		
 		return true;
 	}
-
+	
+	/*
 	@Override
 	public boolean verifyItemBasket(Long itemId) {
 		
@@ -56,7 +57,8 @@ public class BasketServiceImplementation implements BasketService {
 		
 		return false;
 	}
-
+	*/
+	
 	@Override
 	public boolean removeItemToBasket(Long itemId) {
 		
@@ -98,8 +100,6 @@ public class BasketServiceImplementation implements BasketService {
 
 	@Override
 	public Map<Long, Item> getItemsBasket() {
-		
-		//basketData.getBasketItems().values().forEach(System.out::println);
 		
 		return basketData.getBasketItems();
 	}

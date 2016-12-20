@@ -35,7 +35,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	@Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        servletContext.setInitParameter("spring.profiles.active", "prod");
+        servletContext.setInitParameter("spring.profiles.active", "test");
     }
 	
 }

@@ -8,7 +8,7 @@ import com.alithya.shoppingcart.model.Item;
 
 public interface BasketService {
 	public boolean addItemToBasket(Long itemId);
-	public boolean verifyItemBasket(Long itemId);
+	//public boolean verifyItemBasket(Long itemId);
 	public boolean removeItemToBasket(Long itemId);
 	public boolean removeItemsToBasket();
 	public boolean removeItemOnItemsListOfClient(Item item, List<Item> items);

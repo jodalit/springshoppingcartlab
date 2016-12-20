@@ -16,4 +16,9 @@ public class ShoppingServiceImplementation implements ShoppingService {
 		return itemRepository.getAllItems() ; 
 	}
 	
+	@Override
+	public void setItemRepository(ItemRepository itemRepository) {
+		this.itemRepository = itemRepository;
+	}
+	
 }
