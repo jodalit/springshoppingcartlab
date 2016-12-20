@@ -62,5 +62,10 @@ public class CustomerServiceImplementation implements CustomerService {
 	public Customer getCustomerInfo() {
 		return customerRepository.getCustomer();
 	}
-
+	
+	@Override
+	public void setCustomerRepository(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
+	
 }
