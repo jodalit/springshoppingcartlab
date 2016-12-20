@@ -5,8 +5,13 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alithya.shoppingcart.model.Basket;
@@ -20,7 +25,7 @@ public class ShoppingOnLineCustomerRestController {
 	@Autowired
 	private CustomerService customerService; 
 	
-	@RequestMapping("/payitems")
+	@RequestMapping(value="/payitems", method=RequestMethod.GET)
 	@ResponseBody
 	public String payItems(HttpServletRequest request) {
 	
@@ -31,13 +36,23 @@ public class ShoppingOnLineCustomerRestController {
 		Double basketTotalAmount = basketData.getBasketTotalAmount();
 		Collection<Item> items = basketData.getBasketItems().values();
 		Customer customer = (Customer) request.getSession().getAttribute("customer");
+		
 		if (!customerService.purchaseItem(basketData, customer))
-			return String.join(" ", "<h1 style='color:red;'>You do not have enough money available in your Account</h1>", "<h2>Your available amount is ($) :",customer.getCustomerAvailableAmount().toString(), "</h2>");
+			return String.join(" ", "<h1 style='color:red;'>You do not have enough money available in your Account</h1>", 
+					"<h2>Your available amount is ($) :",customer.getCustomerAvailableAmount().toString(), "</h2>");
 		
 		initBasket(request);
 		request.getSession().invalidate();
 		
-		return String.join(" ", "<h2>Your ticket ($) : ", basketTotalAmount.toString(),"</h2>", "<h3>For these Items : </h3>", items.toString()) ;
+		return String.join(" ", "<h2 style='color:green;'>Your ticket ($) : ", 
+				basketTotalAmount.toString(),"</h2>", "<h3 style='color:bleue;'>For these Items : </h3>", 
+				items.toString()) ;
+	}
+	
+	@RequestMapping(value="/recharge", method=RequestMethod.POST)
+	@ResponseStatus(value=HttpStatus.OK)
+	public void rechargeAccount(@PathVariable("customerAvailableAmount") Double customerAvailableAmount, RequestBody Customer, HttpServletRequest request) {
+		
 	}
 	
 	public void initBasket(HttpServletRequest request){

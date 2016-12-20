@@ -1,12 +1,17 @@
 package com.alithya.shoppingcart.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 import org.springframework.context.annotation.Scope;
 
 @Scope("session")
-public class Customer extends Person {
+public class Customer extends Person implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long customerId;
 	private Double customerAvailableAmount;
 	private Person person;

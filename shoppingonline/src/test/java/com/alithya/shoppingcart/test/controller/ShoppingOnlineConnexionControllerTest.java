@@ -4,11 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +20,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.controller.ShoppingOnlineConnexionController;
-import com.alithya.shoppingcart.model.Person;
 import com.alithya.shoppingcart.service.ServicePerson;
 
 @RunWith(SpringJUnit4ClassRunner.class)

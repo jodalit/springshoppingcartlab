@@ -12,9 +12,6 @@ public class CustomerServiceImplementation implements CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 	
-	@Autowired
-	private BasketService  BasketService;
-	
 	@Override
 	public Double getAvailableAmount() {
 		Customer customer = customerRepository.getCustomer();
@@ -35,7 +32,7 @@ public class CustomerServiceImplementation implements CustomerService {
 		Double existingAmount =customerRepository.getCustomer().getCustomerAvailableAmount();
 		Double newAmount = existingAmount + amount;
 		
-		customerRepository.updateAmount(amount, id);
+		customerRepository.updateAmount(newAmount, id);
 		
 		return true;
 	}

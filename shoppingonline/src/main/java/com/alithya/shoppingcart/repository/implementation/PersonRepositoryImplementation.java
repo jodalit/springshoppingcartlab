@@ -2,7 +2,6 @@ package com.alithya.shoppingcart.repository.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +28,14 @@ public class PersonRepositoryImplementation implements PersonRepository {
 	}
 	
 	private static final class PersonProfileMapper implements org.springframework.jdbc.core.RowMapper<Person> {
-		private static final String PROFILEI_D = "PROFILEID";
+		//private static final String PROFILEI_D = "PROFILEID";
 		public static final String PERSON_PASSWORD = "PERSONPASSWORD";
 		public static final String PERSON_CONNECTION_NAME = "PERSONCONNECTIONNAME";
 		public static final String PERSON_SEX = "PERSONSEX";
 		public static final String PERSON_NAME = "PERSONNAME";
 		public static final String PERSON_ID = "PERSONID";
-						
+		
+		@Override
 		public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Person person = new Person();
 			person.setPersonId(rs.getLong(PERSON_ID));
