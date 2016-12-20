@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,14 +24,22 @@ public class CustomerRepositotyImplementation implements CustomerRepository {
 	public static final String SQL_SELECT_CUSTOMER_INFO = "SELECT * FROM Person_Customer_view";
 	public static final String SQL_UPDATE_AVAILABLE_AMOUNT = "UPDATE Customer SET customerAvailableAmount = :availableAmount WHERE customerId = :id";
 	
+	private JdbcTemplate jdbcTemplateShoppingCart;
+	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	public CustomerRepositotyImplementation (DataSource dataSouce) {
+		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
+	}
 	
 	@Override
 	public Customer getCustomer() {
 		Map<String, Object> params = new HashMap<>();
 		
-		return jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, params, new CustomerPersonMapper());
+		//return jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, params, new CustomerPersonMapper());
+		return jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
 	}
 
 	@Override
@@ -40,7 +51,8 @@ public class CustomerRepositotyImplementation implements CustomerRepository {
 		params.put(AVAILABLE_AMOUNT, amount);
 		params.put(ID, customerId);
 		
-		jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
+		//jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
+		jdbcTemplateShoppingCart.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
 		return true;
 	}
 	

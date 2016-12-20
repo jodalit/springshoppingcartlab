@@ -31,24 +31,12 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	@Autowired
 	MockHttpServletRequest request;
 	
-	@Mock
-	private BasketService basketServiceMock;
-	
-	@Mock
-	private ShoppingService shoppingServiceMock;
-
-	@Mock
-	private ItemService itemServiceMock;
-	
 	private ShoppingOnlineSomeUtilitiesController someUtilities;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		request.getSession().setAttribute("basket", shoppingServiceMock.getBasket());
 		someUtilities = new ShoppingOnlineSomeUtilitiesController();
-		someUtilities.setItemService(itemServiceMock);
-		someUtilities.setShoppingService(shoppingServiceMock);
 	}
 
 	@Test

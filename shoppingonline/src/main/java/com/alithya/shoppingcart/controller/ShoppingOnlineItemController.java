@@ -81,26 +81,6 @@ public class ShoppingOnlineItemController {
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
 	
-	/* F2
-	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
-	public String showDetailOfItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
-		
-		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
-		
-		return SHOPPING_ONLINE_DETAIL_OF_ITEM;
-	}
-	
-	
-	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
-	@ResponseBody
-	public Item showDetailOfItems(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
-		
-		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));
-		
-		return itemService.getItemById(itemId); //SHOPPING_ONLINE_DETAIL_OF_ITEM;
-	}
-	*/
-	
 	@RequestMapping(value=REQUESTMAPPING_UPDATEITEM_ITEM_ID, method=RequestMethod.GET)
 	public String updateDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		

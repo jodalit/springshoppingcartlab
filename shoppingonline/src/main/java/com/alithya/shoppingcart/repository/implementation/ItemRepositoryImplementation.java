@@ -44,7 +44,7 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	@Autowired
 	public ItemRepositoryImplementation (DataSource dataSouce) {
 		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
-	}
+	}	
 	
 	public boolean insertItem(String itemName, String itemDescription, String itemPrice, String itemExpireDate){
 		

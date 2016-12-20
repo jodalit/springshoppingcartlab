@@ -77,22 +77,6 @@ public class ShoppingOnlineItemControllerTest {
 	}
 	
 	@Test
-	public void verifyShowDetailOfItems(){
-		
-		Item item = new Item(Long.valueOf(10), "Alithya", "Alithya Montreal", 125.45D, LocalDate.now());
-		when(itemServiceMock.getItemById(Long.valueOf(10))).thenReturn(item);
-		
-		ModelMap model = new ModelMap();	
-		String result = shoppingOnlineItemController.showDetailOfItems(Long.valueOf(10), model, request);
-		
-		assertNotNull(result);
-		assertTrue(model.containsKey(shoppingOnlineItemController.MODEL_ITEM));
-		assertTrue(model.containsKey(shoppingOnlineItemController.MODEL_ITEM));
-		assertEquals(item, model.get(shoppingOnlineItemController.MODEL_ITEM));
-		assertSame("PAGE OF LISTE OF ITEMS", shoppingOnlineItemController.SHOPPING_ONLINE_DETAIL_OF_ITEM, result); 
-	}
-	
-	@Test
 	public void verifyGetAllItems(){
 		
 		ModelMap model = new ModelMap();

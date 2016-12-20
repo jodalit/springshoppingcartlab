@@ -44,7 +44,12 @@ public class ShoppingOnlineRootApplicationContextConfig {
 				.setType(EmbeddedDatabaseType.H2)
 				.setScriptEncoding("UTF-8")
 				.ignoreFailedDrops(true)
-				.addScript("/test/resources/db/sql/shoppingonline.sql")
+				.addScript("/db/sql/shoppingonline_create_item.sql")
+				.addScripts("/db/sql/shoppingonline_create_profile.sql")
+				.addScripts("/db/sql/shoppingonline_create_person.sql")
+				.addScripts("/db/sql/shoppingonline_create_customer.sql")
+				.addScripts("/db/sql/shoppingonline_create_person_profile_view.sql")
+				.addScripts("/db/sql/shoppingonline_create_person_customer_view.sql")
 				.build();
 	}
 	

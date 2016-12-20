@@ -1,16 +1,17 @@
-CREATE TABLE Item (
+CREATE TABLE IF NOT EXISTS Item (
 	itemId BIGINT(8) NOT NULL, 
 	itemName VARCHAR(60),
 	itemDescription VARCHAR(250),
 	itemPrice DOUBLE,
 	PRIMARY KEY (itemId)
-);
+)
 
+/*
 CREATE TABLE Profile (
   profileId  INT NOT NULL,
   profileName (255) NOT NULL,
   PRIMARY KEY (profileId)
-);
+)
 
 CREATE TABLE Person (
 	personId BIGINT(8) NOT NULL, 
@@ -33,6 +34,7 @@ CREATE TABLE Customer (
   PRIMARY KEY (customerId),
   FOREIGN KEY (personId) REFERENCES Person(personId)
 );
+
 
 CREATE VIEW Person_Profile_view AS
     SELECT DISTINCT
@@ -71,3 +73,4 @@ insert into Item (itemId, itemName, itemDescription, itemPrice) values(4, 'Alith
 
 insert into Person (personId, personName, personConnectionName, personPassword, personProfile) values(1, 'administrator', 'admin', 'admin', 1);
 insert into Person (personId, personName, personConnectionName, personPassword, personProfile) values(1, 'customer1', 'customer1', 'customer1', 2);
+*/

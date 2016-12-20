@@ -115,4 +115,10 @@ public class ShoppingOnlineBasketController {
 	public void setBasketService(BasketService basketService) {
 		this.basketService = basketService;
 	}
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
+	}
+	
+	
 }
