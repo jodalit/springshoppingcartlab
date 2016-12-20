@@ -82,21 +82,6 @@ public class ShoppingOnlineBasketController {
 		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 	
-	/*
-	@RequestMapping(REQUESTMAPPING_PAYITEMS)
-	public String payItems(HttpServletRequest request) {
-		
-		if (basketService.getItemsBasket() == null)
-			return REDIRECT;
-		
-		if (basketService.removeItemsToBasket()){
-			initBasket(request);
-			return REDIRECT;
-		}
-			
-		return SHOPPING_ONLINE_BASKET_RECEIVED;
-	}
-	*/
 	
 	@RequestMapping(REQUESTMAPPING_REMOVEFROMBASKET_ITEM_ID)
 	public String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {

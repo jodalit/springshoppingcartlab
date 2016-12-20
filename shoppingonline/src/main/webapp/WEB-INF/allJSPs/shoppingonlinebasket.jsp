@@ -158,9 +158,9 @@
 		    border:inset;
 		}
 		
-		div#divrecharge #customerAvailableAmount{
+		div#divrecharge input#customerAvailableAmount{
 			width:6.75em/*px*/;
-			margin-left: 0.5em;
+			margin-left:0;
 		}
 		
 		/*Buttons formating */
@@ -678,29 +678,25 @@
             
             <hr />
             
-            <p>
+            <p style="background-color: #ccd458; color: navy; text-align: right;">
             	<br/><br/>
-            	<em style="color: navy; text-align: center;">Your available amount ($) : </em>${customer.customerAvailableAmount} <br/> <br/>
+            	<em>Your available amount ($) : </em>${customer.customerAvailableAmount} <br/> <br/>
             	<span style="text-align: right;"><a id="arechargeaccount" href="#">Recharge your account</a></span><br/> <br/>
             </p>
             
-            <div id = "divrecharge">
+            <div id = "divrecharge" style="background-color: #ccd458;">
             	
             	<form action="<spring:url value='customer/recharge' />" method="post">
             		<fieldset>
-                    	<br/>
-                        <label for="customerAvailableAmount">Amount ($) :</label><br/>
-                        <input type="text" name="customerAvailableAmount" id="customerAvailableAmount"  size="10" maxlength="15" tabindex="0"/> <span id="scustomerAvailableAmount"></span><br />
+                        <label for="customerAvailableAmount">Amount ($) :</label><br />
+                        <input type="text" name="customerAvailableAmount" id="customerAvailableAmount"  size="10" maxlength="15" tabindex="0"/> <span id="scustomerAvailableAmount"></span>
                      </fieldset>
                      <fieldset>
-                        <br/>
                         <button type="submit" id="saveBtn" name="saveBtn" class="bouton">Save</button>
                         <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
                         <br/>
+                        <span style="text-align: right;"><a id="acancelrechargeaccount" href="#" style="text-align: right;">Renounce</a></span> 
                     </fieldset>
-                    <br />
-                    <br />
-                    <span style="text-align: right;"><a id="acancelrechargeaccount" href="#">Renounce</a></span><br/> <br/> 
             	</form>
             </div>
             

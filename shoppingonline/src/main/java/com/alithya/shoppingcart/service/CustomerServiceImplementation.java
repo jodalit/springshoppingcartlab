@@ -23,10 +23,10 @@ public class CustomerServiceImplementation implements CustomerService {
 
 	@Override
 	public boolean recharge(Double amount, Long id) {
-		if (amount==null)
-			return false;
+		System.out.println(amount);
+		System.out.println(id);
 		
-		if (customerRepository.getCustomer().getCustomerId()!=id)
+		if (amount==null)
 			return false;
 		
 		Double existingAmount =customerRepository.getCustomer().getCustomerAvailableAmount();
