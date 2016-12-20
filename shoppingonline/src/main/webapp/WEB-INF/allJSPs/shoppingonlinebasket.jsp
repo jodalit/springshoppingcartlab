@@ -157,8 +157,10 @@
 		    padding:7px;
 		    border:inset;
 		}
-		#customerAvailableAmount{
-			width:8.75em/*px*/;
+		
+		div#divrecharge #customerAvailableAmount{
+			width:6.75em/*px*/;
+			margin-left: 0.5em;
 		}
 		
 		/*Buttons formating */
@@ -242,6 +244,15 @@
 		[readonly]{
 		    background-color:hsl(255, 50%, 80%);
 		}
+		
+		div#divrecharge #saveBtn, div#divrecharge #resetBtn{
+			background-color:navy;
+			width: :3em;
+			height: 2em;
+			margin: 0.05em;
+			padding: 0.05em;
+		}
+		
 		
 		/*------------------Formatting buttons and inputs in forms----------------------------*/
 		form input{
@@ -670,7 +681,7 @@
             <p>
             	<br/><br/>
             	<em style="color: navy; text-align: center;">Your available amount ($) : </em>${customer.customerAvailableAmount} <br/> <br/>
-            	<span style="text-align: right;"><a id="arechargeaccount" href='<spring:url value="customer/recharge"></spring:url>'>Recharge your account</a></span><br/> <br/>
+            	<span style="text-align: right;"><a id="arechargeaccount" href="#">Recharge your account</a></span><br/> <br/>
             </p>
             
             <div id = "divrecharge">
@@ -687,7 +698,9 @@
                         <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
                         <br/>
                     </fieldset>
-                     
+                    <br />
+                    <br />
+                    <span style="text-align: right;"><a id="acancelrechargeaccount" href="#">Renounce</a></span><br/> <br/> 
             	</form>
             </div>
             
@@ -736,14 +749,23 @@
         </footer>
     </div>
     
-    <script type="text/javascript">
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js" ></script>
+    <script>
     	$(document).ready(function(){
-    		$(".solTitle a").live('click',function(e){
-        	var contentId = "summary_" + $(this).attr('id');
-        	$(".summary").hide();
-        	$("#" + contentId).show();
-    });
-});
+    		$("#divrecharge").hide();
+    		$("#arechargeaccount").click(function(){
+        	
+        		$("#divrecharge").show();
+        		$("#arechargeaccount").hide();
+    		});
+    		
+    		$("#acancelrechargeaccount").click(function(){
+        	
+        		$("#divrecharge").hide();
+        		$("#arechargeaccount").show();
+    		});
+    		
+		});
     </script>
 </body>
 </html>
