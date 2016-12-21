@@ -54,7 +54,6 @@ public class ItemServiceImplementation implements ItemService {
 			return false;
 		
 		if (itemRepository.updateItem(id, name, description, price, expireDate)){
-			//this.setItems(itemsList());
 			this.getItemsList();
 			return true;
 		}

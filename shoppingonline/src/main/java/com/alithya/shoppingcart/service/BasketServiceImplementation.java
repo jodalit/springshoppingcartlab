@@ -48,17 +48,6 @@ public class BasketServiceImplementation implements BasketService {
 		return true;
 	}
 	
-	/*
-	@Override
-	public boolean verifyItemBasket(Long itemId) {
-		
-		if (basketData.getBasketItems().containsKey(itemId))
-			return true;
-		
-		return false;
-	}
-	*/
-	
 	@Override
 	public boolean removeItemToBasket(Long itemId) {
 		

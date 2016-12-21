@@ -5,12 +5,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,9 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Item;
-import com.alithya.shoppingcart.repository.ItemRepository;
 import com.alithya.shoppingcart.service.BasketService;
 import com.alithya.shoppingcart.service.BasketServiceImplementation;
 import com.alithya.shoppingcart.service.ItemService;
@@ -74,6 +69,7 @@ public class BasketServiceImplementationTest {
 		boolean b = basketService.addItemToBasket(4L);
 		boolean response = basketService.removeItemToBasket(4L);
 		
+		assertTrue( b);
 		assertSame(true, response);
 		assertNotSame(items,basketService.getBasketData().getBasketItems());
 		assertSame(0,basketService.getBasketData().getBasketItems().size());
@@ -90,6 +86,7 @@ public class BasketServiceImplementationTest {
 		boolean b = basketService.addItemToBasket(4L);
 		boolean response = basketService.removeItemsToBasket();
 		
+		assertTrue( b);
 		assertSame(true, response);
 		assertNull(basketService.getBasketData().getBasketItems());
 		assertSame(0, basketService.getBasketData().getBasketQuantity());
@@ -109,6 +106,7 @@ public class BasketServiceImplementationTest {
 		List<Item> itemsList = new ArrayList<>(items.values());
 		boolean response = basketService.removeItemOnItemsListOfClient(item, itemsList);
 		
+		assertTrue( b);
 		assertSame(true, response);
 		assertEquals(0,basketService.getBasketData().getBasketItems().size());
 	}

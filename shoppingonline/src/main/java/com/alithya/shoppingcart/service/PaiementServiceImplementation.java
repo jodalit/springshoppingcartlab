@@ -1,5 +1,6 @@
 package com.alithya.shoppingcart.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class PaiementServiceImplementation implements PaiementService {
 		
 	@Override
 	public Double getAvailableAmount() {
-		Customer customer = paiementRepository.getCustomer();
+		Customer customer = this.getCustomerInfo();
 		try {
 			return customer.getCustomerAvailableAmount();
 		} catch (BusinessException e) {
@@ -32,14 +33,19 @@ public class PaiementServiceImplementation implements PaiementService {
 
 	@Override
 	public boolean recharge(Double amount, Long id) {	
+		Double existingAmount = this.getCustomerInfo().getCustomerAvailableAmount();
+		Double newAmount = existingAmount + amount;
+		
 		try {
-			Double existingAmount =paiementRepository.getCustomer().getCustomerAvailableAmount();
-			Double newAmount = existingAmount + amount;
 			
-			paiementRepository.updateAmount(newAmount, id);
+			if (!paiementRepository.updateAmount(newAmount, id)){
+				return false;
+			}
 			
 			return true;
-		} catch (BusinessException e) {
+			
+		} catch (SQLException e) {
+			
 			setError("customerAvailableAmount", e.getMessage());
 			return false;
 		}
@@ -49,46 +55,62 @@ public class PaiementServiceImplementation implements PaiementService {
 	@Override
 	public boolean purchaseItem(Basket customerBasket, Customer customer) {
 		try {
+			
 			basketValidation(customerBasket);
+			
 		} catch (BusinessException e) {
+			
 			setError("emptybasket", e.getMessage());
 			return false;
+			
 		}
 		
-		Customer customerr = paiementRepository.getCustomer();
+		Customer customerr = this.getCustomerInfo();
 		
 		try {
+			
 			accountBalanceValidation(customerBasket, customerr);
+			
 		} catch (BusinessException e) {
+			
 			setError("accountbalance", e.getMessage());
 			return false;
+			
 		}
 		
 		Double availableAmount = customerr.getCustomerAvailableAmount();
 		Double basketTotalAmount = customerBasket.getBasketTotalAmount();
 		
 		try {
+			
 			availableAmount = availableAmount-basketTotalAmount;
-			if (customer.getCustomerId()!=customerr.getCustomerId())
-				paiementRepository.updateAmount(availableAmount, customerr.getCustomerId());
-			else
-				paiementRepository.updateAmount(availableAmount, customer.getCustomerId());
-
-			customerBasket.setBasketItems(null);
-			customerBasket.setBasketQuantity(0);
-			customerBasket.setBasketTotalAmount(0.0);
-		
+			
+			if (!paiementRepository.updateAmount(availableAmount, customerr.getCustomerId())){
+				return false;
+			}
+						
 			return true;
+			
 		} catch (BusinessException e) {
+			
 			setError("customerAvailableAmount", e.getMessage());
 			return false;
+			
+		} catch (SQLException e) {
+			
+			setError("connection", String.join(" ", "Database unavailable!", e.getMessage()));
+			return false;
+			
 		}
 	} 
 	
 	@Override
 	public void basketValidation(Basket customerBasket) {
+		
 		if (customerBasket.getBasketItems()==null){
+			
 			throw new BusinessException("You do not have much money!");
+			
 		}
 	}
 	
@@ -99,17 +121,28 @@ public class PaiementServiceImplementation implements PaiementService {
 		Double basketTotalAmount = customerBasket.getBasketTotalAmount();
 		
 		if (basketTotalAmount > availableAmount){
+			
 			throw new BusinessException("Your basket is empty!");
+			
 		}
 	}
 	
 	@Override
 	public Customer getCustomerInfo() {
-		return paiementRepository.getCustomer();
+		try {
+			
+			return paiementRepository.getCustomer();
+			
+		} catch (SQLException e) {
+			
+			setError("connection", String.join(" ", "Database unavailable!", e.getMessage()));
+			return null;
+			
+		}
 	}
 	
 	@Override
-	public void setCustomerRepository(PaiementRepository paiementRepository) {
+	public void setPaiementRepository(PaiementRepository paiementRepository) {
 		this.paiementRepository = paiementRepository;
 	}
 	@Override

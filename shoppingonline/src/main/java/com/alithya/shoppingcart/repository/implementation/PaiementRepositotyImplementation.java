@@ -36,11 +36,9 @@ public class PaiementRepositotyImplementation implements PaiementRepository {
 	}
 	
 	@Override
-	public Customer getCustomer() throws BusinessException {
-		Map<String, Object> params = new HashMap<String, Object>();
-		
+	public Customer getCustomer() {
 		try {
-			//return jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, params, new CustomerPersonMapper());
+			
 			return jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
 		} catch (Exception e) {
 			throw new BusinessException("Database unavailable!");
@@ -48,7 +46,7 @@ public class PaiementRepositotyImplementation implements PaiementRepository {
 	}
 
 	@Override
-	public boolean updateAmount(Double amount, Long customerId) throws BusinessException{
+	public boolean updateAmount(Double amount, Long customerId) throws SQLException{
 		if (amount == null){
 			throw new BusinessException("Amount should be number");
 		}
@@ -58,8 +56,7 @@ public class PaiementRepositotyImplementation implements PaiementRepository {
 			params.put(AVAILABLE_AMOUNT, amount);
 			params.put(ID, customerId);
 			
-			//jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
-			jdbcTemplateShoppingCart.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
+			jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
 			return true;
 		} catch (Exception e) {
 			throw new BusinessException("Database unavailable!");

@@ -11,9 +11,9 @@ public interface PaiementService {
 	public Double getAvailableAmount();
 	public boolean recharge(Double amount, Long id);
 	public boolean purchaseItem(Basket customerBasket, Customer customer);
-	public void setCustomerRepository(PaiementRepository paiementRepository);
 	public void basketValidation(Basket customerBasket);
 	public void accountBalanceValidation(Basket customerBasket, Customer customer);
 	public Map<String, String> getErrors();
 	public void setError( String target, String message );
+	void setPaiementRepository(PaiementRepository paiementRepository);
 }

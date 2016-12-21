@@ -20,8 +20,23 @@ import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.PaiementService;
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping(ShoppingOnLinePaiementRestController.SESSION_CUSTOMER)
 public class ShoppingOnLinePaiementRestController {
+	public static final String ERROR_CUSTOMER_AVAILABLE_AMOUNT = "customerAvailableAmount";
+	public static final String ERROR_EMPTYBASKET = "emptybasket";
+	public static final String ERROR_ACCOUNTBALANCE = "accountbalance";
+	public static final String SESSION_CUSTOMER = "customer";
+	public static final String SESSION_BASKETDATA = "basketdata";
+	public static final String STRING_H1 = "</h1>";
+	public static final String STRING_BR = "<br />";
+	public static final String STRING_H1_STYLE_COLOR_RED_WARNNING_H1 = "<h1 style='color:red;'>WARNNING</h1>";
+	public static final String STRING_H3_STYLE_COLOR_BLEUE_YOUR_RECHARGE_IS_PERFORMED_WITH_SUCCESS_H3 = "<h3 style='color:bleue;'>Your recharge is performed with success.</h3>";
+	public static final String STRING_H2_STYLE_COLOR_GREEN_INFO = "<h2 style='color:green;'>INFO : ";
+	public static final String STRING_H3_STYLE_COLOR_BLEUE_FOR_THESE_ITEMS_H3 = "<h3 style='color:bleue;'>For these Items : </h3>";
+	public static final String STRING_H2 = "</h2>";
+	public static final String STRING_H2_STYLE_COLOR_GREEN_YOUR_TICKET_$ = "<h2 style='color:green;'>Your ticket ($) : ";
+	public static final String STRING_H1_STYLE_COLOR_RED = "<h1 style='color:red;'>";
+	
 	@Autowired
 	private PaiementService paiementService; 
 	
@@ -29,51 +44,48 @@ public class ShoppingOnLinePaiementRestController {
 	@ResponseBody
 	public String payItems(HttpServletRequest request) {
 		
-		
-		Basket basketData = (Basket) request.getSession().getAttribute("basketdata");
-		/*if (basketData == null)
-			return String.join(" ", "<h1 style='color:red;'>", errors.get("emptybasket"),"</h1>");
-		*/
-		
-		
-		//Collection<Item> items = basketData.getBasketItems().values();
-		Customer customer = (Customer) request.getSession().getAttribute("customer");
-		
-		if (!paiementService.purchaseItem(basketData, customer)){
-			//request.getSession().setAttribute("errors", customerService.getErrors());
-			Map<String, String> errors = paiementService.getErrors();
-			return String.join(" ","<h1 style='color:red;'>", errors.get("accountbalance"),"<br />",errors.get("emptybasket"), "</h1>");//${errors['accountbalance']}
-		}
-			
+		Basket basketData = (Basket) request.getSession().getAttribute(SESSION_BASKETDATA);
+		Customer customer = (Customer) request.getSession().getAttribute(SESSION_CUSTOMER);
+		Map<String, String> errors;
+				
 		Double basketTotalAmount = basketData.getBasketTotalAmount();
 		Collection<Item> items = basketData.getBasketItems().values();
+		
+		if (!paiementService.purchaseItem(basketData, customer)){
+			errors = paiementService.getErrors();
+			return String.join(" ",STRING_H1_STYLE_COLOR_RED, errors.get(ERROR_ACCOUNTBALANCE),STRING_BR,errors.get(ERROR_EMPTYBASKET), STRING_H1);
+		}
 		
 		initBasket(request);
 		request.getSession().invalidate();
 		
-		return String.join(" ", "<h2 style='color:green;'>Your ticket ($) : ", basketTotalAmount.toString(),"</h2>", "<h3 style='color:bleue;'>For these Items : </h3>", items.toString()) ;
+		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_YOUR_TICKET_$, basketTotalAmount.toString(),STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_FOR_THESE_ITEMS_H3, items.toString()) ;
 	}
 	
 	@RequestMapping(value="/recharge", method=RequestMethod.POST)
 	@ResponseStatus(value=HttpStatus.OK)
-	public String rechargeAccount(@RequestParam("customerAvailableAmount") Double customerAvailableAmount, HttpServletRequest request) {
+	public String rechargeAccount(@RequestParam(ERROR_CUSTOMER_AVAILABLE_AMOUNT) Double customerAvailableAmount, HttpServletRequest request) {
 		
-		Customer customer = (Customer) request.getSession().getAttribute("customer");
+		Customer customer = (Customer) request.getSession().getAttribute(SESSION_CUSTOMER);
+		Map<String, String> errors;
+		
 		if (!paiementService.recharge(customerAvailableAmount, customer.getCustomerId())){
-			//request.getSession().setAttribute("errors", customerService.getErrors());
-			Map<String, String> errors = paiementService.getErrors();
-			return String.join(" ","<h1 style='color:red;'>WARNNING</h1>", errors.get("accountbalance"),"<br />",errors.get("emptybasket"), "</h1>");
-			//return String.join(" ", "<h1 style='color:red;'>WARNNING</h1>", "<h2>Your recharge is not performed !","</h2>");
+			errors = paiementService.getErrors();
+			return String.join(" ",STRING_H1_STYLE_COLOR_RED_WARNNING_H1, errors.get(ERROR_ACCOUNTBALANCE),STRING_BR,errors.get(ERROR_EMPTYBASKET), STRING_H1);
 		}
 			
-		
-		return String.join(" ", "<h2 style='color:green;'>INFO : ", "</h2>", "<h3 style='color:bleue;'>Your recharge is performed with success.</h3>") ;
+		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_INFO, STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_YOUR_RECHARGE_IS_PERFORMED_WITH_SUCCESS_H3) ;
 	}
 	
 	public void initBasket(HttpServletRequest request){
-		request.getSession().setAttribute("basketdata",null);
+		request.getSession().setAttribute(SESSION_BASKETDATA,null);
 		request.getSession().setAttribute("basket", null);
 		request.getSession().setAttribute("basketsize", 0);
 		request.getSession().setAttribute("baskettotal", 0.0);
 	}
+
+	public void setPaiementService(PaiementService paiementService) {
+		this.paiementService = paiementService;
+	}
+	
 }
