@@ -10,8 +10,8 @@ public class Person {
 	private LocalDate personBirthDate;
 	private String personAdress;
 	private String personTelephone;
-	private String connexionname;
-	private String password;
+	private String personConnectionName;
+	private String personPassword;
 	private int profile; //1 for admin; 2 for client; 0 for super admin 
 	
 	public Person() {
@@ -28,15 +28,15 @@ public class Person {
 	}
 	
 	public Person(Long personId, String personName, String personSex, LocalDate personBirthDate, String personAdress,
-			String personTelephone, String connexionName, String password, int profile) {
+			String personTelephone, String personConnectionName, String personPassword, int profile) {
 		this.personId = personId;
 		this.personName = personName;
 		this.personSex = personSex;
 		this.personBirthDate = personBirthDate;
 		this.personAdress = personAdress;
 		this.personTelephone = personTelephone;
-		this.connexionname = connexionName;
-		this.password = password;
+		this.personConnectionName = personConnectionName;
+		this.personPassword = personPassword;
 		this.profile= profile;
 	}
 
@@ -88,20 +88,20 @@ public class Person {
 		this.personTelephone = personTelephone;
 	}
 	
-	public String getConnexionname() {
-		return connexionname;
+	public String getPersonConnectionName() {
+		return personConnectionName;
 	}
 
-	public void setConnexionname(String connexionname) {
-		this.connexionname = connexionname;
+	public void setPersonConnectionName(String personConnectionName) {
+		this.personConnectionName = personConnectionName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPersonPassword() {
+		return personPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPersonPassword(String personPassword) {
+		this.personPassword = personPassword;
 	}
 	
 	public int getProfile() {
@@ -116,7 +116,7 @@ public class Person {
 	public String toString() {
 		return "Person [\npersonId= " + personId + ", personName= " + personName + ", personSex= " + personSex
 				+ ", personBirthDate= " + personBirthDate + ", personAdress= " + personAdress + ", personTelephone= "
-				+ personTelephone + ", connexionname= " + connexionname + ", profil = " + profile + "\n]";
+				+ personTelephone + ", connexionname= " + personConnectionName + ", profil = " + profile + "\n]";
 	}
 
 	@Override
@@ -128,15 +128,15 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (connexionname == null) {
-			if (other.connexionname != null)
+		if (personConnectionName == null) {
+			if (other.personConnectionName != null)
 				return false;
-		} else if (!connexionname.equals(other.connexionname))
+		} else if (!personConnectionName.equals(other.personConnectionName))
 			return false;
-		if (password == null) {
-			if (other.password != null)
+		if (personPassword == null) {
+			if (other.personPassword != null)
 				return false;
-		} else if (!password.equals(other.password))
+		} else if (!personPassword.equals(other.personPassword))
 			return false;
 		if (personAdress == null) {
 			if (other.personAdress != null)
@@ -175,7 +175,7 @@ public class Person {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(personId, personName, personSex, personBirthDate, personAdress, personTelephone, connexionname, password, profile);
+		return Objects.hash(personId, personName, personSex, personBirthDate, personAdress, personTelephone, personConnectionName, personPassword, profile);
 	}
 	
 	

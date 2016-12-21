@@ -1,13 +1,20 @@
 package com.alithya.shoppingcart.configuration;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+	public static final String URL_FOR_MAPPING = "/";
+
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		
-		return null;
+		return new Class[]{
+				ShoppingOnlineRootApplicationContextConfig.class
+		};
 	}
 
 	@Override
@@ -21,7 +28,13 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	@Override
 	protected String[] getServletMappings() {
 		
-		return new String[]{"/"};
+		return new String[]{URL_FOR_MAPPING};
 	}
+	
+	@Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.setInitParameter("spring.profiles.active", "test");
+    }
 
 }

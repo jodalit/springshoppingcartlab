@@ -617,7 +617,7 @@
         <header>
             <div id="headerCommandeMenu">
                 <c:choose>
-                	<c:when test="${not empty connexionname }">
+                	<c:when test="${not empty connectionname }">
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
                 	</c:when>
                 	<c:otherwise>
@@ -625,7 +625,7 @@
 					</c:otherwise>
 	              </c:choose>
 				
-                <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnexion' />">Quit</a></span>
+                <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnection' />">Quit</a></span>
             </div>
             
 			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
@@ -648,7 +648,7 @@
         </nav>
         
         <div id="main">
-        	<em>${connexionname}, hi!!!</em>
+        	<em>${connectionname}, hi!!!</em>
             <h2>Welcome on your web store</h2>
             <hr />
             
@@ -691,7 +691,7 @@
         
         <footer>
             <p>
-                Copyright &copy; 2016, <a href="mail:juoud1@gmail.com">Centre de formation</a>, GNU Licence
+                Copyright &copy; 2016, <a href="mail:juoud1@gmail.com">Alithya's Training Center</a>, GNU Licence
             </p>
         </footer>
     </div>

@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -28,6 +29,7 @@ import com.alithya.shoppingcart.service.ItemService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
+@ActiveProfiles("test")
 public class ShoppingOnlineHomeControllerTest {
 	private static final String SHOPPING_ONLINE_HOME = "shoppingonlinehome";
 
@@ -36,22 +38,28 @@ public class ShoppingOnlineHomeControllerTest {
 	
 	@Mock
 	private ItemService itemServiceMock;
-	private ShoppingOnlineHomeController home;
+	private ShoppingOnlineHomeController homeController;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		home = new ShoppingOnlineHomeController();
-		home.setItemService(itemServiceMock);
+		homeController = new ShoppingOnlineHomeController();
+		homeController.setItemService(itemServiceMock);
 	}
 	
 	@Test
-	public void verifyGoShoppingOnlineHomeReturnNamePage() {
+	public void verifyGetShoppingOnlineHome() {
 		Map<Long, Item> items = new HashMap<>();
-		when(itemServiceMock.getItems()).thenReturn(items);
+		when(itemServiceMock.getItemsList()).thenReturn(items);
+		
 		ModelMap model = new ModelMap();
-		String pagename = home.goShoppingOnlineHome(model, request);
+		String pagename = homeController.getShoppingOnlineHome(model, request);
+		
 		assertNotNull(pagename);
+		assertTrue(model.containsKey(homeController.MODEL_NAME_WELCOME_TITLE));
+		assertTrue(model.containsKey(homeController.MODEL_NAME_WELCOME_INFO));
+		assertSame(homeController.WELCOME_TITLE, model.get(homeController.MODEL_NAME_WELCOME_TITLE));
+		assertSame(homeController.WELCOME_INFO, model.get(homeController.MODEL_NAME_WELCOME_INFO));
 		assertEquals(SHOPPING_ONLINE_HOME, pagename);
 	}
 		

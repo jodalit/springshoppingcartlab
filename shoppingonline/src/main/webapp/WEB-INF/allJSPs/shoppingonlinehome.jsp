@@ -627,7 +627,7 @@
                 <span id="saccueil"><a id="aaccueil" href='<spring:url value="/"></spring:url>'>Home</a></span>
 
                 <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connexion"></spring:url>'>Connexion</a></span>
+                <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connection"></spring:url>'>Connection</a></span>
             </div>
             
 			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
@@ -665,7 +665,7 @@
             </div>
             
             <div id="divimagepcple" class="divmain">
-                <h1 id="OLShopping">OnLine Shopping</h1>
+                <h1 id="OLShopping">On Line Shopping</h1>
             </div>
             
             <div id="divmotbienvenue" class="divmain">
@@ -683,7 +683,7 @@
         
         <footer>
             <p>
-                Copyright &copy; 2016, <a href="mail:juoud1@gmail.com">Centre de formation</a>, GNU Licence
+                Copyright &copy; 2016, <a href="mail:juoud1@gmail.com">Alithya's Training Center</a>, GNU Licence
             </p>
         </footer>
     </div>

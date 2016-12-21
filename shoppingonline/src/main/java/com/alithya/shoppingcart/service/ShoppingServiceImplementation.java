@@ -1,14 +1,13 @@
 package com.alithya.shoppingcart.service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.repository.ItemRepository;
 
 @Service
 public class ShoppingServiceImplementation implements shoppingService {
@@ -18,11 +17,14 @@ public class ShoppingServiceImplementation implements shoppingService {
 	private double pricetoberemoved = 0.0;
 	
 	@Autowired
+	private ItemRepository itemRepository;
+	
+	@Autowired
 	ItemServiceImplementation itemService;
 
 	@Override
 	public List<Item> getAllItems() {
-		return Collections.list(Collections.enumeration(itemService.getItems().values())) ;
+		return itemRepository.getAllItems() ; 
 	}
 
 	@Override
