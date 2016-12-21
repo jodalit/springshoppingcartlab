@@ -15,7 +15,6 @@ import com.alithya.shoppingcart.service.ShoppingService;
 
 @Controller
 public class ShoppingOnlineSomeUtilitiesController {
-	
 	public static final String SESSION_PEOPLE = "people";
 	public static final String SESSION_ITEMS = "items";
 	public static final String SESSION_ITEMS_FOR_NAME = "itemsforname";
@@ -105,6 +104,7 @@ public class ShoppingOnlineSomeUtilitiesController {
 	}
 	
 	public void setShoppingService(ShoppingService shoppingService) {
+		
 	}
 	
 }

@@ -70,7 +70,6 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 		
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_CONNECTION));
 		assertEquals(someUtilities.CONNEXION, model.get(someUtilities.MODEL_NAME_CONNECTION));
-	
 		assertSame(someUtilities.SHOPPING_ONLINE_HOME_ADMIN, result);
 	}
 	
@@ -81,6 +80,7 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 		String result =  someUtilities.getNewUser(model);
 		
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_NEWUSER));
+		assertEquals(someUtilities.NEWUSER, model.get(someUtilities.MODEL_NAME_NEWUSER));
 		assertSame(someUtilities.SHOPPING_ONLINE_NEWUSER, result);
 	}
 	
