@@ -26,10 +26,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 	public static final String MODEL_NAME_BASKET_SIZE = "basketSize";
 	public static final String MODEL_NAME_CONNECTION = "connection";
 	public static final String REQUESTMAPPING_DECONNECTION = "/deconnection";
-	public static final String REQUESTMAPPING_REMOVEFROMBASKET_ITEM_ID = "/removefrombasket/{itemId}";
-	public static final String REQUESTMAPPING_PAYITEMS = "/payitems";
-	public static final String REQUESTMAPPING_ADD_TO_BASKET_FROM_RESULT_SEARCH_ITEM_ID = "/addtobasketfromresultsearch/{itemId}";
-	public static final String REQUESTMAPPING_ADDTOBASKET_ITEM_ID = "/addtobasket/{itemId}";
 	public static final String REQUESTMAPPING_NEWUSER = "/newuser";
 	public static final String REQUESTMAPPING_SHOWBASKET = "/showbasket";
 	public static final String REQUESTMAPPING_CONNECT = "/connect";
@@ -44,22 +40,17 @@ public class ShoppingOnlineSomeUtilitiesController {
 	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
 	public static final String SHOPPING_ONLINE_CONNEXION = "shoppingonlineconnexion";
 	public static final String CONNEXION = "Access to your account";
-	public static final String BASKET = "Basket Breakdown";
 	public static final String NEWUSER = "Choose your profil";
 	
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.GET)
 	public String getConnection(ModelMap model, HttpServletRequest request) {
-		
-		model.addAttribute(MODEL_NAME_CONNECTION, CONNEXION);
-		
+				
 		return SHOPPING_ONLINE_CONNEXION;
 	}
 
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.POST)
 	public String sumitConnection(ModelMap model) {
 		
-		model.addAttribute(MODEL_NAME_BASKET, BASKET);
-
 		return SHOPPING_ONLINE_HOME_ADMIN;
 	}
 	
@@ -87,7 +78,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 		request.getSession().setAttribute(SESSION_CONNECTION_NAME, null);
 		request.getSession().setAttribute(SESSION_ITEMS_FOR_NAME, null);
 		request.getSession().setAttribute(SESSION_ITEMS, null);
-		request.getSession().setAttribute(MODEL_NAME_BASKET, null);
 		request.getSession().setAttribute(SESSION_PEOPLE, null);
 		
 		
@@ -101,10 +91,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 		webrequest.removeAttribute(SESSION_PEOPLE, WebRequest.SCOPE_SESSION);
 		
 		return REDIRECT;
-	}
-	
-	public void setShoppingService(ShoppingService shoppingService) {
-		
 	}
 	
 }

@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.alithya.shoppingcart.model.Item;
 
-public class ShoppingOnLineCustomerRestControllerTest {
+public class ShoppingOnLinePaiementRestControllerTest {
 
 	@Before
 	public void setUp() throws Exception {

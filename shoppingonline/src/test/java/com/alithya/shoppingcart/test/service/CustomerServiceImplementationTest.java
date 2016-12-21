@@ -15,10 +15,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.repository.CustomerRepository;
+import com.alithya.shoppingcart.repository.PaiementRepository;
 import com.alithya.shoppingcart.repository.ItemRepository;
-import com.alithya.shoppingcart.service.CustomerService;
-import com.alithya.shoppingcart.service.CustomerServiceImplementation;
+import com.alithya.shoppingcart.service.PaiementService;
+import com.alithya.shoppingcart.service.PaiementServiceImplementation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -26,15 +26,15 @@ import com.alithya.shoppingcart.service.CustomerServiceImplementation;
 @ActiveProfiles("test")
 public class CustomerServiceImplementationTest {
 	@Mock
-	CustomerRepository customerRepositoryMock;
+	PaiementRepository customerRepositoryMock;
 	
-	private CustomerService customerService;
+	private PaiementService paiementService;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		customerService = new CustomerServiceImplementation();
-		customerService.setCustomerRepository(customerRepositoryMock);
+		paiementService = new PaiementServiceImplementation();
+		paiementService.setCustomerRepository(customerRepositoryMock);
 	}
 
 	@Test

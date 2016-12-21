@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.BasketService;
-import com.alithya.shoppingcart.service.CustomerService;
+import com.alithya.shoppingcart.service.PaiementService;
 
 @Controller
 public class ShoppingOnlineBasketController {
@@ -52,12 +52,12 @@ public class ShoppingOnlineBasketController {
 	private BasketService basketService;
 	
 	@Autowired
-	CustomerService customerService;
+	PaiementService paiementService;
 
 	@RequestMapping(value = REQUESTMAPPING_SHOWBASKET, method = RequestMethod.GET)
 	public String getBasket(HttpServletRequest request) {
 
-		request.getSession().setAttribute(SESSION_CUSTOMER, customerService.getCustomerInfo());
+		request.getSession().setAttribute(SESSION_CUSTOMER, paiementService.getCustomerInfo());
 		
 		return SHOPPING_ONLINE_BASKET;
 	}
@@ -116,8 +116,8 @@ public class ShoppingOnlineBasketController {
 		this.basketService = basketService;
 	}
 
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
+	public void setCustomerService(PaiementService paiementService) {
+		this.paiementService = paiementService;
 	}
 	
 	

@@ -12,12 +12,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.alithya.shoppingcart.exception.BusinessException;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Person;
-import com.alithya.shoppingcart.repository.CustomerRepository;
+import com.alithya.shoppingcart.repository.PaiementRepository;
 
 @Repository
-public class CustomerRepositotyImplementation implements CustomerRepository {
+public class PaiementRepositotyImplementation implements PaiementRepository {
 	public static final String ID = "id";
 	public static final String AVAILABLE_AMOUNT = "availableAmount";
 	
@@ -30,35 +31,43 @@ public class CustomerRepositotyImplementation implements CustomerRepository {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public CustomerRepositotyImplementation (DataSource dataSouce) {
+	public PaiementRepositotyImplementation (DataSource dataSouce) {
 		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
 	}
 	
 	@Override
-	public Customer getCustomer() {
-		Map<String, Object> params = new HashMap<>();
+	public Customer getCustomer() throws BusinessException {
+		Map<String, Object> params = new HashMap<String, Object>();
 		
-		//return jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, params, new CustomerPersonMapper());
-		return jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
+		try {
+			//return jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, params, new CustomerPersonMapper());
+			return jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
+		} catch (Exception e) {
+			throw new BusinessException("Database unavailable!");
+		}	
 	}
 
 	@Override
-	public boolean updateAmount(Double amount, Long customerId) {
-		if (amount == null)
-			return false;
+	public boolean updateAmount(Double amount, Long customerId) throws BusinessException{
+		if (amount == null){
+			throw new BusinessException("Amount should be number");
+		}
+			
+		try {
+			Map<String, Object> params = new HashMap<>();
+			params.put(AVAILABLE_AMOUNT, amount);
+			params.put(ID, customerId);
+			
+			//jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
+			jdbcTemplateShoppingCart.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
+			return true;
+		} catch (Exception e) {
+			throw new BusinessException("Database unavailable!");
+		}
 		
-		Map<String, Object> params = new HashMap<>();
-		params.put(AVAILABLE_AMOUNT, amount);
-		params.put(ID, customerId);
-		
-		//jdbcTemplate.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
-		jdbcTemplateShoppingCart.update(SQL_UPDATE_AVAILABLE_AMOUNT, params);
-		return true;
 	}
 	
-	private static final class CustomerPersonMapper implements org.springframework.jdbc.core.RowMapper<Customer> {	
-		
-		
+	private static final class CustomerPersonMapper implements org.springframework.jdbc.core.RowMapper<Customer> {			
 		public static final String CUSTOMER_AVAILABLE_AMOUNT = "customerAvailableAmount";
 		public static final String CUSTOMER_ID = "customerId";
 		public static final String PROFILE_ID = "profileId";
