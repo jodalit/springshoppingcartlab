@@ -109,7 +109,6 @@ public class ShoppingOnlineItemControllerTest {
 		Map<Long, Item> items = new HashMap<>();
 		items.put(18L, item);
 		
-		//itemServiceMock.setItems(items);
 		when(itemServiceMock.getItemById(18L)).thenReturn(item);
 		when(itemServiceMock.getItemsList()).thenReturn(items);
 		
@@ -131,7 +130,6 @@ public class ShoppingOnlineItemControllerTest {
 		Map<Long, Item> items = new HashMap<>();
 		items.put(17L, item);
 		
-		//itemServiceMock.setItems(items);
 		when(itemServiceMock.modifyNameDescriptionPriceExpiredateItem(Long.valueOf(17), "alithya 700 gauchetiere", "700 gauchetiere Montreal", "0.25", LocalDate.now().toString())).thenReturn(true);
 		when(itemServiceMock.getItemById(Long.valueOf(17))).thenReturn(item);
 		
@@ -152,14 +150,14 @@ public class ShoppingOnlineItemControllerTest {
 		Item item = new Item(Long.valueOf(18),"allo", "allo", 12.2D, LocalDate.now());
 		Map<Long, Item> items = new HashMap<>();
 		items.put(18L, item);
-		//itemServiceMock.setItems(items);
+		
 		when(itemServiceMock.removeItem(18L)).thenReturn(true);
 		
 		ModelMap model = new ModelMap();		
 		String result = shoppingOnlineItemController.removeDetailItem(18L, model, request);
 		
 		assertTrue( request.getSession().getAttribute("items") instanceof List<?>);
-		assertSame(null, model.get("item")); 	//TODO try to assert the removed item
+		assertSame(null, model.get("item")); 	
 		assertEquals("PAGE OF REMOVING ITEM", shoppingOnlineItemController.REDIRECT_LISTITEMS , result);
 
 	}

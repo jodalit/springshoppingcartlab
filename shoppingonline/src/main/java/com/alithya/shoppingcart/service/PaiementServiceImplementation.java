@@ -61,6 +61,7 @@ public class PaiementServiceImplementation implements PaiementService {
 		} catch (BusinessException e) {
 			
 			setError("emptybasket", e.getMessage());
+			
 			return false;
 			
 		}

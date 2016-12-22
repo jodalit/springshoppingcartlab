@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -19,9 +18,6 @@ import org.springframework.ui.ModelMap;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.controller.ShoppingOnlineSomeUtilitiesController;
-import com.alithya.shoppingcart.service.BasketService;
-import com.alithya.shoppingcart.service.ItemService;
-import com.alithya.shoppingcart.service.ShoppingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})

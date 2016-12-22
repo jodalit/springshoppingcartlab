@@ -21,7 +21,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	protected Class<?>[] getServletConfigClasses() {
 		
 		return new Class[]{
-				ShoppingOnlineWebApplicationContextConfig.class
+				ShoppingOnlineWebApplicationContextConfig.class, ShoppingOnlineWebServiceConfig.class
 		};
 	}
 
@@ -34,7 +34,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	@Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        servletContext.setInitParameter("spring.profiles.active", "test");
+        servletContext.setInitParameter("spring.profiles.active", "prod");
     }
 	
 }

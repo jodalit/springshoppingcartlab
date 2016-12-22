@@ -20,11 +20,13 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
+import com.alithya.shoppingcart.model.Basket;
+import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.alithya.shoppingcart.service", "com.alithya.shoppingcart.repository", "com.alithya.shoppingcart.repository.implementation", "com.alithya.shoppingcart.model", "com.alithya.shoppingcart.configuration", "com.alithya.shoppingcart.controller"})
+@ComponentScan({"com.alithya.shoppingcart.service", "com.alithya.shoppingcart.exception", "com.alithya.shoppingcart.repository", "com.alithya.shoppingcart.repository.implementation", "com.alithya.shoppingcart.model", "com.alithya.shoppingcart.configuration", "com.alithya.shoppingcart.controller"})
 public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	public static final String RESOURCES_DIRECTORY = "/resources/";
@@ -61,7 +63,8 @@ public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerA
     public MarshallingView xmlView() { 
        Jaxb2Marshaller marshaller = new Jaxb2Marshaller(); 
        marshaller.setClassesToBeBound(Item.class); 
-  
+       /*marshaller.setClassesToBeBound(Basket.class);
+       marshaller.setClassesToBeBound(Customer.class);*/
        MarshallingView xmlView = new MarshallingView(marshaller); 
        return xmlView; 
     }
