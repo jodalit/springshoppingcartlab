@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.context.annotation.Scope;
+
+@Scope("session")
 public class Person implements Serializable{
 	/**
 	 * 

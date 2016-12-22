@@ -23,6 +23,7 @@ import org.springframework.web.servlet.view.xml.MarshallingView;
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.model.Person;
 
 @Configuration
 @EnableWebMvc
@@ -63,8 +64,9 @@ public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerA
     public MarshallingView xmlView() { 
        Jaxb2Marshaller marshaller = new Jaxb2Marshaller(); 
        marshaller.setClassesToBeBound(Item.class); 
-       /*marshaller.setClassesToBeBound(Basket.class);
-       marshaller.setClassesToBeBound(Customer.class);*/
+       marshaller.setClassesToBeBound(Basket.class);
+       marshaller.setClassesToBeBound(Person.class);
+       marshaller.setClassesToBeBound(Customer.class);
        MarshallingView xmlView = new MarshallingView(marshaller); 
        return xmlView; 
     }

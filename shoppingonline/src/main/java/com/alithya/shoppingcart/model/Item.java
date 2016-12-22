@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.multipart.MultipartFile;
 
 //@XmlRootElement
+@Scope("session")
 public class Item implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long itemId;
