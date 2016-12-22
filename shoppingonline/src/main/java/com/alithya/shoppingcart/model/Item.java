@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Item implements Serializable {
+import org.springframework.web.multipart.MultipartFile;
+
+//@XmlRootElement
+public class Item implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long itemId;
 	private String itemName;
 	private String description;
 	private Double price;
 	private LocalDate expireDate;
+	private MultipartFile itemImage;
 	
 	public Item() {
 	}
@@ -68,6 +72,14 @@ public class Item implements Serializable {
 
 	public void setExpireDate(LocalDate expireDate) {
 		this.expireDate = expireDate;
+	}
+	
+	public MultipartFile getItemImage() {
+		return itemImage;
+	}
+
+	public void setItemImage(MultipartFile itemImage) {
+		this.itemImage = itemImage;
 	}
 
 	@Override

@@ -158,6 +158,10 @@
 		    border:inset;
 		}
 		
+		div#divrecharge input#customerAvailableAmount{
+			width:6.75em/*px*/;
+			margin-left:0;
+		}
 		
 		/*Buttons formating */
 		button, #sconnexion, #sdeconnexion{
@@ -240,6 +244,15 @@
 		[readonly]{
 		    background-color:hsl(255, 50%, 80%);
 		}
+		
+		div#divrecharge #saveBtn, div#divrecharge #resetBtn{
+			background-color:navy;
+			width: :3em;
+			height: 2em;
+			margin: 0.05em;
+			padding: 0.05em;
+		}
+		
 		
 		/*------------------Formatting buttons and inputs in forms----------------------------*/
 		form input{
@@ -662,18 +675,49 @@
         <div id="main">
         	<c:if test="${not empty connectionname}"><em>${connectionname}, hi!!!</em></c:if>
             <h2>Your current Basket</h2>
+            
             <hr />
-            <div id="divrecentitems1">
+            
+            <p style="background-color: #ccd458; color: navy; text-align: right;">
+            	<br/><br/>
+            	<em>Your available amount ($) : </em>${customer.customerAvailableAmount} <br/> <br/>
+            	<span style="text-align: right;"><a id="arechargeaccount" href="#">Recharge your account</a></span><br/> <br/>
+            </p>
+            
+            <div id = "divrecharge" style="background-color: #ccd458;">
+            	
+            	<form action="<spring:url value='customer/recharge' />" method="post">
+            		<fieldset>
+                        <label for="customerAvailableAmount">Amount ($) :</label><br />
+                        <input type="text" name="customerAvailableAmount" id="customerAvailableAmount"  size="10" maxlength="15" tabindex="0"/> <span id="scustomerAvailableAmount"></span>
+                     </fieldset>
+                     <fieldset>
+                        <button type="submit" id="saveBtn" name="saveBtn" class="bouton">Save</button>
+                        <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
+                        <br/>
+                        <span style="text-align: right;"><a id="acancelrechargeaccount" href="#" style="text-align: right;">Renounce</a></span> 
+                    </fieldset>
+            	</form>
+            </div>
+            
+            <hr />
+            
+            <div id="divrecentitems1">            	
             	<c:forEach items="${basket}" var="b"> 
             		<div>
             			<p>
-	                		<a href="#"><img alt="image 1" src="#" src="#" style="height: 5em; width: 7.25em;">${b.itemName}</a>
+	                		<a href="#"><img alt="image 1" src="#" style="height: 5em; width: 7.25em;">${b.itemName}</a>
 							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href='<spring:url value="/removefrombasket/${b.itemId}"></spring:url>' style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
+							
 	                		<br />
 	                		${b.description}
 	                		<br />
 	                		<em>${b.price}<span>$</span></em>
-                		</p>
+	                		<br />
+							
+							<h3><a id="itemBasket" href='<spring:url value="rest/basket/${b.itemId}"></spring:url>'>Item's Rest access</a></h3>
+							<br />
+                		<!-- /p-->
                 	</div>
             	</c:forEach>
             	<br/>
@@ -681,7 +725,11 @@
             	<br />
             	<span>Total ($) : ${baskettotal }</span> <br/> <br/>
             	
-            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
+            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="customer/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
+            	<br />
+            												
+				<h3><a id="allBasket" href='<spring:url value="rest/basket/items"></spring:url>'>Your items' Rest access</a></h3>
+				<br>
             </div>
 
         </div>
@@ -696,5 +744,24 @@
             </p>
         </footer>
     </div>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js" ></script>
+    <script>
+    	$(document).ready(function(){
+    		$("#divrecharge").hide();
+    		$("#arechargeaccount").click(function(){
+        	
+        		$("#divrecharge").show();
+        		$("#arechargeaccount").hide();
+    		});
+    		
+    		$("#acancelrechargeaccount").click(function(){
+        	
+        		$("#divrecharge").hide();
+        		$("#arechargeaccount").show();
+    		});
+    		
+		});
+    </script>
 </body>
 </html>

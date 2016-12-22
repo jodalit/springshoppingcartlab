@@ -21,7 +21,7 @@ import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContex
 import com.alithya.shoppingcart.controller.ShoppingOnlineSomeUtilitiesController;
 import com.alithya.shoppingcart.service.BasketService;
 import com.alithya.shoppingcart.service.ItemService;
-import com.alithya.shoppingcart.service.shoppingService;
+import com.alithya.shoppingcart.service.ShoppingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -31,24 +31,12 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	@Autowired
 	MockHttpServletRequest request;
 	
-	@Mock
-	private BasketService basketServiceMock;
-	
-	@Mock
-	private shoppingService shoppingServiceMock;
-
-	@Mock
-	private ItemService itemServiceMock;
-	
 	private ShoppingOnlineSomeUtilitiesController someUtilities;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		request.getSession().setAttribute("basket", shoppingServiceMock.getBasket());
 		someUtilities = new ShoppingOnlineSomeUtilitiesController();
-		someUtilities.setItemService(itemServiceMock);
-		someUtilities.setShoppingService(shoppingServiceMock);
 	}
 
 	@Test
@@ -82,7 +70,6 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 		
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_CONNECTION));
 		assertEquals(someUtilities.CONNEXION, model.get(someUtilities.MODEL_NAME_CONNECTION));
-	
 		assertSame(someUtilities.SHOPPING_ONLINE_HOME_ADMIN, result);
 	}
 	
@@ -93,6 +80,7 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 		String result =  someUtilities.getNewUser(model);
 		
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_NEWUSER));
+		assertEquals(someUtilities.NEWUSER, model.get(someUtilities.MODEL_NAME_NEWUSER));
 		assertSame(someUtilities.SHOPPING_ONLINE_NEWUSER, result);
 	}
 	

@@ -16,7 +16,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan({"com.alithya.shoppingcart.repository"})
@@ -44,8 +43,12 @@ public class ShoppingOnlineRootApplicationContextConfig {
 				.setType(EmbeddedDatabaseType.H2)
 				.setScriptEncoding("UTF-8")
 				.ignoreFailedDrops(true)
-				.addScript("/db/sql/create_Item.sql")
-				//.addScripts("/db/sql/insert_Item.sql")
+				.addScript("/db/sql/shoppingonline_create_item.sql")
+				.addScripts("/db/sql/shoppingonline_create_profile.sql")
+				.addScripts("/db/sql/shoppingonline_create_person.sql")
+				.addScripts("/db/sql/shoppingonline_create_customer.sql")
+				.addScripts("/db/sql/shoppingonline_create_person_profile_view.sql")
+				.addScripts("/db/sql/shoppingonline_create_person_customer_view.sql")
 				.build();
 	}
 	

@@ -36,5 +36,5 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
         super.onStartup(servletContext);
         servletContext.setInitParameter("spring.profiles.active", "test");
     }
-
+	
 }

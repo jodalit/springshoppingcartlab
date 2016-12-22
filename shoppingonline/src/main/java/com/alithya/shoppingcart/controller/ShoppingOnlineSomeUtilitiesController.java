@@ -2,7 +2,6 @@ package com.alithya.shoppingcart.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import com.alithya.shoppingcart.service.ItemService;
-import com.alithya.shoppingcart.service.shoppingService;
-
 @Controller
 public class ShoppingOnlineSomeUtilitiesController {
-	
 	public static final String SESSION_PEOPLE = "people";
 	public static final String SESSION_ITEMS = "items";
 	public static final String SESSION_ITEMS_FOR_NAME = "itemsforname";
@@ -27,10 +22,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 	public static final String MODEL_NAME_BASKET_SIZE = "basketSize";
 	public static final String MODEL_NAME_CONNECTION = "connection";
 	public static final String REQUESTMAPPING_DECONNECTION = "/deconnection";
-	public static final String REQUESTMAPPING_REMOVEFROMBASKET_ITEM_ID = "/removefrombasket/{itemId}";
-	public static final String REQUESTMAPPING_PAYITEMS = "/payitems";
-	public static final String REQUESTMAPPING_ADD_TO_BASKET_FROM_RESULT_SEARCH_ITEM_ID = "/addtobasketfromresultsearch/{itemId}";
-	public static final String REQUESTMAPPING_ADDTOBASKET_ITEM_ID = "/addtobasket/{itemId}";
 	public static final String REQUESTMAPPING_NEWUSER = "/newuser";
 	public static final String REQUESTMAPPING_SHOWBASKET = "/showbasket";
 	public static final String REQUESTMAPPING_CONNECT = "/connect";
@@ -45,27 +36,17 @@ public class ShoppingOnlineSomeUtilitiesController {
 	public static final String SHOPPING_ONLINE_HOME_ADMIN = "shoppingonlinehomeadmin";
 	public static final String SHOPPING_ONLINE_CONNEXION = "shoppingonlineconnexion";
 	public static final String CONNEXION = "Access to your account";
-	public static final String BASKET = "Basket Breakdown";
 	public static final String NEWUSER = "Choose your profil";
 	
-	@Autowired
-	private shoppingService shoppingService;
-
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.GET)
 	public String getConnection(ModelMap model, HttpServletRequest request) {
-		
-		model.addAttribute(MODEL_NAME_CONNECTION, CONNEXION);
-		
+				
 		return SHOPPING_ONLINE_CONNEXION;
 	}
 
 	@RequestMapping(value = REQUESTMAPPING_CONNECTION, method = RequestMethod.POST)
 	public String sumitConnection(ModelMap model) {
 		
-		int basketSize = 1;
-		model.addAttribute(MODEL_NAME_BASKET_SIZE, basketSize);
-		model.addAttribute(MODEL_NAME_BASKET, BASKET);
-
 		return SHOPPING_ONLINE_HOME_ADMIN;
 	}
 	
@@ -93,7 +74,6 @@ public class ShoppingOnlineSomeUtilitiesController {
 		request.getSession().setAttribute(SESSION_CONNECTION_NAME, null);
 		request.getSession().setAttribute(SESSION_ITEMS_FOR_NAME, null);
 		request.getSession().setAttribute(SESSION_ITEMS, null);
-		request.getSession().setAttribute(MODEL_NAME_BASKET, null);
 		request.getSession().setAttribute(SESSION_PEOPLE, null);
 		
 		
@@ -108,23 +88,5 @@ public class ShoppingOnlineSomeUtilitiesController {
 		
 		return REDIRECT;
 	}
-	
-	public void infoBasket(Long itemId, HttpServletRequest request){
-		
-		if (shoppingService.addItemToBasket(itemId)){
-			request.getSession().setAttribute(MODEL_NAME_BASKET, shoppingService.getBasket());
-			request.getSession().setAttribute(SESSION_BASKETSIZE, shoppingService.getBasket().size());
-			request.getSession().setAttribute(SESSION_BASKETTOTAL, shoppingService.getTotalBasket());
-		}
-	}
-
-	public void setShoppingService(shoppingService shoppingService) {
-		
-		this.shoppingService = shoppingService;
-	}
-
-	public void setItemService(ItemService itemService) {
-	}
-	
 	
 }

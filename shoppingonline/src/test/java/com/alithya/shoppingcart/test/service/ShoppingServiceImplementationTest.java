@@ -1,12 +1,8 @@
 package com.alithya.shoppingcart.test.service;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +18,7 @@ import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletCon
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.repository.ItemRepository;
-import com.alithya.shoppingcart.service.ItemServiceImplementation;
+import com.alithya.shoppingcart.service.ShoppingService;
 import com.alithya.shoppingcart.service.ShoppingServiceImplementation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,83 +29,21 @@ public class ShoppingServiceImplementationTest {
 	@Mock
 	ItemRepository itemRepositoryMock;
 	
-	@Mock
-	ItemServiceImplementation itemServiceMock;
-	
-	ShoppingServiceImplementation shoppingService; 
+	ShoppingService shoppingService; 
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		shoppingService = new ShoppingServiceImplementation();	
-		shoppingService.setItemService(itemServiceMock);
+		shoppingService = new ShoppingServiceImplementation();
+		shoppingService.setItemRepository(itemRepositoryMock);
 	}
+	
 	
 	@Test
-	public void verifyItemMap() {
-		assertNotNull(itemServiceMock.getItemsList());
-	}
-	
-	@Test
-	public void verifyExistItemInBasketWhenBasketIsEmpty() {
-		assertNotEquals(true, shoppingService.existItemInBasketOrNo(2L));
-	}
-	
-	@Test
-	public void verifyExistItemInBasket() {
-		Set<Item> basket = new HashSet<>();
-		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
-		basket.add(item);
-		assertNotNull(shoppingService.getBasket());
-		shoppingService.setBasket(basket);
-		assertEquals(true, shoppingService.existItemInBasketOrNo(4L));
-	}
-
-	@Test
-	public void verifyAddItemToBasket() {
-		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
-		Map<Long, Item> items = new HashMap<>();
-		items.put(4L, item);
-	
-		when(itemServiceMock.getItemById(4L)).thenReturn(item);
-		
-		shoppingService.addItemToBasket(4L);
-		assertNotNull(shoppingService.getBasket());
-		assertEquals(1, shoppingService.getBasket().size());
-	}
-	
-	@Test
-	public void verifyRemoveAllItemsToBasket() {
-		Set<Item> basket = new HashSet<>();
-		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
-		basket.add(item);
-		shoppingService.setBasket(basket);
-		assertNotNull(shoppingService.getBasket());
-		
-		shoppingService.removeItemsToBasket();
-		assertEquals(0, shoppingService.getBasket().size());
-	}
-	
-	@Test
-	public void verifyRemoveItemToBasket() {
-		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
-		Map<Long, Item> items = new HashMap<>();
-		items.put(4L, item);
-	
-		when(itemServiceMock.getItemById(4L)).thenReturn(item);
-		
-		Set<Item> basket = new HashSet<>();
-		basket.add(item);
-		shoppingService.setBasket(basket);
-		assertNotNull(shoppingService.getBasket());
-		
-		shoppingService.setPricetoberemoved(0.0);
-		shoppingService.setTotalBasket(31.31D);
-		shoppingService.removeItemToBasket(new Long(4));
-		basket.remove(item);
-		assertEquals(0, shoppingService.getBasket().size());
-	}
-	
-	
+	public void verifyGetAllItems() {
+		List<Item> items = shoppingService.getAllItems();
+		Item item= items.get(0);
+		assertSame("test", item.getItemName());
+	}	
 
 }

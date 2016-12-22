@@ -3,6 +3,7 @@ package com.alithya.shoppingcart.test.controller;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +22,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.controller.ShoppingOnlineBasketController;
+import com.alithya.shoppingcart.model.Basket;
+import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
+import com.alithya.shoppingcart.model.Person;
 import com.alithya.shoppingcart.service.BasketService;
+import com.alithya.shoppingcart.service.PaiementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -32,22 +37,34 @@ public class ShoppingOnlineBasketControllerTest {
 	
 	@Mock
 	private BasketService basketServiceMock;
+	@Mock
+	private PaiementService customerServiceMock;
 	
 	@Autowired
 	MockHttpServletRequest request;
 	
 	private ShoppingOnlineBasketController basketController;
+	
 		
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		basketController = new ShoppingOnlineBasketController();
 		basketController.setBasketService(basketServiceMock);
+		basketController.setCustomerService(customerServiceMock);
 	}
 
 	@Test
 	public void testGetBasket() {
-		String result =  basketController.getBasket();
+		Person p = new Person(Long.valueOf(2), "customer1", null, LocalDate.now(), null, null, "customer1", "customer1", 2);
+		Customer customer = new Customer();
+		customer.setCustomerId(1L);
+		customer.setCustomerAvailableAmount(1500D);
+		customer.setPerson(p);
+		
+		when(customerServiceMock.getCustomerInfo()).thenReturn(customer);
+		
+		String result =  basketController.getBasket(request);
 		
 		assertSame(basketController.SHOPPING_ONLINE_BASKET, result);
 	}
@@ -82,61 +99,22 @@ public class ShoppingOnlineBasketControllerTest {
 		
 		assertSame( basketController.SHOPPING_ONLINE_SEARCH_RESULT, result);
 	}
-
-	@Test
-	public void testPayItemsWithEmptyBasket() {
-		Map<Long, Item> basket = new HashMap<>();
-		when(basketServiceMock.getItemsBasket()).thenReturn(null);
-				
-		String result = basketController.payItems(request);
-		
-		assertSame(basketController.REDIRECT, result);
-	}
 	
-	@Test
-	public void testPayItems() {
-		Long id = 4L;
-		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
-		
-		Map<Long, Item> basket = new HashMap<>();
-		basket.put(id, item);
-		
-		when(basketServiceMock.removeItemsToBasket()).thenReturn(true);
-		when(basketServiceMock.getItemsBasket()).thenReturn(basket);
-		
-		String result = basketController.payItems(request);
-		
-		assertNull(request.getSession().getAttribute(basketController.MODEL_NAME_BASKET));
-		assertSame(null, request.getSession().getAttribute(basketController.SESSION_BASKETSIZE));
-		assertSame(null,request.getSession().getAttribute(basketController.SESSION_BASKETTOTAL));
-		assertSame(basketController.REDIRECT, result);
-	}
-	
-	@Test
-	public void testNotPayItems() {
-		Long id = 4L;
-		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
-		
-		Map<Long, Item> basket = new HashMap<>();
-		basket.put(id, item);
-		when(basketServiceMock.removeItemsToBasket()).thenReturn(false);
-		when(basketServiceMock.getItemsBasket()).thenReturn(basket);
-		
-		String result = basketController.payItems(request);
-		
-		assertNull(request.getSession().getAttribute(basketController.MODEL_NAME_BASKET));
-		assertSame(null, request.getSession().getAttribute(basketController.SESSION_BASKETSIZE));
-		assertSame(null,request.getSession().getAttribute(basketController.SESSION_BASKETTOTAL));
-		assertSame(basketController.SHOPPING_ONLINE_BASKET_RECEIVED, result);
-	}
-
 	@Test
 	public void testRemoveItemFromEmptyBasket() {
+		Item item = new Item(4L, "Item 12 Montréal  orekj398", " irewItem 1", 31.31D);
 		Map<Long, Item> basket = new HashMap<>();
-			
-		String result = basketController.removeItemFromBasket(14L, request);
+		basket.put(4L, item);
 		
-		assertSame(null, request.getSession().getAttribute(basketController.SESSION_BASKETSIZE));
+		Basket basketData = new Basket();
+		basketData.setBasketItems(basket);
+		basketData.setBasketQuantity(1);
+		basketData.setBasketTotalAmount(31.31D);
+		
+		basketServiceMock.setBasketData(basketData);
+		when(basketServiceMock.removeItemToBasket(4L)).thenReturn(true);
+		String result = basketController.removeItemFromBasket(4L, request);
+		
 		assertSame(basketController.REDIRECT, result);
 	}
 	
