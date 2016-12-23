@@ -77,7 +77,7 @@ public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerA
     ContentNegotiatingViewResolver(); 
        resolver.setContentNegotiationManager(manager); 
      
-       ArrayList<View>   views = new ArrayList<>(); 
+       ArrayList<View> views = new ArrayList<>(); 
        views.add(jsonView()); 
        views.add(xmlView()); 
      

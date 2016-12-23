@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.formatiointerne.springmvc.pratiq1</groupId>
+  <groupId>com.alithya.shoppingcart</groupId>
   <artifactId>shoppingonline</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <properties>
@@ -148,28 +148,31 @@
     	<version>1.3.3</version>
 	</dependency>
   </dependencies>
-  <!--build>
-	  <plugins>
-		  <plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>jaxb2-maven-plugin</artifactId>
-		    <version>1.6</version>
-		    <executions>
-		        <execution>
-		            <id>xjc</id>
-		            <goals>
-		                <goal>xjc</goal>
-		            </goals>
-		        </execution>
-		    </executions>
-		    <configuration>
-		        <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
-		        <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-		        <clearOutputDir>false</clearOutputDir>
-		    </configuration>
-		   </plugin>
-	   </plugins>
-   </build-->	
+  <build>
+   <plugins>
+  	 <plugin>
+		<groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+            <execution>
+                <id>xjc</id>
+                <goals>
+                    <goal>xjc</goal>
+                </goals>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+                    <!--schemaFiles>/schema/financialschema.xsd</schemaFiles-->
+                    <!--  packageName>com.alithya.shoppingcart.model.jaxb</packageName--> <!-- The name of your generated source package -->
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <!--  target>2.1</target-->
+                    <clearOutputDir>false</clearOutputDir>
+                </configuration>
+            </execution>
+        </executions>
+	  </plugin>
+	</plugins>
+  </build>
   <!--build>
  
             <plugins>

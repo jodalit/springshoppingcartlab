@@ -1,7 +1,5 @@
 package com.alithya.shoppingcart.configuration;
 
-import javax.servlet.ServletRegistration;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -26,18 +24,18 @@ public class ShoppingOnlineWebServiceConfig extends WsConfigurerAdapter {
 	}
 	
 	@Bean
-	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema customerSchema){
+	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema financialSchema){
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-		wsdl11Definition.setPortTypeName("customerPort");
+		wsdl11Definition.setPortTypeName("financialPort");
 		wsdl11Definition.setLocationUri("/ws");
-		wsdl11Definition.setTargetNamespace("http://localhost:8080/shoppingonline/customerSchema");
-		wsdl11Definition.setSchema(customerSchema);
+		wsdl11Definition.setTargetNamespace("http://localhost:8080/shoppingonline/financialschema");
+		wsdl11Definition.setSchema(financialSchema);
 		return wsdl11Definition;
 		
 	}
 	
 	@Bean
-	public XsdSchema customerSchema(){
-		return new SimpleXsdSchema(new ClassPathResource("/schema/customerSchema.xsd"));
+	public XsdSchema financialSchema(){
+		return new SimpleXsdSchema(new ClassPathResource("/schema/financialschema.xsd"));
 	}
 }
