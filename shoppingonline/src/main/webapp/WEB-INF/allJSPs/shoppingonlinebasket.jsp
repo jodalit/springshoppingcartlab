@@ -188,7 +188,7 @@
 		    margin-left:.75%;
 		}
 		
-		#spayitems{
+		#spayitems, #spayitems2{
 			color:white;
 			background-color:royalblue;
 		    height:9%;
@@ -199,7 +199,7 @@
 		    border-radius:10px;
 		}
 		
-		#spayitems a{
+		#spayitems a, #spayitems2 a{
 			color: white;
 			text-decoration: none;
 		}
@@ -208,7 +208,7 @@
 		    background-color: hsl(150, 50%, 90%);
 		}
 		
-		.bouton:hover, .boutonreset:hover, #spayitem:hover{
+		.bouton:hover, .boutonreset:hover, #spayitem:hover, #spayitem2:hover{
 		    background-color:hsl(0, 2%, 17%);
 		    border-color: hsl(0, 9%, 80%);
 		    color: hsl(0, 9%, 80%);
@@ -222,7 +222,7 @@
 		    background-color:hsl(250, 50%, 50%);
 		}
 		
-		.bouton:active, .boutonreset:active, #spayitem:active{
+		.bouton:active, .boutonreset:active, #spayitem:active, #spayitem2:active{
 		    border:inset;
 		    border-width:thick;
 		    color:hsl(0, 2%, 17%);
@@ -245,9 +245,9 @@
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		div#divrecharge #saveBtn, div#divrecharge #resetBtn{
+		div#divrecharge #saveBtn, div#divrecharge #saveBtn1, div#divrecharge #resetBtn{
 			background-color:navy;
-			width: :3em;
+			width: :6.75em;
 			height: 2em;
 			margin: 0.05em;
 			padding: 0.05em;
@@ -686,13 +686,14 @@
             
             <div id = "divrecharge" style="background-color: #ccd458;">
             	
-            	<form action="<spring:url value='customer/recharge' />" method="post">
+            	<form method="post">
             		<fieldset>
                         <label for="customerAvailableAmount">Amount ($) :</label><br />
                         <input type="text" name="customerAvailableAmount" id="customerAvailableAmount"  size="10" maxlength="15" tabindex="0"/> <span id="scustomerAvailableAmount"></span>
                      </fieldset>
                      <fieldset>
-                        <button type="submit" id="saveBtn" name="saveBtn" class="bouton">Save</button>
+                        <button type="submit" id="saveBtn" name="saveBtn" formaction="<spring:url value='customer/recharge' />" class="bouton">Save using REST</button>
+                        <button type="submit" id="saveBtn1" name="saveBtn1" formaction="<spring:url value='customer/rechargebyws' />" class="bouton">Save using SOAP</button>
                         <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
                         <br/>
                         <span style="text-align: right;"><a id="acancelrechargeaccount" href="#" style="text-align: right;">Renounce</a></span> 
@@ -726,6 +727,8 @@
             	<span>Total($) : ${basketdata.basketTotalAmount}</span> <br/> <br/>
             	
             	<span id="spayitems" class="bouton"><a id="apayitems" href="<spring:url value='customer/payitems/${basketdata.basketReference}' />">Pay your item(s) by Spring Restfull</a></span><br /><br />
+            	
+            	<span id="spayitems2" class="bouton"><a id="apayitems2" href="<spring:url value='customer/payitemsbyws/${basketdata.basketReference}' />">Pay your item(s) by Spring Web Service</a></span><br /><br />
             	<br />
             	<h3><a href="ws/wspurchase.wsdl">wspurchase.wsdl</a></h3>
             	<br />

@@ -7,26 +7,24 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
-import com.alithya.shoppingcart.service.FinancialService;
 import com.alithya.shoppingcart.webservice.consumer.FinancialConsumer;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import localhost._8080.shoppingonline.financialschema.PurchaseItemResponse;
 
-@RestController
+@Controller
 @RequestMapping(ShoppingOnLineFinancialRestController.SESSION_CUSTOMER)
-public class ShoppingOnLineFinancialRestController {
+public class ShoppingOnLineFinancialWsController {
 	public static final String CUSTOMER_AVAILABLE_AMOUNT = "customerAvailableAmount";
 	public static final String ERROR_EMPTYBASKET = "emptybasket";
 	public static final String ERROR_ACCOUNTBALANCE = "accountbalance";
@@ -43,21 +41,20 @@ public class ShoppingOnLineFinancialRestController {
 	public static final String STRING_H1_STYLE_COLOR_RED = "<h1 style='color:red;'>";
 	
 	@Autowired
-	private FinancialService financialService; 
+	FinancialConsumer financialConsumer;
 	
-	@RequestMapping(value="/payitems/{basketReference}", method=RequestMethod.GET)
+	@RequestMapping(value="/payitemsbyws/{basketReference}", method=RequestMethod.GET)
 	@ResponseBody
-	public String payItems(@PathVariable String basketReference, HttpServletRequest request) {
+	public String payItemsByWebService(@PathVariable String basketReference, HttpServletRequest request) {
 		
 		Basket basketData = (Basket) request.getSession().getAttribute(SESSION_BASKETDATA);
 		Double basketTotalAmount = basketData.getBasketTotalAmount();
 		Collection<Item> items = basketData.getBasketItems().values();
 		
-		Map<String, String> errors;
+		//PurchaseItemResponse rep = financialConsumer.doPurchaseItems(basketReference);
 		
-		if (!financialService.purchaseItem(basketReference)){
-			errors = financialService.getErrors();
-			return String.join(" ",STRING_H1_STYLE_COLOR_RED, errors.get(ERROR_ACCOUNTBALANCE),STRING_BR,errors.get(ERROR_EMPTYBASKET), STRING_H1);
+		if (financialConsumer.doPurchaseItems(basketReference)==null){
+			return String.join(" ",STRING_H1_STYLE_COLOR_RED, ERROR_ACCOUNTBALANCE,STRING_BR,ERROR_EMPTYBASKET, STRING_H1);
 		}
 		
 		initBasket(request);
@@ -66,17 +63,17 @@ public class ShoppingOnLineFinancialRestController {
 		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_YOUR_TICKET_$, basketTotalAmount.toString(),STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_FOR_THESE_ITEMS_H3, items.toString()) ;
 	}
 	
-	@RequestMapping(value="/recharge", method=RequestMethod.POST)
+	@RequestMapping(value="/rechargebyws", method=RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.OK)
-	public String rechargeAccount(@RequestParam(CUSTOMER_AVAILABLE_AMOUNT) Double customerAvailableAmount, HttpServletRequest request) {
+	public String rechargeAccountByWebService(@RequestParam(CUSTOMER_AVAILABLE_AMOUNT) Double customerAvailableAmount, HttpServletRequest request) {
 		
 		Customer customer = (Customer) request.getSession().getAttribute(SESSION_CUSTOMER);
-		Map<String, String> errors;
+		//Map<String, String> errors;
 		
-		if (!financialService.recharge(customerAvailableAmount, customer.getCustomerId())){
-			errors = financialService.getErrors();
-			return String.join(" ",STRING_H1_STYLE_COLOR_RED_WARNNING_H1, errors.get(ERROR_ACCOUNTBALANCE),STRING_BR,errors.get(ERROR_EMPTYBASKET), STRING_H1);
+		if (financialConsumer.doRecharge(customerAvailableAmount, customer.getCustomerId())==null){
+			//errors = financialService.getErrors();
+			return String.join(" ",STRING_H1_STYLE_COLOR_RED_WARNNING_H1, ERROR_ACCOUNTBALANCE,STRING_BR,ERROR_EMPTYBASKET, STRING_H1);
 		}
 			
 		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_INFO, STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_YOUR_RECHARGE_IS_PERFORMED_WITH_SUCCESS_H3) ;
@@ -89,8 +86,7 @@ public class ShoppingOnLineFinancialRestController {
 		request.getSession().setAttribute("baskettotal", 0.0);
 	}
 
-	public void setFinancialService(FinancialService financialService) {
-		this.financialService = financialService;
+	public void setFinancialConsumer(FinancialConsumer financialConsumer) {
+		this.financialConsumer = financialConsumer;
 	}
-	
 }

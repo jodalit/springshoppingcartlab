@@ -99,7 +99,7 @@ public class FinancialServiceImplementation implements FinancialService {
 		if (customerBasketRef==null){
 			throw new BusinessException("Your basket is empty!");
 		} else{
-			if (!varCustomerBasketRef.equalsIgnoreCase(customerBasketRef))
+			if (!varCustomerBasketRef.trim().equalsIgnoreCase(customerBasketRef.trim()))
 				throw new BusinessException("Your basket does not exist!");
 		}
 	}

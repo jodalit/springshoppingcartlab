@@ -27,7 +27,7 @@ import com.alithya.shoppingcart.model.Person;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.alithya.shoppingcart.service", "com.alithya.shoppingcart.exception", "com.alithya.shoppingcart.repository", "com.alithya.shoppingcart.repository.implementation", "com.alithya.shoppingcart.model", "com.alithya.shoppingcart.configuration", "com.alithya.shoppingcart.controller"})
+@ComponentScan({"com.alithya.shoppingcart.service", "com.alithya.shoppingcart.exception", "com.alithya.shoppingcart.repository", "com.alithya.shoppingcart.repository.implementation", "com.alithya.shoppingcart.model", "com.alithya.shoppingcart.configuration", "com.alithya.shoppingcart.controller", "com.alithya.shoppingcart.webservice.customer"})
 public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	public static final String RESOURCES_DIRECTORY = "/resources/";

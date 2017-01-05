@@ -38,9 +38,9 @@ public class FinancialEndpoint {
 	public PurchaseItemResponse getPurchaseItems(@RequestPayload PurchaseItemRequest request){
 		
 		PurchaseItemResponse response = new PurchaseItemResponse();		
-		response.setResponse(financialServiceShoppingOnLine.purchaseItem(request.getCustomerBasketReference()));
+		response.setResponse(financialServiceShoppingOnLine.purchaseItem(request.getCustomerBasketReference().trim()));
 		
-		return null;
+		return response;
 	}
 	
 
