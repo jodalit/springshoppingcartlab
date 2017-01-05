@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -18,10 +17,7 @@ import org.springframework.ui.ModelMap;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnlineSomeUtilitiesController;
-import com.alithya.shoppingcart.service.BasketService;
-import com.alithya.shoppingcart.service.ItemService;
-import com.alithya.shoppingcart.service.ShoppingService;
+import com.alithya.shoppingcart.controller.ShoppingOnLineAuthenticationController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -31,12 +27,12 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 	@Autowired
 	MockHttpServletRequest request;
 	
-	private ShoppingOnlineSomeUtilitiesController someUtilities;
+	private ShoppingOnLineAuthenticationController someUtilities;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		someUtilities = new ShoppingOnlineSomeUtilitiesController();
+		someUtilities = new ShoppingOnLineAuthenticationController();
 	}
 
 	@Test
@@ -71,17 +67,6 @@ public class ShoppingOnlineSomeUtilitiesControllerTest {
 		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_CONNECTION));
 		assertEquals(someUtilities.CONNEXION, model.get(someUtilities.MODEL_NAME_CONNECTION));
 		assertSame(someUtilities.SHOPPING_ONLINE_HOME_ADMIN, result);
-	}
-	
-	@Test
-	public void verifyGetNewUser() {
-		
-		ModelMap model = new ModelMap();
-		String result =  someUtilities.getNewUser(model);
-		
-		assertNotNull(model.containsKey(someUtilities.MODEL_NAME_NEWUSER));
-		assertEquals(someUtilities.NEWUSER, model.get(someUtilities.MODEL_NAME_NEWUSER));
-		assertSame(someUtilities.SHOPPING_ONLINE_NEWUSER, result);
 	}
 	
 }

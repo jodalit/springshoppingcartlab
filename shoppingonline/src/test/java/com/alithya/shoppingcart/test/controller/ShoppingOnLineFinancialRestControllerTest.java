@@ -1,6 +1,7 @@
 package com.alithya.shoppingcart.test.controller;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -21,32 +22,32 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnLinePaiementRestController;
+import com.alithya.shoppingcart.controller.ShoppingOnLineFinancialRestController;
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.model.Person;
-import com.alithya.shoppingcart.service.PaiementService;
+import com.alithya.shoppingcart.service.FinancialService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
 @ActiveProfiles("test")
-public class ShoppingOnLinePaiementRestControllerTest {
+public class ShoppingOnLineFinancialRestControllerTest {
 	
 	@Mock
-	private PaiementService paiementServiceMock;
+	private FinancialService financialServiceMock;
 	
 	@Autowired
 	MockHttpServletRequest request;
 	
-	private ShoppingOnLinePaiementRestController paiementRestController;
+	private ShoppingOnLineFinancialRestController financialRestController;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		paiementRestController = new ShoppingOnLinePaiementRestController();
-		paiementRestController.setPaiementService(paiementServiceMock);
+		financialRestController = new ShoppingOnLineFinancialRestController();
+		financialRestController.setFinancialService(financialServiceMock);
 	}
 
 	@Test
@@ -69,10 +70,10 @@ public class ShoppingOnLinePaiementRestControllerTest {
 		request.getSession().setAttribute("basketdata", basketCustomer);
 		request.getSession().setAttribute("customer", customer);
 		
-		when(paiementServiceMock.purchaseItem(basketCustomer, customer)).thenReturn(true);
-		when(paiementServiceMock.getErrors()).thenReturn(new HashMap<>());
+		when(financialServiceMock.purchaseItem(anyString())).thenReturn(true);
+		when(financialServiceMock.getErrors()).thenReturn(new HashMap<>());
 				
-		String result = paiementRestController.payItems(request);
+		String result = financialRestController.payItems(anyString(), request);
 		
 		assertFalse(String.join(" ", "<h2 style='color:green;'>Your ticket ($) : ", basketCustomer.getBasketTotalAmount().toString(),"</h2>", "<h3 style='color:bleue;'>For these Items : </h3>", items.toString()).equals(result));
 	}
@@ -89,13 +90,12 @@ public class ShoppingOnLinePaiementRestControllerTest {
 		
 		Double amount = 27.109D;
 		
-		when(paiementServiceMock.recharge(amount, 1L)).thenReturn(true);
-		when(paiementServiceMock.getErrors()).thenReturn(new HashMap<>());
+		when(financialServiceMock.recharge(amount, 1L)).thenReturn(true);
+		when(financialServiceMock.getErrors()).thenReturn(new HashMap<>());
 		
-		String result = paiementRestController.rechargeAccount(amount, request);
+		String result = financialRestController.rechargeAccount(amount, request);
 		
 		assertEquals(String.join(" ", "<h2 style='color:green;'>INFO : ", "</h2>", "<h3 style='color:bleue;'>Your recharge is performed with success.</h3>"), result);
-		
 	}
 	
 }

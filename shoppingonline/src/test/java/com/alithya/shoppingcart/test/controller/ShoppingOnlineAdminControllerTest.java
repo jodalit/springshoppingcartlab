@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnlineConnexionController;
+import com.alithya.shoppingcart.controller.ShoppingOnLineConnexionController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -22,7 +22,7 @@ import com.alithya.shoppingcart.controller.ShoppingOnlineConnexionController;
 @ActiveProfiles("test")
 public class ShoppingOnlineAdminControllerTest {
 	
-	private ShoppingOnlineConnexionController adminController;
+	private ShoppingOnLineConnexionController adminController;
 	
 	@Autowired
 	MockHttpServletRequest request;
@@ -31,7 +31,7 @@ public class ShoppingOnlineAdminControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		adminController = new ShoppingOnlineConnexionController();
+		adminController = new ShoppingOnLineConnexionController();
 	}
 
 	@Test

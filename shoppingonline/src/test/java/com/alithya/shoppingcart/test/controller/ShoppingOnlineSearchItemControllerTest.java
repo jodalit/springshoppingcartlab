@@ -23,7 +23,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnlineSearchItemController;
+import com.alithya.shoppingcart.controller.ShoppingOnLineSearchItemController;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.ItemService;
 import com.alithya.shoppingcart.service.ShoppingService;
@@ -40,13 +40,13 @@ public class ShoppingOnlineSearchItemControllerTest {
 	@Autowired
 	MockHttpServletRequest request;
 	
-	private ShoppingOnlineSearchItemController searchItem;
+	private ShoppingOnLineSearchItemController searchItem;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		request.setParameter("itemNameToFind", "centre");	
-		searchItem = new ShoppingOnlineSearchItemController();
+		searchItem = new ShoppingOnLineSearchItemController();
 		searchItem.setItemService(itemServiceMock);
 		searchItem.setShoppingService(shoppingServiceMock);
 	}

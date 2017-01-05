@@ -188,7 +188,7 @@
 		    margin-left:.75%;
 		}
 		
-		#spayitems{
+		#spayitems, #spayitems2{
 			color:white;
 			background-color:royalblue;
 		    height:9%;
@@ -199,7 +199,7 @@
 		    border-radius:10px;
 		}
 		
-		#spayitems a{
+		#spayitems a, #spayitems2 a{
 			color: white;
 			text-decoration: none;
 		}
@@ -208,7 +208,7 @@
 		    background-color: hsl(150, 50%, 90%);
 		}
 		
-		.bouton:hover, .boutonreset:hover, #spayitem:hover{
+		.bouton:hover, .boutonreset:hover, #spayitem:hover, #spayitem2:hover{
 		    background-color:hsl(0, 2%, 17%);
 		    border-color: hsl(0, 9%, 80%);
 		    color: hsl(0, 9%, 80%);
@@ -222,7 +222,7 @@
 		    background-color:hsl(250, 50%, 50%);
 		}
 		
-		.bouton:active, .boutonreset:active, #spayitem:active{
+		.bouton:active, .boutonreset:active, #spayitem:active, #spayitem2:active{
 		    border:inset;
 		    border-width:thick;
 		    color:hsl(0, 2%, 17%);
@@ -245,9 +245,9 @@
 		    background-color:hsl(255, 50%, 80%);
 		}
 		
-		div#divrecharge #saveBtn, div#divrecharge #resetBtn{
+		div#divrecharge #saveBtn, div#divrecharge #saveBtn1, div#divrecharge #resetBtn{
 			background-color:navy;
-			width: :3em;
+			width: :6.75em;
 			height: 2em;
 			margin: 0.05em;
 			padding: 0.05em;
@@ -674,7 +674,7 @@
         
         <div id="main">
         	<c:if test="${not empty connectionname}"><em>${connectionname}, hi!!!</em></c:if>
-            <h2>Your current Basket</h2>
+            <h2>Your current Basket : ${basketdata.basketReference}</h2>
             
             <hr />
             
@@ -686,13 +686,14 @@
             
             <div id = "divrecharge" style="background-color: #ccd458;">
             	
-            	<form action="<spring:url value='customer/recharge' />" method="post">
+            	<form method="post">
             		<fieldset>
                         <label for="customerAvailableAmount">Amount ($) :</label><br />
                         <input type="text" name="customerAvailableAmount" id="customerAvailableAmount"  size="10" maxlength="15" tabindex="0"/> <span id="scustomerAvailableAmount"></span>
                      </fieldset>
                      <fieldset>
-                        <button type="submit" id="saveBtn" name="saveBtn" class="bouton">Save</button>
+                        <button type="submit" id="saveBtn" name="saveBtn" formaction="<spring:url value='customer/recharge' />" class="bouton">Save using REST</button>
+                        <button type="submit" id="saveBtn1" name="saveBtn1" formaction="<spring:url value='customer/rechargebyws' />" class="bouton">Save using SOAP</button>
                         <button type="reset" id="resetBtn" name="resetBtn" class="bouton">Cancel</button>
                         <br/>
                         <span style="text-align: right;"><a id="acancelrechargeaccount" href="#" style="text-align: right;">Renounce</a></span> 
@@ -702,34 +703,39 @@
             
             <hr />
             
-            <div id="divrecentitems1">            	
-            	<c:forEach items="${basket}" var="b"> 
+            <div id="divrecentitems1">
+            	<br />
+            	
+            	<br />            	
+            	<c:forEach items="${basketdata.basketItems.values()}" var="b"> 
             		<div>
             			<p>
 	                		<a href="#"><img alt="image 1" src="#" style="height: 5em; width: 7.25em;">${b.itemName}</a>
-							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href='<spring:url value="/removefrombasket/${b.itemId}"></spring:url>' style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
+							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href="<spring:url value='/removefrombasket/${b.itemId}' />" style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
 							
 	                		<br />
 	                		${b.description}
 	                		<br />
-	                		<em>${b.price}<span>$</span></em>
+	                		<em><span>$</span> ${b.price}</em>
 	                		<br />
-							
-							<h3><a id="itemBasket" href='<spring:url value="rest/basket/${b.itemId}"></spring:url>'>Item's Rest access</a></h3>
-							<br />
-                		<!-- /p-->
+                		</p>
                 	</div>
             	</c:forEach>
             	<br/>
-            	<span>Quantity : ${basketsize} </span> 
+            	<span>Quantity : ${basketdata.basketQuantity} </span> 
             	<br />
-            	<span>Total ($) : ${baskettotal }</span> <br/> <br/>
+            	<span>Total($) : ${basketdata.basketTotalAmount}</span> <br/> <br/>
             	
-            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="customer/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
+            	<span id="spayitems" class="bouton"><a id="apayitems" href="<spring:url value='customer/payitems/${basketdata.basketReference}' />">Pay your item(s) by Spring Restfull</a></span><br /><br />
+            	
+            	<span id="spayitems2" class="bouton"><a id="apayitems2" href="<spring:url value='customer/payitemsbyws/${basketdata.basketReference}' />">Pay your item(s) by Spring Web Service</a></span><br /><br />
             	<br />
-            												
-				<h3><a id="allBasket" href='<spring:url value="rest/basket/items"></spring:url>'>Your items' Rest access</a></h3>
+            	<h3><a href="ws/wspurchase.wsdl">wspurchase.wsdl</a></h3>
+            	<br />
+            	<br />											
+				<h3><a id="allBasket" href="<spring:url value='rest/basket/items' />">Your items' Rest access</a></h3>
 				<br>
+				
             </div>
 
         </div>

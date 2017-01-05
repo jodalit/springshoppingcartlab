@@ -10,12 +10,15 @@ import org.springframework.stereotype.Service;
 import com.alithya.shoppingcart.exception.BusinessException;
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
-import com.alithya.shoppingcart.repository.PaiementRepository;
+import com.alithya.shoppingcart.repository.FinancialRepository;
 
 @Service
-public class PaiementServiceImplementation implements PaiementService {
+public class FinancialServiceImplementation implements FinancialService {
 	@Autowired
-	private PaiementRepository paiementRepository;
+	private FinancialRepository financialRepository;
+	
+	@Autowired
+	private BasketService basketService;
 	
 	private Map<String, String> errors = new HashMap<String, String>();
 		
@@ -38,7 +41,7 @@ public class PaiementServiceImplementation implements PaiementService {
 		
 		try {
 			
-			if (!paiementRepository.updateAmount(newAmount, id)){
+			if (!financialRepository.updateAmount(newAmount, id)){
 				return false;
 			}
 			
@@ -51,79 +54,60 @@ public class PaiementServiceImplementation implements PaiementService {
 		}
 			
 	}
-
+	
 	@Override
-	public boolean purchaseItem(Basket customerBasket, Customer customer) {
+	public boolean purchaseItem(String customerBasketReference) {
+		
+		Basket customerBasket = basketService.getBasketData();
+		
+		String varCustomerBasketRef = customerBasket.getBasketReference();
 		try {
-			
-			basketValidation(customerBasket);
-			
+			basketValidation(customerBasketReference, varCustomerBasketRef);
 		} catch (BusinessException e) {
-			
-			setError("emptybasket", e.getMessage());
+			setError("emptybasket", e.getMessage());	
 			return false;
-			
 		}
 		
-		Customer customerr = this.getCustomerInfo();
+		Customer currentCustomer = customerBasket.getCustomer();
+		Double currentCustomerAvailableAmount = currentCustomer.getCustomerAvailableAmount();
+		Double varCustomerBasketTotalAmount = basketService.getBasketData().getBasketTotalAmount();
 		
 		try {
-			
-			accountBalanceValidation(customerBasket, customerr);
-			
+			accountBalanceValidation(currentCustomerAvailableAmount, varCustomerBasketTotalAmount);
 		} catch (BusinessException e) {
-			
 			setError("accountbalance", e.getMessage());
 			return false;
-			
 		}
 		
-		Double availableAmount = customerr.getCustomerAvailableAmount();
-		Double basketTotalAmount = customerBasket.getBasketTotalAmount();
-		
+		currentCustomerAvailableAmount = currentCustomerAvailableAmount-varCustomerBasketTotalAmount;
 		try {
-			
-			availableAmount = availableAmount-basketTotalAmount;
-			
-			if (!paiementRepository.updateAmount(availableAmount, customerr.getCustomerId())){
+			if (!financialRepository.updateAmount(currentCustomerAvailableAmount, currentCustomer.getCustomerId())){
+				setError("customerAvailableAmount", "You do not have much money!");
 				return false;
 			}
-						
-			return true;
-			
-		} catch (BusinessException e) {
-			
-			setError("customerAvailableAmount", e.getMessage());
-			return false;
-			
 		} catch (SQLException e) {
-			
 			setError("connection", String.join(" ", "Database unavailable!", e.getMessage()));
 			return false;
-			
 		}
-	} 
+		
+		return true;
+	}
 	
 	@Override
-	public void basketValidation(Basket customerBasket) {
+	public void basketValidation(String customerBasketRef, String varCustomerBasketRef){
 		
-		if (customerBasket.getBasketItems()==null){
-			
-			throw new BusinessException("You do not have much money!");
-			
+		if (customerBasketRef==null){
+			throw new BusinessException("Your basket is empty!");
+		} else{
+			if (!varCustomerBasketRef.trim().equalsIgnoreCase(customerBasketRef.trim()))
+				throw new BusinessException("Your basket does not exist!");
 		}
 	}
 	
 	@Override
-	public void accountBalanceValidation(Basket customerBasket, Customer customer) {
-		
-		Double availableAmount = customer.getCustomerAvailableAmount();
-		Double basketTotalAmount = customerBasket.getBasketTotalAmount();
-		
-		if (basketTotalAmount > availableAmount){
-			
-			throw new BusinessException("Your basket is empty!");
-			
+	public void accountBalanceValidation(Double currentCustAvailableAmount, Double varCustBasketTotalAmount) {
+		if (varCustBasketTotalAmount > currentCustAvailableAmount){
+			throw new BusinessException("You do not have much money!");
 		}
 	}
 	
@@ -131,7 +115,7 @@ public class PaiementServiceImplementation implements PaiementService {
 	public Customer getCustomerInfo() {
 		try {
 			
-			return paiementRepository.getCustomer();
+			return financialRepository.getCustomer();
 			
 		} catch (SQLException e) {
 			
@@ -142,13 +126,15 @@ public class PaiementServiceImplementation implements PaiementService {
 	}
 	
 	@Override
-	public void setPaiementRepository(PaiementRepository paiementRepository) {
-		this.paiementRepository = paiementRepository;
+	public void setFinancialRepository(FinancialRepository financialRepository) {
+		this.financialRepository = financialRepository;
 	}
+	
 	@Override
 	public void setError( String target, String message ) {
 		errors.put( target, message );
 	}
+	
 	@Override
 	public Map<String, String> getErrors() {
 		return errors;

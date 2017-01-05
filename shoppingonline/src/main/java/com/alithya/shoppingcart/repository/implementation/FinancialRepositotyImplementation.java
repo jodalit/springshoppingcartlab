@@ -3,22 +3,27 @@ package com.alithya.shoppingcart.repository.implementation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.alithya.shoppingcart.exception.BusinessException;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Person;
-import com.alithya.shoppingcart.repository.PaiementRepository;
+import com.alithya.shoppingcart.repository.FinancialRepository;
 
 @Repository
-public class PaiementRepositotyImplementation implements PaiementRepository {
+public class FinancialRepositotyImplementation implements FinancialRepository {
+	public static final String PROD = "prod";
 	public static final String ID = "id";
 	public static final String AVAILABLE_AMOUNT = "availableAmount";
 	
@@ -31,15 +36,27 @@ public class PaiementRepositotyImplementation implements PaiementRepository {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public PaiementRepositotyImplementation (DataSource dataSouce) {
+	private Environment environement;
+	
+	@Autowired
+	public FinancialRepositotyImplementation (DataSource dataSouce) {
 		jdbcTemplateShoppingCart = new JdbcTemplate(dataSouce);
 	}
 	
 	@Override
 	public Customer getCustomer() {
-		try {
+		String[] activeEnvironement = this.environement.getActiveProfiles();
+		
+		try{
+			if (!PROD.equalsIgnoreCase(activeEnvironement[0])){
+				return (Customer) jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, (HashMap) null , new CustomerPersonMapper()); //jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
 			
-			return jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
+			} else{
+				List<Customer> l = jdbcTemplate.query(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
+				
+				return l.get(0);
+			}
+			
 		} catch (Exception e) {
 			throw new BusinessException("Database unavailable!");
 		}	
@@ -65,13 +82,13 @@ public class PaiementRepositotyImplementation implements PaiementRepository {
 	}
 	
 	private static final class CustomerPersonMapper implements org.springframework.jdbc.core.RowMapper<Customer> {			
-		public static final String CUSTOMER_AVAILABLE_AMOUNT = "customerAvailableAmount";
-		public static final String CUSTOMER_ID = "customerId";
-		public static final String PROFILE_ID = "profileId";
-		public static final String CUSTOMER_PASSWORD = "customerPassword";
-		public static final String CUSTOMER_CONNNECTION_NAME = "customerConnnectionName";
-		public static final String CUSTOMER_NAME = "customerName";
-		public static final String PERSON_ID = "personId";
+		public static final String CUSTOMER_AVAILABLE_AMOUNT = "CUSTOMERAVAILABLEAMOUNT";//customerAvailableAmount";
+		public static final String CUSTOMER_ID = "CUSTOMERID";//customerid";
+		public static final String PROFILE_ID = "PROFILEID"; //profileid";
+		public static final String CUSTOMER_PASSWORD = "PERSONPASSWORD";//customerPassword";
+		public static final String CUSTOMER_CONNNECTION_NAME = "PERSONCONNECTIONNAME";
+		public static final String CUSTOMER_NAME = "PERSONNAME";
+		public static final String PERSON_ID = "PERSONID";
 
 		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Customer customer = new Customer();

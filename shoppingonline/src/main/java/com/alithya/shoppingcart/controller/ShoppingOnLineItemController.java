@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
-public class ShoppingOnlineItemController {
+public class ShoppingOnLineItemController {
 	
 	public static final String MODEL_ITEMS = "items";
 	public static final String MODEL_UPDATE_ITEM = "updateitem";

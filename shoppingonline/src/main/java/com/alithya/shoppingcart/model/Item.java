@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.multipart.MultipartFile;
 
 //@XmlRootElement
+@Scope("session")
 public class Item implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long itemId;
@@ -84,7 +86,15 @@ public class Item implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", description=" + description + ", price=" + price +", expireDate=" + expireDate + "]";
+		return new StringBuilder()
+				.append("Item [itemId=" + itemId)
+				.append(", itemName=" + itemName)
+				.append(", description=" + description)
+				.append(", price=" + price)
+				.append(", expireDate="  + expireDate)
+				.append("]")
+				.toString();
+				//"Item [itemId=" + itemId + ", itemName=" + itemName + ", description=" + description + ", price=" + price + ", expireDate=" + expireDate + "]";
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import com.alithya.shoppingcart.service.ItemService;
 import com.alithya.shoppingcart.service.ShoppingService;
 
 @Controller
-public class ShoppingOnlineSearchItemController {
+public class ShoppingOnLineSearchItemController {
 	
 	public static final String SESSION_SIZE_ITEMS_FOR_NAME = "sizeitemsforname";
 	public static final String SESSION_ITEMS_FOR_NAME = "itemsforname";
