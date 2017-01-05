@@ -15,13 +15,15 @@ import localhost._8080.shoppingonline.financialschema.RechargeResponse;
 
 @Endpoint
 public class FinancialEndpoint {
-	private static final String RECHARGE_NAMESPACE_URI = "http://localhost:8080/shoppingonline/ws/financialschema/rechargeaccount";
+	private static final String NAMESPACE_URI = "http://localhost:8080/shoppingonline/financialschema";
+	/*private static final String RECHARGE_NAMESPACE_URI = "http://localhost:8080/shoppingonline/financialschema";//"http://localhost:8080/shoppingonline/ws/financialschema/rechargeaccount";
 	private static final String PURCHASE_NAMESPACE_URI = "http://localhost:8080/shoppingonline/ws/financialschema/purchaseitem";
+	*/
 	
 	@Autowired
 	private FinancialService financialServiceShoppingOnLine;
 
-	@PayloadRoot(namespace=RECHARGE_NAMESPACE_URI, localPart="rechargeRequest")
+	@PayloadRoot(namespace=NAMESPACE_URI, localPart="rechargeRequest")
 	@ResponsePayload
 	public RechargeResponse getRechargeCustomerAccount(@RequestPayload RechargeRequest request){
 	
@@ -31,7 +33,7 @@ public class FinancialEndpoint {
 		return response;
 	}
 	
-	@PayloadRoot(namespace=PURCHASE_NAMESPACE_URI, localPart="purchaseItemRequest")
+	@PayloadRoot(namespace=NAMESPACE_URI, localPart="purchaseItemRequest")
 	@ResponsePayload
 	public PurchaseItemResponse getPurchaseItems(@RequestPayload PurchaseItemRequest request){
 		
