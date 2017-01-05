@@ -609,8 +609,6 @@
 		    border-radius :15px;
 		}
     
-    
-    
     </style>
 </head>
 <body>
@@ -620,7 +618,7 @@
                 <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>your Basket ${basketsize}</a></span>
+			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>your Basket </a>${basketdata.basketQuantity}</span>
 		</header>
 
         <nav>

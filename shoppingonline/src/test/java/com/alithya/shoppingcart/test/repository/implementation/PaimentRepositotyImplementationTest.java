@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineRootApplicationContextConfig;
 import com.alithya.shoppingcart.model.Customer;
-import com.alithya.shoppingcart.repository.PaiementRepository;
+import com.alithya.shoppingcart.repository.FinancialRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineRootApplicationContextConfig.class})
 @WebAppConfiguration
@@ -22,17 +22,17 @@ import com.alithya.shoppingcart.repository.PaiementRepository;
 @ActiveProfiles("test")
 public class PaimentRepositotyImplementationTest {
 	@Autowired
-	PaiementRepository paiementRepository;
+	FinancialRepository financialRepository;
 	
 	@Test
 	public void verifyGetCustomer() throws SQLException {
-		Customer customer = paiementRepository.getCustomer();
+		Customer customer = financialRepository.getCustomer();
 		assertNotNull(customer);
 	}
 	
 	@Test
 	public void verifyUpdateAmount() throws SQLException {
-		boolean response = paiementRepository.updateAmount(Double.valueOf(125), Long.valueOf(2));
+		boolean response = financialRepository.updateAmount(Double.valueOf(125), Long.valueOf(2));
 		assertTrue(response);
 	}
 

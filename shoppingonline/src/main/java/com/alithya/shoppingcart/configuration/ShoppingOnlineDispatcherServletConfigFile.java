@@ -2,11 +2,11 @@ package com.alithya.shoppingcart.configuration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+	//public static final String WS_URL_FOR_MAPPING = "/ws/*";
 	public static final String URL_FOR_MAPPING = "/";
 
 	@Override
@@ -21,7 +21,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	protected Class<?>[] getServletConfigClasses() {
 		
 		return new Class[]{
-				ShoppingOnlineWebApplicationContextConfig.class, ShoppingOnlineWebServiceConfig.class
+				ShoppingOnlineWebApplicationContextConfig.class//, ShoppingOnlineWebServiceConfig.class
 		};
 	}
 
@@ -33,7 +33,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 	
 	@Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
+        super.onStartup(servletContext);    
         servletContext.setInitParameter("spring.profiles.active", "prod");
     }
 	

@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
-public class ShoppingOnlineHomeController {
+public class ShoppingOnLineHomeController {
 	
 	public static final String SESSION_BASKETSIZE = "basketsize";
 	public static final String SESSION_ITEMS = "items";
@@ -24,7 +25,7 @@ public class ShoppingOnlineHomeController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping(REQUESTMAPPING_HOME) 
+	@RequestMapping(value=REQUESTMAPPING_HOME, method=RequestMethod.GET) 
 	public String getShoppingOnlineHome(ModelMap model, HttpServletRequest request){
 		
 		request.getSession().setAttribute(SESSION_ITEMS, itemService.getItemsList().values());

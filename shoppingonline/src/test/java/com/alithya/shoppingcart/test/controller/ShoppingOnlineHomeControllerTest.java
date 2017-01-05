@@ -22,7 +22,7 @@ import org.springframework.ui.ModelMap;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnlineHomeController;
+import com.alithya.shoppingcart.controller.ShoppingOnLineHomeController;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.ItemService;
 
@@ -38,12 +38,12 @@ public class ShoppingOnlineHomeControllerTest {
 	
 	@Mock
 	private ItemService itemServiceMock;
-	private ShoppingOnlineHomeController homeController;
+	private ShoppingOnLineHomeController homeController;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		homeController = new ShoppingOnlineHomeController();
+		homeController = new ShoppingOnLineHomeController();
 		homeController.setItemService(itemServiceMock);
 	}
 	

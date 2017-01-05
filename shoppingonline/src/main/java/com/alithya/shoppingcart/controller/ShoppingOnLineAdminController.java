@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ShoppingOnlineAdminController {
+public class ShoppingOnLineAdminController {
 	
 	public static final String REQUESTMAPPING_ADMIN = "/admin";
 	public static final String MODEL_NAME_ADMIN = "admin";

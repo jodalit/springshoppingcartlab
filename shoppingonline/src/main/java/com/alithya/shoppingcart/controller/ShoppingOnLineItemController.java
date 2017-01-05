@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
-public class ShoppingOnlineItemController {
+public class ShoppingOnLineItemController {
 	
 	public static final String MODEL_ITEMS = "items";
 	public static final String MODEL_UPDATE_ITEM = "updateitem";

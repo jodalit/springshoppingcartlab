@@ -1,6 +1,8 @@
 package com.alithya.shoppingcart.test.service;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
@@ -23,25 +25,25 @@ import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.model.Person;
-import com.alithya.shoppingcart.repository.PaiementRepository;
-import com.alithya.shoppingcart.service.PaiementService;
-import com.alithya.shoppingcart.service.PaiementServiceImplementation;
+import com.alithya.shoppingcart.repository.FinancialRepository;
+import com.alithya.shoppingcart.service.FinancialService;
+import com.alithya.shoppingcart.service.FinancialServiceImplementation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
 @WebAppConfiguration
 @ActiveProfiles("test")
-public class PaiementServiceImplementationTest {
+public class FinancialServiceImplementationTest {
 	@Mock
-	PaiementRepository paiementRepositoryMock;
+	FinancialRepository financialRepositoryMock;
 	
-	private PaiementService paiementService;
+	private FinancialService financialService;
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		paiementService = new PaiementServiceImplementation();
-		paiementService.setPaiementRepository(paiementRepositoryMock);
+		financialService = new FinancialServiceImplementation();
+		financialService.setFinancialRepository(financialRepositoryMock);
 	}
 
 	@Test
@@ -52,9 +54,9 @@ public class PaiementServiceImplementationTest {
 		customer.setCustomerAvailableAmount(1500D);
 		customer.setPerson(p);
 		
-		when(paiementRepositoryMock.getCustomer()).thenReturn(customer);
+		when(financialRepositoryMock.getCustomer()).thenReturn(customer);
 		
-		Double result = paiementService.getAvailableAmount();
+		Double result = financialService.getAvailableAmount();
 		
 		assertTrue(result==1500D);
 	}
@@ -67,9 +69,9 @@ public class PaiementServiceImplementationTest {
 		customer.setCustomerAvailableAmount(1500D);
 		customer.setPerson(p);
 		
-		when(paiementRepositoryMock.getCustomer()).thenReturn(customer);
+		when(financialRepositoryMock.getCustomer()).thenReturn(customer);
 		 
-		Customer result = paiementService.getCustomerInfo();
+		Customer result = financialService.getCustomerInfo();
 		
 		assertEquals(customer, result);
 	}
@@ -91,12 +93,12 @@ public class PaiementServiceImplementationTest {
 		basketData.setBasketQuantity(1);
 		basketData.setBasketTotalAmount(Double.valueOf(50));
 		
-		when(paiementRepositoryMock.updateAmount(Double.valueOf(1450), 2L)).thenReturn(true);
+		when(financialRepositoryMock.updateAmount(Double.valueOf(1450), 2L)).thenReturn(true);
 		
-		paiementService.basketValidation(basketData);
-		paiementService.accountBalanceValidation(basketData, customer);
+		financialService.basketValidation(anyString(), anyString());;
+		financialService.accountBalanceValidation(anyDouble(), anyDouble());
 				
-		boolean result = paiementService.purchaseItem(basketData, customer);
+		boolean result = financialService.purchaseItem(anyString());
 		
 		assertTrue(result);
 	}
@@ -109,11 +111,11 @@ public class PaiementServiceImplementationTest {
 		customer.setCustomerAvailableAmount(1500D);
 		customer.setPerson(p);
 		
-		when(paiementRepositoryMock.updateAmount(27D, 2L)).thenReturn(true);
+		when(financialRepositoryMock.updateAmount(27D, 2L)).thenReturn(true);
 		 
-		boolean result = paiementService.recharge(Double.valueOf(1527), 2L);
+		boolean result = financialService.recharge(Double.valueOf(1527), 2L);
 		
-		assertEquals(Double.valueOf(1527), paiementRepositoryMock.getCustomer().getCustomerAvailableAmount());
+		assertEquals(Double.valueOf(1527), financialRepositoryMock.getCustomer().getCustomerAvailableAmount());
 		assertTrue(result);
 	}
 

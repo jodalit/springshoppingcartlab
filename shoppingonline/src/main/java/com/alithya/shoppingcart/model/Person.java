@@ -122,9 +122,21 @@ public class Person implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Person [\npersonId= " + personId + ", personName= " + personName + ", personSex= " + personSex
+		return new StringBuilder()
+				.append("Person [personId= " + personId)
+				.append(", personName= " + personName)
+				.append(", personSex= " + personSex)
+				.append(", personBirthDate= " + personBirthDate)
+				.append(", personAdress= " + personAdress)
+				.append(", personTelephone= " + personTelephone)
+				.append(", connexionname= " + personConnectionName)
+				.append(", profil = " + profile)
+				.append("]")
+				.toString();
+		
+		/*return "Person [\npersonId= " + personId + ", personName= " + personName + ", personSex= " + personSex
 				+ ", personBirthDate= " + personBirthDate + ", personAdress= " + personAdress + ", personTelephone= "
-				+ personTelephone + ", connexionname= " + personConnectionName + ", profil = " + profile + "\n]";
+				+ personTelephone + ", connexionname= " + personConnectionName + ", profil = " + profile + "\n]";*/
 	}
 
 	@Override

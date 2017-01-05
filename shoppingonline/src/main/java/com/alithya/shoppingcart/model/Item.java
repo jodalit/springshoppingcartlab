@@ -86,7 +86,15 @@ public class Item implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", description=" + description + ", price=" + price +", expireDate=" + expireDate + "]";
+		return new StringBuilder()
+				.append("Item [itemId=" + itemId)
+				.append(", itemName=" + itemName)
+				.append(", description=" + description)
+				.append(", price=" + price)
+				.append(", expireDate="  + expireDate)
+				.append("]")
+				.toString();
+				//"Item [itemId=" + itemId + ", itemName=" + itemName + ", description=" + description + ", price=" + price + ", expireDate=" + expireDate + "]";
 	}
 
 	@Override

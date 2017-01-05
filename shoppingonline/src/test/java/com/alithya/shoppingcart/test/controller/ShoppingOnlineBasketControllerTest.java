@@ -21,13 +21,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
-import com.alithya.shoppingcart.controller.ShoppingOnlineBasketController;
+import com.alithya.shoppingcart.controller.ShoppingOnLineBasketController;
 import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.model.Person;
 import com.alithya.shoppingcart.service.BasketService;
-import com.alithya.shoppingcart.service.PaiementService;
+import com.alithya.shoppingcart.service.FinancialService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
@@ -38,20 +38,20 @@ public class ShoppingOnlineBasketControllerTest {
 	@Mock
 	private BasketService basketServiceMock;
 	@Mock
-	private PaiementService customerServiceMock;
+	private FinancialService customerServiceMock;
 	
 	@Autowired
 	MockHttpServletRequest request;
 	
-	private ShoppingOnlineBasketController basketController;
+	private ShoppingOnLineBasketController basketController;
 	
 		
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		basketController = new ShoppingOnlineBasketController();
+		basketController = new ShoppingOnLineBasketController();
 		basketController.setBasketService(basketServiceMock);
-		basketController.setCustomerService(customerServiceMock);
+		basketController.setFinancialService(customerServiceMock);
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class ShoppingOnlineBasketControllerTest {
 		
 		Map<Long, Item> basket = new HashMap<>();
 		basket.put(id, item);
-		when(basketServiceMock.addItemToBasket(id)).thenReturn(true);
+		when(basketServiceMock.addItemToBasket(id)).thenReturn(new Basket());
 		
 		request.getSession().setAttribute("basket", basket);
 		String result =  basketController.addToBasket(id, request);
@@ -91,7 +91,7 @@ public class ShoppingOnlineBasketControllerTest {
 		
 		Map<Long, Item> basket = new HashMap<>();
 		basket.put(id, item);
-		when(basketServiceMock.addItemToBasket(id)).thenReturn(true);
+		when(basketServiceMock.addItemToBasket(id)).thenReturn(new Basket());
 		when(basketServiceMock.getItemsBasket()).thenReturn(basket);
 		
 		request.getSession().setAttribute("basket", basket);

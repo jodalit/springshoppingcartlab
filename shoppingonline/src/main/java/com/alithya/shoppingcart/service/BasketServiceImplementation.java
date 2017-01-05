@@ -1,5 +1,6 @@
 package com.alithya.shoppingcart.service;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,42 +16,53 @@ public class BasketServiceImplementation implements BasketService {
 	@Autowired
 	private ItemService itemService;
 	
-	private Basket basketData = new Basket();
+	@Autowired
+	private FinancialService customerService;
 	
+	private Basket basketData = new Basket();
+		
 	@Override
-	public boolean addItemToBasket(Long itemId) {
+	public Basket addItemToBasket(Long itemId) {
 		Item item = itemService.getItemById(itemId);
-		
-		Map<Long, Item> mapBasket = new HashMap<>();
-		
+			
+		Map<Long, Item> items = new HashMap<>();
 		if(basketData.getBasketItems() != null){
 			if (basketData.getBasketItems().containsKey(itemId))
-				return false;
+				return basketData;
 			
-			mapBasket = basketData.getBasketItems();
-		} 
-			
-		mapBasket.put(itemId, item);
-		basketData.setBasketItems(mapBasket);
-		 
-		int quantity = basketData.getBasketQuantity()+1;
-		basketData.setBasketQuantity(quantity);
+			items = basketData.getBasketItems();
+		} 	
 		
-		double totalAmount = 0;
+		items.put(itemId, item);
+		basketData.setBasketItems(items);
+		 
+		basketData.setBasketQuantity(items.size());
+		
+		double totalAmount;
 		if(basketData.getBasketTotalAmount()== null){
 			totalAmount = item.getPrice().doubleValue();
 		} else {
 			totalAmount = basketData.getBasketTotalAmount().doubleValue() + item.getPrice().doubleValue();
 		}
-		
 		basketData.setBasketTotalAmount(Double.valueOf(totalAmount));
 		
-		return true;
+		basketData.setCustomer(customerService.getCustomerInfo());
+		basketData.setBasketDate(LocalDate.now());
+		
+		if (basketData.getBasketReference()==null){
+			String basketReference = new StringBuilder()
+					.append(customerService.getCustomerInfo().getCustomerId().toString())
+					.append("-")
+					.append(System.currentTimeMillis()).toString();
+			
+			basketData.setBasketReference(basketReference);
+		}
+				
+		return basketData;
 	}
 	
 	@Override
 	public boolean removeItemToBasket(Long itemId) {
-		
 		if (basketData.getBasketItems().containsKey(itemId)){
 			Double priceRemovedItem  = basketData.getBasketItems().get(itemId).getPrice(); 
 
@@ -61,7 +73,7 @@ public class BasketServiceImplementation implements BasketService {
 			
 			int quantity = basketData.getBasketQuantity()-1;
 			basketData.setBasketQuantity(quantity);
-			 
+			
 			return true;
 		}
 		
@@ -89,7 +101,6 @@ public class BasketServiceImplementation implements BasketService {
 
 	@Override
 	public Map<Long, Item> getItemsBasket() {
-		
 		return basketData.getBasketItems();
 	}
 	

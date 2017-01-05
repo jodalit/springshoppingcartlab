@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
-public class ShoppingOnlineConnexionController {
+public class ShoppingOnLineConnexionController {
 	
 	public static final String REQUESTMAPPING_MAKE_CONNECTION = "/makeconnection";
 	public static final String MODEL_NAME_CONNECTION_NAME = "connectionname";

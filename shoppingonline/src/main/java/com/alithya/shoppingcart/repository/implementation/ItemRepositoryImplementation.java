@@ -2,10 +2,7 @@ package com.alithya.shoppingcart.repository.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +31,8 @@ public class ItemRepositoryImplementation implements ItemRepository {
 	public static final String SQL_INSERT_ITEM1 = "INSERT INTO Item (itemName, itemDescription, itemPrice) VALUES (:name, :description, :price)";
 	public static final String SQL_UPDATE_ITEM = "UPDATE Item SET itemName = :name, itemDescription = :description, itemPrice = :price WHERE itemId = :id";
 	public static final String SQL_DELETE_ITEM = "DELETE FROM Item WHERE itemId = :id";
-	public static final String SQL_SELECT_ALL_ITEM = "SELECT * FROM Item ORDER BY itemId DESC";
-	public static final String SQL_SELECT_LAST_ITEM = "SELECT * FROM Item ORDER itemId DESC LIMIT 1";
+	public static final String SQL_SELECT_ALL_ITEM = "SELECT * FROM Item ORDER BY itemid DESC";
+	public static final String SQL_SELECT_LAST_ITEM = "SELECT * FROM Item ORDER itemid DESC LIMIT 1";
 	
 	@Autowired
 	private Environment environement;

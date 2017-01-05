@@ -20,6 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
+import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.BasketService;
 import com.alithya.shoppingcart.service.BasketServiceImplementation;
@@ -52,10 +53,10 @@ public class BasketServiceImplementationTest {
 		
 		when(itemServiceMock.getItemById(4L)).thenReturn(item);
 		
-		boolean response = basketService.addItemToBasket(4L);
+		Basket response = basketService.addItemToBasket(4L);
 		
-		assertSame(true, response);
-		assertEquals(items, basketService.getBasketData().getBasketItems());
+		assertSame(items, response.getBasketItems());
+		assertNotNull(response);
 	}
 	
 	@Test
@@ -66,10 +67,10 @@ public class BasketServiceImplementationTest {
 		
 		when(itemServiceMock.getItemById(4L)).thenReturn(item);
 		
-		boolean b = basketService.addItemToBasket(4L);
+		Basket b = basketService.addItemToBasket(4L);
 		boolean response = basketService.removeItemToBasket(4L);
 		
-		assertTrue( b);
+		assertNotNull( b);
 		assertSame(true, response);
 		assertNotSame(items,basketService.getBasketData().getBasketItems());
 		assertSame(0,basketService.getBasketData().getBasketItems().size());
@@ -83,10 +84,10 @@ public class BasketServiceImplementationTest {
 		
 		when(itemServiceMock.getItemById(4L)).thenReturn(item);
 		
-		boolean b = basketService.addItemToBasket(4L);
+		Basket b = basketService.addItemToBasket(4L);
 		boolean response = basketService.removeItemsToBasket();
 		
-		assertTrue( b);
+		assertNotNull( b);
 		assertSame(true, response);
 		assertNull(basketService.getBasketData().getBasketItems());
 		assertSame(0, basketService.getBasketData().getBasketQuantity());
@@ -101,12 +102,12 @@ public class BasketServiceImplementationTest {
 		
 		when(itemServiceMock.getItemById(4L)).thenReturn(item);
 		
-		boolean b = basketService.addItemToBasket(4L);
+		Basket b = basketService.addItemToBasket(4L);
 		
 		List<Item> itemsList = new ArrayList<>(items.values());
 		boolean response = basketService.removeItemOnItemsListOfClient(item, itemsList);
 		
-		assertTrue( b);
+		assertNotNull( b);
 		assertSame(true, response);
 		assertEquals(0,basketService.getBasketData().getBasketItems().size());
 	}

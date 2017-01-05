@@ -95,7 +95,6 @@ public class ItemServiceImplementation implements ItemService {
 			return false;
 		
 		if (itemRepository.deleteItem(id)){
-			//this.setItems(itemsList());
 			this.getItemsList();
 			return true;
 		}
@@ -104,28 +103,14 @@ public class ItemServiceImplementation implements ItemService {
 	}
 
 	@Override
-	public Long getMaxItemId() {
-		//this.setItems(itemsList());
-		
+	public Long getMaxItemId() {	
 		Set<Long> idSet = this.getItemsList().keySet();
 		if (idSet.isEmpty())
 			return null;
 		
 		return Collections.max(idSet);
 	}
-	
-	/*
-	@Override
-	public  Map<Long, Item> getItems() {
-		return items;
-	}
-	
-	@Override
-	public void setItems(Map<Long, Item> items) {
-		this.items = items;
-	}
-	*/
-	
+		
 	@Override
 	public void setItemRepository(ItemRepository itemRepository) {
 		this.itemRepository = itemRepository;

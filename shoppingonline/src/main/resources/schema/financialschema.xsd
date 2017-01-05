@@ -1,56 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/financialschema" xmlns:tns="http://www.example.org/financialschema" elementFormDefault="qualified">
-	<element name="getRechargeRequest">
-		<complexType>
-            <sequence>
-                <element name="amount" type="double"/>
-                <element name="id" type="long"/>
-            </sequence>
-        </complexType>
-	</element>
-	
-	<element name="getRechargeResponse">
-		<complexType>
-            <sequence>
-                <element name="response" type="boolean"/>
-            </sequence>
-        </complexType>
-	</element>
-	
-	<element name="getPurchaseItemRequest">
-		<complexType>
-            <sequence>
-                <element name="customer" type="tns:customer" />
-                <element name="basket" type="tns:basket" />
-            </sequence>
-        </complexType>
-	</element>
-	
-	<element name="getPurchaseItemResponse">
-		<complexType>
-            <sequence>
-                <element name="response" type="boolean"/>
-            </sequence>
-        </complexType>
-	</element>
-	
-	<complexType name="customer">
-		<sequence>
-			<element name="customerid" type="long" />
-			<element name="personid" type="long" />
-			<element name="conneectionname" type="string" />
-		</sequence>
-	</complexType>
-	
-	<complexType name="basket">
-		<sequence>
-			<element name="basketquantity" type="integer" />
-			<element name="baskettotalamount" type="double" />
-			<element name="basketitems" type="tns:basketitems" />
-		</sequence>
-	</complexType>
-	
-	<simpleType name="basketitems">
-		<list itemType="long" />
-	</simpleType>
-</schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost:8080/shoppingonline/financialschema" xmlns:tns="http://localhost:8080/shoppingonline/financialschema" elementFormDefault="qualified">
+	<xs:element name="rechargeRequest">
+		<xs:complexType>
+            <xs:sequence>
+                <xs:element name="amount" type="xs:double"/>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="rechargeResponse">
+		<xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="purchaseItemRequest">
+		<xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerBasketReference" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="purchaseItemResponse">
+		<xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+	</xs:element>
+</xs:schema>

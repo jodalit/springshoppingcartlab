@@ -674,7 +674,7 @@
         
         <div id="main">
         	<c:if test="${not empty connectionname}"><em>${connectionname}, hi!!!</em></c:if>
-            <h2>Your current Basket</h2>
+            <h2>Your current Basket : ${basketdata.basketReference}</h2>
             
             <hr />
             
@@ -702,34 +702,37 @@
             
             <hr />
             
-            <div id="divrecentitems1">            	
-            	<c:forEach items="${basket}" var="b"> 
+            <div id="divrecentitems1">
+            	<br />
+            	
+            	<br />            	
+            	<c:forEach items="${basketdata.basketItems.values()}" var="b"> 
             		<div>
             			<p>
 	                		<a href="#"><img alt="image 1" src="#" style="height: 5em; width: 7.25em;">${b.itemName}</a>
-							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href='<spring:url value="/removefrombasket/${b.itemId}"></spring:url>' style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
+							<span id="s${b.itemId}" style="position: relative; top: -2.75em; color:yellow; background-color:#e1546a; height:3%; width:3.5em;border:outset; padding:1px; margin-left: 25%; text-align:center; border-radius:5px;"><a id="${b.itemId}" href="<spring:url value='/removefrombasket/${b.itemId}' />" style="color:lightyellow; text-align:center; text-decoration:none; z-index: 11500;">Remove from Basket</a></span>
 							
 	                		<br />
 	                		${b.description}
 	                		<br />
-	                		<em>${b.price}<span>$</span></em>
+	                		<em><span>$</span> ${b.price}</em>
 	                		<br />
-							
-							<h3><a id="itemBasket" href='<spring:url value="rest/basket/${b.itemId}"></spring:url>'>Item's Rest access</a></h3>
-							<br />
-                		<!-- /p-->
+                		</p>
                 	</div>
             	</c:forEach>
             	<br/>
-            	<span>Quantity : ${basketsize} </span> 
+            	<span>Quantity : ${basketdata.basketQuantity} </span> 
             	<br />
-            	<span>Total ($) : ${baskettotal }</span> <br/> <br/>
+            	<span>Total($) : ${basketdata.basketTotalAmount}</span> <br/> <br/>
             	
-            	<span id="spayitems" class="bouton"><a id="apayitems" href='<spring:url value="customer/payitems"></spring:url>'>Pay your item(s)</a></span><br /><br />
+            	<span id="spayitems" class="bouton"><a id="apayitems" href="<spring:url value='customer/payitems/${basketdata.basketReference}' />">Pay your item(s) by Spring Restfull</a></span><br /><br />
             	<br />
-            												
-				<h3><a id="allBasket" href='<spring:url value="rest/basket/items"></spring:url>'>Your items' Rest access</a></h3>
+            	<h3><a href="ws/wspurchase.wsdl">wspurchase.wsdl</a></h3>
+            	<br />
+            	<br />											
+				<h3><a id="allBasket" href="<spring:url value='rest/basket/items' />">Your items' Rest access</a></h3>
 				<br>
+				
             </div>
 
         </div>

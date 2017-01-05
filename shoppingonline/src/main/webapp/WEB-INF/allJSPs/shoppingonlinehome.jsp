@@ -619,22 +619,20 @@
 		    border-radius :15px;
 		}
     
-    
-    
     </style>
 </head>
+
 <body>
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
-                <span id="saccueil"><a id="aaccueil" href='<spring:url value="/"></spring:url>'>Home</a></span>
-
-                <!-- span id="sinscription" class="bouton"><a id="ainscription" href="gererInscriptionMembres.html">S'inscrire</a></span-->
-                <span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connection"></spring:url>'>Connection</a></span>
+                <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
+                
+                <span id="sconnexion" class="bouton"><a id="aconnexion" href="<spring:url value='/connection' />">Connection</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
-		
+			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>your Basket </a>${basketdata.basketQuantity}</span>
+    		
             <div id="divSearch">
                 <form action="<spring:url value='/resultsearchitem' />" method="post">
                     <fieldset>

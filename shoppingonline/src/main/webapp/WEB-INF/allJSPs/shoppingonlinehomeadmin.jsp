@@ -628,7 +628,7 @@
                 <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnection' />">Quit</a></span>
             </div>
             
-			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>Your Basket</a> ${basketsize}</span>
+			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>your Basket </a>${basketdata.basketQuantity}</span>
 		
             <div id="divSearch">
                 <form action="<spring:url value='/resultsearchitem' />" method="post">

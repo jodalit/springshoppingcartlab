@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @Scope("session")
 public class Customer extends Person implements Serializable {
@@ -13,7 +15,10 @@ public class Customer extends Person implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long customerId;
+	
+	@NumberFormat(style=Style.NUMBER, pattern="#,###.##")
 	private Double customerAvailableAmount;
+	
 	private Person person;
 	
 	public Customer() {
@@ -61,8 +66,15 @@ public class Customer extends Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", customerAvailableAmount=" + customerAvailableAmount
-				+ ", person=" + super.toString() + "]";
+		return new StringBuilder()
+		.append("Customer [customerId=" + customerId)
+		.append(", customerAvailableAmount=" + customerAvailableAmount)
+		.append(", person=" + super.toString())
+		.append("]")
+		.toString();
+		
+		//return "Customer [customerId=" + customerId + ", customerAvailableAmount=" + customerAvailableAmount
+			//	+ ", person=" + super.toString() + "]";
 	}
 
 	@Override
