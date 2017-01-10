@@ -248,7 +248,7 @@
 		div#divrecharge #saveBtn, div#divrecharge #saveBtn1, div#divrecharge #resetBtn{
 			background-color:navy;
 			width: :6.75em;
-			height: 2em;
+			height: 3em;
 			margin: 0.05em;
 			padding: 0.05em;
 		}

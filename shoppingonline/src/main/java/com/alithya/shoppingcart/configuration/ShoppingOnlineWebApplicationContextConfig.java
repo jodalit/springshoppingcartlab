@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -28,6 +29,7 @@ import com.alithya.shoppingcart.model.Person;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"com.alithya.shoppingcart.service", "com.alithya.shoppingcart.exception", "com.alithya.shoppingcart.repository", "com.alithya.shoppingcart.repository.implementation", "com.alithya.shoppingcart.model", "com.alithya.shoppingcart.configuration", "com.alithya.shoppingcart.controller", "com.alithya.shoppingcart.webservice.customer"})
+//@Import(value =  {ShoppingOnlineAPISecurityConfiguration.class})
 public class ShoppingOnlineWebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	public static final String RESOURCES_DIRECTORY = "/resources/";
