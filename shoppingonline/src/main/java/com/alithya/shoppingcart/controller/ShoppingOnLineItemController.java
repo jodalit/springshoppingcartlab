@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
+@RequestMapping(ShoppingOnLineItemController.RESQUESTMAPPING_ADMIN)
 public class ShoppingOnLineItemController {
 	
+	public static final String RESQUESTMAPPING_ADMIN = "admin";
 	public static final String MODEL_ITEMS = "items";
 	public static final String MODEL_UPDATE_ITEM = "updateitem";
 	public static final String MODEL_ITEM = "item";

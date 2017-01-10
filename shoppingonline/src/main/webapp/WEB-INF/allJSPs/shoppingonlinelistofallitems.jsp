@@ -703,7 +703,7 @@
 		</header>
 
         <nav>
-            <h3><a id="aaddclient" href="<spring:url value='/additem' />">Add new Item</a></h3>
+            <h3><a id="aaddclient" href="<spring:url value='admin/additem' />">Add new Item</a></h3>
             <br />
             
         </nav>
@@ -731,9 +731,9 @@
 							<td>${item.price}</td>
 							<td>${item.expireDate}</td>
 							<td>
-								<a href="<spring:url value="/item/${item.itemId}" />">View</a>
-								<a href="<spring:url value="/updateitem/${item.itemId}" />">Update</a>
-								<a href="<spring:url value="/removeitem/${item.itemId}" />">Remove</a><br />
+								<a href="<spring:url value="admin/item/${item.itemId}" />">View</a>
+								<a href="<spring:url value="admin/updateitem/${item.itemId}" />">Update</a>
+								<a href="<spring:url value="admin/removeitem/${item.itemId}" />">Remove</a><br />
 							 </td>
 						</tr>
 					</c:forEach>
