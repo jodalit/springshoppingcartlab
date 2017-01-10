@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
-@RequestMapping(ShoppingOnLineItemController.RESQUESTMAPPING_ADMIN)
+//@RequestMapping(ShoppingOnLineItemController.RESQUESTMAPPING_ADMIN)
 public class ShoppingOnLineItemController {
-	
-	public static final String RESQUESTMAPPING_ADMIN = "admin";
 	public static final String MODEL_ITEMS = "items";
 	public static final String MODEL_UPDATE_ITEM = "updateitem";
 	public static final String MODEL_ITEM = "item";
@@ -36,7 +34,7 @@ public class ShoppingOnLineItemController {
 	public static final String ITEM_PRICE = "itemPrice";
 	public static final String ITEM_DESCRIPTION = "itemDescription";
 	public static final String ITEM_NAME = "itemName";
-	public static final String REDIRECT_LISTITEMS = "redirect:/listitems";
+	public static final String REDIRECT_LISTITEMS = "redirect:/item/listitems";
 	public static final String SHOPPING_ONLINE_UPDATE_ITEM = "shoppingonlineupdateitem";
 	public static final String SHOPPING_ONLINE_DETAIL_OF_ITEM = "shoppingonlinedetailofitem";
 	public static final String SHOPPING_ONLINE_LIST_OF_ALLITEMS = "shoppingonlinelistofallitems";
@@ -48,6 +46,17 @@ public class ShoppingOnLineItemController {
 	
 	@Autowired
 	ItemService itemService;
+	
+	
+	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
+	public String getDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
+		
+		model.addAttribute(MODEL_ITEM, itemService.getItemById(itemId));		
+		request.getSession().setAttribute(MODEL_ITEMS, Collections.list(Collections.enumeration(itemService.getItemsList().values())));
+		
+		return SHOPPING_ONLINE_DETAIL_OF_ITEM;
+	}
+	
 	
 	@RequestMapping(value=REQUESTMAPPING_ADD_ITEM, method=RequestMethod.GET)
 	public String getAddItem(ModelMap model){

@@ -653,7 +653,7 @@
 		</header>
 
         <nav>
-            <h3><a id="listitems" href="<spring:url value='admin/listitems' />">List of all items</a></h3>
+            <h3><a id="listitems" href="<spring:url value='/item/listitems' />">List of all items</a></h3>
             
         </nav>
         
@@ -662,7 +662,7 @@
             <hr />
             
             <div id="divimagepcple" class="divmain">
-            	<spring:url value="admin/saveitem" var="saveItem" />
+            	<spring:url value="/saveitem" var="saveItem" />
             	<form action="${saveItem}" method="POST">
             		<h3>${saveresult} ${Itemnumero }</h3>
                     <fieldset>

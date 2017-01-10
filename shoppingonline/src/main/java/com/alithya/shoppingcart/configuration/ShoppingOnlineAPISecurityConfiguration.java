@@ -32,6 +32,7 @@ public class ShoppingOnlineAPISecurityConfiguration extends WebSecurityConfigure
 		.authorizeRequests()
 		.antMatchers(HttpMethod.GET).permitAll()
 		.antMatchers(HttpMethod.POST, "/customer/**").access("hasRole('ROLE_USER')")
+		.antMatchers(HttpMethod.POST, "/removeitem/**", "/updateitem/", "/item/**","/saveitem" , "/additem").access("hasRole('ROLE_ADMIN')")
 		.and()
 		.formLogin()
 		//.loginPage("/connection")
@@ -42,6 +43,7 @@ public class ShoppingOnlineAPISecurityConfiguration extends WebSecurityConfigure
 		.authorizeRequests()
 		.antMatchers( HttpMethod.GET,"/", "/resultsearchitem", "/connection").permitAll()
 		.antMatchers(HttpMethod.POST, "/customer/**").access("hasRole('ROLE_USER')")
+		.antMatchers(HttpMethod.POST, "/removeitem/**", "/updateitem/**", "/item/**","/saveitem" , "/additem").access("hasRole('ROLE_ADMIN')")
 		/*.and()
 		.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/connection").permitAll()*/
