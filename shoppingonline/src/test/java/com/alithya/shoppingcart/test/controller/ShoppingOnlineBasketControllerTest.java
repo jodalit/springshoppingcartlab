@@ -1,10 +1,8 @@
 package com.alithya.shoppingcart.test.controller;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;

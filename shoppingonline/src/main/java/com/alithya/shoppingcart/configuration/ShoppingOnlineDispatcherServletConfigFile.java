@@ -6,7 +6,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	//public static final String WS_URL_FOR_MAPPING = "/ws/*";
 	public static final String URL_FOR_MAPPING = "/";
 
 	@Override
@@ -15,7 +14,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 		return new Class[]{
 				ShoppingOnlineWebApplicationContextConfig.class,
 				ShoppingOnlineAPISecurityConfiguration.class,
-				ShoppingOnlineAPISecurityConfiguration.class
+				ShoppingOnlineGlobalMethodSecurityConfiguration.class
 		};
 	}
 

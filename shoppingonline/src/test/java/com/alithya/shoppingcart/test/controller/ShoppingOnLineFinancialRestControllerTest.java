@@ -24,7 +24,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.alithya.shoppingcart.configuration.ShoppingOnlineAPISecurityConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineDispatcherServletConfigFile;
+import com.alithya.shoppingcart.configuration.ShoppingOnlineGlobalMethodSecurityConfiguration;
 import com.alithya.shoppingcart.configuration.ShoppingOnlineWebApplicationContextConfig;
 import com.alithya.shoppingcart.controller.ShoppingOnLineFinancialRestController;
 import com.alithya.shoppingcart.model.Basket;
@@ -34,7 +36,7 @@ import com.alithya.shoppingcart.model.Person;
 import com.alithya.shoppingcart.service.FinancialService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class})
+@ContextConfiguration(classes={ShoppingOnlineDispatcherServletConfigFile.class, ShoppingOnlineWebApplicationContextConfig.class, ShoppingOnlineAPISecurityConfiguration.class, ShoppingOnlineGlobalMethodSecurityConfiguration.class})
 @WebAppConfiguration
 @ActiveProfiles("test")
 public class ShoppingOnLineFinancialRestControllerTest {

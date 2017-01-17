@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity
 public class ShoppingOnlineAPISecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -35,7 +34,6 @@ public class ShoppingOnlineAPISecurityConfiguration extends WebSecurityConfigure
 		.antMatchers(HttpMethod.POST, "/removeitem/**", "/updateitem/", "/item/**","/saveitem" , "/additem").access("hasRole('ROLE_ADMIN')")
 		.and()
 		.formLogin()
-		//.loginPage("/connection")
 		.defaultSuccessUrl("/connection")
 		.and()
 		.logout().logoutSuccessUrl("/")
@@ -44,9 +42,6 @@ public class ShoppingOnlineAPISecurityConfiguration extends WebSecurityConfigure
 		.antMatchers( HttpMethod.GET,"/", "/resultsearchitem", "/connection").permitAll()
 		.antMatchers(HttpMethod.POST, "/customer/**").access("hasRole('ROLE_USER')")
 		.antMatchers(HttpMethod.POST, "/removeitem/**", "/updateitem/**", "/item/**","/saveitem" , "/additem").access("hasRole('ROLE_ADMIN')")
-		/*.and()
-		.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/connection").permitAll()*/
 		.anyRequest().permitAll();
 	}
 	

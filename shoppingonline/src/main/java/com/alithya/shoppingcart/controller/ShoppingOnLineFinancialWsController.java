@@ -1,8 +1,6 @@
 package com.alithya.shoppingcart.controller;
 
 import java.util.Collection;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,6 @@ import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.webservice.consumer.FinancialConsumer;
-
-import localhost._8080.shoppingonline.financialschema.PurchaseItemResponse;
 
 @Controller
 @RequestMapping(ShoppingOnLineFinancialRestController.SESSION_CUSTOMER)
@@ -53,8 +49,6 @@ public class ShoppingOnLineFinancialWsController {
 		Double basketTotalAmount = basketData.getBasketTotalAmount();
 		Collection<Item> items = basketData.getBasketItems().values();
 		
-		//PurchaseItemResponse rep = financialConsumer.doPurchaseItems(basketReference);
-		
 		if (financialConsumer.doPurchaseItems(basketReference)==null){
 			return String.join(" ",STRING_H1_STYLE_COLOR_RED, ERROR_ACCOUNTBALANCE,STRING_BR,ERROR_EMPTYBASKET, STRING_H1);
 		}
@@ -72,10 +66,8 @@ public class ShoppingOnLineFinancialWsController {
 	public String rechargeAccountByWebService(@RequestParam(CUSTOMER_AVAILABLE_AMOUNT) Double customerAvailableAmount, HttpServletRequest request) {
 		
 		Customer customer = (Customer) request.getSession().getAttribute(SESSION_CUSTOMER);
-		//Map<String, String> errors;
 		
 		if (financialConsumer.doRecharge(customerAvailableAmount, customer.getCustomerId())==null){
-			//errors = financialService.getErrors();
 			return String.join(" ",STRING_H1_STYLE_COLOR_RED_WARNNING_H1, ERROR_ACCOUNTBALANCE,STRING_BR,ERROR_EMPTYBASKET, STRING_H1);
 		}
 			

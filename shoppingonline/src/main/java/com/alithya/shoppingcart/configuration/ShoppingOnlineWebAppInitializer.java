@@ -19,11 +19,7 @@ public class ShoppingOnlineWebAppInitializer implements WebApplicationInitialize
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		
         AnnotationConfigWebApplicationContext webAppContext = new AnnotationConfigWebApplicationContext();
-        //webAppContext.register(ShoppingOnlineAPISecurityConfiguration.class);
-        //webAppContext.register(ShoppingOnlineSpringSecurityInitializer.class);
         webAppContext.register(ShoppingOnlineDispatcherServletConfigFile.class);
-        
-        //webAppContext.register(ShoppingOnlineWebServiceConfig.class);
         
 		DispatcherServlet dispatcherServlet = new DispatcherServlet();
 
@@ -41,7 +37,6 @@ public class ShoppingOnlineWebAppInitializer implements WebApplicationInitialize
 		Set<String> mappingConflicts = appServlet.addMapping("/");
         
 		webAppContext.register(ShoppingOnlineWebServiceConsumerConfig.class);
-        //webAppContext.register(ShoppingOnlineWebServiceConsumerConfig.class);
         
 		MessageDispatcherServlet mds = new MessageDispatcherServlet();
 		mds.setTransformWsdlLocations(true);
