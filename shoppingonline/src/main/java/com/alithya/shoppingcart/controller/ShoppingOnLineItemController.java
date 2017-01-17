@@ -5,6 +5,7 @@ import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alithya.shoppingcart.service.ItemService;
 
 @Controller
-//@RequestMapping(ShoppingOnLineItemController.RESQUESTMAPPING_ADMIN)
 public class ShoppingOnLineItemController {
 	public static final String MODEL_ITEMS = "items";
 	public static final String MODEL_UPDATE_ITEM = "updateitem";
@@ -47,7 +47,7 @@ public class ShoppingOnLineItemController {
 	@Autowired
 	ItemService itemService;
 	
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_ITEM_ID, method=RequestMethod.GET)
 	public String getDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
@@ -57,7 +57,7 @@ public class ShoppingOnLineItemController {
 		return SHOPPING_ONLINE_DETAIL_OF_ITEM;
 	}
 	
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_ADD_ITEM, method=RequestMethod.GET)
 	public String getAddItem(ModelMap model){
 		
@@ -67,6 +67,7 @@ public class ShoppingOnLineItemController {
 		return SHOPPING_ONLINE_NEWITEM;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_SAVE_ITEM, method=RequestMethod.POST)
 	public String getSaveItem(ModelMap model,@RequestParam(ITEM_NAME) String itemName, @RequestParam(ITEM_DESCRIPTION) String itemDescription, @RequestParam(ITEM_PRICE) String itemPrice, @RequestParam(ITEM_EXPIRE_DATE) String itemExpireDate, HttpServletRequest request){
 		
@@ -81,6 +82,7 @@ public class ShoppingOnLineItemController {
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_LIST_ITEMS, method=RequestMethod.GET)
 	public String getAllItems(ModelMap model, HttpServletRequest request){
 		
@@ -89,6 +91,7 @@ public class ShoppingOnLineItemController {
 		return SHOPPING_ONLINE_LIST_OF_ALLITEMS;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_UPDATEITEM_ITEM_ID, method=RequestMethod.GET)
 	public String updateDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
@@ -99,6 +102,7 @@ public class ShoppingOnLineItemController {
 		return SHOPPING_ONLINE_UPDATE_ITEM;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_UPDATEITEM_ITEM_ID, method=RequestMethod.POST)
 	public String updateDetailItem(@PathVariable(ITEM_ID) Long itemId, @RequestParam(ITEM_NAME) String itemName, @RequestParam(ITEM_DESCRIPTION) String itemDescription, @RequestParam(ITEM_PRICE) String itemPrice, @RequestParam(ITEM_EXPIRE_DATE) String itemExpireDate, ModelMap model, HttpServletRequest request){
 		
@@ -111,6 +115,7 @@ public class ShoppingOnLineItemController {
 		return REDIRECT_LISTITEMS;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value=REQUESTMAPPING_REMOVEITEM_ITEM_ID, method=RequestMethod.GET)
 	public String removeDetailItem(@PathVariable(ITEM_ID) Long itemId, ModelMap model, HttpServletRequest request){
 		
@@ -126,6 +131,5 @@ public class ShoppingOnLineItemController {
 		
 		this.itemService = itemService;
 	}
-	
 	
 }

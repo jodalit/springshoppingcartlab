@@ -14,7 +14,8 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 		
 		return new Class[]{
 				ShoppingOnlineRootApplicationContextConfig.class,
-				ShoppingOnlineAPISecurityConfiguration.class
+				ShoppingOnlineAPISecurityConfiguration.class,
+				ShoppingOnlineGlobalMethodSecurityConfiguration.class
 		};
 	}
 
@@ -23,8 +24,7 @@ public class ShoppingOnlineDispatcherServletConfigFile extends AbstractAnnotatio
 		
 		return new Class[]{
 				ShoppingOnlineWebApplicationContextConfig.class 
-				//ShoppingOnlineAPISecurityConfiguration.class,
-				//ShoppingOnlineWebSecurityConfiguration.class//, ShoppingOnlineWebServiceConfig.class
+				
 		};
 	}
 

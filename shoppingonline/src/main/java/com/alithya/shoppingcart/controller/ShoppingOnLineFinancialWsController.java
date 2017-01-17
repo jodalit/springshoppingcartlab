@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public class ShoppingOnLineFinancialWsController {
 	@Autowired
 	FinancialConsumer financialConsumer;
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/payitemsbyws/{basketReference}", method=RequestMethod.GET)
 	@ResponseBody
 	public String payItemsByWebService(@PathVariable String basketReference, HttpServletRequest request) {
@@ -63,6 +65,7 @@ public class ShoppingOnLineFinancialWsController {
 		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_YOUR_TICKET_$, basketTotalAmount.toString(),STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_FOR_THESE_ITEMS_H3, items.toString()) ;
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/rechargebyws", method=RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.OK)

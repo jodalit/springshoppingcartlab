@@ -3,6 +3,7 @@ package com.alithya.shoppingcart.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +30,14 @@ public class ShoppingOnLineBasketController {
 	
 	@Autowired
 	FinancialService financialService;
-
+	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = REQUESTMAPPING_SHOWBASKET, method = RequestMethod.GET)
 	public String getBasket(HttpServletRequest request) {
 		request.getSession().setAttribute(SESSION_CUSTOMER, financialService.getCustomerInfo());
 		return SHOPPING_ONLINE_BASKET;
 	}
-		
+	
 	@RequestMapping( value =REQUESTMAPPING_ADDTOBASKET_ITEM_ID, method = RequestMethod.GET)
 	public String addToBasket(@PathVariable Long itemId, HttpServletRequest request) {		
 		addBasketToSession(itemId, request);
@@ -48,7 +50,7 @@ public class ShoppingOnLineBasketController {
 		return SHOPPING_ONLINE_SEARCH_RESULT;
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@RequestMapping(value=REQUESTMAPPING_REMOVEFROMBASKET_ITEM_ID, method = RequestMethod.GET)
 	public String removeItemFromBasket(@PathVariable Long itemId, HttpServletRequest request) {
 		if (basketService.removeItemToBasket(itemId)){
