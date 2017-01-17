@@ -23,7 +23,13 @@ public class ShoppingOnLineConnexionController {
 	@Autowired
 	ServicePerson servicePerson;
 
-	@RequestMapping(value = REQUESTMAPPING_MAKE_CONNECTION, method = RequestMethod.POST)
+	@RequestMapping(value = REQUESTMAPPING_MAKE_CONNECTION, method = RequestMethod.GET)
+	public String getShoppingOnLineHomeAdmin() {
+
+		return SHOPPING_ONLINE_HOME_ADMIN;
+	}
+	
+	/*@RequestMapping(value = REQUESTMAPPING_MAKE_CONNECTION, method = RequestMethod.POST)
 	public String getShoppingOnLineHomeAdmin(@RequestParam("personConnectionName") String personConnectionName,
 			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
 		
@@ -36,7 +42,7 @@ public class ShoppingOnLineConnexionController {
 		}
 
 		return REDIRECT;
-	}
+	}*/
 
 	public void setServicePerson(ServicePerson servicePerson) {
 		this.servicePerson = servicePerson;

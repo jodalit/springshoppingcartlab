@@ -40,7 +40,7 @@ public class ShoppingOnlineWebAppInitializer implements WebApplicationInitialize
 
 		Set<String> mappingConflicts = appServlet.addMapping("/");
         
-		webAppContext.register(ShoppingOnlineWebServiceConfig.class);
+		webAppContext.register(ShoppingOnlineWebServiceConsumerConfig.class);
         //webAppContext.register(ShoppingOnlineWebServiceConsumerConfig.class);
         
 		MessageDispatcherServlet mds = new MessageDispatcherServlet();
