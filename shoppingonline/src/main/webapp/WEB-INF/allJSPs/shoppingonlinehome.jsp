@@ -628,7 +628,7 @@
             <div id="headerCommandeMenu">
                 <span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
                 
-                <span id="sconnexion" class="bouton"><a id="aconnexion" href="<spring:url value='/connection' />">Connection</a></span>
+                <span id="sconnexion" class="bouton"><a id="aconnexion" href="<spring:url value='/makeconnection' />">Administration</a></span>
             </div>
             
 			<span id="sbasket" class="bouton"><a id="abasket" href='<spring:url value="/showbasket"></spring:url>'>your Basket </a>${basketdata.basketQuantity}</span>

@@ -248,7 +248,7 @@
 		div#divrecharge #saveBtn, div#divrecharge #saveBtn1, div#divrecharge #resetBtn{
 			background-color:navy;
 			width: :6.75em;
-			height: 2em;
+			height: 3em;
 			margin: 0.05em;
 			padding: 0.05em;
 		}
@@ -645,6 +645,7 @@
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
+                
                 <c:choose>
                 	<c:when test="${not empty connectionname }">
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
@@ -652,7 +653,7 @@
                 	</c:when>
                 	<c:otherwise>
                 		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-                		<span id="sconnexion" class="bouton"><a id="aconnexion" href='<spring:url value="/connection"></spring:url>'>Connection</a></span>
+                		<span id="sconnexion" class="bouton"><a id="aconnexion" href="<spring:url value='/makeconnection' />">Administration</a></span>
 					</c:otherwise>
 	              </c:choose>                
             </div>

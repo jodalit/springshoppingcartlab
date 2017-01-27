@@ -1,7 +1,5 @@
 package com.alithya.shoppingcart.webservice.consumer;
 
-import org.apache.log4j.spi.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
@@ -11,7 +9,6 @@ import localhost._8080.shoppingonline.financialschema.RechargeRequest;
 import localhost._8080.shoppingonline.financialschema.RechargeResponse;
 
 public class FinancialConsumer extends WebServiceGatewaySupport{
-	//private static final Logger lolg = LoggerFactory.get
 	public PurchaseItemResponse doPurchaseItems(String basketReference){
 		PurchaseItemRequest request = new PurchaseItemRequest();
 		request.setCustomerBasketReference(basketReference);

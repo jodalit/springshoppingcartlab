@@ -1,12 +1,11 @@
 package com.alithya.shoppingcart.controller;
 
 import java.util.Collection;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +18,6 @@ import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.webservice.consumer.FinancialConsumer;
-
-import localhost._8080.shoppingonline.financialschema.PurchaseItemResponse;
 
 @Controller
 @RequestMapping(ShoppingOnLineFinancialRestController.SESSION_CUSTOMER)
@@ -43,6 +40,7 @@ public class ShoppingOnLineFinancialWsController {
 	@Autowired
 	FinancialConsumer financialConsumer;
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/payitemsbyws/{basketReference}", method=RequestMethod.GET)
 	@ResponseBody
 	public String payItemsByWebService(@PathVariable String basketReference, HttpServletRequest request) {
@@ -50,8 +48,6 @@ public class ShoppingOnLineFinancialWsController {
 		Basket basketData = (Basket) request.getSession().getAttribute(SESSION_BASKETDATA);
 		Double basketTotalAmount = basketData.getBasketTotalAmount();
 		Collection<Item> items = basketData.getBasketItems().values();
-		
-		//PurchaseItemResponse rep = financialConsumer.doPurchaseItems(basketReference);
 		
 		if (financialConsumer.doPurchaseItems(basketReference)==null){
 			return String.join(" ",STRING_H1_STYLE_COLOR_RED, ERROR_ACCOUNTBALANCE,STRING_BR,ERROR_EMPTYBASKET, STRING_H1);
@@ -63,16 +59,15 @@ public class ShoppingOnLineFinancialWsController {
 		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_YOUR_TICKET_$, basketTotalAmount.toString(),STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_FOR_THESE_ITEMS_H3, items.toString()) ;
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/rechargebyws", method=RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.OK)
 	public String rechargeAccountByWebService(@RequestParam(CUSTOMER_AVAILABLE_AMOUNT) Double customerAvailableAmount, HttpServletRequest request) {
 		
 		Customer customer = (Customer) request.getSession().getAttribute(SESSION_CUSTOMER);
-		//Map<String, String> errors;
 		
 		if (financialConsumer.doRecharge(customerAvailableAmount, customer.getCustomerId())==null){
-			//errors = financialService.getErrors();
 			return String.join(" ",STRING_H1_STYLE_COLOR_RED_WARNNING_H1, ERROR_ACCOUNTBALANCE,STRING_BR,ERROR_EMPTYBASKET, STRING_H1);
 		}
 			

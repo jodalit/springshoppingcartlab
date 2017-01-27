@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,10 +20,6 @@ import com.alithya.shoppingcart.model.Basket;
 import com.alithya.shoppingcart.model.Customer;
 import com.alithya.shoppingcart.model.Item;
 import com.alithya.shoppingcart.service.FinancialService;
-import com.alithya.shoppingcart.webservice.consumer.FinancialConsumer;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import localhost._8080.shoppingonline.financialschema.PurchaseItemResponse;
 
 @RestController
 @RequestMapping(ShoppingOnLineFinancialRestController.SESSION_CUSTOMER)
@@ -45,6 +42,7 @@ public class ShoppingOnLineFinancialRestController {
 	@Autowired
 	private FinancialService financialService; 
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/payitems/{basketReference}", method=RequestMethod.GET)
 	@ResponseBody
 	public String payItems(@PathVariable String basketReference, HttpServletRequest request) {
@@ -66,6 +64,7 @@ public class ShoppingOnLineFinancialRestController {
 		return String.join(" ", STRING_H2_STYLE_COLOR_GREEN_YOUR_TICKET_$, basketTotalAmount.toString(),STRING_H2, STRING_H3_STYLE_COLOR_BLEUE_FOR_THESE_ITEMS_H3, items.toString()) ;
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/recharge", method=RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.OK)

@@ -16,16 +16,6 @@ public class ShoppingOnlineWebServiceConsumerConfig {
 		marshaller.setContextPath("localhost._8080.shoppingonline.financialschema");
 		return marshaller;
 	}
-	/*
-	@Bean(name="wsrechargeconsumer")
-	public FinancialConsumer financialRechargeConsumer(Jaxb2Marshaller marshaller) {
-		FinancialConsumer consumer  = new FinancialConsumer();
-		consumer.setDefaultUri("http://localhost:8080/shoppingonline/ws/wsrecharge.wsdl");
-		consumer.setMarshaller(marshaller);
-		consumer.setUnmarshaller(marshaller);
-		return consumer;
-	}
-	*/
 	
 	@Bean
 	public FinancialConsumer financialPurchaseConsumer(Jaxb2Marshaller marshaller) {

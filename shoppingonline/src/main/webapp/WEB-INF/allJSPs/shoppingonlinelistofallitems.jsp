@@ -688,15 +688,8 @@
     <div id="container">
         <header>
             <div id="headerCommandeMenu">
-                <c:choose>
-                	<c:when test="${not empty connectionname }">
-                		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
-                	</c:when>
-                	<c:otherwise>
-                		<span id="saccueil"><a id="aaccueil" href="<spring:url value='/' />">Home</a></span>
-					</c:otherwise>
-	              </c:choose>
-				
+            	<span id="saccueil"><a id="aaccueil" href="<spring:url value='/connect' />">Home</a></span>
+                
                 <span id="sdeconnexion" class="bouton"><a id="adeconnexion" href="<spring:url value='/deconnection' />">Quit</a></span>
             </div>
             

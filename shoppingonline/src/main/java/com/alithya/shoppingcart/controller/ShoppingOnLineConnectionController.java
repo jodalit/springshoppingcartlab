@@ -1,17 +1,13 @@
 package com.alithya.shoppingcart.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.alithya.shoppingcart.service.ServicePerson;
 
 @Controller
-public class ShoppingOnLineConnexionController {
+public class ShoppingOnLineConnectionController {
 	
 	public static final String REQUESTMAPPING_MAKE_CONNECTION = "/makeconnection";
 	public static final String MODEL_NAME_CONNECTION_NAME = "connectionname";
@@ -23,21 +19,12 @@ public class ShoppingOnLineConnexionController {
 	@Autowired
 	ServicePerson servicePerson;
 
-	@RequestMapping(value = REQUESTMAPPING_MAKE_CONNECTION, method = RequestMethod.POST)
-	public String getShoppingOnLineHomeAdmin(@RequestParam("personConnectionName") String personConnectionName,
-			@RequestParam("personPassword") String personPassword, HttpServletRequest request) {
-		
-		if (servicePerson.getPersonByConnexionNamePassword(personConnectionName, personPassword)) {
-			
-			request.getSession().setAttribute(MODEL_NAME_CONNECTION_NAME, personConnectionName);
-			if (servicePerson.getProfile() == USER_PROFILE)
-				return SHOPPING_ONLINE_HOME_ADMIN; 
-			
-		}
+	@RequestMapping(value = REQUESTMAPPING_MAKE_CONNECTION, method = RequestMethod.GET)
+	public String getShoppingOnLineHomeAdmin() {
 
-		return REDIRECT;
+		return SHOPPING_ONLINE_HOME_ADMIN;
 	}
-
+	
 	public void setServicePerson(ServicePerson servicePerson) {
 		this.servicePerson = servicePerson;
 	}

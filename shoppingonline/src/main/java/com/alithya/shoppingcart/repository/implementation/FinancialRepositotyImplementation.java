@@ -11,9 +11,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.alithya.shoppingcart.exception.BusinessException;
@@ -49,7 +47,7 @@ public class FinancialRepositotyImplementation implements FinancialRepository {
 		
 		try{
 			if (!PROD.equalsIgnoreCase(activeEnvironement[0])){
-				return (Customer) jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, (HashMap) null , new CustomerPersonMapper()); //jdbcTemplateShoppingCart.queryForObject(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
+				return jdbcTemplate.queryForObject(SQL_SELECT_CUSTOMER_INFO, (HashMap) null , new CustomerPersonMapper());
 			
 			} else{
 				List<Customer> l = jdbcTemplate.query(SQL_SELECT_CUSTOMER_INFO, new CustomerPersonMapper());
@@ -82,10 +80,10 @@ public class FinancialRepositotyImplementation implements FinancialRepository {
 	}
 	
 	private static final class CustomerPersonMapper implements org.springframework.jdbc.core.RowMapper<Customer> {			
-		public static final String CUSTOMER_AVAILABLE_AMOUNT = "CUSTOMERAVAILABLEAMOUNT";//customerAvailableAmount";
-		public static final String CUSTOMER_ID = "CUSTOMERID";//customerid";
-		public static final String PROFILE_ID = "PROFILEID"; //profileid";
-		public static final String CUSTOMER_PASSWORD = "PERSONPASSWORD";//customerPassword";
+		public static final String CUSTOMER_AVAILABLE_AMOUNT = "CUSTOMERAVAILABLEAMOUNT";
+		public static final String CUSTOMER_ID = "CUSTOMERID";
+		public static final String PROFILE_ID = "PROFILEID"; 
+		public static final String CUSTOMER_PASSWORD = "PERSONPASSWORD";
 		public static final String CUSTOMER_CONNNECTION_NAME = "PERSONCONNECTIONNAME";
 		public static final String CUSTOMER_NAME = "PERSONNAME";
 		public static final String PERSON_ID = "PERSONID";
